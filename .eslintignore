@@ -1,0 +1,10 @@
+.next/**
+.slicemachine/**
+.storybook/**
+public/**
+node_modules/**
+storybook-static/**
+next.config.js
+jest.setup.js
+components/dummyStuffs/**
+/pages/tutorials
