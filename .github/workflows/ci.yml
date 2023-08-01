@@ -1,0 +1,37 @@
+name: CI
+
+on: pull_request
+
+env:
+  FORCE_COLOR: 1
+
+jobs:
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+      - name: Setup ESLint
+        run: |
+          npm install
+      - name: ESLint Report
+        run: npm run lint:check
+
+  Jest:
+    name: Jest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+      - name: Setup Jest
+        run: |
+          npm install
+      - name: Jest Report
+        run: npm run test

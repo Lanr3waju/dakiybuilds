@@ -1,0 +1,8 @@
+.next/**
+.storybook/**
+public/**
+node_modules/**
+next.config.js
+jest.setup.js
+components/dummyStuffs/**
+app/__tests__
