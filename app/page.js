@@ -1,7 +1,9 @@
+import HomeComponent from "./components/HomePage"
+
 function HomePage() {
   return (
     <div>
-      Hello World
+      <HomeComponent />
     </div>
   )
 }
