@@ -34,4 +34,4 @@ jobs:
         run: |
           npm install
       - name: Jest Report
-        run: npm run test:run
+        run: npm run test

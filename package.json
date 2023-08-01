@@ -10,7 +10,6 @@
     "lint:check": "next lint",
     "lint:all": "yarn format:check && next lint",
     "test": "jest",
-    "test:run": "jest --run",
     "format": "prettier --write . --ignore-path .gitignore",
     "format:check": "prettier --check .  --ignore-path .gitignore"
   },
