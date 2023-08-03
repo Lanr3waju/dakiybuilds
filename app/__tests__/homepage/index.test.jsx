@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect' // Make sure to include this line
+import '@testing-library/jest-dom/extend-expect'
 import HomePage from '@/app/page'
 
 test('renders the Home header with correct text', () => {
     render(<HomePage />)
-    const headingElement = screen.getByRole('heading')
+    const headingElement = screen.getByTestId('homepage-heading')
     expect(headingElement).toBeInTheDocument()
-    expect(headingElement).toHaveTextContent('This is Home')
+    expect(headingElement).toHaveTextContent('This is home')
 })
