@@ -1,8 +1,8 @@
 function Dashboard() {
     return (
-        <div>
-
-        </div>
+        <h2 data-testid="dashboard-heading">
+            This is dashboard
+        </h2>
     )
 }
 

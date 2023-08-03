@@ -1,7 +1,7 @@
 function AllProjects() {
     return (
         <h2 data-testid="all-projects-heading">
-            This is All Projects
+            This is all projects
         </h2>
     )
 }

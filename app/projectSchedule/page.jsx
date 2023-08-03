@@ -1,8 +1,8 @@
 function ProjectSchedule() {
     return (
-        <div>
-
-        </div>
+        <h2 data-testid="project-schedule-heading">
+            This is project schedule
+        </h2>
     )
 }
 

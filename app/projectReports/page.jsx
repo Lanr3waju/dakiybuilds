@@ -1,8 +1,8 @@
 function ProjectReports() {
     return (
-        <div>
-
-        </div>
+        <h2 data-testid="project-reports-heading">
+            This is project reports
+        </h2>
     )
 }
 

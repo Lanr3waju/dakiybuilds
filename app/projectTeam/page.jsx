@@ -1,8 +1,8 @@
 function ProjectTeam() {
     return (
-        <div>
-
-        </div>
+        <h2 data-testid="project-team-heading">
+            This is project team
+        </h2>
     )
 }
 

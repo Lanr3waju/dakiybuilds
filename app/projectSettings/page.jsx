@@ -1,8 +1,8 @@
 function ProjectSettings() {
     return (
-        <div>
-
-        </div>
+        <h2 data-testid="project-settings-heading">
+            This is project settings
+        </h2>
     )
 }
 

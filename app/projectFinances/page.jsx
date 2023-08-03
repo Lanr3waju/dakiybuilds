@@ -1,8 +1,8 @@
 function ProjectFinances() {
     return (
-        <div>
-
-        </div>
+        <h2 data-testid="project-finances-heading">
+            This is project finances
+        </h2>
     )
 }
 

@@ -1,8 +1,8 @@
 function ProjectLogs() {
     return (
-        <div>
-
-        </div>
+        <h2 data-testid="project-logs-heading">
+            This is project logs
+        </h2>
     )
 }
 

@@ -1,8 +1,8 @@
 function ProjectDocuments() {
     return (
-        <div>
-
-        </div>
+        <h2 data-testid="project-documents-heading">
+            This is project docs
+        </h2>
     )
 }
 
