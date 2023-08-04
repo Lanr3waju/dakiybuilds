@@ -1,4 +1,4 @@
-import DashboardComponent from "../components/DashboardComponent"
+import DashboardComponent from "../components/dashboard/DashboardComponent"
 
 function Dashboard() {
     return (
