@@ -6,5 +6,5 @@ test('renders the Home header with correct text', () => {
     render(<HomePage />)
     const headingElement = screen.getByTestId('homepage-heading')
     expect(headingElement).toBeInTheDocument()
-    expect(headingElement).toHaveTextContent('This is home')
+    expect(headingElement).toHaveTextContent('dakiyBuilds')
 })

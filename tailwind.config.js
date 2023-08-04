@@ -1,5 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  daisyui: {
+    themes: ["retro"],
+    darkTheme: "retro",
+    lightTheme: "retro",
+    base: true,
+  },
+
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -13,6 +20,12 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
+    fontFamily: {
+      Raleway: "Raleway, sans-serif",
+      Roboto: "Roboto, sans-serif",
+      Fascinate: "Fascinate, cursive",
+      Poppins: "Poppins, sans-serif",
+    },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms"), require("daisyui")],
 }

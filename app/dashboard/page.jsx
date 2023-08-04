@@ -1,8 +1,8 @@
+import DashboardComponent from "../components/DashboardComponent"
+
 function Dashboard() {
     return (
-        <h2 data-testid="dashboard-heading">
-            This is dashboard
-        </h2>
+        <DashboardComponent />
     )
 }
 
