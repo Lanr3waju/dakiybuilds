@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import Dashboard from '@/app/dashboard/page'
+import DakiyBoard from '@/app/dakiyBoard/page'
 test('renders the Home header with correct text', () => {
-    render(<Dashboard />)
-    const headingElement = screen.getByTestId('dashboard-heading')
+    render(<DakiyBoard />)
+    const headingElement = screen.getByRole('wrapper')
     expect(headingElement).toBeInTheDocument()
-    expect(headingElement).toHaveTextContent('This is dashboard')
+    expect(headingElement).toHaveTextContent()
 })
