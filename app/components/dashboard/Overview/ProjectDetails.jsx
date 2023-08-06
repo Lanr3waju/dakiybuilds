@@ -1,5 +1,3 @@
-import React from 'react'
-
 function ProjectDetails() {
     return (
         <section className='mt-3'>

@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Agendas() {
     return (
         <section className='mt-3'>

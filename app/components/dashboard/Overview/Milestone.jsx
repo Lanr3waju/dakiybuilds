@@ -1,5 +1,4 @@
-import React from 'react'
-import HorizontalLine from '../../HorizontalLine'
+import HorizontalLine from '../../utils/HorizontalLine'
 
 function Milestone() {
     return (

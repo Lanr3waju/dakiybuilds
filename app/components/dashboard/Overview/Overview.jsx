@@ -1,7 +1,6 @@
-import React from 'react'
 import Agendas from './Agendas'
 import ProjectDetails from './ProjectDetails'
-import HorizontalLine from '../../HorizontalLine'
+import HorizontalLine from '../../utils/HorizontalLine'
 
 function Overview() {
     return (
