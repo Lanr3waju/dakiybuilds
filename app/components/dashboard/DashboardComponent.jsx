@@ -18,9 +18,13 @@ import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import { mainListItems, secondaryListItems } from './ListItems.js'
-import Chart from './Chart.js'
-import Deposits from './Deposits.js'
 import { useState } from 'react'
+import Progress from './Progress.jsx'
+import Greeting from './greeting/Greeting.jsx'
+import Weather from './getCurrentWeather/Weather.jsx'
+import GetDate from './greeting/GetDate.jsx'
+import Overview from './Overview/Overview.jsx'
+import Milestone from './Overview/Milestone.jsx'
 
 function Copyright(props) {
     return (
@@ -162,32 +166,53 @@ export default function DashboardComponent() {
                     }}
                 >
                     <Toolbar />
+
                     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                        {/* Progress Bar */}
+                        <Progress />
                         <Grid container spacing={3}>
-                            {/* Chart */}
-                            <Grid item xs={12} md={8} lg={9}>
+                            {/* Greeting */}
+                            <Grid item xs={12} md={8} lg={8}>
                                 <Paper
+                                    className='flex flex-row justify-between'
                                     sx={{
                                         p: 2,
                                         display: 'flex',
                                         flexDirection: 'column',
-                                        height: 240,
+                                        height: 120,
                                     }}
                                 >
-                                    <Chart />
+                                    <Greeting />
+                                    <Weather />
+                                </Paper>
+                                {/* Overview */}
+                                <Paper
+                                    className='mt-2'
+                                    sx={{
+                                        p: 2,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        height: 500,
+                                        backgroundColor: 'primary'
+                                    }}
+                                >
+                                    <Overview />
                                 </Paper>
                             </Grid>
-                            {/* Recent Deposits */}
-                            <Grid item xs={12} md={4} lg={3}>
+                            {/* Date and Milestone */}
+                            <Grid item xs={12} md={4} lg={4}>
                                 <Paper
+                                    className='bg-info-content'
                                     sx={{
                                         p: 2,
                                         display: 'flex',
                                         flexDirection: 'column',
-                                        height: 240,
+                                        height: '100vh',
+                                        backgroundColor: 'primary'
                                     }}
                                 >
-                                    <Deposits />
+                                    <GetDate />
+                                    <Milestone />
                                 </Paper>
                             </Grid>
                         </Grid>
