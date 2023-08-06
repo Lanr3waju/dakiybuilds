@@ -1,9 +1,9 @@
 import DashboardComponent from "../components/dashboard/DashboardComponent"
 
-function Dashboard() {
+function DakiyBoard() {
     return (
         <DashboardComponent />
     )
 }
 
-export default Dashboard
+export default DakiyBoard
