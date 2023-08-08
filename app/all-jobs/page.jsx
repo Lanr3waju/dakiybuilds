@@ -1,8 +1,10 @@
+import AllJobs from "../components/all-jobs-page/AllJobs"
+
 function AllProjects() {
     return (
-        <h2 data-testid="all-projects-heading">
-            This is all projects
-        </h2>
+        <section data-testid="all-projects-heading">
+            <AllJobs />
+        </section>
     )
 }
 

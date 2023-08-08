@@ -1,0 +1,42 @@
+[
+    {
+      "title": "Renovation of Smith Residence",
+      "progress": 80,
+      "contractSum": 750000,
+      "startDate": "2023-03-15",
+      "estimatedFinishDate": "2023-07-30",
+      "clientName": "John Smith"
+    },
+    {
+      "title": "Construction of Johnson Office Building",
+      "progress": 45,
+      "contractSum": 12000000,
+      "startDate": "2023-01-10",
+      "estimatedFinishDate": "2023-11-15",
+      "clientName": "Emily Johnson"
+    },
+    {
+      "title": "Landscaping Project at Green Acres Park",
+      "progress": 25,
+      "contractSum": 350000,
+      "startDate": "2023-04-20",
+      "estimatedFinishDate": "2023-09-30",
+      "clientName": "Michael Williams"
+    },
+    {
+      "title": "Interior Design for Anderson Retail Store",
+      "progress": 60,
+      "contractSum": 550000,
+      "startDate": "2023-02-28",
+      "estimatedFinishDate": "2023-08-10",
+      "clientName": "Sarah Anderson"
+    },
+    {
+      "title": "Roof Replacement at Brown Industrial Warehouse",
+      "progress": 15,
+      "contractSum": 1800000,
+      "startDate": "2023-05-10",
+      "estimatedFinishDate": "2023-12-20",
+      "clientName": "Robert Brown"
+    }
+  ]

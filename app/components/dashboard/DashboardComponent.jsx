@@ -19,7 +19,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import { mainListItems, secondaryListItems } from './ListItems.js'
 import { useState } from 'react'
-import Progress from './Progress.jsx'
+import Progress from '../utils/Progress.jsx'
 import Greeting from './greeting/Greeting.jsx'
 import Weather from './getCurrentWeather/Weather.jsx'
 import GetDate from './greeting/GetDate.jsx'
@@ -169,7 +169,7 @@ export default function DashboardComponent() {
 
                     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                         {/* Progress Bar */}
-                        <Progress />
+                        <Progress progress={80} />
                         <Grid container spacing={3}>
                             {/* Greeting */}
                             <Grid item xs={12} md={8} lg={8}>
