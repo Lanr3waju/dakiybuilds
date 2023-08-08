@@ -1,8 +1,8 @@
 function FilterBtn() {
     return (
         <details className="dropdown">
-            <summary className="m-1 btn btn-accent btn-circle mr-1 text-neutral-content text-xs font-semibold">Filter</summary>
-            <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+            <summary className="btn btn-circle btn-accent m-1 text-xs font-semibold text-neutral-content">Filter</summary>
+            <ul className="menu dropdown-content rounded-box z-[1] w-52 bg-base-100 p-2 shadow">
                 <li><a>Filter by Format</a></li>
                 <li><a>Filter by Date Uploaded</a></li>
             </ul>

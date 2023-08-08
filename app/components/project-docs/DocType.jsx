@@ -5,12 +5,12 @@ function DocType({ name }) {
     const data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     return (
         <section className="mt-5">
-            <h2 className="uppercase md:text-lg font-semibold text-primary-focus">{name}</h2>
+            <h2 className="font-semibold uppercase text-primary-focus md:text-lg">{name}</h2>
             <HorizontalLine />
-            <ul className="flex w-full flex-wrap justify-start mx-auto">
+            <ul className="mx-auto flex w-full flex-wrap justify-start">
                 {data.map((doc) => (
                     <li key={doc}><Image
-                        className=" cursor-pointer h-30 object-cover rounded-md border-2 border-primary mr-5 mb-4 w-40 md:w-56"
+                        className=" h-30 mb-4 mr-5 w-40 cursor-pointer rounded-md border-2 border-primary object-cover md:w-56"
                         src='/logo.png'
                         width={300}
                         height={200}
