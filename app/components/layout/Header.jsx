@@ -14,7 +14,7 @@ function Header({ children }) {
         'project-settings']
     return (
         <header className={pathname === 'dakiyBoard' ? "md:hidden" : ""}>
-            <div className="drawer z-50">
+            <div className="drawer z-50 font-Poppins">
                 <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col">
                     {/* Navbar */}
@@ -24,7 +24,7 @@ function Header({ children }) {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block h-6 w-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                             </label>
                         </div>
-                        <div className="mx-2 flex-1 px-2 capitalize">{pathname}</div>
+                        <div className="mx-2 flex-1 px-2 font-semibold uppercase">{pathname}</div>
                         <div className="hidden flex-none lg:block">
                             <ul className="menu menu-horizontal">
                                 {/* Navbar menu content here */}

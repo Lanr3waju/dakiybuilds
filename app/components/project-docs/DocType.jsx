@@ -10,7 +10,7 @@ function DocType({ name }) {
             <ul className="mx-auto flex w-full flex-wrap justify-start">
                 {data.map((doc) => (
                     <li key={doc}><Image
-                        className=" h-30 mb-4 mr-5 w-40 cursor-pointer rounded-md border-2 border-primary object-cover md:w-56"
+                        className=" h-28 mb-4 mr-5 w-40 cursor-pointer rounded-md border-2 border-primary object-cover md:w-56"
                         src='/logo.png'
                         width={300}
                         height={200}
