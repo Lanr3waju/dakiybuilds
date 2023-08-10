@@ -1,0 +1,122 @@
+[
+    {
+      "id": 1,
+      "name": "Cy Ganderton",
+      "role": "Site Supervisor",
+      "phone": "07044000000",
+      "email": "ganderton@dakiybuilds.com",
+      "lastLoginDate": "12/16/2020"
+    },
+    {
+      "id": 2,
+      "name": "Hart Hagerty",
+      "role": "Company Admin",
+      "phone": "08000005000",
+      "email": "Hagerty.Hart@dakiybuilds.com",
+      "lastLoginDate": "12/5/2020"
+    },
+    {
+      "id": 3,
+      "name": "Brice Swyre",
+      "role": "Site Manager",
+      "phone": "0709494949494",
+      "email": "Brice.Swyre@dakiybuilds.com",
+      "lastLoginDate": "8/15/2020"
+    },
+    {
+      "id": 4,
+      "name": "Marjy Ferencz",
+      "role": "Carpenter",
+      "phone": "0509393945",
+      "email": "Marjy.Ferencz@gmail.com",
+      "lastLoginDate": "--"
+    },
+    {
+      "id": 5,
+      "name": "Yancy Tear",
+      "role": "Foreman",
+      "phone": "060848472822",
+      "email": "tear234@hotmail.com",
+      "lastLoginDate": "5/22/2020"
+    },
+    {
+      "id": 6,
+      "name": "Eliza Green",
+      "role": "Architect",
+      "phone": "08012345678",
+      "email": "eliza.green@architectsolutions.com",
+      "lastLoginDate": "3/10/2021"
+    },
+    {
+      "id": 7,
+      "name": "Maxwell Stone",
+      "role": "Engineer",
+      "phone": "09098765432",
+      "email": "max.stone@engineerpros.com",
+      "lastLoginDate": "6/28/2021"
+    },
+    {
+      "id": 8,
+      "name": "Jessica Crane",
+      "role": "Project Manager",
+      "phone": "07055555555",
+      "email": "jessica.crane@projectwise.com",
+      "lastLoginDate": "2/14/2022"
+    },
+    {
+      "id": 9,
+      "name": "Leo Martinez",
+      "role": "Electrician",
+      "phone": "08098761234",
+      "email": "leo.martinez@sparkworks.com",
+      "lastLoginDate": "9/5/2022"
+    },
+    {
+      "id": 10,
+      "name": "Olivia Hunter",
+      "role": "Plumber",
+      "phone": "07011112222",
+      "email": "olivia.hunter@waterflow.com",
+      "lastLoginDate": "7/17/2022"
+    },
+    {
+      "id": 11,
+      "name": "Liam Foster",
+      "role": "Structural Engineer",
+      "phone": "08123456789",
+      "email": "liam.foster@structuralworks.com",
+      "lastLoginDate": "10/9/2022"
+    },
+    {
+      "id": 12,
+      "name": "Nora Davis",
+      "role": "Interior Designer",
+      "phone": "08055544433",
+      "email": "nora.davis@designsbynora.com",
+      "lastLoginDate": "11/21/2022"
+    },
+    {
+      "id": 13,
+      "name": "Ethan Carter",
+      "role": "Surveyor",
+      "phone": "07024681357",
+      "email": "ethan.carter@landsurveyors.com",
+      "lastLoginDate": "1/8/2023"
+    },
+    {
+      "id": 14,
+      "name": "Ava Turner",
+      "role": "Painter",
+      "phone": "08070070070",
+      "email": "ava.turner@colorfulpaints.com",
+      "lastLoginDate": "4/5/2023"
+    },
+    {
+      "id": 15,
+      "name": "Noah Williams",
+      "role": "Safety Officer",
+      "phone": "09098761234",
+      "email": "noah.williams@safetyfirst.com",
+      "lastLoginDate": "6/20/2023"
+    }
+  ]

@@ -1,8 +1,10 @@
+import Team from "../components/project-team/Team"
+
 function ProjectTeam() {
     return (
-        <h2 data-testid="project-team-heading">
-            This is project team
-        </h2>
+        <section data-testid="project-team-heading" >
+            <Team />
+        </section>
     )
 }
 
