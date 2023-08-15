@@ -8,7 +8,7 @@ function HomePageLoginForm() {
                 <input type="email" placeholder="Enter your mail" className="input input-bordered input-primary my-3 w-full focus:border-none focus:ring-0" />
                 <input type="password" placeholder="Enter your password" className="input input-bordered input-primary my-1 w-full focus:border-none focus:ring-0" />
                 <Link className="btn btn-neutral btn-active mt-5" href="/dakiyboard"><button className="" type="submit">Login</button></Link>
-                <Link className="link-info link font-bold my-2 no-underline text-lg" href="/#">Forgotten password</Link>
+                <Link className="link-info link my-2 text-lg font-bold no-underline" href="/#">Forgotten password</Link>
             </form>
         </section>
     )

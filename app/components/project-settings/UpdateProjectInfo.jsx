@@ -27,9 +27,9 @@ const EditableProjectForm = () => {
     }
 
     return (
-        <form className='flex flex-col uppercase font-bold text-lg font-Poppins p-4 w-full' onSubmit={handleSubmit}>
+        <form className='flex w-full flex-col p-4 font-Poppins text-lg font-bold uppercase' onSubmit={handleSubmit}>
             <input
-                className="file-input file-input-bordered w-full mb-3"
+                className="file-input file-input-bordered mb-3 w-full"
                 placeholder='Select new Image'
                 aria-label='Select new Image'
                 type="file"
@@ -39,7 +39,7 @@ const EditableProjectForm = () => {
             />
 
             <input
-                className="input input-bordered input-warning w-full mb-3"
+                className="input input-bordered input-warning mb-3 w-full"
                 placeholder='Enter new location'
                 aria-label='Enter new location'
                 type="text"
@@ -58,7 +58,7 @@ const EditableProjectForm = () => {
             />
 
             <input
-                className="input input-bordered input-warning w-full mb-3"
+                className="input input-bordered input-warning mb-3 w-full"
                 placeholder='Enter new date'
                 aria-label='Enter new date'
                 type="date"
@@ -68,7 +68,7 @@ const EditableProjectForm = () => {
             />
 
             <input
-                className="input input-bordered input-warning w-full mb-3"
+                className="input input-bordered input-warning mb-3 w-full"
                 placeholder='Enter new date'
                 aria-label='Enter new date'
                 type="date"
@@ -79,7 +79,7 @@ const EditableProjectForm = () => {
 
             {/* TODO this should be a select input */}
             <input
-                className="input input-bordered input-warning w-full mb-3"
+                className="input input-bordered input-warning mb-3 w-full"
                 placeholder='Select new job type'
                 aria-label='Select new job type'
                 type="text"
@@ -89,7 +89,7 @@ const EditableProjectForm = () => {
             />
 
             <input
-                className="input input-bordered input-warning w-full mb-3"
+                className="input input-bordered input-warning mb-3 w-full"
                 placeholder='Update client name'
                 aria-label='Update client name'
                 type="text"

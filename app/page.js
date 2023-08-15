@@ -2,7 +2,7 @@ import HomeComponent from "./components/homepage/HomePage"
 
 function HomePage() {
   return (
-    <div className="bg-no-repeat bg-[url('/yct-logo.png')] bg-right-bottom">
+    <div className="bg-[url('/yct-logo.png')] bg-right-bottom bg-no-repeat">
       <HomeComponent />
     </div>
   )
