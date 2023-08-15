@@ -126,7 +126,7 @@ export default function DashboardComponent() {
                                 noWrap
                                 sx={{ flexGrow: 1 }}
                             >
-                                Dashboard
+                                DakiyBoard
                             </Typography>
                             <IconButton color="inherit">
                                 <Badge badgeContent={4} className='text-secondary-content'>

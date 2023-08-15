@@ -10,7 +10,7 @@ import { BusinessCenterRounded, CalendarMonth, Folder, Notes, RequestQuote, Sett
 
 export const mainListItems = (
     <>
-        <Link href='/dakiyBoard'>
+        <Link href='/dakiyboard'>
             <ListItemButton>
                 <ListItemIcon>
                     <DashboardIcon />

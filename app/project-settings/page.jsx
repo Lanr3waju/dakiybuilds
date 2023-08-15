@@ -1,8 +1,10 @@
+import ProjectSettingsPage from "../components/project-settings/ProjectSettingsPage"
+
 function ProjectSettings() {
     return (
-        <h2 data-testid="project-settings-heading">
-            This is project settings
-        </h2>
+        <main className="p-4" data-testid="project-settings-heading">
+            <ProjectSettingsPage />
+        </main>
     )
 }
 
