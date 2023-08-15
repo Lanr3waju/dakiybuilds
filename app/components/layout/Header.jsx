@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 function Header({ children }) {
     const pathname = usePathname().replace(/^\/+/, '')
-    const navLinks = ['dakiyBoard', 'project-documents', 'project-schedule',
+    const navLinks = ['dakiyboard', 'project-documents', 'project-schedule',
         'project-team',
         'project-logs',
         'project-finances',
@@ -13,7 +13,7 @@ function Header({ children }) {
         'all-jobs',
         'project-settings']
     return (
-        <header className={pathname === 'dakiyBoard' ? "md:hidden" : ""}>
+        <header className={pathname === 'dakiyboard' ? "md:hidden" : ""}>
             <div className="drawer z-50 font-Poppins">
                 <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col">
