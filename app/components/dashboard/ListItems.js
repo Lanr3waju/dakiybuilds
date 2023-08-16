@@ -6,7 +6,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard'
 import PeopleIcon from '@mui/icons-material/People'
 import Image from 'next/image'
 import Link from 'next/link'
-import { BusinessCenterRounded, CalendarMonth, Folder, Notes, RequestQuote, Settings, Summarize } from '@mui/icons-material'
+import { BusinessCenterRounded, CalendarMonth, Folder, Notes, RequestQuote, Settings } from '@mui/icons-material'
 
 export const mainListItems = (
     <>
@@ -61,15 +61,6 @@ export const mainListItems = (
                     <RequestQuote />
                 </ListItemIcon>
                 <ListItemText primary="Project Finances" />
-            </ListItemButton>
-        </Link>
-
-        <Link href='/project-reports'>
-            <ListItemButton>
-                <ListItemIcon>
-                    <Summarize />
-                </ListItemIcon>
-                <ListItemText primary="Project Reports" />
             </ListItemButton>
         </Link>
 
