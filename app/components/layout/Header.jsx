@@ -9,7 +9,6 @@ function Header({ children }) {
         'project-team',
         'project-logs',
         'project-finances',
-        'project-reports',
         'all-jobs',
         'project-settings']
     return (

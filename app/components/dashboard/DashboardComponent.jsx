@@ -150,7 +150,7 @@ export default function DashboardComponent() {
                             </IconButton>
                         </Toolbar>
                         <Divider />
-                        <List className='bg-base-200' component="nav">
+                        <List className='h-[90vh] bg-base-200' component="nav">
                             {mainListItems}
                             <Divider sx={{ my: 1 }} />
                             {secondaryListItems}

@@ -1,8 +1,10 @@
+import ProjectLogsPage from "../components/project-logs/ProjectLogsPage"
+
 function ProjectLogs() {
     return (
-        <h2 data-testid="project-logs-heading">
-            This is project logs
-        </h2>
+        <div data-testid="project-logs-heading">
+            <ProjectLogsPage />
+        </div>
     )
 }
 
