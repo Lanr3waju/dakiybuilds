@@ -10,7 +10,7 @@ function Resources() {
                         <tr>
                             <th>S/N</th>
                             <th>
-                                <div className="tooltip tooltip-info tooltip-bottom z-50 cursor-pointer before:w-[20rem] before:content-[attr(data-tip)]" data-tip="Resource name">Name</div>
+                                <div className="tooltip tooltip-info tooltip-bottom z-50 cursor-pointer" data-tip="Resource name">Name</div>
                             </th>
                             <th>
                                 <div className="tooltip tooltip-info tooltip-bottom cursor-pointer before:whitespace-pre-wrap before:[--tw-content:'Type_of_resource_\a_(Plants_/_Equipment,_People_or_Material)']" data-tip>Unit</div>
