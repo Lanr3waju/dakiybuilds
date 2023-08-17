@@ -5,8 +5,8 @@ function Payments() {
     return (
         <section className="mt-5">
             <div className="overflow-x-auto font-Roboto">
-                <table className="table table-zebra table-xs md:table-md py-2 border-4 border-secondary/50">
-                    <thead className="bg-primary text-primary-content-content uppercase font-Poppins tracking-wider">
+                <table className="table table-zebra table-xs border-4 border-secondary/50 py-2 md:table-md">
+                    <thead className="bg-primary font-Poppins uppercase tracking-wider text-primary-content">
                         <tr>
                             <th>S/N</th>
                             <th>Amount (₦)</th>
@@ -19,7 +19,7 @@ function Payments() {
                     </thead>
                     <tbody>
                         {paymentData.map(({ id, amount, type, description, beneficiary, date }) => (
-                            <tr className='hover:translate-y-1 transition-all' key={id}>
+                            <tr className='transition-all hover:translate-y-1' key={id}>
                                 <th>{id}</th>
                                 <td>{addCommasToMoney(amount)}</td>
                                 <td>{type}</td>

@@ -7,7 +7,7 @@ import Payments from "./Payments"
 function ProjectFinancePage() {
     return (
         <div className="p-4">
-            <h2 className="font-semibold uppercase text-primary-focus text-lg">Finances</h2>
+            <h2 className="text-lg font-semibold uppercase text-primary-focus">Finances</h2>
             <HorizontalLine />
             <section className="mx-auto my-8 rounded-lg border-2 border-accent-focus bg-accent/10 p-4">
                 <Progress progress={55} />
