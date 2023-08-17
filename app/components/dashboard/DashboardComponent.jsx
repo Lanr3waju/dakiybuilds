@@ -178,7 +178,6 @@ export default function DashboardComponent() {
                                     sx={{
                                         p: 2,
                                         display: 'flex',
-                                        flexDirection: 'column',
                                         height: 120,
                                     }}
                                 >

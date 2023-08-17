@@ -86,9 +86,9 @@ export const mainListItems = (
 
 export const secondaryListItems = (
     <>
-        <ListSubheader className='bg-base-200 pl-1' component="div" inset>
+        <ListSubheader className='bg-base-200' component="span" inset>
             <Image
-                className="h-20 object-cover"
+                className="h-20 object-cover bg-base-200"
                 src='/logo.png'
                 width={200}
                 quality={100}
