@@ -26,9 +26,9 @@ const NewResourceForm = () => {
     // TODO Add tooltip to inputs
 
     return (
-        <form className='flex w-full flex-col justify-between md:flex-row py-5 font-Poppins text-lg font-bold uppercase' onSubmit={handleSubmit}>
+        <form className='flex w-full flex-col justify-between py-5 font-Poppins text-lg font-bold uppercase md:flex-row' onSubmit={handleSubmit}>
             <input
-                className="input input-bordered input-warning mb-3 w-full md:max-w-[22%] placeholder:text-xs"
+                className="input input-bordered input-warning mb-3 w-full placeholder:text-xs md:max-w-[22%]"
                 placeholder='Enter resource name'
                 aria-label='Enter resource name'
                 type="text"
@@ -40,7 +40,7 @@ const NewResourceForm = () => {
             <select name="type"
                 value={formData.type}
                 onChange={handleInputChange}
-                className="select select-warning mb-3 w-full md:max-w-[22%] placeholder:text-xs">
+                className="select select-warning mb-3 w-full placeholder:text-xs md:max-w-[22%]">
                 <option disabled selected>Select resource type</option>
                 <option>Material</option>
                 <option>Plant / Equipment</option>
@@ -48,7 +48,7 @@ const NewResourceForm = () => {
             </select>
 
             <input
-                className="input input-bordered input-warning mb-3 w-full md:max-w-[22%] placeholder:text-xs"
+                className="input input-bordered input-warning mb-3 w-full placeholder:text-xs md:max-w-[22%]"
                 placeholder='Enter resource rate'
                 aria-label='Enter resource rate'
                 type="number"
@@ -58,7 +58,7 @@ const NewResourceForm = () => {
             />
 
             <input
-                className="input input-bordered input-warning mb-3 w-full md:max-w-[22%] placeholder:text-xs"
+                className="input input-bordered input-warning mb-3 w-full placeholder:text-xs md:max-w-[22%]"
                 placeholder='Enter resource unit of measurement'
                 aria-label='Enter resource unit of measurement'
                 type="text"
