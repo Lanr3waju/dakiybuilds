@@ -1,7 +1,6 @@
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import ListSubheader from '@mui/material/ListSubheader'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import PeopleIcon from '@mui/icons-material/People'
 import Image from 'next/image'
@@ -86,17 +85,15 @@ export const mainListItems = (
 
 export const secondaryListItems = (
     <>
-        <ListSubheader className='bg-base-200' component="span" inset>
             <Image
-                className="h-20 object-cover bg-base-200"
+            className="h-20 bg-base-200 object-cover"
                 src='/logo.png'
                 width={200}
                 quality={100}
                 height={70}
                 loading="lazy"
                 alt="logo"
-            />
-        </ListSubheader>
+        />
 
         <ListItemButton>
             <ListItemIcon>

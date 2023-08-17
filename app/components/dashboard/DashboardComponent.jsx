@@ -174,7 +174,7 @@ export default function DashboardComponent() {
                             {/* Greeting */}
                             <Grid item xs={12} md={8} lg={8}>
                                 <Paper
-                                    className='flex flex-row justify-between'
+                                    className='flex flex-col justify-between md:flex-row'
                                     sx={{
                                         p: 2,
                                         display: 'flex',
@@ -206,8 +206,7 @@ export default function DashboardComponent() {
                                         p: 2,
                                         display: 'flex',
                                         flexDirection: 'column',
-                                        height: '100vh',
-                                        backgroundColor: 'primary'
+                                        height: '90vh',
                                     }}
                                 >
                                     <GetDate />
