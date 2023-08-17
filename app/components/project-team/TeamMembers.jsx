@@ -33,8 +33,8 @@ function TeamMembers() {
                         <tr>
                             <th>S/N</th>
                             <th>Name</th>
-                            <th>Job</th>
-                            <th>Tel</th>
+                            <th>Role</th>
+                            <th>Phone</th>
                             <th>Email</th>
                             <th>Last Login</th>
                             <th>More</th>

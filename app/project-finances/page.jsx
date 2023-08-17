@@ -1,8 +1,8 @@
+import ProjectFinancePage from "../components/project-finance/ProjectFinancePage"
+
 function ProjectFinances() {
     return (
-        <h2 data-testid="project-finances-heading">
-            This is project finances
-        </h2>
+        <ProjectFinancePage />
     )
 }
 

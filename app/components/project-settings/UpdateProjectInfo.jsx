@@ -77,22 +77,11 @@ const EditableProjectForm = () => {
                 onChange={handleInputChange}
             />
 
-            {/* TODO this should be a select input */}
-            <input
-                className="input input-bordered input-warning mb-3 w-full"
-                placeholder='Select new job type'
-                aria-label='Select new job type'
-                type="text"
-                name="jobType"
-                value={formData.jobType}
-                onChange={handleInputChange}
-            />
-
             <select name="jobType"
                 value={formData.type}
                 onChange={handleInputChange}
                 className="select select-warning mb-3 w-full">
-                <option disabled selected>Select Job Type</option>
+                <option disabled selected>Update Job Type</option>
                 <option>Construction</option>
                 <option>Renovation</option>
                 <option>Demolition</option>

@@ -1,0 +1,56 @@
+[
+    {
+      "id": 1,
+      "amount": 50000,
+      "description": "Payment for Column Casting",
+      "type": "Dr",
+      "beneficiary": "MR. Abass (Carpenter)",
+      "proofOfPayment": "https://example.com/link_to_image_1.jpg",
+      "date": "2023-08-15"
+    },
+    {
+      "id": 2,
+      "amount": 75000,
+      "description": "Payment for Roofing Materials",
+      "type": "Dr",
+      "beneficiary": "Ms. Johnson (Supplier)",
+      "proofOfPayment": "https://example.com/link_to_image_2.jpg",
+      "date": "2023-08-16"
+    },
+    {
+      "id": 3,
+      "amount": 35000,
+      "description": "Payment for Electrical Work",
+      "type": "Dr",
+      "beneficiary": "Mr. Smith (Electrician)",
+      "proofOfPayment": "https://example.com/link_to_image_3.jpg",
+      "date": "2023-08-18"
+    },
+    {
+      "id": 4,
+      "amount": 120000,
+      "description": "Payment for Architectural Design",
+      "type": "Dr",
+      "beneficiary": "Architect Solutions",
+      "proofOfPayment": "https://example.com/link_to_image_4.jpg",
+      "date": "2023-08-20"
+    },
+    {
+      "id": 5,
+      "amount": 6000,
+      "description": "Payment for Welding Services",
+      "type": "Dr",
+      "beneficiary": "WeldTech Services",
+      "proofOfPayment": "https://example.com/link_to_image_5.jpg",
+      "date": "2023-08-21"
+    },
+    {
+      "id": 6,
+      "amount": 10000,
+      "description": "For Working on Variations Requested by Client",
+      "type": "Cr",
+      "beneficiary": "DakiyBuilds",
+      "proofOfPayment": "https://example.com/link_to_image_6.jpg",
+      "date": "2023-08-25"
+    }
+  ]
