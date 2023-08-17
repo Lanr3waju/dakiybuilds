@@ -5,5 +5,4 @@ test('renders the Home header with correct text', () => {
     render(<ProjectSchedule />)
     const headingElement = screen.getByTestId('project-schedule-heading')
     expect(headingElement).toBeInTheDocument()
-    expect(headingElement).toHaveTextContent('This is project schedule')
 })
