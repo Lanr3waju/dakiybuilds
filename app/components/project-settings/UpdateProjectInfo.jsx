@@ -88,6 +88,17 @@ const EditableProjectForm = () => {
                 onChange={handleInputChange}
             />
 
+            <select name="jobType"
+                value={formData.type}
+                onChange={handleInputChange}
+                className="select select-warning mb-3 w-full">
+                <option disabled selected>Select Job Type</option>
+                <option>Construction</option>
+                <option>Renovation</option>
+                <option>Demolition</option>
+                <option>Maintenance</option>
+            </select>
+
             <input
                 className="input input-bordered input-warning mb-3 w-full"
                 placeholder='Update client name'

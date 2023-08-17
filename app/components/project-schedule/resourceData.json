@@ -1,0 +1,37 @@
+[
+    {
+      "id": 1,
+      "name": "Cement",
+      "type": "Material",
+      "rate": "5000",
+      "unit": "bag"
+    },
+    {
+      "id": 2,
+      "name": "Block 9 inches",
+      "type": "Material",
+      "rate": "350",
+      "unit": "block"
+    },
+    {
+      "id": 3,
+      "name": "Backhoe",
+      "type": "Plant",
+      "rate": "80000",
+      "unit": "day"
+    },
+    {
+      "id": 4,
+      "name": "Bricklayer",
+      "type": "People",
+      "rate": "5000",
+      "unit": "day"
+    },
+    {
+      "id": 5,
+      "name": "Operator",
+      "type": "People",
+      "rate": "5000",
+      "unit": "day"
+    }
+  ]

@@ -1,8 +1,10 @@
+import ProjectSchedulePage from "../components/project-schedule/ProjectSchedulePage"
+
 function ProjectSchedule() {
     return (
-        <h2 data-testid="project-schedule-heading">
-            This is project schedule
-        </h2>
+        <div data-testid="project-schedule-heading">
+            <ProjectSchedulePage />
+        </div>
     )
 }
 
