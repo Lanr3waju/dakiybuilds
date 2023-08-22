@@ -1,69 +1,154 @@
 'use client'
-import { BusinessCenterOutlined } from '@mui/icons-material'
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-function Header({ children }) {
-    const pathname = usePathname().replace(/^\/+/, '')
-    const navLinks = ['dakiyboard', 'project-documents', 'project-schedule',
-        'project-team',
-        'project-logs',
-        'project-finances',
-        'all-jobs',
-        'project-settings']
-    return (
-        <header className={pathname === 'dakiyboard' ? "md:hidden" : ""}>
-            <div className="drawer z-50 font-Poppins">
-                <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col">
-                    {/* Navbar */}
-                    <div className="navbar w-full bg-base-300">
-                        <div className="flex-none lg:hidden">
-                            <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block h-6 w-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                            </label>
-                        </div>
-                        <div className="mx-2 flex-1 px-2 font-semibold uppercase">{pathname}</div>
-                        <div className="hidden flex-none lg:block">
-                            <ul className="menu menu-horizontal">
-                                {/* Navbar menu content here */}
-                                {navLinks.map((link) => (
-                                    <li className={`capitalize ${pathname === link ? "hidden" : "block"}`} key={link}><Link href={`/${link}`}>{link}</Link></li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                    {/* Page content here */}
-                    {children}
-                </div>
-                <div className="drawer-side">
-                    <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-                    <ul className="menu h-full w-80 bg-base-200 p-4">
-                        {/* Sidebar content here */}
-                        {navLinks.map((link) => (
-                            <li className="capitalize" key={link}><Link href={`/${link}`}>{link}</Link></li>
-                        ))}
-                        <li><div className='my-3 h-[0.2px] w-full bg-primary-content' /></li>
-                        <li>
-                            <Image
-                                className="h-20 w-full object-cover"
-                                src='/logo.png'
-                                width={200}
-                                quality={100}
-                                height={60}
-                                loading="lazy"
-                                alt="logo"
-                            />
-                        </li>
-                        <li>
-                            <button className='btn btn-primary'><BusinessCenterOutlined /> + Add jobs</button>
-                        </li>
-                    </ul>
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles'
+import { usePathname } from 'next/navigation.js'
+import CssBaseline from '@mui/material/CssBaseline'
+import MuiDrawer from '@mui/material/Drawer'
+import Box from '@mui/material/Box'
+import MuiAppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import List from '@mui/material/List'
+import Typography from '@mui/material/Typography'
+import Divider from '@mui/material/Divider'
+import IconButton from '@mui/material/IconButton'
+import Badge from '@mui/material/Badge'
+import MenuIcon from '@mui/icons-material/Menu'
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
+import NotificationsIcon from '@mui/icons-material/Notifications'
+import { mainListItems, secondaryListItems } from './ListItems.js'
+import { useState } from 'react'
+import removeForwardSlash from '../utils/removeForwardSlash.js'
 
+const drawerWidth = 240
+
+const AppBar = styled(MuiAppBar, {
+    shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+    }),
+    ...(open && {
+        marginLeft: drawerWidth,
+        width: `calc(100% - ${drawerWidth}px)`,
+        transition: theme.transitions.create(['width', 'margin'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    }),
+}))
+
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+    ({ theme, open }) => ({
+        '& .MuiDrawer-paper': {
+            position: 'relative',
+            whiteSpace: 'nowrap',
+            width: drawerWidth,
+            transition: theme.transitions.create('width', {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.enteringScreen,
+            }),
+            boxSizing: 'border-box',
+            backgroundColor: 'inherit',
+            ...(!open && {
+                overflowX: 'hidden',
+                transition: theme.transitions.create('width', {
+                    easing: theme.transitions.easing.sharp,
+                    duration: theme.transitions.duration.leavingScreen,
+                }),
+                width: theme.spacing(7),
+                [theme.breakpoints.up('sm')]: {
+                    width: theme.spacing(9),
+                },
+            }),
+        },
+    }),
+)
+
+// TODO remove, this demo shouldn't need to reset the theme.
+const defaultTheme = createTheme()
+
+export default function DashboardComponent({ children }) {
+    const pathname = usePathname()
+    const [open, setOpen] = useState(false)
+    const toggleDrawer = () => {
+        setOpen(!open)
+    }
+
+    return (
+        <ThemeProvider theme={defaultTheme}>
+            <Box className="bg-base-100" sx={{ display: 'flex' }}>
+                <CssBaseline />
+                <div role='wrapper'>
+                    <AppBar position="absolute" open={open}>
+                        <Toolbar
+                            sx={{
+                                pr: '24px', // keep right padding when drawer closed
+                            }}
+                            className='bg-primary-content'
+                        >
+                            <IconButton
+                                edge="start"
+                                className='bg-primary-content text-neutral-content'
+                                aria-label="open drawer"
+                                onClick={toggleDrawer}
+                                sx={{
+                                    marginRight: '36px',
+                                    ...(open && { display: 'none' }),
+                                }}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                            <Typography
+                                component="h1"
+                                variant="h6"
+                                className='capitalize text-neutral-content'
+                                noWrap
+                                sx={{ flexGrow: 1 }}
+                            >
+                                {removeForwardSlash(pathname)}
+                            </Typography>
+                            <IconButton color="inherit">
+                                <Badge badgeContent={4} className='text-secondary-content'>
+                                    <NotificationsIcon />
+                                </Badge>
+                            </IconButton>
+                        </Toolbar>
+                    </AppBar>
+
+                    <Drawer variant="permanent" open={open}>
+                        <Toolbar
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'flex-end',
+                                px: [1],
+                            }}
+                        >
+                            <IconButton onClick={toggleDrawer}>
+                                <ChevronLeftIcon />
+                            </IconButton>
+                        </Toolbar>
+                        <Divider />
+                        <List className='h-[90vh] bg-base-200' component="nav">
+                            {mainListItems}
+                            <Divider sx={{ my: 1 }} />
+                            {secondaryListItems}
+                        </List>
+                    </Drawer>
                 </div>
-            </div>
-        </header >
+                <Box
+                    component="main"
+                    sx={{
+                        flexGrow: 1,
+                        height: '100vh',
+                        overflow: 'auto',
+                    }}
+                >
+                    <Toolbar />
+                    {children}
+                </Box>
+            </Box>
+        </ThemeProvider>
     )
 }
-
-export default Header

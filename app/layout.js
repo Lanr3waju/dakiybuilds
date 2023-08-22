@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 'use client'
 import { usePathname } from 'next/navigation'
 import Header from './components/layout/Header'
@@ -9,8 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html className='bg-base-100' lang="en">
       <body className='font-Raleway'>
-        <Header />
-        {children}
+        <Header children={children} />
       </body>
     </html>
   )
