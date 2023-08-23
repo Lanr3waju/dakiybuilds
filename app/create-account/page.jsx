@@ -1,4 +1,4 @@
-import CreateAccountForm from "../components/homepage/CreateAccountForm"
+import CreateAccountForm from "../components/create-account/CreateAccountForm"
 
 function CreateAccount() {
     return <CreateAccountForm />

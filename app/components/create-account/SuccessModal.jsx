@@ -1,8 +1,6 @@
 'use client'
-import { useRouter } from "next/navigation"
 
 function SuccessModal() {
-    const router = useRouter()
     return (
         <>
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
@@ -11,7 +9,7 @@ function SuccessModal() {
                     <p className="py-4">Check your email to verify your account</p>
                     <div className="modal-action">
                         {/* if there is a button in form, it will close the modal */}
-                        <button className="btn" onClick={router.push('/')}>Close</button>
+                        <button className="btn">Close</button>
                     </div>
                 </form>
             </dialog>

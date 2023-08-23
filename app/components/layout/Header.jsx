@@ -70,7 +70,7 @@ const defaultTheme = createTheme()
 
 export default function DashboardComponent({ children }) {
     const pathname = usePathname()
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(true)
     const toggleDrawer = () => {
         setOpen(!open)
     }

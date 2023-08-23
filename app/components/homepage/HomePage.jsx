@@ -21,7 +21,7 @@ function HomeComponent() {
                         Welcome to <span className="bg-[linear-gradient(90deg,hsl(var(--s))_0%,hsl(var(--sf))_9%,hsl(var(--pf))_42%,hsl(var(--p))_47%,hsl(var(--a))_100%)] bg-clip-text font-Fascinate tracking-widest text-primary-focus [-webkit-text-fill-color:transparent] [&::selection]:bg-blue-700/20 [@supports(color:oklch(0_0_0))]:bg-[linear-gradient(90deg,hsl(var(--s))_4%,color-mix(in_oklch,hsl(var(--sf)),hsl(var(--pf)))_22%,hsl(var(--p))_45%,color-mix(in_oklch,hsl(var(--p)),hsl(var(--a)))_67%,hsl(var(--a))_100.2%)]">dakiyBuilds</span>
                     </h1>
                     <h2 className="font-Poppins text-xl font-extrabold text-base-content/80 md:text-2xl">Your Modern Web-Based Construction Manager!</h2>
-                    <p className="font-title py-4 font-light text-base-content/60 md:text-lg xl:text-2xl">Join the revolution in construction management. Experience the future of building projects with dakiyBuilds.</p>
+                    <p className="py-4 font-light text-base-content/60 md:text-lg xl:text-2xl">Join the revolution in construction management. Experience the future of building projects with dakiyBuilds.</p>
                     <p className="text-xs text-success md:text-sm">Made with 🤎 from Yaba College of Technology (Building Technology Department) </p>
                 </section>
                 <HomePageLoginForm />
