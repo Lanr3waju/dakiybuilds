@@ -1,9 +1,11 @@
 import Image from "next/image"
 import HomePageLoginForm from "./HomePageLoginForm"
+import ForgotPasswordModal from "./ForgotPasswordModal"
 
 function HomeComponent() {
     return (
         <>
+            <ForgotPasswordModal />
             <header className="border-b-4 border-base-300 bg-neutral-content px-3">
                 <Image
                     className="h-20 w-full object-cover md:w-1/4"
