@@ -95,11 +95,13 @@ export const secondaryListItems = (
             alt="logo"
         />
 
+        <Link href="/add-job">
         <ListItemButton>
             <ListItemIcon>
                 <BusinessCenterRounded />
             </ListItemIcon>
-            <button type='button'>+ Add Jobs</button>
+                + Add Jobs
         </ListItemButton>
+        </Link>
     </>
 )

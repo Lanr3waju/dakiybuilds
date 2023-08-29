@@ -6,7 +6,7 @@ import './styles/globals.css'
 
 export default function RootLayout({ children }) {
   const pathname = usePathname()
-  if (pathname !== "/" && pathname !== "/create-account")
+  if (pathname !== "/" && pathname !== "/create-account" && pathname !== "/add-job")
   return (
     <html className='bg-base-100' lang="en">
       <body className='font-Raleway'>

@@ -1,6 +1,8 @@
-function AddButon({ addText }) {
+import Link from "next/link"
+
+function AddButon({ addText, route }) {
     return (
-        <button className='btn btn-primary mb-2 w-full py-5 text-right' type='button'>+ {addText}</button>
+        <Link href={`/${route}`} className='btn btn-primary mb-2 w-full py-5 text-right' >+ {addText}</Link>
     )
 }
 

@@ -9,7 +9,7 @@ function AllJobs() {
         <section className='p-4 font-Poppins'>
             <h1 className='font-medium uppercase text-primary md:text-lg'>Jobs</h1>
             <HorizontalLine />
-            <AddButon addText="Add Job" />
+            <AddButon addText="Add Job" route="add-job" />
             <ul>
                 {allProjects.map(({ title, progress, contractSum, startDate, estimatedFinishDate, clientName }) => (
                     <li className='mb-1 flex w-full flex-wrap items-center justify-between p-4 shadow-lg shadow-base-300' key={title}>

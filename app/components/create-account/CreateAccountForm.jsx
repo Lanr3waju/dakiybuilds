@@ -45,7 +45,7 @@ function CreateAccountForm() {
 
         if (Object.values(newErrors).every(error => error === '')) {
             console.log('Form data submitted:', formData)
-            window.my_modal_5.showModal()
+            window.account_creation_modal.showModal()
             setFormData(initialFormData)
         } else {
             setIsSubmitDisabled(true)
