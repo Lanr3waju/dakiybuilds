@@ -80,7 +80,7 @@ const AddJobForm = () => {
                         {field === 'jobType' ? (
                             <select
                                 ref={refs[field]}
-                                className='select select-bordered select-primary mb-3 w-full max-w-md font-Roboto'
+                                className='select select-bordered select-primary mb-3 w-full max-w-md font-Roboto capitalize'
                                 id={field}
                                 name={field}
                                 value={jobData[field]}

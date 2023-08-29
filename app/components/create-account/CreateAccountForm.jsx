@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
 import SuccessModal from './SuccessModal'
 import { validateField, validatePassword, validateRetypePassword } from './validateForm'
@@ -11,8 +11,22 @@ import Link from 'next/link'
 function CreateAccountForm() {
     const [formData, setFormData] = useState(initialFormData)
     const [errors, setErrors] = useState({ ...initialFormData })
-    const [isSubmitDisabled, setIsSubmitDisabled] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
+    const hasErrors = Object.values(errors).some(error => error !== '')
+
+    const inputRefs = {
+        firstName: useRef(null),
+        lastName: useRef(null),
+        email: useRef(null),
+        password: useRef(null),
+        retypePassword: useRef(null),
+        profession: useRef(null),
+        tel: useRef(null),
+        businessName: useRef(null),
+        businessEmail: useRef(null),
+        businessTel: useRef(null),
+        staffs: useRef(null)
+    };
 
     const handleInputChange = (event) => {
         const { name, value } = event.target
@@ -24,7 +38,6 @@ function CreateAccountForm() {
             ...errors,
             [name]: ''
         })
-        setIsSubmitDisabled(false)
     }
 
     const handleSubmit = (event) => {
@@ -48,7 +61,19 @@ function CreateAccountForm() {
             window.account_creation_modal.showModal()
             setFormData(initialFormData)
         } else {
-            setIsSubmitDisabled(true)
+
+            const firstErrorField = Object.keys(newErrors).find(field => newErrors[field] !== '')
+
+            // Scroll to the input field with the error
+            if (firstErrorField) {
+                if (firstErrorField === 'password' && inputRefs['password'].current) {
+                    inputRefs['password'].current.scrollIntoView({ behavior: 'smooth' })
+                } else if (firstErrorField === 'retypePassword' && inputRefs['retypePassword'].current) {
+                    inputRefs['retypePassword'].current.scrollIntoView({ behavior: 'smooth' })
+                } else if (firstErrorField in inputRefs) {
+                    inputRefs[firstErrorField].current.scrollIntoView({ behavior: 'smooth' })
+                }
+            }
         }
     }
 
@@ -62,25 +87,21 @@ function CreateAccountForm() {
                 <h2 className='my-2 text-right font-Roboto font-medium transition-all hover:-translate-x-3 md:text-lg'>Go back to <Link className='link-info' href="/" >Login Page</Link></h2>
                 <h2 className='mb-3 font-bold text-primary-focus md:text-lg'>Your Details</h2>
                 <HorizontalLine />
-
-                {renderInputField('firstName', 'your first name', 'text', formData, handleInputChange, errors)}
-                {renderInputField('lastName', 'your last name', 'text', formData, handleInputChange, errors)}
-                {renderInputField('email', 'email address', 'email', formData, handleInputChange, errors)}
-                {renderPasswordField('password', 'Password', formData, handleInputChange, errors, showPassword, setShowPassword)}
-                {renderPasswordField('retypePassword', 'Re-type Password', formData, handleInputChange, errors, showPassword, setShowPassword)}
-                {renderInputField('profession', 'your profession / occupation', 'text', formData, handleInputChange, errors)}
-                {renderInputField('tel', 'your mobile number', 'tel', formData, handleInputChange, errors)}
-
+                {renderInputField('firstName', 'your first name', 'text', formData, handleInputChange, errors, inputRefs.firstName)}
+                {renderInputField('lastName', 'your last name', 'text', formData, handleInputChange, errors, inputRefs.lastName)}
+                {renderInputField('email', 'email address', 'email', formData, handleInputChange, errors, inputRefs.email)}
+                {renderPasswordField('password', 'Password', formData, handleInputChange, errors, showPassword, setShowPassword, inputRefs.password)}
+                {renderPasswordField('retypePassword', 'Re-type Password', formData, handleInputChange, errors, showPassword, setShowPassword, inputRefs.retypePassword)}
+                {renderInputField('profession', 'your profession / occupation', 'text', formData, handleInputChange, errors, inputRefs.profession)}
+                {renderInputField('tel', 'your mobile number', 'tel', formData, handleInputChange, errors, inputRefs.tel)}
                 <div className="divider"></div>
                 <h2 className='my-3 font-bold text-primary-focus md:text-lg'>Business Details</h2>
                 <HorizontalLine />
-
-                {renderInputField('businessName', 'Business name', 'text', formData, handleInputChange, errors)}
-                {renderInputField('businessEmail', 'Business email', 'email', formData, handleInputChange, errors)}
-                {renderInputField('businessTel', 'Business tel', 'tel', formData, handleInputChange, errors)}
-                {renderInputField('staffs', 'number of staffs', 'number', formData, handleInputChange, errors)}
-
-                <button className='btn btn-success' type="submit" disabled={isSubmitDisabled}>
+                {renderInputField('businessName', 'Business name', 'text', formData, handleInputChange, errors, inputRefs.businessName)}
+                {renderInputField('businessEmail', 'Business email', 'email', formData, handleInputChange, errors, inputRefs.businessEmail)}
+                {renderInputField('businessTel', 'Business tel', 'tel', formData, handleInputChange, errors, inputRefs.businessTel)}
+                {renderInputField('staffs', 'number of staffs', 'number', formData, handleInputChange, errors, inputRefs.staffs)}
+                <button className={`btn ${hasErrors ? 'btn-error' : 'btn-success'}`} type="submit">
                     Create Account
                 </button>
             </form>
