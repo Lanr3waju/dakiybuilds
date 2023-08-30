@@ -1,3 +1,4 @@
+import Link from "next/link"
 import HorizontalLine from "../utils/HorizontalLine"
 import Progress from "../utils/Progress"
 import NewResourceForm from "./NewResource"
@@ -12,7 +13,7 @@ function ProjectSchedulePage() {
                     <div>23rd November, 2023</div>
                     <div>30th December, 2024</div>
                 </div>
-                <button className="btn btn-secondary mt-5 w-full md:w-1/4">open gantt chart</button>
+                <Link href="/project-schedule/gantt-chart" className="btn btn-secondary mt-5 w-full md:w-1/4">open gantt chart</Link>
             </section>
             <HorizontalLine />
             <section className="mt-8">
