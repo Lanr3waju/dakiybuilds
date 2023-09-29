@@ -1,7 +1,7 @@
-import AddJobForm from "../components/add-job/AddJobForm"
+import AddJobForm from '../components/add-job/AddJobForm'
 
 function AddJobsPage() {
-    return <AddJobForm />
+  return <AddJobForm />
 }
 
 export default AddJobsPage

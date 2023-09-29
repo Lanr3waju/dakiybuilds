@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import ProjectSchedule from '@/app/project-schedule/page'
 test('renders the Home header with correct text', () => {
-    render(<ProjectSchedule />)
-    const headingElement = screen.getByTestId('project-schedule-heading')
-    expect(headingElement).toBeInTheDocument()
+  render(<ProjectSchedule />)
+  const headingElement = screen.getByTestId('project-schedule-heading')
+  expect(headingElement).toBeInTheDocument()
 })
