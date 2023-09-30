@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   daisyui: {
-    themes: ["retro"],
-    darkTheme: "retro",
-    lightTheme: "retro",
+    themes: ['retro'],
+    darkTheme: 'retro',
+    lightTheme: 'retro',
     base: true,
   },
 
@@ -21,11 +21,15 @@ module.exports = {
       },
     },
     fontFamily: {
-      Raleway: "Raleway, sans-serif",
-      Roboto: "Roboto, sans-serif",
-      Fascinate: "Fascinate, cursive",
-      Poppins: "Poppins, sans-serif",
+      Raleway: 'Raleway, sans-serif',
+      Roboto: 'Roboto, sans-serif',
+      Fascinate: 'Fascinate, cursive',
+      Poppins: 'Poppins, sans-serif',
     },
   },
-  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms"), require("daisyui")],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('daisyui'),
+  ],
 }

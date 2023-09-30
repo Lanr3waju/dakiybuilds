@@ -1,9 +1,7 @@
-import ProjectFinancePage from "../components/project-finance/ProjectFinancePage"
+import ProjectFinancePage from '../components/project-finance/ProjectFinancePage'
 
 function ProjectFinances() {
-    return (
-        <ProjectFinancePage />
-    )
+  return <ProjectFinancePage />
 }
 
 export default ProjectFinances

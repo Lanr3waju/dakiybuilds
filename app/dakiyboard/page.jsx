@@ -1,9 +1,7 @@
-import DashboardComponent from "../components/dashboard/DashboardComponent"
+import DashboardComponent from '../components/dashboard/DashboardComponent'
 
 function DakiyBoard() {
-    return (
-        <DashboardComponent />
-    )
+  return <DashboardComponent />
 }
 
 export default DakiyBoard
