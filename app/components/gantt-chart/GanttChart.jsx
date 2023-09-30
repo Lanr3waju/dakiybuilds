@@ -10,25 +10,23 @@ import {
   Toolbar,
   ColumnsDirective,
   ColumnDirective,
-  EventMarkersDirective,
-  EventMarkerDirective,
 } from '@syncfusion/ej2-react-gantt'
-import { editingData, editingResources } from './data'
+import { editingData } from './data'
+import resourceData from '../project-schedule/resourceData.json'
 import { registerLicense } from '@syncfusion/ej2-base'
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 
-registerLicense(
-  'Ngo9BigBOggjHTQxAR8/V1NGaF1cXGJCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdgWXdceXRXR2JcUEV1WUc='
-)
+const projectName = "dummyProject"
+
+registerLicense(process.env.NEXT_PUBLIC_GANTT_LICENSE)
 
 function GanttChart() {
+
   const [data, setData] = useState(editingData)
 
   useEffect(() => {
-    let localData = JSON.parse(window.localStorage.getItem('ganttData'))
-    if (localData) {
-      setData(localData)
-    }
+    let localData = JSON.parse(window.localStorage.getItem(`${projectName}-gantt`))
+    if (localData) setData(localData)
   }, [])
 
   const actionComplete = (args) => {
@@ -37,7 +35,7 @@ function GanttChart() {
       args.requestType === 'delete' ||
       args.requestType === 'add'
     ) {
-      window.localStorage.setItem('ganttData', JSON.stringify(data))
+      window.localStorage.setItem(`${projectName}-gantt`, JSON.stringify(data))
     }
   }
 
@@ -54,8 +52,8 @@ function GanttChart() {
     resourceInfo: 'resources',
   }
   const resourceFields = {
-    id: 'resourceId',
-    name: 'resourceName',
+    id: 'id',
+    name: 'name',
   }
   const editSettings = {
     allowAdding: true,
@@ -67,8 +65,8 @@ function GanttChart() {
   const splitterSettings = {
     columnIndex: 2,
   }
-  const projectStartDate = new Date('03/25/2019')
-  const projectEndDate = new Date('07/28/2019')
+  const projectStartDate = new Date('01/01/2023')
+  const projectEndDate = new Date('01/01/2024')
   const gridLines = 'Both'
   const toolbar = [
     'Add',
@@ -95,11 +93,6 @@ function GanttChart() {
     rightLabel: 'resources',
   }
 
-  const eventMarkerDay1 = new Date('4/17/2019')
-  const eventMarkerDay2 = new Date('5/3/2019')
-  const eventMarkerDay3 = new Date('6/7/2019')
-  const eventMarkerDay4 = new Date('7/16/2019')
-
   return (
     <div className="control-pane">
       <div className="control-section">
@@ -120,12 +113,12 @@ function GanttChart() {
           timelineSettings={timelineSettings}
           labelSettings={labelSettings}
           splitterSettings={splitterSettings}
-          height="700px"
+          height="600px"
           editSettings={editSettings}
           gridLines={gridLines}
           toolbar={toolbar}
           resourceFields={resourceFields}
-          resources={editingResources}
+          resources={resourceData}
         >
           <ColumnsDirective>
             <ColumnDirective field="TaskID" width="80"></ColumnDirective>
@@ -149,24 +142,6 @@ function GanttChart() {
             <EditDialogFieldDirective type="Resources"></EditDialogFieldDirective>
             <EditDialogFieldDirective type="Notes"></EditDialogFieldDirective>
           </EditDialogFieldsDirective>
-          <EventMarkersDirective>
-            <EventMarkerDirective
-              day={eventMarkerDay1}
-              label="Project approval and kick-off"
-            ></EventMarkerDirective>
-            <EventMarkerDirective
-              day={eventMarkerDay2}
-              label="Foundation inspection"
-            ></EventMarkerDirective>
-            <EventMarkerDirective
-              day={eventMarkerDay3}
-              label="Site manager inspection"
-            ></EventMarkerDirective>
-            <EventMarkerDirective
-              day={eventMarkerDay4}
-              label="Property handover and sign-off"
-            ></EventMarkerDirective>
-          </EventMarkersDirective>
           <Inject services={[Edit, Selection, Toolbar, DayMarkers]} />
         </GanttComponent>
       </div>
