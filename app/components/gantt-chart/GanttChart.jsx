@@ -65,8 +65,8 @@ function GanttChart() {
   const splitterSettings = {
     columnIndex: 2,
   }
-  const projectStartDate = new Date('01/01/2023')
-  const projectEndDate = new Date('01/01/2024')
+  const projectStartDate = new Date('11/23/2023')
+  const projectEndDate = new Date('12/24/2024')
   const gridLines = 'Both'
   const toolbar = [
     'Add',
