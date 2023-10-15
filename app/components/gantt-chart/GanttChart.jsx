@@ -1,4 +1,5 @@
 'use client'
+import '../../styles/ganttChart.css'
 import {
   GanttComponent,
   EditDialogFieldsDirective,
@@ -94,58 +95,63 @@ function GanttChart() {
   }
 
   return (
-    <div className="control-pane">
-      <div className="control-section">
-        <GanttComponent
-          id="Editing"
-          actionComplete={actionComplete}
-          enablePersistence={true}
-          dataSource={data}
-          dateFormat={'MMM dd, y'}
-          treeColumnIndex={1}
-          allowSelection={true}
-          showColumnMenu={false}
-          highlightWeekends={true}
-          allowUnscheduledTasks={true}
-          projectStartDate={projectStartDate}
-          projectEndDate={projectEndDate}
-          taskFields={taskFields}
-          timelineSettings={timelineSettings}
-          labelSettings={labelSettings}
-          splitterSettings={splitterSettings}
-          height="600px"
-          editSettings={editSettings}
-          gridLines={gridLines}
-          toolbar={toolbar}
-          resourceFields={resourceFields}
-          resources={resourceData}
-        >
-          <ColumnsDirective>
-            <ColumnDirective field="TaskID" width="80"></ColumnDirective>
-            <ColumnDirective
-              field="TaskName"
-              headerText="Job Name"
-              width="250"
-              clipMode="EllipsisWithTooltip"
-            ></ColumnDirective>
-            <ColumnDirective field="StartDate"></ColumnDirective>
-            <ColumnDirective field="Duration"></ColumnDirective>
-            <ColumnDirective field="Progress"></ColumnDirective>
-            <ColumnDirective field="Predecessor"></ColumnDirective>
-          </ColumnsDirective>
-          <EditDialogFieldsDirective>
-            <EditDialogFieldDirective
-              type="General"
-              headerText="General"
-            ></EditDialogFieldDirective>
-            <EditDialogFieldDirective type="Dependency"></EditDialogFieldDirective>
-            <EditDialogFieldDirective type="Resources"></EditDialogFieldDirective>
-            <EditDialogFieldDirective type="Notes"></EditDialogFieldDirective>
-          </EditDialogFieldsDirective>
-          <Inject services={[Edit, Selection, Toolbar, DayMarkers]} />
-        </GanttComponent>
-      </div>
-    </div>
+    <>
+      <a href="/project-schedule" className="btn btn-secondary m-2 w-fit md:w-1/4">Back to schedules Page!</a>
+      <main className="material3 p-4">
+        <div className="control-pane">
+          <div className="control-section">
+            <GanttComponent
+              id="Editing"
+              actionComplete={actionComplete}
+              enablePersistence={true}
+              dataSource={data}
+              dateFormat={'MMM dd, y'}
+              treeColumnIndex={1}
+              allowSelection={true}
+              showColumnMenu={false}
+              highlightWeekends={true}
+              allowUnscheduledTasks={true}
+              projectStartDate={projectStartDate}
+              projectEndDate={projectEndDate}
+              taskFields={taskFields}
+              timelineSettings={timelineSettings}
+              labelSettings={labelSettings}
+              splitterSettings={splitterSettings}
+              height="600px"
+              editSettings={editSettings}
+              gridLines={gridLines}
+              toolbar={toolbar}
+              resourceFields={resourceFields}
+              resources={resourceData}
+            >
+              <ColumnsDirective>
+                <ColumnDirective field="TaskID" width="80"></ColumnDirective>
+                <ColumnDirective
+                  field="TaskName"
+                  headerText="Job Name"
+                  width="250"
+                  clipMode="EllipsisWithTooltip"
+                ></ColumnDirective>
+                <ColumnDirective field="StartDate"></ColumnDirective>
+                <ColumnDirective field="Duration"></ColumnDirective>
+                <ColumnDirective field="Progress"></ColumnDirective>
+                <ColumnDirective field="Predecessor"></ColumnDirective>
+              </ColumnsDirective>
+              <EditDialogFieldsDirective>
+                <EditDialogFieldDirective
+                  type="General"
+                  headerText="General"
+                ></EditDialogFieldDirective>
+                <EditDialogFieldDirective type="Dependency"></EditDialogFieldDirective>
+                <EditDialogFieldDirective type="Resources"></EditDialogFieldDirective>
+                <EditDialogFieldDirective type="Notes"></EditDialogFieldDirective>
+              </EditDialogFieldsDirective>
+              <Inject services={[Edit, Selection, Toolbar, DayMarkers]} />
+            </GanttComponent>
+          </div>
+        </div>
+      </main>
+    </>
   )
 }
 export default GanttChart

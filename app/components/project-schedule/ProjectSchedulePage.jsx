@@ -12,12 +12,12 @@ function ProjectSchedulePage() {
           <div>23rd November, 2023</div>
           <div>30th December, 2024</div>
         </div>
-              <a
+        <a
           href="/project-schedule/gantt-chart"
           className="btn btn-secondary mt-5 w-full md:w-1/4"
         >
           open gantt chart
-              </a>
+        </a>
       </section>
       <HorizontalLine />
       <section className="mt-8">
