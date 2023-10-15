@@ -3,13 +3,13 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
 export async function POST(request) {
-    const requestUrl = new URL(request.url)
-    const cookieStore = cookies()
-    const supabase = createRouteHandlerClient({ cookies: () => cookieStore })
+  const requestUrl = new URL(request.url)
+  const cookieStore = cookies()
+  const supabase = createRouteHandlerClient({ cookies: () => cookieStore })
 
-    await supabase.auth.signOut()
+  await supabase.auth.signOut()
 
-    return NextResponse.redirect(`${requestUrl.origin}/`, {
-        status: 301,
-    })
+  return NextResponse.redirect(`${requestUrl.origin}/`, {
+    status: 301,
+  })
 }

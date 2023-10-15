@@ -3,7 +3,6 @@ import HorizontalLine from '../utils/HorizontalLine'
 import EditableProjectForm from './UpdateProjectInfo'
 
 function ProjectSettingsPage() {
-
   return (
     <>
       <h1 className="font-medium uppercase text-primary md:text-lg">
@@ -25,8 +24,14 @@ function ProjectSettingsPage() {
           <h3 className="my-3 font-semibold text-warning-content">
             This button logs you out of your organization.
           </h3>
-          <form className="flex flex-col text-left" action="/auth/logout" method="post">
-            <button className="btn btn-warning mx-auto mb-3 block w-full md:w-2/5">Sign Out</button>
+          <form
+            className="flex flex-col text-left"
+            action="/auth/logout"
+            method="post"
+          >
+            <button className="btn btn-warning mx-auto mb-3 block w-full md:w-2/5">
+              Sign Out
+            </button>
           </form>
         </section>
 

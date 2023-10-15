@@ -5,7 +5,9 @@ import { redirect } from 'next/navigation'
 
 async function AddJobsPage() {
   const supabase = createServerComponentClient({ cookies })
-  const { data: { session } } = await supabase.auth.getSession()
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
 
   if (!session) {
     redirect('/')

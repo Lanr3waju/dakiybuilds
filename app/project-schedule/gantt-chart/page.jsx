@@ -1,13 +1,11 @@
 import GanttChart from '@/app/components/gantt-chart/GanttChart'
 
 export const metadata = {
-  title: "Gantt Chart"
+  title: 'Gantt Chart',
 }
 
 function GanttChartPage() {
-  return (
-    <GanttChart />
-  )
+  return <GanttChart />
 }
 
 export default GanttChartPage

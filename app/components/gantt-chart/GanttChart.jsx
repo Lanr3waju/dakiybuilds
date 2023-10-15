@@ -17,16 +17,17 @@ import resourceData from '../project-schedule/resourceData.json'
 import { registerLicense } from '@syncfusion/ej2-base'
 import { useState, useEffect } from 'react'
 
-const projectName = "dummyProject"
+const projectName = 'dummyProject'
 
 registerLicense(process.env.NEXT_PUBLIC_GANTT_LICENSE)
 
 function GanttChart() {
-
   const [data, setData] = useState(editingData)
 
   useEffect(() => {
-    let localData = JSON.parse(window.localStorage.getItem(`${projectName}-gantt`))
+    let localData = JSON.parse(
+      window.localStorage.getItem(`${projectName}-gantt`)
+    )
     if (localData) setData(localData)
   }, [])
 
@@ -96,7 +97,12 @@ function GanttChart() {
 
   return (
     <>
-      <a href="/project-schedule" className="btn btn-secondary m-2 w-fit md:w-1/4">Back to schedules Page!</a>
+      <a
+        href="/project-schedule"
+        className="btn btn-secondary m-2 w-fit md:w-1/4"
+      >
+        Back to schedules Page!
+      </a>
       <main className="material3 p-4">
         <div className="control-pane">
           <div className="control-section">
