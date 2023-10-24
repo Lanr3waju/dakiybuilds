@@ -14,7 +14,7 @@ function ProjectSchedulePage() {
 
   return (
     <>
-      {openGantt && <div className='flex w-full justify-center items-center h-full'><progress className="progress w-4/5 mx-auto my-9 progress-success h-4"></progress></div>}
+      {openGantt && <div className='flex h-full w-full items-center justify-center'><progress className="progress progress-success mx-auto my-9 h-4 w-4/5"></progress></div>}
 
       <main className={`${openGantt ? "hidden" : "p-4"}`} >
       <section className="mx-auto my-8 rounded-lg border-2 border-accent-focus bg-accent/10 p-4">

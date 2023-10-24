@@ -1,15 +1,12 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import HomeComponent from './components/homepage/HomePage'
-import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+import userSession from './components/utils/userSession'
+
+export const dynamic = 'force-dynamic'
 
 async function HomePage() {
-  const supabase = createServerComponentClient({ cookies })
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-
-  if (session) {
+  const isLoggedIn = await userSession()
+  if (isLoggedIn) {
     redirect('/dakiyboard')
   }
 

@@ -1,18 +1,14 @@
 import ProjectSchedulePage from '../components/project-schedule/ProjectSchedulePage'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+import userSession from '../components/utils/userSession'
+
+export const dynamic = 'force-dynamic'
 
 async function ProjectSchedule() {
-  const supabase = createServerComponentClient({ cookies })
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-
-  if (!session) {
+  const isLoggedIn = await userSession()
+  if (!isLoggedIn) {
     redirect('/')
   }
-
   return (
     <div data-testid="project-schedule-heading">
       <ProjectSchedulePage />
