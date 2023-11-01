@@ -37,6 +37,7 @@ function HomePageLoginForm() {
     email: '',
     password: '',
     retypePassword: '',
+    status: 0
   })
   const [formErrors, setFormErrors] = useState({
     email: 'Field is required',
@@ -44,23 +45,29 @@ function HomePageLoginForm() {
     retypePassword: 'Field is required',
   })
 
-  async function handleSubmit(event) {
-    event.preventDefault()
-    const formData = new FormData(event.target)
+  const [loginResponse, setLoginResponse] = useState('')
 
-    const response = await fetch('/auth/login', {
+  async function handleSubmission(event) {
+    event.preventDefault()
+    setLoginResponse('')
+    const formData = new FormData(event.target)
+    const value = createAccount ? "sign-up" : "login"
+    const response = await fetch(`/auth/${value}`, {
       method: 'POST',
       body: formData,
     })
 
-    const data = await response.json()
+    const { status, message } = await response.json()
 
-    if (data.status === 200) {
-      // Redirect to '/dashboard' or handle successful login
+    if (status === 200) {
       router.push('/dakiyboard')
+      setFormData({ ...formData, status: status })
+    } else if (status === 301) {
+      setFormData({ ...formData, status: 301 })
+      setLoginResponse('A verification link has been sent to your email!')
     } else {
-      // Display 'data.message' to the user
-      console.log(`Error: ${data.message}`)
+      setFormData({ ...formData, status: status })
+      setLoginResponse(message)
     }
   }
 
@@ -97,8 +104,8 @@ function HomePageLoginForm() {
         errors.retypePassword = ''
       }
     }
-
     setFormErrors(errors)
+    setLoginResponse('')
   }
 
   const { email, password, retypePassword } = formErrors
@@ -112,7 +119,7 @@ function HomePageLoginForm() {
 
       <FormHeader createAccount={createAccount} setCreateAccount={setCreateAccount} />
 
-      <form className="flex flex-col text-left" onSubmit={handleSubmit}>
+      <form className="flex flex-col text-left" onSubmit={handleSubmission}>
         <InputField
           name="email"
           type="text"
@@ -151,12 +158,16 @@ function HomePageLoginForm() {
         ) : (
           <button
             disabled={email !== "" || password !== "" || retypePassword !== ""}
-            className="btn btn-neutral btn-active mt-5 disabled:btn-disabled"
-            formAction="/auth/sign-up"
+              className="btn btn-neutral btn-active mt-5 disabled:btn-disabled"
           >
             Sign Up
           </button>
         )}
+        <div className="my-2 h-fit p-3">
+          {loginResponse &&
+            <span className={`text-base font-semibold ${formData.status === 301 ? "text-success" : "text-error"}`}>{loginResponse}</span>
+          }
+        </div>
       </form>
     </section>
   )
