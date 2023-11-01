@@ -44,12 +44,15 @@ function HomePageLoginForm() {
     password: 'Field is required',
     retypePassword: 'Field is required',
   })
+  const [isLoading, setIsLoading] = useState(false)
 
   const [loginResponse, setLoginResponse] = useState('')
 
   async function handleSubmission(event) {
     event.preventDefault()
+    setIsLoading(true)
     setLoginResponse('')
+
     const formData = new FormData(event.target)
     const value = createAccount ? "sign-up" : "login"
     const response = await fetch(`/auth/${value}`, {
@@ -63,9 +66,11 @@ function HomePageLoginForm() {
       router.push('/dakiyboard')
       setFormData({ ...formData, status: status })
     } else if (status === 301) {
+      setIsLoading(false)
       setFormData({ ...formData, status: 301 })
       setLoginResponse('A verification link has been sent to your email!')
     } else {
+      setIsLoading(false)
       setFormData({ ...formData, status: status })
       setLoginResponse(message)
     }
@@ -153,14 +158,14 @@ function HomePageLoginForm() {
 
         {!createAccount ? (
           <button disabled={email !== "" || password !== ""} className="btn btn-neutral btn-active mt-5 disabled:btn-disabled">
-            Login
+            {isLoading ? <span className="loading loading-dots loading-lg"></span> : "Login"}
           </button>
         ) : (
           <button
             disabled={email !== "" || password !== "" || retypePassword !== ""}
               className="btn btn-neutral btn-active mt-5 disabled:btn-disabled"
           >
-            Sign Up
+              {isLoading ? <span className="loading loading-dots loading-lg"></span> : "Signup"}
           </button>
         )}
         <div className="my-2 h-fit p-3">
