@@ -1,8 +1,37 @@
 'use client'
 import { useState } from 'react'
-import HorizontalLine from '../utils/HorizontalLine';
+import HorizontalLine from '../utils/HorizontalLine'
+import { useRouter } from 'next/navigation'
+
+function InputField({ name, type, value, onChange, placeholder, isError, errorMessage }) {
+  return (
+    <>
+      <input
+        className={` ${isError && 'input-error'} input input-bordered input-success mt-3 w-full focus:border-none focus:ring-0`}
+        name={name}
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
+      <p className="mb-3 mt-1 text-sm font-semibold text-error">{isError ? errorMessage : " "}</p>
+    </>
+  )
+}
+
+function FormHeader({ createAccount, setCreateAccount }) {
+  return (
+    <h2 className="font-Poppins text-lg font-semibold text-base-content/70">
+      {createAccount ? 'Already have an account? ' : 'Login to access your projects, or '}
+      <button className="link-info link" onClick={() => setCreateAccount(!createAccount)}>
+        {createAccount ? 'Click to Login' : 'Click to Sign Up:'}
+      </button>
+    </h2>
+  )
+}
 
 function HomePageLoginForm() {
+  const router = useRouter()
   const [createAccount, setCreateAccount] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -15,15 +44,34 @@ function HomePageLoginForm() {
     retypePassword: 'Field is required',
   })
 
-  const validateFormInput = ({ target }) => {
+  async function handleSubmit(event) {
+    event.preventDefault()
+    const formData = new FormData(event.target)
+
+    const response = await fetch('/auth/login', {
+      method: 'POST',
+      body: formData,
+    })
+
+    const data = await response.json()
+
+    if (data.status === 200) {
+      // Redirect to '/dashboard' or handle successful login
+      router.push('/dakiyboard')
+    } else {
+      // Display 'data.message' to the user
+      console.log(`Error: ${data.message}`)
+    }
+  }
+
+  function validateFormInput({ target }) {
     const { name, value } = target
     setFormData({
       ...formData,
       [name]: value,
     })
-    // Validation rules can be added here
-    const errors = { ...formErrors }
 
+    const errors = { ...formErrors }
 
     if (name === 'email') {
       const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
@@ -51,10 +99,10 @@ function HomePageLoginForm() {
     }
 
     setFormErrors(errors)
-
   }
 
   const { email, password, retypePassword } = formErrors
+
   return (
     <section className="mt-5 max-w-xl rounded-md bg-base-200/95 px-2 py-9 leading-loose text-base-content shadow-md shadow-base-300 md:w-3/6 ">
       <h1 className="font-Poppins text-lg font-semibold uppercase text-base-content">
@@ -62,65 +110,45 @@ function HomePageLoginForm() {
       </h1>
       <HorizontalLine />
 
-      {!createAccount && (
-        <h2 className="font-Poppins text-lg font-semibold text-base-content/70">
-          Login to access your projects, or{' '}
-          <button
-            className="link-info link"
-            onClick={() => setCreateAccount(true)}
-          >
-            {' '}
-            Click to Sign Up:
-          </button>
-        </h2>
-      )}
+      <FormHeader createAccount={createAccount} setCreateAccount={setCreateAccount} />
 
-      {createAccount && (
-        <h2 className="font-Poppins text-lg font-semibold text-base-content/70">
-          Already have an account?{' '}
-          <button
-            className="link-info link"
-            onClick={() => setCreateAccount(false)}
-          >
-            Click to Login
-          </button>
-        </h2>
-      )}
-
-      <form className="flex flex-col text-left" action="/auth/login" method="post">
-        <input
-          className={` ${email && 'input-error'} input input-bordered input-success mt-3 w-full focus:border-none focus:ring-0`}
+      <form className="flex flex-col text-left" onSubmit={handleSubmit}>
+        <InputField
           name="email"
+          type="text"
+          value={formData.email}
           onChange={validateFormInput}
           placeholder="Enter your mail"
+          isError={email}
+          errorMessage={email}
         />
-        <p className="mb-3 mt-1 text-sm font-semibold text-error">{email ? email : " "}</p>
-        <input
+        <InputField
           name="password"
           type="password"
+          value={formData.password}
           onChange={validateFormInput}
           placeholder="Enter your password"
-          className={`${password && 'input-error'} input input-bordered input-success mt-1 w-full focus:border-none focus:ring-0`}
+          isError={password}
+          errorMessage={password}
         />
-        <p className="mb-3 mt-1 text-sm font-semibold text-error">{password ? password : " "}</p>
+
         {createAccount && (
-          <>
-            <input
-              name="retypePassword"
-              type="password"
-              onChange={validateFormInput}
-              placeholder="Retype your password"
-              className={`${retypePassword && 'input-error'} input input-bordered input-success mt-1 w-full focus:border-none focus:ring-0`}
-            />
-            <p className="mb-3 mt-1 text-sm font-semibold text-error">{retypePassword ? retypePassword : " "}</p>
-          </>
+          <InputField
+            name="retypePassword"
+            type="password"
+            value={formData.retypePassword}
+            onChange={validateFormInput}
+            placeholder="Retype your password"
+            isError={retypePassword}
+            errorMessage={retypePassword}
+          />
         )}
-        {!createAccount && (
+
+        {!createAccount ? (
           <button disabled={email !== "" || password !== ""} className="btn btn-neutral btn-active mt-5 disabled:btn-disabled">
             Login
           </button>
-        )}
-        {createAccount && (
+        ) : (
           <button
             disabled={email !== "" || password !== "" || retypePassword !== ""}
             className="btn btn-neutral btn-active mt-5 disabled:btn-disabled"

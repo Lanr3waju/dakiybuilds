@@ -3,7 +3,6 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
 export async function POST(request) {
-  const requestUrl = new URL(request.url)
   const formData = await request.formData()
   const email = formData.get('email')
   const password = formData.get('password')
@@ -16,10 +15,8 @@ export async function POST(request) {
   })
 
   if (error) {
-    return NextResponse.json({ message: 'invalid credentials', status: 400 })
+    return NextResponse.json({ message: error.message, status: error.status })
   }
 
-  return NextResponse.redirect(`${requestUrl.origin}/dakiyboard`, {
-    status: 301,
-  })
+  return NextResponse.json({ message: "Request successful", status: 200, })
 }
