@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
         <title>{title}</title>
       </head>
       <body className='font-Raleway'>
-        {pathname !== '/project-schedule/gantt-chart' && pathname !== '/' && pathname !== 'create-account' && pathname !== '/add-job' ?
+        {pathname !== '/project-schedule/gantt-chart' && pathname !== '/' && pathname !== 'create-profile' && pathname !== '/add-job' ?
           (<Header children={children} />) :
           (children)
         }

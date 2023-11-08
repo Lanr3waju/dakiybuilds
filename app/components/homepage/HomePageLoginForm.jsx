@@ -2,33 +2,8 @@
 import { useState } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
 import { useRouter } from 'next/navigation'
-
-function InputField({ name, type, value, onChange, placeholder, isError, errorMessage }) {
-  return (
-    <>
-      <input
-        className={` ${isError && 'input-error'} input input-bordered input-success mt-3 w-full focus:border-none focus:ring-0`}
-        name={name}
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-      />
-      <p className="mb-3 mt-1 text-sm font-semibold text-error">{isError ? errorMessage : " "}</p>
-    </>
-  )
-}
-
-function FormHeader({ createAccount, setCreateAccount }) {
-  return (
-    <h2 className="font-Poppins text-lg font-semibold text-base-content/70">
-      {createAccount ? 'Already have an account? ' : 'Login to access your projects, or '}
-      <button className="link-info link" onClick={() => setCreateAccount(!createAccount)}>
-        {createAccount ? 'Click to Login' : 'Click to Sign Up:'}
-      </button>
-    </h2>
-  )
-}
+import InputField from './InputField'
+import FormHeader from './FormHeader'
 
 function HomePageLoginForm() {
   const router = useRouter()
@@ -157,12 +132,12 @@ function HomePageLoginForm() {
         )}
 
         {!createAccount ? (
-          <button disabled={email !== "" || password !== ""} className="btn btn-neutral btn-active mt-5 disabled:btn-disabled">
+          <button disabled={email !== "" || password !== "" || isLoading} className="btn btn-neutral btn-active mt-5 disabled:btn-disabled">
             {isLoading ? <span className="loading loading-dots loading-lg"></span> : "Login"}
           </button>
         ) : (
           <button
-            disabled={email !== "" || password !== "" || retypePassword !== ""}
+              disabled={email !== "" || password !== "" || retypePassword !== "" || isLoading}
               className="btn btn-neutral btn-active mt-5 disabled:btn-disabled"
           >
               {isLoading ? <span className="loading loading-dots loading-lg"></span> : "Signup"}

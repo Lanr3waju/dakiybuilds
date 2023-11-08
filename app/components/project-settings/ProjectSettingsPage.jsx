@@ -4,7 +4,7 @@ import EditableProjectForm from './UpdateProjectInfo'
 
 function ProjectSettingsPage() {
   return (
-    <>
+    <main className='p-4'>
       <h1 className="font-medium uppercase text-primary md:text-lg">
         Project Settings
       </h1>
@@ -45,7 +45,7 @@ function ProjectSettingsPage() {
           </button>
         </section>
       </section>
-    </>
+    </main>
   )
 }
 
