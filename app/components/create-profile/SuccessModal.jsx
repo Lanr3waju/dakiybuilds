@@ -9,9 +9,8 @@ function SuccessModal() {
       >
         <form method="dialog" className="modal-box">
           <h3 className="text-lg font-bold text-success">
-            Account Created Successfully! 🎊
+            Profile created successfully 🎉
           </h3>
-          <p className="py-4">Check your email to verify your account</p>
           <div className="modal-action">
             {/* if there is a button in form, it will close the modal */}
             <button className="btn">Close</button>

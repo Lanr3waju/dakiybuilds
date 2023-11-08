@@ -1,4 +1,4 @@
-import CreateAccountForm from '../components/create-account/CreateAccountForm'
+import CreateProfileForm from '../components/create-profile/CreateProfileForm'
 import { redirect } from 'next/navigation'
 import userSession from '../components/utils/userSession'
 import getUserData from '../components/utils/getUserData'
@@ -14,7 +14,7 @@ async function CreateAccount() {
   } else if (userData.phone) {
     redirect('/dakiyboard')
   }
-  return <CreateAccountForm />
+  return <CreateProfileForm />
 }
 
 export default CreateAccount

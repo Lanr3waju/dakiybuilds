@@ -9,7 +9,6 @@ import {
 } from './validateForm'
 import { initialFormData } from './initialFormData'
 import { renderInputField, renderPasswordField } from './RenderFields'
-import Link from 'next/link'
 
 function CreateAccountForm() {
   const [formData, setFormData] = useState(initialFormData)
@@ -102,12 +101,6 @@ function CreateAccountForm() {
         noValidate
         onSubmit={handleSubmit}
       >
-        <h2 className="my-2 text-right font-Roboto font-medium transition-all hover:-translate-x-3 md:text-lg">
-          Go back to{' '}
-          <Link className="link-info" href="/">
-            Login Page
-          </Link>
-        </h2>
         <h2 className="mb-3 font-bold text-primary-focus md:text-lg">
           Your Details
         </h2>
