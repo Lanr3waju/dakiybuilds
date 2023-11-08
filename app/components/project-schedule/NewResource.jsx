@@ -46,9 +46,7 @@ const NewResourceForm = () => {
         onChange={handleInputChange}
         className="select select-warning mb-3 w-full placeholder:text-xs md:max-w-[22%]"
       >
-        <option disabled>
-          Select resource type
-        </option>
+        <option disabled>Select resource type</option>
         <option>Material</option>
         <option>Plant / Equipment</option>
         <option>People</option>

@@ -1,12 +1,10 @@
 'use client'
-import { useRouter } from 'next/navigation'
 import HorizontalLine from '../utils/HorizontalLine'
 import EditableProjectForm from './UpdateProjectInfo'
 
 function ProjectSettingsPage() {
-  const router = useRouter()
   return (
-    <>
+    <main className='p-4'>
       <h1 className="font-medium uppercase text-primary md:text-lg">
         Project Settings
       </h1>
@@ -24,14 +22,17 @@ function ProjectSettingsPage() {
         </h2>
         <section className="my-3 rounded-lg border-2 border-warning bg-warning/10 p-4 text-center">
           <h3 className="my-3 font-semibold text-warning-content">
-            This button logs you out of all your projects.
+            This button logs you out of your organization.
           </h3>
-          <button
-            onClick={() => router.push('/')}
-            className="btn btn-warning mx-auto mb-3 block w-full md:w-2/5"
+          <form
+            className="flex flex-col text-left"
+            action="/auth/logout"
+            method="post"
           >
-            Logout
-          </button>
+            <button className="btn btn-warning mx-auto mb-3 block w-full md:w-2/5">
+              Sign Out
+            </button>
+          </form>
         </section>
 
         <section className="my-3 rounded-lg border-2 border-error bg-error/10 p-4 text-center">
@@ -44,7 +45,7 @@ function ProjectSettingsPage() {
           </button>
         </section>
       </section>
-    </>
+    </main>
   )
 }
 

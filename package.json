@@ -18,6 +18,8 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.3",
+    "@supabase/auth-helpers-nextjs": "^0.8.1",
+    "@supabase/supabase-js": "^2.38.0",
     "@syncfusion/ej2-base": "^22.2.10",
     "@syncfusion/ej2-buttons": "^22.2.9",
     "@syncfusion/ej2-documenteditor": "^22.2.11",

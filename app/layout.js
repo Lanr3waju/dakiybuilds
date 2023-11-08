@@ -3,27 +3,37 @@
 import { usePathname } from 'next/navigation'
 import Header from './components/layout/Header'
 import './styles/globals.css'
+import removeForwardSlash from './components/utils/removeForwardSlash'
+
+export const dynamic = 'force-dynamic'
 
 export default function RootLayout({ children }) {
   const pathname = usePathname()
-  if (
-    pathname !== '/' &&
-    pathname !== '/create-account' &&
-    pathname !== '/add-job' &&
-    pathname !== '/project-schedule/gantt-chart'
-  )
-    return (
-      <html className="bg-base-100" lang="en">
-        <body className="font-Raleway">
-          <Header children={children} />
-        </body>
-      </html>
-    )
-  else {
-    return (
-      <html className="bg-base-100" lang="en">
-        <body className="font-Raleway">{children}</body>
-      </html>
-    )
+  let title = removeForwardSlash(pathname)
+  let bodyClass;
+
+
+  if (pathname === '/') {
+    title = 'Login'
+    bodyClass = "bg-base-100"
+  } else if (pathname === '/project-schedule/gantt-chart') {
+    title = 'gantt-chart'
+    bodyClass = "bg-white"
+  } else {
+    bodyClass = "bg-base-100"
   }
+
+  return (
+    <html lang="en" className={bodyClass}>
+      <head>
+        <title>{title}</title>
+      </head>
+      <body className='font-Raleway'>
+        {pathname !== '/project-schedule/gantt-chart' && pathname !== '/' && pathname !== 'create-profile' && pathname !== '/add-job' ?
+          (<Header children={children} />) :
+          (children)
+        }
+      </body>
+    </html>
+  )
 }
