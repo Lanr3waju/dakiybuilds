@@ -30,7 +30,7 @@
     "@syncfusion/ej2-react-gantt": "^22.2.11",
     "@syncfusion/ej2-splitbuttons": "^22.2.8",
     "autoprefixer": "10.4.14",
-    "axios": "^1.4.0",
+    "axios": "^1.6.0",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
     "eslint-plugin-tailwindcss": "^3.13.0",
