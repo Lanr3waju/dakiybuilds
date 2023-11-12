@@ -1,17 +1,17 @@
-import CreateProfileForm from '../components/create-profile/CreateProfileForm'
 import { redirect } from 'next/navigation'
 import userSession from '../components/utils/userSession'
-import getUserData from '../components/utils/getUserData'
+import getUserProfile from '../components/utils/getUserProfile'
+import CreateProfileForm from '../components/create-profile/CreateProfileForm'
 
 export const dynamic = 'force-dynamic'
 
 async function CreateAccount() {
-  const userData = await getUserData()
+  const userProfile = await getUserProfile()
   const isLoggedIn = await userSession()
 
   if (!isLoggedIn) {
     redirect('/')
-  } else if (userData.phone) {
+  } else if (userProfile === true) {
     redirect('/dakiyboard')
   }
   return <CreateProfileForm />

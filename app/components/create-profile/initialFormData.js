@@ -1,13 +1,13 @@
-export const initialFormData = {
+export const initialUserFormData = {
   firstName: '',
   lastName: '',
-  email: '',
   profession: '',
-  tel: '',
-  businessName: '',
-  businessEmail: '',
-  businessTel: '',
-  staffs: '',
-  password: '',
-  retypePassword: '',
+  tel: ''
+}
+
+export const initialOrganizationFormData = {
+  organizationName: '',
+  organizationEmail: '',
+  organizationTel: '',
+  staffs: ''
 }

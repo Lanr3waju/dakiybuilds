@@ -1,9 +1,11 @@
 import { getGreeting } from './getTime'
 
-function Greeting() {
+async function Greeting() {
+  const fullName = "Abass Olanrewaju"
+
   return (
     <h2 className="mt-4 text-xl font-semibold">
-      Hello Mr. Abass, {getGreeting()}.
+      Hello {fullName}, {getGreeting()}.
     </h2>
   )
 }
