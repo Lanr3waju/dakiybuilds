@@ -2,7 +2,6 @@ import ProjectLogsPage from '../components/project-logs/ProjectLogsPage'
 import { redirect } from 'next/navigation'
 import userSession from '../components/utils/userSession'
 import getUserProfile from '../components/utils/getUserProfile'
-
 export const dynamic = 'force-dynamic'
 
 async function ProjectLogs() {
