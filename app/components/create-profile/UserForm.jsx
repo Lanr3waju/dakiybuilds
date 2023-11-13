@@ -53,7 +53,6 @@ function UserForm({ activateUserForm }) {
         event.preventDefault()
         if (validateForm()) {
             setIsLoading(true)
-            setUserFormData(initialUserFormData)
             // save the data to the profiles table
             const profileError = profileTable(firstName, lastName, profession, tel)
             const profileErrorMessage = (await profileError)?.message

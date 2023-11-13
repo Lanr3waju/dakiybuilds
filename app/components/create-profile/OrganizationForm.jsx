@@ -66,7 +66,6 @@ function OrganizationForm({ setActivateUserForm, activateUserForm }) {
         event.preventDefault()
         if (validateForm()) {
             setIsLoading(true)
-            setOrganizationFormData(initialOrganizationFormData)
             const error = organizationTable(organizationName, organizationEmail, organizationTel, staffs)
             const errorMessage = (await error)?.message
             if (!errorMessage) {
