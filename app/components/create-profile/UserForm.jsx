@@ -51,7 +51,6 @@ function UserForm({ activateUserForm }) {
     const handleSubmission = async (event) => {
         const { firstName, lastName, profession, tel } = userFormData
         event.preventDefault()
-
         if (validateForm()) {
             setIsLoading(true)
             setUserFormData(initialUserFormData)
@@ -59,7 +58,7 @@ function UserForm({ activateUserForm }) {
             const profileError = profileTable(firstName, lastName, profession, tel)
             const profileErrorMessage = (await profileError)?.message
 
-            if (profileErrorMessage) {
+            if (!profileErrorMessage) {
                 setIsLoading(false)
                 window.account_creation_modal.showModal()
                 router.push("/dakiyboard")
@@ -67,7 +66,6 @@ function UserForm({ activateUserForm }) {
                 setIsLoading(false)
                 alert(profileErrorMessage)
             }
-
         }
     }
 
