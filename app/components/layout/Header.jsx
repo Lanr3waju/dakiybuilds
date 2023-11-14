@@ -10,10 +10,8 @@ import List from '@mui/material/List'
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
-import Badge from '@mui/material/Badge'
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import NotificationsIcon from '@mui/icons-material/Notifications'
 import { mainListItems, secondaryListItems } from './ListItems.js'
 import { useState } from 'react'
 import removeForwardSlash from '../utils/removeForwardSlash.js'
@@ -70,7 +68,7 @@ const defaultTheme = createTheme()
 
 export default function DashboardComponent({ children }) {
   const pathname = usePathname()
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const toggleDrawer = () => {
     setOpen(!open)
   }
@@ -108,11 +106,6 @@ export default function DashboardComponent({ children }) {
               >
                 {removeForwardSlash(pathname)}
               </Typography>
-              <IconButton color="inherit">
-                <Badge badgeContent={4} className="text-secondary-content">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
             </Toolbar>
           </AppBar>
 

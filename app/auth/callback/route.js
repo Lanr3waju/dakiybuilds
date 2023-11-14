@@ -12,6 +12,6 @@ export async function GET(request) {
     await supabase.auth.exchangeCodeForSession(code)
   }
 
-  // URL to redirect to after sign in process completes
-  return NextResponse.redirect('http://localhost:3000/dakiyboard')
+  // URL to redirect to after sign in process complete
+  return NextResponse.redirect(`${requestUrl.origin}/create-profile`)
 }
