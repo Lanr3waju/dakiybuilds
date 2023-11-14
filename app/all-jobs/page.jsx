@@ -1,25 +1,21 @@
 import AllJobs from '../components/all-jobs-page/AllJobs'
 import { redirect } from 'next/navigation'
 import userSession from '../components/utils/userSession'
-import getUserData from '../components/utils/getUserData'
+import getUserProfile from '../components/utils/getUserProfile'
 
 export const dynamic = 'force-dynamic'
 
 async function AllProjects() {
-  const userData = await getUserData()
+  const userProfile = await getUserProfile()
   const isLoggedIn = await userSession()
 
   if (!isLoggedIn) {
     redirect('/')
-  } else if (!userData.phone) {
+  } else if (userProfile !== true) {
     redirect('/create-profile')
   }
 
-  return (
-    <section data-testid="all-projects-heading">
-      <AllJobs />
-    </section>
-  )
+  return <AllJobs />
 }
 
 export default AllProjects
