@@ -4,6 +4,7 @@ import HorizontalLine from '../utils/HorizontalLine'
 import Link from 'next/link'
 import SuccessModal from './SuccessModal'
 import { validateForm } from './validateForm'
+import { projectsTable } from './supabase-tables'
 
 const AddJobForm = () => {
   const initialJobData = {
@@ -22,6 +23,7 @@ const AddJobForm = () => {
 
   const [jobData, setJobData] = useState(initialJobData)
   const [errors, setErrors] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
   const refs = {
     jobName: useRef(null),
     jobLocation: useRef(null),
@@ -47,13 +49,21 @@ const AddJobForm = () => {
     })
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmission = async (event) => {
     event.preventDefault()
     const newErrors = validateForm(jobData)
     if (Object.keys(newErrors).length === 0) {
-      console.log('Job data submitted:', jobData)
-      window.job_addition_modal.showModal()
-      setJobData(initialJobData)
+      setIsLoading(true)
+      const error = projectsTable(jobData)
+      const errorMessage = (await error)?.message
+      if (!errorMessage) {
+        setIsLoading(false)
+        window.job_addition_modal.showModal()
+        setJobData(initialJobData)
+      } else {
+        setIsLoading(false)
+        alert(errorMessage)
+      }
     } else {
       // Scroll to the first input element with an error
       for (const field in newErrors) {
@@ -73,9 +83,10 @@ const AddJobForm = () => {
         Add Job
       </h2>
       <HorizontalLine />
-      <form className="mx-auto my-10 flex w-5/6 flex-col rounded-lg bg-base-200 p-10 shadow-md shadow-base-300">
+      <h3 className='mt-5 text-sm font-medium italic text-warning'>Kindly note that the contract sum is valued in naira!</h3>
+      <form onSubmit={handleSubmission} className="mx-auto mb-10 mt-5 flex w-5/6 flex-col rounded-lg bg-base-200 p-10 shadow-md shadow-base-300">
         <Link
-          className="btn btn-error ml-auto w-1/5 text-lg font-semibold uppercase"
+          className="btn btn-error mb-3 w-full"
           href="/all-jobs"
         >
           Close Form
@@ -86,8 +97,8 @@ const AddJobForm = () => {
             {field === 'sitePicture'
               ? 'Site Picture (If available)'
               : field
-                  .replace(/([A-Z])/g, ' $1')
-                  .replace(/^./, (str) => str.toUpperCase())}
+                .replace(/([A-Z])/g, ' $1')
+                .replace(/^./, (str) => str.toUpperCase())}
             {field === 'jobType' ? (
               <select
                 ref={refs[field]}
@@ -109,22 +120,21 @@ const AddJobForm = () => {
             ) : (
               <input
                 ref={refs[field]}
-                className={` mb-2 font-Roboto ${
-                  field === 'sitePicture'
+                  className={` mb-2 font-Roboto ${field === 'sitePicture'
                     ? 'file-input file-input-bordered file-input-primary w-full max-w-md'
                     : 'input input-bordered input-primary'
-                }`}
+                    }`}
                 type={
                   field === 'clientEmail'
                     ? 'email'
                     : field === 'clientTelephone'
-                    ? 'tel'
-                    : field === 'contractSum'
-                    ? 'number'
-                    : field === 'agreedStartDate' ||
-                      field === 'estimatedFinishDate'
-                    ? 'date'
-                    : 'text'
+                      ? 'tel'
+                      : field === 'contractSum'
+                        ? 'number'
+                        : field === 'agreedStartDate' ||
+                          field === 'estimatedFinishDate'
+                          ? 'date'
+                          : 'text'
                 }
                 id={field}
                 name={field}
@@ -140,11 +150,10 @@ const AddJobForm = () => {
         ))}
 
         <button
-          type="submit"
           className="btn btn-primary"
-          onClick={handleSubmit}
+          disabled={isLoading}
         >
-          Add Job
+          {isLoading ? <span className="loading loading-dots loading-lg"></span> : "Add Job"}
         </button>
       </form>
     </section>
