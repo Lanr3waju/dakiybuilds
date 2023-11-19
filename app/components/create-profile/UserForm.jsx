@@ -83,7 +83,7 @@ function UserForm({ activateUserForm }) {
                 noValidate
                 onSubmit={handleSubmission}
             >
-                <h2 className="mb-3 font-bold text-primary-focus md:text-lg">Your Details</h2>
+                <h2 className="mb-3 font-bold text-primary-focus md:text-lg">Your Details (Step 2 of 2)</h2>
                 <HorizontalLine />
 
                 {renderInputField(

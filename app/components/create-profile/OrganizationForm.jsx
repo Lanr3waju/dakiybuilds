@@ -69,9 +69,8 @@ function OrganizationForm({ setActivateUserForm, activateUserForm }) {
             const error = organizationTable(organizationName, organizationEmail, organizationTel, staffs)
             const errorMessage = (await error)?.message
             if (!errorMessage) {
-                setIsLoading(false)
                 setActivateUserForm(true)
-                alert('Organization Data successfully saved, please enter your data to complete the profile!')
+                alert('Organization Data successfully saved, Please fill in the next form with your profile data!')
             } else {
                 setIsLoading(false)
                 alert(errorMessage + "   " + 'Try Again!')
@@ -86,7 +85,7 @@ function OrganizationForm({ setActivateUserForm, activateUserForm }) {
                 noValidate
                 onSubmit={handleSubmission}
             >
-                <h2 className="my-3 font-bold text-primary-focus md:text-lg">Organization Details</h2>
+                <h2 className="my-3 font-bold text-primary-focus md:text-lg">Organization Details (Step 1 of 2)</h2>
                 <HorizontalLine />
 
                 {renderInputField(
