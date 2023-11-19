@@ -31,7 +31,7 @@ export const validateForm = (jobData) => {
   if (!jobData.clientTelephone) {
     errors.clientTelephone = 'Client Telephone is required'
   } else if (!/^\d{10}$/.test(jobData.clientTelephone)) {
-    errors.clientTelephone = 'Invalid telephone format, should be 10 digits (8051551565)'
+    errors.clientTelephone = 'Invalid telephone format, should be 10 digits e.g. (8051551565)'
   }
 
   if (!jobData.agreedStartDate) {

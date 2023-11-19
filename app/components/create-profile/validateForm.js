@@ -17,9 +17,9 @@ export const validateField = (fieldName, value) => {
     error = `${fieldErrorMap[fieldName]} is required`
   } else if (
     (fieldName === 'tel' || fieldName === 'organizationTel') &&
-    !/^\d{11}$/.test(value)
+    !/^\d{10}$/.test(value)
   ) {
-    error = 'Invalid phone number format; phone number should be 11 digits'
+    error = 'Invalid telephone format, should be 10 digits e.g. (8051551565)'
   } else if (fieldName === 'staffs' && !/^\d+$/.test(value)) {
     error = 'Invalid staffs number format: value should be digits e.g. 4'
   }
