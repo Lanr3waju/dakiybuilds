@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
+import { logsTable } from './supabaseTables'
 
-const AddLogs = () => {
+const AddLogs = ({ setAddLog }) => {
     const initialLogData = { logBody: '', logTitle: '' }
     const [log, setLog] = useState(initialLogData)
     const [isLoading, setIsLoading] = useState(false)
@@ -19,13 +20,21 @@ const AddLogs = () => {
         }
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         setIsLoading(true)
         if (validateForm()) {
-            setIsLoading(false)
-            setLog(initialLogData)
-            console.log('Text Area Value:', log)
+            const error = await logsTable(log)
+            const errorMessage = error?.message
+            if (!errorMessage) {
+                setIsLoading(false)
+                alert('Log successfully added')
+                setLog(initialLogData)
+                setAddLog(false)
+            } else {
+                setIsLoading(false)
+                alert(errorMessage + "   " + 'Try Again!')
+            }
         }
     }
 

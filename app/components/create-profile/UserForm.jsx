@@ -39,8 +39,8 @@ function UserForm({ activateUserForm }) {
         // Validate tel
         if (!userFormData.tel) {
             errors.tel = "Mobile number is required"
-        } else if (!/^\d{11}$/.test(userFormData.tel)) {
-            errors.tel = "Invalid phone number format"
+        } else if (!/^\d{10}$/.test(userFormData.tel)) {
+            errors.tel = "Invalid telephone format, should be 10 digits e.g. (8051551565)"
         }
 
         setFormErrors(errors)
@@ -54,8 +54,8 @@ function UserForm({ activateUserForm }) {
         if (validateForm()) {
             setIsLoading(true)
             // save the data to the profiles table
-            const profileError = profileTable(firstName, lastName, profession, tel)
-            const profileErrorMessage = (await profileError)?.message
+            const profileError = await profileTable(firstName, lastName, profession, tel)
+            const profileErrorMessage = profileError?.message
 
             if (!profileErrorMessage) {
                 setIsLoading(false)

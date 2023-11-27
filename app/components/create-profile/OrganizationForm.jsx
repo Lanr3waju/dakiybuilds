@@ -37,8 +37,8 @@ function OrganizationForm({ setActivateUserForm, activateUserForm }) {
         // Validate organizationTel
         if (!organizationFormData.organizationTel) {
             errors.organizationTel = "Organization tel is required"
-        } else if (!/^\d{11}$/.test(organizationFormData.organizationTel)) {
-            errors.organizationTel = "Invalid phone number format"
+        } else if (!/^\d{10}$/.test(organizationFormData.organizationTel)) {
+            errors.organizationTel = "Invalid telephone format, should be 10 digits e.g. (8051551565)"
         }
 
         // Validate staffs
@@ -66,8 +66,8 @@ function OrganizationForm({ setActivateUserForm, activateUserForm }) {
         event.preventDefault()
         if (validateForm()) {
             setIsLoading(true)
-            const error = organizationTable(organizationName, organizationEmail, organizationTel, staffs)
-            const errorMessage = (await error)?.message
+            const error = await organizationTable(organizationName, organizationEmail, organizationTel, staffs)
+            const errorMessage = error?.message
             if (!errorMessage) {
                 setActivateUserForm(true)
                 alert('Organization Data successfully saved, Please fill in the next form with your profile data!')
