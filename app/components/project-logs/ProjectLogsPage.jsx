@@ -77,7 +77,7 @@ function ProjectLogsPage() {
           </section>
         )
         :
-        <h1 className='text-center text-lg uppercase font-bold text-error rounded-lg border-2 border-error p-2 bg-error-content m-7'>Add or Select a Project to Access the Project&apos;s Logs</h1>}
+        <h1 className='m-7 rounded-lg border-2 border-error bg-error-content p-2 text-center text-lg font-bold uppercase text-error'>Add or Select a Project to Access the Project&apos;s Logs</h1>}
     </>
   )
 }
