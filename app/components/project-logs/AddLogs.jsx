@@ -34,7 +34,7 @@ const AddLogs = () => {
             <HorizontalLine />
             <input
                 name='logTitle'
-                className='input w-3/4 input-bordered input-primary focus:ring-2 focus:outline-0 focus:ring-primary-focus focus:border-primary-focus'
+                className='input input-bordered input-primary w-3/4 focus:border-primary-focus focus:outline-0 focus:ring-2 focus:ring-primary-focus'
                 maxLength='60'
                 value={log.logTitle}
                 placeholder='Enter log title'
@@ -44,7 +44,7 @@ const AddLogs = () => {
             <textarea
                 name='logBody'
                 aria-label='Enter logs'
-                className='w-full my-4 p-3 textarea textarea-primary textarea-bordered textarea-lg focus:ring-2 focus:outline-0 focus:ring-primary-focus focus:border-primary-focus'
+                className='textarea textarea-bordered textarea-primary textarea-lg my-4 w-full p-3 focus:border-primary-focus focus:outline-0 focus:ring-2 focus:ring-primary-focus'
                 value={log.logBody}
                 onChange={handleTextAreaChange}
                 placeholder="Enter today's log..."
