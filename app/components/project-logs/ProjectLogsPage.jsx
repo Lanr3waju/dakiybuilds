@@ -1,13 +1,22 @@
+'use client'
+import { useState } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
+import AddLogs from './AddLogs'
 
 function ProjectLogsPage() {
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  const [addLog, setAddLog] = useState(false)
+
+  const handleAddLog = () => {
+    setAddLog(!addLog)
+  }
   // TODO Use intersection observer API to render logs on scroll, add filters / sort buttons
   return (
     <section className="p-3 ">
-      <button className="btn btn-neutral mx-auto mb-4 block w-2/4">
-        Add new log
+      <button onClick={handleAddLog} className="btn btn-neutral mx-auto mb-4 block w-2/4">
+        {addLog ? 'Close form' : 'Add new log'}
       </button>
+      {addLog && <AddLogs />}
       <HorizontalLine />
       <section className="my-8">
         <h3 className="font-Poppins text-lg font-semibold text-primary-content/70">
