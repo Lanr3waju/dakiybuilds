@@ -2,12 +2,14 @@
 import { useEffect, useState } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
 import AddLogs from './AddLogs'
-import { getProjectId } from './supabaseTables'
+import { getLogs, getProjectId } from './supabaseTables'
 
 function ProjectLogsPage() {
-  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  const initialLogData = { logBody: '', logTitle: '' }
   const [addLog, setAddLog] = useState(false)
+  const [logs, setLogs] = useState([])
   const [projects, setProjects] = useState(false)
+  const [log, setLog] = useState(initialLogData)
 
   const handleAddLog = () => {
     setAddLog(!addLog)
@@ -18,9 +20,18 @@ function ProjectLogsPage() {
     setProjects(res)
   }
 
+  async function fetchLogs() {
+    const logs = await getLogs()
+    setLogs(logs)
+  }
+
   useEffect(() => {
     fetchProjectID()
   }, [])
+
+  useEffect(() => {
+    fetchLogs()
+  }, [log])
 
   // TODO Use intersection observer API to render logs on scroll, add filters / sort buttons
   return (
@@ -31,45 +42,19 @@ function ProjectLogsPage() {
             <button onClick={handleAddLog} className="btn btn-neutral mx-auto mb-4 block w-2/4">
               {addLog ? 'Close form' : 'Add new log'}
             </button>
-            {addLog && <AddLogs setAddLog={setAddLog} />}
+            {addLog && <AddLogs setAddLog={setAddLog} log={log} setLog={setLog} initialLogData={initialLogData} />}
             <HorizontalLine />
             <section className="my-8">
-              <h3 className="font-Poppins text-lg font-semibold text-primary-content/70">
-                April
-              </h3>
               <div className=" flex w-full flex-wrap justify-start text-left text-primary-content/60">
-                {data.map((doc) => (
+                {logs.map((log) => (
                   <button
-                    className="mx-2 my-4 w-full rounded-md bg-base-200 p-4 text-left shadow-lg shadow-base-300 transition-transform hover:translate-x-1 hover:translate-y-2 md:max-w-[300px]"
-                    key={doc}
+                    className="m-4 w-full rounded-sm bg-base-200 px-3 py-5 text-left shadow-md shadow-base-300 transition-all duration-300 hover:scale-105 md:max-w-[300px]"
+                    key={log.id}
                   >
-                    <span className="text-left leading-loose tracking-wider underline underline-offset-4">
-                      The site was cleared, debris and other granular waste removed,
-                      and top soil rem.....
-                    </span>
+                    <span className="mb-3 block w-full text-left font-semibold uppercase leading-loose tracking-wider">{log.title}</span>
+                    <span className="my-3 text-left leading-loose tracking-wider">{log.note}</span>
                     <HorizontalLine />
-                    <div className="font-Poppins">23-05-2020</div>
-                  </button>
-                ))}
-              </div>
-            </section>
-            <HorizontalLine />
-            <section className="my-8">
-              <h3 className="font-Poppins text-lg font-semibold text-primary-content/70">
-                March
-              </h3>
-              <div className="flex w-full flex-wrap justify-start text-left text-primary-content/60">
-                {data.map((doc) => (
-                  <button
-                    className="mx-2 my-4 w-full rounded-md bg-base-200 p-4 text-left shadow-lg shadow-base-300 transition-transform hover:translate-x-1 hover:translate-y-2 md:max-w-[300px]"
-                    key={doc}
-                  >
-                    <span className="text-left leading-loose tracking-wider underline underline-offset-4">
-                      The site was cleared, debris and other granular waste removed,
-                      and top soil rem.....
-                    </span>
-                    <HorizontalLine />
-                    <div className="font-Poppins">23-05-2020</div>
+                    <div className="font-Poppins">{log.created_at}</div>
                   </button>
                 ))}
               </div>

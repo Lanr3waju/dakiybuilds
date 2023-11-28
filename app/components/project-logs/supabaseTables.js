@@ -22,6 +22,15 @@ export const getProjectId = async () => {
     }
 }
 
+export const getLogs = async () => {
+    let { data: logs } = await supabase
+        .from('logs')
+        .select("*")
+        // Filters
+        .eq('project_id', projectData ? projectData[0].id : "")
+    return logs
+}
+
 
 export const logsTable = async (log) => {
     const user = await getUser()

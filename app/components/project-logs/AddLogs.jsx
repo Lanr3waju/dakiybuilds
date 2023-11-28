@@ -2,9 +2,7 @@ import { useState } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
 import { logsTable } from './supabaseTables'
 
-const AddLogs = ({ setAddLog }) => {
-    const initialLogData = { logBody: '', logTitle: '' }
-    const [log, setLog] = useState(initialLogData)
+const AddLogs = ({ setAddLog, setLog, log, initialLogData }) => {
     const [isLoading, setIsLoading] = useState(false)
 
     const handleTextAreaChange = ({ target }) => {
