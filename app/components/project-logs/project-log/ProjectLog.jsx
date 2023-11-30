@@ -22,11 +22,11 @@ function ProjectLog() {
     }, [logs])
 
     return (
-        <section className="p-4 m-6 bg-slate-50 rounded-tr-2xl shadow-md shadow-base-300">
-            <h2 className="uppercase w-full font-Poppins font-bold text-lg">{log?.title}</h2>
+        <section className="m-6 rounded-tr-2xl bg-slate-50 p-4 shadow-md shadow-base-300">
+            <h2 className="w-full font-Poppins text-lg font-bold uppercase">{log?.title}</h2>
             <HorizontalLine />
-            <p className="leading-5 tracking-wide underline underline-offset-4 mt-3">{log?.note}</p>
-            <p className="leading-5 tracking-wide mt-5 font-Poppins text-base text-primary-content">{log?.created_at}</p>
+            <p className="mt-3 leading-5 tracking-wide underline underline-offset-4">{log?.note}</p>
+            <p className="mt-5 font-Poppins text-base leading-5 tracking-wide text-primary-content">{log?.created_at}</p>
         </section>
     )
 }
