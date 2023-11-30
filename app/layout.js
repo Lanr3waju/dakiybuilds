@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import Header from './components/layout/Header'
 import './styles/globals.css'
 import removeForwardSlash from './components/utils/removeForwardSlash'
+import Context from '@/context/context'
 
 export const dynamic = 'force-dynamic'
 
@@ -29,10 +30,12 @@ export default function RootLayout({ children }) {
         <title>{title}</title>
       </head>
       <body className='font-Raleway'>
+        <Context>
         {pathname !== '/project-schedule/gantt-chart' && pathname !== '/' && pathname !== 'create-profile' && pathname !== '/add-job' ?
           (<Header children={children} />) :
           (children)
         }
+        </Context>
       </body>
     </html>
   )

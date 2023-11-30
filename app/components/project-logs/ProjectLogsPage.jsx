@@ -3,13 +3,14 @@ import { useEffect, useState } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
 import AddLogs from './AddLogs'
 import { getLogs, getProjectId } from './supabaseTables'
+import Link from 'next/link'
 
 function ProjectLogsPage() {
   const initialLogData = { logBody: '', logTitle: '' }
   const [addLog, setAddLog] = useState(false)
-  const [logs, setLogs] = useState([])
   const [projects, setProjects] = useState(false)
   const [log, setLog] = useState(initialLogData)
+  const [logs, setLogs] = useState([])
 
   const handleAddLog = () => {
     setAddLog(!addLog)
@@ -20,7 +21,8 @@ function ProjectLogsPage() {
     setProjects(res)
   }
 
-  async function fetchLogs() {
+  // Updates the logs state in the context state when a new log is added
+  async function updateLogs() {
     const logs = await getLogs()
     setLogs(logs)
   }
@@ -30,7 +32,7 @@ function ProjectLogsPage() {
   }, [])
 
   useEffect(() => {
-    fetchLogs()
+    updateLogs()
   }, [log])
 
   // TODO Use intersection observer API to render logs on scroll, add filters / sort buttons
@@ -42,12 +44,12 @@ function ProjectLogsPage() {
             <button onClick={handleAddLog} className="btn btn-neutral mx-auto mb-4 block w-2/4">
               {addLog ? 'Close form' : 'Add new log'}
             </button>
-            {addLog && <AddLogs setAddLog={setAddLog} log={log} setLog={setLog} initialLogData={initialLogData} />}
+            {addLog && <AddLogs setAddLog={setAddLog} log={log} setLog={setLog} />}
             <HorizontalLine />
             <section className="my-8">
               <div className=" flex w-full flex-wrap justify-start text-left text-primary-content/60">
-                {logs.map((log) => (
-                  <button
+                {logs?.map((log) => (
+                  <Link href={`project-logs/${log.id}`}
                     className="m-4 w-full rounded-sm bg-base-200 px-3 py-5 text-left shadow-md shadow-base-300 transition-all duration-300 hover:scale-105 md:max-w-[300px]"
                     key={log.id}
                   >
@@ -55,7 +57,7 @@ function ProjectLogsPage() {
                     <span className="my-3 text-left leading-loose tracking-wider">{log.note}</span>
                     <HorizontalLine />
                     <div className="font-Poppins">{log.created_at}</div>
-                  </button>
+                  </Link>
                 ))}
               </div>
             </section>
