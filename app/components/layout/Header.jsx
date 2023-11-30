@@ -104,7 +104,8 @@ export default function DashboardComponent({ children }) {
                 noWrap
                 sx={{ flexGrow: 1 }}
               >
-                {removeForwardSlash(pathname)}
+                {pathname.toLowerCase().includes("project-logs/") ? "Log-Details" : removeForwardSlash(pathname)}
+
               </Typography>
             </Toolbar>
           </AppBar>

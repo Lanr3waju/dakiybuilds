@@ -19,13 +19,13 @@ function ProjectLog() {
         const currentLogID = pathname.replace("/project-logs/", "")
         const log = logs?.find((log) => log.id === currentLogID)
         setLog(log)
-    }, [logs])
+    }, [logs, pathname])
 
     return (
         <section className="m-6 rounded-tr-2xl bg-slate-50 p-4 shadow-md shadow-base-300">
-            <h2 className="w-full font-Poppins text-lg font-bold uppercase">{log?.title}</h2>
+            <h2 className="w-full font-Poppins text-lg font-semibold text-primary uppercase">{log?.title}</h2>
             <HorizontalLine />
-            <p className="mt-3 leading-5 tracking-wide underline underline-offset-4">{log?.note}</p>
+            <p className="mt-3 leading-9 tracking-wide underline underline-offset-4 mb-2">{log?.note}</p>
             <p className="mt-5 font-Poppins text-base leading-5 tracking-wide text-primary-content">{log?.created_at}</p>
         </section>
     )
