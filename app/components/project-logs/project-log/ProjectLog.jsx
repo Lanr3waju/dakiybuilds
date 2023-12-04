@@ -39,15 +39,15 @@ function ProjectLog() {
     return (
         <section className="m-6 rounded-tr-2xl bg-slate-50 p-4 shadow-md shadow-base-300">
             <header className="flex justify-between">
-                <h2 className="w-full font-Poppins text-lg font-semibold text-primary uppercase">{log?.title}</h2>
-                <button disabled={updateLog} onClick={editLog} className="p-1 mb-1 btn-primary btn-xs active:translate-y-[2px] duration-200 disabled:translate-y-0 disabled:cursor-not-allowed"><EditIcon className="text-primary-content" /></button>
+                <h2 className="w-full font-Poppins text-lg font-semibold uppercase text-primary">{log?.title}</h2>
+                <button disabled={updateLog} onClick={editLog} className="btn-primary btn-xs mb-1 p-1 duration-200 active:translate-y-[2px] disabled:translate-y-0 disabled:cursor-not-allowed"><EditIcon className="text-primary-content" /></button>
             </header>
             <HorizontalLine />
             {updateLog ? <UpdateLogForm setNewLog={setNewLog} setUpdateLog={setUpdateLog} newLog={newLog} /> :
-                <p className="mt-3 leading-9 tracking-wide underline underline-offset-4 mb-2">{log?.note}</p>
+                <p className="mb-2 mt-3 leading-9 tracking-wide underline underline-offset-4">{log?.note}</p>
             }
             <p className="mt-5 font-Poppins text-base leading-5 tracking-wide text-primary-content">{log?.created_at}</p>
-            <p className="text-primary font-bold text-right">Log by: <span className="text-primary-content/75 font-semibold">{loggerName}</span></p>
+            <p className="text-right font-bold text-primary">Log by: <span className="font-semibold text-primary-content/75">{loggerName}</span></p>
         </section >
     )
 }
