@@ -45,3 +45,21 @@ export const logsTable = async (log) => {
         .select()
     if (error) return error
 }
+
+export const getLoggerName = async (currentLogId) => {
+    // Get user_id for the user that created the current log
+    let { data: logs } = await supabase
+        .from('logs')
+        .select("user_id")
+        // Filters
+        .eq('id', currentLogId)
+    const logUserId = logs[0].user_id
+
+    // Get the full name of the user that created the log
+    let { data: profiles } = await supabase
+        .from('profiles')
+        .select("full_name")
+        // Filters
+        .eq('id', logUserId)
+    return profiles[0].full_name
+}
