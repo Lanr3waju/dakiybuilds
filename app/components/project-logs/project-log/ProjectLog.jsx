@@ -11,11 +11,10 @@ function ProjectLog() {
     const [updateLog, setUpdateLog] = useState(false)
     const [newLog, setNewLog] = useState('')
     const [loggerName, setLoggerName] = useState('')
-    const pathname = usePathname()
+    const currentLogID = usePathname().replace("/project-logs/", "")
 
     async function loadLog() {
         const logs = await getLogs()
-        const currentLogID = pathname.replace("/project-logs/", "")
         const log = logs?.find((log) => log.id === currentLogID)
 
         if (log) {
@@ -43,7 +42,7 @@ function ProjectLog() {
                 <button disabled={updateLog} onClick={editLog} className="btn-primary btn-xs mb-1 p-1 duration-200 active:translate-y-[2px] disabled:translate-y-0 disabled:cursor-not-allowed"><EditIcon className="text-primary-content" /></button>
             </header>
             <HorizontalLine />
-            {updateLog ? <UpdateLogForm setNewLog={setNewLog} setUpdateLog={setUpdateLog} newLog={newLog} /> :
+            {updateLog ? <UpdateLogForm setNewLog={setNewLog} setUpdateLog={setUpdateLog} newLog={newLog} currentLogID={currentLogID} log={log} setLog={setLog} /> :
                 <p className="mb-2 mt-3 leading-9 tracking-wide underline underline-offset-4">{log?.note}</p>
             }
             <p className="mt-5 font-Poppins text-base leading-5 tracking-wide text-primary-content">{log?.created_at}</p>

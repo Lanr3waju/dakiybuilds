@@ -51,7 +51,7 @@ function ProjectLogsPage() {
               <div className=" flex w-full flex-wrap justify-start text-left text-primary-content/60">
                 {logs?.map((log) => (
                   <Link href={`project-logs/${log.id}`}
-                    className="m-4 w-full rounded-tr-2xl bg-base-200 px-3 py-5 text-left shadow-md shadow-base-300 transition-all duration-300 hover:scale-105 md:max-w-[300px]"
+                    className="m-4 w-full rounded-tr-2xl bg-base-200 px-3 py-5 text-left shadow-md shadow-base-300 transition-all duration-300 hover:scale-105 md:max-w-[450px]"
                     key={log.id}
                   >
                     <span className="mb-3 block w-full text-left font-semibold uppercase leading-loose tracking-wider">{log.title}</span>

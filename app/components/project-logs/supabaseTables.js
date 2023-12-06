@@ -63,3 +63,12 @@ export const getLoggerName = async (currentLogId) => {
         .eq('id', logUserId)
     return profiles[0].full_name
 }
+
+export const updateLog = async (currentLogID, updatedLog) => {
+    const { error } = await supabase
+        .from('logs')
+        .update({ note: updatedLog })
+        .eq('id', currentLogID)
+        .select()
+    if (error) return error.message
+}

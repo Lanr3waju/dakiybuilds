@@ -41,7 +41,7 @@ const AddLogs = ({ setAddLog, setLog, log }) => {
             <input
                 name='logTitle'
                 className='input input-bordered input-primary w-3/4 focus:border-primary-focus focus:outline-0 focus:ring-2 focus:ring-primary-focus'
-                maxLength='60'
+                maxLength='30'
                 value={log.logTitle}
                 placeholder='Enter log title'
                 aria-label='Enter log title'
