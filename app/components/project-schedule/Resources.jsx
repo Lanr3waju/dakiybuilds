@@ -19,38 +19,56 @@ function Resources() {
               </th>
               <th>
                 <div
-                  className="tooltip tooltip-info tooltip-bottom cursor-pointer before:whitespace-pre-wrap before:[--tw-content:'Type_of_resource_\a_(Plants_/_Equipment,_People_or_Material)']"
-                  data-tip
+                  className="tooltip tooltip-info tooltip-bottom z-50 cursor-pointer"
+                  data-tip="Category of the resource"
                 >
-                  Unit
+                  Group
                 </div>
               </th>
               <th>
                 <div
                   className="tooltip tooltip-info tooltip-bottom z-50 cursor-pointer"
-                  data-tip="Unit cost of each resource"
+                  data-tip="Unit rate of each resource"
                 >
                   Rate (₦)
                 </div>
               </th>
               <th>
                 <div
-                  className="tooltip tooltip-info tooltip-bottom cursor-pointer before:whitespace-pre-wrap before:[--tw-content:'The_unit_of_measurement_of_a_resource_\a_e.g._cubic-meter,_bag,_day_etc.']"
-                  data-tip
+                  className="tooltip tooltip-info tooltip-bottom cursor-pointer"
+                  data-tip="Number of resource required"
+                >
+                  Quantity
+                </div>
+              </th>
+              <th>
+                <div
+                  className="tooltip tooltip-info tooltip-bottom cursor-pointer"
+                  data-tip="Resource unit of measurement"
                 >
                   Unit
+                </div>
+              </th>
+              <th>
+                <div
+                  className="tooltip tooltip-info tooltip-bottom cursor-pointer"
+                  data-tip="Total resource cost"
+                >
+                  Cost
                 </div>
               </th>
             </tr>
           </thead>
           <tbody>
-            {resourceData.map(({ id, name, type, rate, unit }) => (
-              <tr key={id}>
+            {resourceData.map(({ id, name, group, rate, quantity, resourceUnit, cost }) => (
+              <tr key={id} className='capitalize'>
                 <th>{id}</th>
-                <td className="capitalize">{name}</td>
-                <td className="capitalize">{type}</td>
+                <td>{name}</td>
+                <td>{group}</td>
                 <td>{addCommasToMoney(rate)}</td>
-                <td className="capitalize">{unit}</td>
+                <td>{quantity}</td>
+                <td>{resourceUnit}</td>
+                <td>{addCommasToMoney(cost)}</td>
               </tr>
             ))}
           </tbody>
@@ -58,9 +76,11 @@ function Resources() {
             <tr>
               <th>S/N</th>
               <th>Name</th>
-              <th>Type</th>
+              <th>Group</th>
               <th>Rate</th>
+              <th>Quantity</th>
               <th>Unit</th>
+              <th>Cost</th>
             </tr>
           </tfoot>
         </table>

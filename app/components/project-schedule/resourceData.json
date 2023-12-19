@@ -2,36 +2,46 @@
   {
     "id": 1,
     "name": "Cement",
-    "type": "Material",
+    "group": "Material",
     "rate": "5000",
-    "unit": "bag"
+    "resourceUnit": "bag",
+    "cost": "20000",
+    "quantity": "58"
   },
   {
     "id": 2,
     "name": "Block 9 inches",
-    "type": "Material",
+    "group": "Material",
     "rate": "350",
-    "unit": "block"
+    "resourceUnit": "block",
+    "cost": "20000",
+    "quantity": "29"
   },
   {
     "id": 3,
     "name": "Backhoe",
-    "type": "Plant",
+    "group": "Plant",
     "rate": "80000",
-    "unit": "day"
+    "resourceUnit": "day",
+    "cost": "20000",
+    "quantity": "299"
   },
   {
     "id": 4,
     "name": "Bricklayer",
-    "type": "People",
+    "group": "People",
     "rate": "5000",
-    "unit": "day"
+    "resourceUnit": "day",
+    "cost": "20000",
+    "quantity": "43"
   },
   {
     "id": 5,
     "name": "Operator",
-    "type": "People",
+    "group": "People",
     "rate": "5000",
-    "unit": "day"
+    "resourceUnit": "day",
+    "cost": "20000",
+    "quantity": "100"
   }
 ]

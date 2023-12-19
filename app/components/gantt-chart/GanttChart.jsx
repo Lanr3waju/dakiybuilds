@@ -56,6 +56,9 @@ function GanttChart() {
   const resourceFields = {
     id: 'id',
     name: 'name',
+    group: 'group',
+    rate: 'rate',
+    quantity: 'quantity'
   }
   const editSettings = {
     allowAdding: true,
