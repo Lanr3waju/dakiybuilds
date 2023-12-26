@@ -98,9 +98,9 @@ const AddJobForm = () => {
 
         {/* File Upload */}
         <section>
-          <p className='font-medium text-sm'>Upload site picture; if available <span className='text-warning'> (900kb maximum image size )</span></p>
-          <input disabled={!jobData.jobName} className='file-input file-input-bordered file-input-primary w-full max-w-md mb-1' type="file" onChange={async (event) => await handleFileUpload(event, jobData.jobName)} />
-          {!jobData.jobName && <p className='text-error-content p-2 text-xs m-1 bg-error rounded-md'>Please note that you have to add job name below before you can upload site picture</p>}
+          <p className='text-sm font-medium'>Upload site picture; if available <span className='text-warning'> (900kb maximum image size )</span></p>
+          <input disabled={!jobData.jobName} className='file-input file-input-bordered file-input-primary mb-1 w-full max-w-md' type="file" onChange={async (event) => await handleFileUpload(event, jobData.jobName)} />
+          {!jobData.jobName && <p className='m-1 rounded-md bg-error p-2 text-xs text-error-content'>Please note that you have to add job name below before you can upload site picture</p>}
         </section>
 
         {Object.keys(refs).map((field) => (
@@ -127,7 +127,7 @@ const AddJobForm = () => {
             ) : (
               <input
                 ref={refs[field]}
-                  className='my-2 font-Roboto input input-bordered input-primary'
+                  className='input input-bordered input-primary my-2 font-Roboto'
                 type={
                   field === 'clientEmail'
                     ? 'email'

@@ -2,6 +2,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import DashboardIcon from '@mui/icons-material/Dashboard'
+import Divider from '@mui/material/Divider'
 import PeopleIcon from '@mui/icons-material/People'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,6 +14,11 @@ import {
   RequestQuote,
   Settings,
 } from '@mui/icons-material'
+import { DakiyStore } from '@/context/context'
+import { useContext } from 'react'
+import HorizontalLine from '../utils/HorizontalLine'
+
+
 
 export const mainListItems = (
   <>
@@ -90,25 +96,39 @@ export const mainListItems = (
   </>
 )
 
-export const secondaryListItems = (
-  <>
-    <Image
-      className="h-20 bg-base-200 object-cover"
-      src="/logo.png"
-      width={200}
-      quality={100}
-      height={70}
-      loading="lazy"
-      alt="logo"
-    />
-
-    <Link href="/add-job">
+export const SecondaryListItems = () => {
+  const { projects } = useContext(DakiyStore)
+  return (
+    <div>
+      <Image
+        className="h-20 bg-base-200 object-cover"
+        src="/logo.png"
+        width={200}
+        quality={100}
+        height={70}
+        loading="lazy"
+        alt="logo" />
+      <Link href="/add-job">
       <ListItemButton>
         <ListItemIcon>
-          <BusinessCenterRounded />
+            + <BusinessCenterRounded />
         </ListItemIcon>
         + Add Jobs
       </ListItemButton>
-    </Link>
-  </>
-)
+      </Link>
+      <HorizontalLine />
+      {
+        projects.map(({ name, id }) => (
+          <>
+            <Link className='font-Fascinate text-sm font-semibold text-primary-content' key={name} href={`/all-jobs/${id}`}>
+              <ListItemButton>
+                <h2 className='capitalize'>{name}</h2>
+              </ListItemButton>
+            </Link>
+            <Divider />
+          </>
+        ))
+      }
+    </div >
+  )
+}

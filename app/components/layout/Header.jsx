@@ -12,7 +12,7 @@ import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import { mainListItems, secondaryListItems } from './ListItems.js'
+import { mainListItems, SecondaryListItems } from './ListItems.js'
 import { useState } from 'react'
 import removeForwardSlash from '../utils/removeForwardSlash.js'
 
@@ -130,10 +130,10 @@ export default function DashboardComponent({ children }) {
               </IconButton>
             </Toolbar>
             <Divider />
-            <List className="h-[90vh] bg-base-200" component="nav">
+            <List className="bg-base-200" component="nav">
               {mainListItems}
               <Divider sx={{ my: 1 }} />
-              {secondaryListItems}
+              <SecondaryListItems />
             </List>
           </Drawer>
         </div>
