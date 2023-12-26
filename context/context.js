@@ -1,13 +1,25 @@
-import { createContext, useState } from "react"
+'use client'
+import { createContext, useEffect, useState } from "react"
+import { getProjects } from "./supabaseTables"
 
 export const DakiyStore = createContext()
 
 function Context({ children }) {
-    const [project, setProject] = useState([])
+    const [project, setProject] = useState({})
+    const [projects, setProjects] = useState([])
+
+    async function fetchProjectID() {
+        const res = await getProjects()
+        setProjects(res)
+    }
+
+    useEffect(() => {
+        fetchProjectID()
+    }, [])
 
     return (
         <DakiyStore.Provider
-            value={{ project, setProject }}
+            value={{ project, setProject, setProjects, projects }}
         >
             {children}
         </DakiyStore.Provider>

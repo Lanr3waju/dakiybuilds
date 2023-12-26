@@ -10,7 +10,7 @@ export default async function getUserProfile() {
         .select("full_name")
         // Filters
         .eq('id', user.id)
-    if (profiles.length > 0) {
+    if (profiles?.length > 0) {
         return true
     } else {
         return false

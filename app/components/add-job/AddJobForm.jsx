@@ -1,17 +1,18 @@
 'use client'
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
 import Link from 'next/link'
 import SuccessModal from './SuccessModal'
 import { validateForm } from './validateForm'
 import { projectsTable } from './supabase-tables'
+import { DakiyStore } from '@/context/context'
+import { handleFileUpload } from './FileUploader'
 
 const AddJobForm = () => {
   const initialJobData = {
     jobName: '',
     jobLocation: '',
     jobType: '',
-    sitePicture: '',
     clientName: '',
     clientEmail: '',
     clientTelephone: '',
@@ -24,11 +25,13 @@ const AddJobForm = () => {
   const [jobData, setJobData] = useState(initialJobData)
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
+  const { setProjects, projects } = useContext(DakiyStore);
+
+
   const refs = {
     jobName: useRef(null),
     jobLocation: useRef(null),
     jobType: useRef(null),
-    sitePicture: useRef(null),
     clientName: useRef(null),
     clientEmail: useRef(null),
     clientTelephone: useRef(null),
@@ -57,9 +60,10 @@ const AddJobForm = () => {
       const error = projectsTable(jobData)
       const errorMessage = (await error)?.message
       if (!errorMessage) {
+        setProjects([...projects, jobData])
         setIsLoading(false)
-        window.job_addition_modal.showModal()
         setJobData(initialJobData)
+        window.job_addition_modal.showModal()
       } else {
         setIsLoading(false)
         alert(errorMessage)
@@ -92,13 +96,16 @@ const AddJobForm = () => {
           Close Form
         </Link>
 
+        {/* File Upload */}
+        <section>
+          <p className='font-medium text-sm'>Upload site picture; if available <span className='text-warning'> (900kb maximum image size )</span></p>
+          <input disabled={!jobData.jobName} className='file-input file-input-bordered file-input-primary w-full max-w-md mb-1' type="file" onChange={async (event) => await handleFileUpload(event, jobData.jobName)} />
+          {!jobData.jobName && <p className='text-error-content p-2 text-xs m-1 bg-error rounded-md'>Please note that you have to add job name below before you can upload site picture</p>}
+        </section>
+
         {Object.keys(refs).map((field) => (
           <React.Fragment key={field}>
-            {field === 'sitePicture'
-              ? 'Site Picture (If available)'
-              : field
-                .replace(/([A-Z])/g, ' $1')
-                .replace(/^./, (str) => str.toUpperCase())}
+            {field.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
             {field === 'jobType' ? (
               <select
                 ref={refs[field]}
@@ -120,10 +127,7 @@ const AddJobForm = () => {
             ) : (
               <input
                 ref={refs[field]}
-                  className={` mb-2 font-Roboto ${field === 'sitePicture'
-                    ? 'file-input file-input-bordered file-input-primary w-full max-w-md'
-                    : 'input input-bordered input-primary'
-                    }`}
+                  className='my-2 font-Roboto input input-bordered input-primary'
                 type={
                   field === 'clientEmail'
                     ? 'email'
@@ -139,8 +143,7 @@ const AddJobForm = () => {
                 id={field}
                 name={field}
                 value={jobData[field]}
-                onChange={handleInputChange}
-                {...(field === 'sitePicture' ? { type: 'file' } : null)} // Set type to 'file' for sitePicture
+                  onChange={handleInputChange}
               />
             )}
             {errors[field] && (
@@ -148,10 +151,9 @@ const AddJobForm = () => {
             )}
           </React.Fragment>
         ))}
-
         <button
           className="btn btn-primary"
-          disabled={isLoading}
+          // disabled={isLoading}
         >
           {isLoading ? <span className="loading loading-dots loading-lg"></span> : "Add Job"}
         </button>
