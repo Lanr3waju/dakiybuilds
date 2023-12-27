@@ -17,6 +17,7 @@ import {
 import { DakiyStore } from '@/context/context'
 import { useContext } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
+import { getAcronym } from '../utils/getAcronym'
 
 
 
@@ -120,9 +121,9 @@ export const SecondaryListItems = () => {
       {
         projects.map(({ name, id }) => (
           <>
-            <Link className='font-Fascinate text-sm font-semibold text-primary-content' key={name} href={`/all-jobs/${id}`}>
+            <Link className='font-Raleway font-bold text-primary-content/80' key={id} href={`/all-jobs/${id}`}>
               <ListItemButton>
-                <h2 className='capitalize'>{name}</h2>
+                <h2>{getAcronym(name)}</h2>
               </ListItemButton>
             </Link>
             <Divider />
