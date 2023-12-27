@@ -2,6 +2,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 import { cookies } from "next/headers"
 import getUser from "../utils/getUser"
+import { getLapseTime, getRemainingTime, getWeeksBetween } from "./calculateProjectDuration"
 
 const supabase = createServerComponentClient({ cookies })
 
@@ -33,7 +34,12 @@ export const projectsTable = async (jobData) => {
                 client_email: clientEmail,
                 project_description: projectDescription,
                 user_id: user.id,
-                organization_id: organizationId
+                organization_id: organizationId,
+                project_duration: getWeeksBetween(agreedStartDate, estimatedFinishDate),
+                time_to_completion: getRemainingTime(agreedStartDate, estimatedFinishDate),
+                project_lapse_time: getLapseTime(agreedStartDate, estimatedFinishDate),
+                initial_advance_payment: 0,
+                progress: 0,
             },
         ])
         .select()

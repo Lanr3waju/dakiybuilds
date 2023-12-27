@@ -121,7 +121,7 @@ export const SecondaryListItems = () => {
       {
         projects.map(({ name, id }) => (
           <>
-            <Link className='font-Raleway font-bold text-primary-content/80' key={id} href={`/all-jobs/${id}`}>
+            <Link className='font-Poppins font-bold text-primary-content/80' key={id} href={`/all-jobs/${id}`}>
               <ListItemButton>
                 <h2>{getAcronym(name)}</h2>
               </ListItemButton>

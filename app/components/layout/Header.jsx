@@ -68,7 +68,7 @@ const defaultTheme = createTheme()
 
 export default function DashboardComponent({ children }) {
   const pathname = usePathname()
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   const toggleDrawer = () => {
     setOpen(!open)
   }
@@ -87,7 +87,7 @@ export default function DashboardComponent({ children }) {
             >
               <IconButton
                 edge="start"
-                className="bg-primary-content text-neutral-content"
+                className="text-base-200"
                 aria-label="open drawer"
                 onClick={toggleDrawer}
                 sx={{
@@ -95,7 +95,9 @@ export default function DashboardComponent({ children }) {
                   ...(open && { display: 'none' }),
                 }}
               >
+                <div className=' border-2 border-base-200 rounded-lg px-2'>
                 <MenuIcon />
+                </div>
               </IconButton>
               <Typography
                 component="h1"
@@ -130,7 +132,7 @@ export default function DashboardComponent({ children }) {
               </IconButton>
             </Toolbar>
             <Divider />
-            <List className="bg-base-200" component="nav">
+            <List className="min-h-screen bg-base-200" component="nav">
               {mainListItems}
               <Divider sx={{ my: 1 }} />
               <SecondaryListItems />

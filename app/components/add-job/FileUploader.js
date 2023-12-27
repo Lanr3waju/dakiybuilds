@@ -19,7 +19,9 @@ const uploadToSupabase = async (file, fileName) => {
 
     if (error) {
         alert('Error uploading file:', error.message)
+        return false
     } else {
         alert('File uploaded successfully:', data)
+        return true
     }
 }

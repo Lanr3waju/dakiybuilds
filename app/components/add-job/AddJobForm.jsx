@@ -17,6 +17,7 @@ const AddJobForm = () => {
     clientEmail: '',
     clientTelephone: '',
     contractSum: '',
+    initialAdvancePayment: '',
     agreedStartDate: '',
     estimatedFinishDate: '',
     projectDescription: '',
@@ -36,6 +37,7 @@ const AddJobForm = () => {
     clientEmail: useRef(null),
     clientTelephone: useRef(null),
     contractSum: useRef(null),
+    initialAdvancePayment: useRef(null),
     agreedStartDate: useRef(null),
     estimatedFinishDate: useRef(null),
     projectDescription: useRef(null),
@@ -90,17 +92,16 @@ const AddJobForm = () => {
       <h3 className='mt-5 text-sm font-medium italic text-warning'>Kindly note that the contract sum is valued in naira!</h3>
       <form onSubmit={handleSubmission} className="mx-auto mb-10 mt-5 flex w-5/6 flex-col rounded-lg bg-base-200 p-10 shadow-md shadow-base-300">
         <Link
-          className="btn btn-error mb-3 w-full"
+          className="btn btn-error mb-3 ml-auto w-full text-3xl md:max-w-fit"
           href="/all-jobs"
         >
-          Close Form
+          X
         </Link>
-
         {/* File Upload */}
         <section>
-          <p className='text-sm font-medium'>Upload site picture; if available <span className='text-warning'> (900kb maximum image size )</span></p>
-          <input disabled={!jobData.jobName} className='file-input file-input-bordered file-input-primary mb-1 w-full max-w-md' type="file" onChange={async (event) => await handleFileUpload(event, jobData.jobName)} />
-          {!jobData.jobName && <p className='m-1 rounded-md bg-error p-2 text-xs text-error-content'>Please note that you have to add job name below before you can upload site picture</p>}
+          <p className='text-sm font-medium'>Upload site picture; if available <span className='text-warning'> (900kb maximum image size ) please wait till you get an alert &apos;File uploaded successfully&apos; before leaving page.</span></p>
+          <input disabled={!jobData.jobName || !jobData.jobLocation} className='file-input file-input-bordered file-input-primary mb-1 w-full max-w-md' type="file" onChange={async (event) => await handleFileUpload(event, jobData.jobName)} />
+          <p className='m-1 rounded-md bg-error p-2 text-xs text-error-content'>Please note that you have to add job name and location below before you can upload site picture</p>
         </section>
 
         {Object.keys(refs).map((field) => (
@@ -133,7 +134,8 @@ const AddJobForm = () => {
                     ? 'email'
                     : field === 'clientTelephone'
                       ? 'tel'
-                      : field === 'contractSum'
+                      : field === 'contractSum' ||
+                        field === 'initialAdvancePayment'
                         ? 'number'
                         : field === 'agreedStartDate' ||
                           field === 'estimatedFinishDate'
@@ -153,7 +155,7 @@ const AddJobForm = () => {
         ))}
         <button
           className="btn btn-primary"
-          // disabled={isLoading}
+          disabled={isLoading}
         >
           {isLoading ? <span className="loading loading-dots loading-lg"></span> : "Add Job"}
         </button>
