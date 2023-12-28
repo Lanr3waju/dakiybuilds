@@ -93,7 +93,7 @@ const AddJobForm = () => {
       <form onSubmit={handleSubmission} className="mx-auto mb-10 mt-5 flex w-5/6 flex-col rounded-lg bg-base-200 p-10 shadow-md shadow-base-300">
         <Link
           className="btn btn-error mb-3 ml-auto w-full text-3xl md:max-w-fit"
-          href="/all-jobs"
+          href="/dakiyboard"
         >
           X
         </Link>
@@ -125,7 +125,10 @@ const AddJobForm = () => {
                   </option>
                 ))}
               </select>
-            ) : (
+            ) :
+              field === 'projectDescription' ? (<textarea className="textarea textarea-primary textarea-lg text-sm w-full p-1 tracking-widest" placeholder="Enter project description"></textarea>)
+                :
+                (
               <input
                 ref={refs[field]}
                   className='input input-bordered input-primary my-2 font-Roboto'
@@ -154,7 +157,7 @@ const AddJobForm = () => {
           </React.Fragment>
         ))}
         <button
-          className="btn btn-primary"
+          className="btn btn-primary mt-4"
           disabled={isLoading}
         >
           {isLoading ? <span className="loading loading-dots loading-lg"></span> : "Add Job"}

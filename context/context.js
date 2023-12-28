@@ -18,9 +18,7 @@ function Context({ children }) {
     }, [])
 
     return (
-        <DakiyStore.Provider
-            value={{ project, setProject, setProjects, projects }}
-        >
+        <DakiyStore.Provider value={{ project, setProject, setProjects, projects }}>
             {children}
         </DakiyStore.Provider>
     )

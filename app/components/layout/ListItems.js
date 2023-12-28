@@ -119,15 +119,13 @@ export const SecondaryListItems = () => {
       </Link>
       <HorizontalLine />
       {
-        projects.map(({ name, id }) => (
-          <>
-            <Link className='font-Poppins font-bold text-primary-content/80' key={id} href={`/all-jobs/${id}`}>
+        projects?.map(({ name, id }) => (
+          <Link className='font-Poppins font-bold text-primary-content/80' key={id} href={`/all-jobs/${id}`}>
               <ListItemButton>
                 <h2>{getAcronym(name)}</h2>
-              </ListItemButton>
-            </Link>
+            </ListItemButton>
             <Divider />
-          </>
+          </Link>
         ))
       }
     </div >

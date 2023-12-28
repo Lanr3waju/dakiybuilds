@@ -9,11 +9,14 @@ import addCommasToMoney from "../../utils/addCommasToNos"
 import numberToWords from "../../utils/numberToWords"
 import replaceSpacesWithHyphensAndLowerCase from "../../utils/replaceSpacesWithHyphens"
 import HorizontalLine from "../../utils/HorizontalLine"
+import LoadJobModal from "./modals/LoadJobModal"
+import DeleteJobState from "./DeleteJobState"
 
 function JobDetailsComponent() {
     const pathname = usePathname()
     const { projects } = useContext(DakiyStore)
     const [currentProject, setCurrentProject] = useState({})
+    const [deleteState, setDeleteState] = useState(false)
 
     useEffect(() => {
         const projectID = pathname.replace("/all-jobs/", "")
@@ -23,6 +26,7 @@ function JobDetailsComponent() {
 
     return (
         <>
+            <LoadJobModal currentProject={currentProject.id} />
             <header>
                 <h2 className="m-4 text-center font-Poppins text-2xl font-bold uppercase text-primary">
                     {currentProject.name}
@@ -53,15 +57,16 @@ function JobDetailsComponent() {
                     <p className="mb-3 text-lg uppercase"><span className="m-1 text-sm text-secondary-content/70">Client Tel:</span> {currentProject.client_phone}</p>
                     <h3 className="mx-auto my-5 max-w-full overflow-auto rounded-md bg-primary/20 p-4 text-lg underline-offset-8"><div className="m-1 text-sm uppercase text-info underline-offset-8">Project Description:</div>{currentProject.project_description}</h3>
                     <HorizontalLine />
-                    <button className="btn btn-success m-1 block w-full">
+                    <button onClick={() => window.load_job_modal.showModal()} className="btn btn-success m-1 block w-full">
                         Load this project onto the app
                     </button>
                     <button className="btn btn-warning m-1 w-full">
                         Edit this project
                     </button>
-                    <button className="btn btn-error m-1 w-full">
-                        Delete project
-                    </button>
+                    {deleteState ?
+                        <DeleteJobState currentProject={currentProject} setDeleteState={setDeleteState} /> :
+                        <button onClick={() => setDeleteState(true)} className="btn btn-error m-1 w-full">Delete project</button>
+                    }
                 </section>
             </section>
         </>
