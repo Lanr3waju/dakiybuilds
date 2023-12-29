@@ -24,9 +24,12 @@ import { getAcronym } from '../utils/getAcronym'
 export const mainListItems = (
   <>
     <Link href="/dakiyboard">
+
       <ListItemButton>
         <ListItemIcon>
-          <DashboardIcon />
+          <div className="tooltip tooltip-bottom ml-2 before:whitespace-pre-wrap before:[--tw-content:'Dakiy_\a_Board']" data-tip>
+            <DashboardIcon />
+          </div>
         </ListItemIcon>
         <ListItemText primary="DakiyBoard" />
       </ListItemButton>
@@ -35,7 +38,9 @@ export const mainListItems = (
     <Link href="/project-documents">
       <ListItemButton>
         <ListItemIcon>
-          <Folder />
+          <div className="tooltip tooltip-bottom ml-2 before:whitespace-pre-wrap before:[--tw-content:'Project_\a_Docs']" data-tip>
+            <Folder />
+          </div>
         </ListItemIcon>
         <ListItemText primary="Project Documents" />
       </ListItemButton>
@@ -44,7 +49,9 @@ export const mainListItems = (
     <Link href="/project-schedule">
       <ListItemButton>
         <ListItemIcon>
-          <CalendarMonth />
+          <div className="tooltip tooltip-bottom ml-2 before:whitespace-pre-wrap before:[--tw-content:'Project_\a_Schedule']" data-tip>
+            <CalendarMonth />
+          </div>
         </ListItemIcon>
         <ListItemText primary="Project Schedule" />
       </ListItemButton>
@@ -53,7 +60,9 @@ export const mainListItems = (
     <Link href="/project-team">
       <ListItemButton>
         <ListItemIcon>
-          <PeopleIcon />
+          <div className="tooltip tooltip-bottom ml-2 before:whitespace-pre-wrap before:[--tw-content:'Project_\a_Team']" data-tip>
+            <PeopleIcon />
+          </div>
         </ListItemIcon>
         <ListItemText primary="Project Team" />
       </ListItemButton>
@@ -62,7 +71,9 @@ export const mainListItems = (
     <Link href="/project-logs">
       <ListItemButton>
         <ListItemIcon>
-          <Notes />
+          <div className="tooltip tooltip-bottom ml-2 before:whitespace-pre-wrap before:[--tw-content:'Project_\a_Logs']" data-tip>
+            <Notes />
+          </div>
         </ListItemIcon>
         <ListItemText primary="Project Logs" />
       </ListItemButton>
@@ -71,7 +82,9 @@ export const mainListItems = (
     <Link href="/project-finances">
       <ListItemButton>
         <ListItemIcon>
-          <RequestQuote />
+          <div className="tooltip tooltip-bottom ml-2 before:whitespace-pre-wrap before:[--tw-content:'Project_\a_Finance']" data-tip>
+            <RequestQuote />
+          </div>
         </ListItemIcon>
         <ListItemText primary="Project Finances" />
       </ListItemButton>
@@ -80,7 +93,9 @@ export const mainListItems = (
     <Link href="/all-jobs">
       <ListItemButton>
         <ListItemIcon>
-          <BusinessCenterRounded />
+          <div className="tooltip tooltip-bottom ml-2 before:whitespace-pre-wrap before:[--tw-content:'All_\a_Jobs']" data-tip>
+            <BusinessCenterRounded />
+          </div>
         </ListItemIcon>
         <ListItemText primary="All Jobs" />
       </ListItemButton>
@@ -89,7 +104,9 @@ export const mainListItems = (
     <Link href="/project-settings">
       <ListItemButton>
         <ListItemIcon>
-          <Settings />
+          <div className="tooltip tooltip-bottom ml-2 before:whitespace-pre-wrap before:[--tw-content:'Project_\a_Settings']" data-tip>
+            <Settings />
+          </div>
         </ListItemIcon>
         <ListItemText primary="Project Settings" />
       </ListItemButton>
@@ -110,19 +127,21 @@ export const SecondaryListItems = () => {
         loading="lazy"
         alt="logo" />
       <Link href="/add-job">
-      <ListItemButton>
-        <ListItemIcon>
-            + <BusinessCenterRounded />
-        </ListItemIcon>
-        + Add Jobs
-      </ListItemButton>
+        <ListItemButton>
+          <ListItemIcon>
+            <div className="tooltip tooltip-bottom before:whitespace-pre-wrap before:[--tw-content:'Add_\a_Job']" data-tip>
+              + <BusinessCenterRounded />
+            </div>
+          </ListItemIcon>
+          + Add Jobs
+        </ListItemButton>
       </Link>
       <HorizontalLine />
       {
         projects?.map(({ name, id }) => (
           <Link className='font-Poppins font-bold text-primary-content/80' key={id} href={`/all-jobs/${id}`}>
-              <ListItemButton>
-                <h2>{getAcronym(name)}</h2>
+            <ListItemButton>
+              <h2>{getAcronym(name)}</h2>
             </ListItemButton>
             <Divider />
           </Link>

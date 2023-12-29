@@ -95,7 +95,7 @@ export default function DashboardComponent({ children }) {
                   ...(open && { display: 'none' }),
                 }}
               >
-                <div className=' border-2 border-base-200 rounded-lg px-2'>
+                <div className=' rounded-lg border-2 border-base-200 px-2'>
                 <MenuIcon />
                 </div>
               </IconButton>
@@ -124,7 +124,7 @@ export default function DashboardComponent({ children }) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'flex-end',
-                px: [1],
+                px: [3],
               }}
             >
               <IconButton onClick={toggleDrawer}>

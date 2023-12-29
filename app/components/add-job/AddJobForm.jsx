@@ -126,7 +126,7 @@ const AddJobForm = () => {
                 ))}
               </select>
             ) :
-              field === 'projectDescription' ? (<textarea className="textarea textarea-primary textarea-lg text-sm w-full p-1 tracking-widest" placeholder="Enter project description"></textarea>)
+              field === 'projectDescription' ? (<textarea className="textarea textarea-primary textarea-lg w-full p-1 text-sm tracking-widest" placeholder="Enter project description"></textarea>)
                 :
                 (
               <input
