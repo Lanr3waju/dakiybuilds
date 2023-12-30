@@ -65,7 +65,7 @@ function JobDetailsComponent() {
                         Load this project onto the app
                     </button>
                     <button onClick={() => window.edit_job_modal.showModal()} className="btn btn-warning m-1 w-full">
-                        Edit this project
+                        Update this project
                     </button>
                     {deleteState ?
                         <DeleteJobState currentProject={currentProject} setDeleteState={setDeleteState} /> :

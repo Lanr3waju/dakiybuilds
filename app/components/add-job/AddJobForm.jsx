@@ -89,7 +89,10 @@ const AddJobForm = () => {
         Add Job
       </h2>
       <HorizontalLine />
-      <h3 className='mt-5 text-sm font-medium italic text-warning'>Kindly note that the contract sum is valued in naira!</h3>
+      <h2 className="font-bold text-primary-warning">
+        Kindly fill the information with great care as it will not be modifiable after this step!
+      </h2>
+      <h3 className='mt-1 text-sm font-medium italic text-warning'>Kindly note that the contract sum is valued in Nigerian Naira! ₦</h3>
       <form onSubmit={handleSubmission} className="mx-auto mb-10 mt-5 flex w-5/6 flex-col rounded-lg bg-base-200 p-10 shadow-md shadow-base-300">
         <Link
           className="btn btn-error mb-3 ml-auto w-full text-3xl md:max-w-fit"

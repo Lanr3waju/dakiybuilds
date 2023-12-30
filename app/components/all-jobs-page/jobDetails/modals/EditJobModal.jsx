@@ -1,16 +1,10 @@
 'use client'
 
-// import { DakiyStore } from "@/context/context"
-// import { useContext } from "react"
 import EditJobState from "../EditJobState"
 
 // Edit Job Modal
 export default function EditJobModal({ currentProject }) {
 
-    // const handleLoadProject = () => {
-    //     setProject(currentProject)
-    //     document.getElementById('project_edit_successful').showModal()
-    // }
 
     return (
         <>
