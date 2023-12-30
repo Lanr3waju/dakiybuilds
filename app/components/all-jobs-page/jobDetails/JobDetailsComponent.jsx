@@ -11,6 +11,9 @@ import replaceSpacesWithHyphensAndLowerCase from "../../utils/replaceSpacesWithH
 import HorizontalLine from "../../utils/HorizontalLine"
 import LoadJobModal from "./modals/LoadJobModal"
 import DeleteJobState from "./DeleteJobState"
+import EditJobModal from "./modals/EditJobModal"
+import { getLapseTime, getRemainingTime, getWeeksBetween } from "../../add-job/calculateProjectDuration"
+import { addNewLineBeforeHyphen } from "../../utils/formatProjectDescription"
 
 function JobDetailsComponent() {
     const pathname = usePathname()
@@ -26,7 +29,8 @@ function JobDetailsComponent() {
 
     return (
         <>
-            <LoadJobModal currentProject={currentProject.id} />
+            <LoadJobModal currentProject={currentProject} />
+            <EditJobModal currentProject={currentProject} />
             <header>
                 <h2 className="m-4 text-center font-Poppins text-2xl font-bold uppercase text-primary">
                     {currentProject.name}
@@ -40,7 +44,7 @@ function JobDetailsComponent() {
                     <Image className="mt-4 max-h-96 w-full object-cover" priority quality={100} width={800} height={500} src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/project-site-picture/${replaceSpacesWithHyphensAndLowerCase(currentProject.name)}`} alt="Picture of site" />
                     <span className="mb-6 mt-1 text-center text-sm font-medium text-info">(picture of site)</span>
                     <p className="my-3 font-Roboto text-lg uppercase"><span className="m-1 block font-Raleway text-sm text-secondary-content/70">Project Contract Sum:</span>₦{addCommasToMoney(currentProject.contract_sum)} - ({numberToWords(currentProject.contract_sum)} Naira)</p>
-                    <p className="font-Roboto text-lg uppercase"><span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">Initial Advance Payment:</span>₦{currentProject.initial_advance_payment} Naira</p>
+                    <p className="font-Roboto text-lg uppercase"><span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">Initial Advance Payment:</span>₦{addCommasToMoney(currentProject.initial_advance_payment)} - ({numberToWords(currentProject.initial_advance_payment)} Naira)</p>
                     <p className="font-Roboto text-lg uppercase"><span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">Balance Due to Contractor:</span>₦{addCommasToMoney((currentProject.contract_sum - currentProject.initial_advance_payment))}</p>
                     <p className="font-Roboto text-lg uppercase"><span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">Expenditure:</span>₦0 Naira</p>
                 </section>
@@ -48,19 +52,19 @@ function JobDetailsComponent() {
                     <p className="mb-3 text-lg uppercase"><span className="m-1 text-center text-sm text-secondary-content/70">Project Type:</span>{currentProject.type}</p>
                     <p className="mb-3 font-Roboto text-lg uppercase"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Project Start Date:</span>{currentProject.start_date}</p>
                     <p className="mb-3 font-Roboto text-lg uppercase"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Project Estimated Finish Date:</span>{currentProject.finish_date}</p>
-                    <p className="mb-3 font-Roboto text-lg uppercase"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Project Duration:</span>{currentProject.project_duration}</p>
-                    <p className="mb-3 font-Roboto text-lg uppercase md:block"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Duration to Project Completion:</span>{currentProject.time_to_completion}</p>
-                    <p className="mb-3 font-Roboto text-lg uppercase"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Project Lapse Time:</span>{currentProject.project_lapse_time}</p>
+                    <p className="mb-3 font-Roboto text-lg uppercase"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Project Duration:</span>{getWeeksBetween(currentProject.start_date, currentProject.finish_date)}</p>
+                    <p className="mb-3 font-Roboto text-lg uppercase md:block"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Duration to Project Completion:</span>{getRemainingTime(currentProject.start_date, currentProject.finish_date)}</p>
+                    <p className="mb-3 font-Roboto text-lg uppercase"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Project Lapse Time:</span>{getLapseTime(currentProject.start_date, currentProject.finish_date)}</p>
                     <Divider sx={{ my: 3 }} />
                     <p className="mb-3 text-lg uppercase"><span className="m-1 text-sm text-secondary-content/70">Client Name:</span>{currentProject.client_name}</p>
                     <p className="mb-3 text-lg uppercase"><span className="m-1 text-sm text-secondary-content/70">Client Email:</span> {currentProject.client_email}</p>
                     <p className="mb-3 text-lg uppercase"><span className="m-1 text-sm text-secondary-content/70">Client Tel:</span> {currentProject.client_phone}</p>
-                    <h3 className="mx-auto my-5 max-w-full overflow-auto rounded-md bg-primary/20 p-4 text-lg underline-offset-8"><div className="m-1 text-sm uppercase text-info underline-offset-8">Project Description:</div>{currentProject.project_description}</h3>
+                    <h3 className="mx-auto my-5 max-w-full overflow-auto rounded-md bg-primary/20 p-4 text-lg underline-offset-8"><div className="m-1 text-sm uppercase text-info underline-offset-8">Project Description:</div>{addNewLineBeforeHyphen(currentProject.project_description)}</h3>
                     <HorizontalLine />
                     <button onClick={() => window.load_job_modal.showModal()} className="btn btn-success m-1 block w-full">
                         Load this project onto the app
                     </button>
-                    <button className="btn btn-warning m-1 w-full">
+                    <button onClick={() => window.edit_job_modal.showModal()} className="btn btn-warning m-1 w-full">
                         Edit this project
                     </button>
                     {deleteState ?

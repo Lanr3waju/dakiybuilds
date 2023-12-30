@@ -18,8 +18,6 @@ const deleteProjectTable = async (currentProject) => {
     } else {
         return true
     }
-
-
 }
 
 const deleteSitePicture = async (currentProject) => {

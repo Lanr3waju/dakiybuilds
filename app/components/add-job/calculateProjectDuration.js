@@ -51,6 +51,20 @@ export function getLapseTime(startDate, endDate) {
     // Check if the project has started
     if (current < start) {
         return "0 week"
+    } else if (current > start && current < end) {
+        return "0 week"
+    } else if (current > start && current > end) {
+        // Calculate the difference in milliseconds
+        const diff = Math.abs(end - start)
+
+        // Convert milliseconds to weeks
+        const weeks = diff / (7 * 24 * 60 * 60 * 1000)
+
+        // Round to 2 decimal places
+        return `-${weeks.toFixed(2)} week(s)`
+    } else if (current > start && current === end) {
+        // Calculate the difference in milliseconds
+        return "0 week"
     } else if (current === end) {
         return "0 week"
     } else if (current > end) {

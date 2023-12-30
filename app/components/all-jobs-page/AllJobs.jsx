@@ -1,5 +1,5 @@
 'use client'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import AddButon from '../utils/AddButon'
 import Link from 'next/link'
 import HorizontalLine from '../utils/HorizontalLine'
@@ -9,9 +9,14 @@ import { DakiyStore } from '@/context/context'
 
 function AllJobs() {
   const { projects } = useContext(DakiyStore)
+  const [allProjects, setAllProjects] = useState(projects)
+
+  useEffect(() => {
+    setAllProjects(projects)
+  }, [projects])
   return (
     <>
-      {projects ? (
+      {allProjects ? (
     <section className="p-4 font-Poppins">
       <h1 className="font-medium uppercase text-primary md:text-lg">Jobs</h1>
       <HorizontalLine />

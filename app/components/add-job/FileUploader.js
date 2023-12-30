@@ -20,7 +20,7 @@ const uploadToSupabase = async (file, fileName) => {
     const { data, error } = await supabaseStorage.storage.from('project-site-picture').upload(pictureName, file) // Using file.name as the file path
 
     if (error) {
-        alert('Error uploading file:', error.message)
+        alert('Picture with the same name already exists, try changing the name of the project')
         return false
     } else {
         alert('File uploaded successfully:', data)

@@ -1,9 +1,11 @@
 'use server'
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
-import { cookies } from "next/headers"
-import getUser from "./getUser"
 
-export default async function getUserProfile() {
+import { cookies } from "next/headers"
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
+import getUser from "../../utils/getUser"
+
+
+export default async function getUserName() {
     const supabase = createServerComponentClient({ cookies })
     const user = await getUser()
     let { data: profiles } = await supabase
@@ -12,8 +14,8 @@ export default async function getUserProfile() {
         // Filters
         .eq('id', user.id)
     if (profiles?.length > 0) {
-        return true
+        return profiles[0].full_name
     } else {
-        return false
+        return ''
     }
 }

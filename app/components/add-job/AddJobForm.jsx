@@ -26,7 +26,7 @@ const AddJobForm = () => {
   const [jobData, setJobData] = useState(initialJobData)
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
-  const { setProjects, projects } = useContext(DakiyStore);
+  const { setProjects, projects } = useContext(DakiyStore)
 
 
   const refs = {
@@ -126,31 +126,40 @@ const AddJobForm = () => {
                 ))}
               </select>
             ) :
-              field === 'projectDescription' ? (<textarea className="textarea textarea-primary textarea-lg w-full p-1 text-sm tracking-widest" placeholder="Enter project description"></textarea>)
+              field === 'projectDescription' ? (
+                <textarea
+                  id={field}
+                  name={field}
+                  value={jobData[field]}
+                  onChange={handleInputChange}
+                  ref={refs[field]}
+                  className="textarea textarea-primary textarea-lg w-full p-1 text-sm tracking-widest"
+                  placeholder="Enter project description">
+                </textarea>)
                 :
                 (
-              <input
-                ref={refs[field]}
-                  className='input input-bordered input-primary my-2 font-Roboto'
-                type={
-                  field === 'clientEmail'
-                    ? 'email'
-                    : field === 'clientTelephone'
-                      ? 'tel'
-                      : field === 'contractSum' ||
-                        field === 'initialAdvancePayment'
-                        ? 'number'
-                        : field === 'agreedStartDate' ||
-                          field === 'estimatedFinishDate'
-                          ? 'date'
-                          : 'text'
-                }
-                id={field}
-                name={field}
-                value={jobData[field]}
-                  onChange={handleInputChange}
-              />
-            )}
+                  <input
+                    ref={refs[field]}
+                    className='input input-bordered input-primary my-2 font-Roboto'
+                    type={
+                      field === 'clientEmail'
+                        ? 'email'
+                        : field === 'clientTelephone'
+                          ? 'tel'
+                          : field === 'contractSum' ||
+                            field === 'initialAdvancePayment'
+                            ? 'number'
+                            : field === 'agreedStartDate' ||
+                              field === 'estimatedFinishDate'
+                              ? 'date'
+                              : 'text'
+                    }
+                    id={field}
+                    name={field}
+                    value={jobData[field]}
+                    onChange={handleInputChange}
+                  />
+                )}
             {errors[field] && (
               <p className="mb-5 text-error">{errors[field]}</p>
             )}

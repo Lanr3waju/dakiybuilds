@@ -23,7 +23,7 @@ export const validateForm = (jobData) => {
   }
 
   if (!jobData.initialAdvancePayment) {
-    errors.contractSum = 'Initial Advance Payment is required, enter 0 if no payment has been made by client'
+    errors.initialAdvancePayment = 'Initial Advance Payment is required, enter N 0 if no payment has been made by client'
   }
 
   if (!jobData.clientEmail) {

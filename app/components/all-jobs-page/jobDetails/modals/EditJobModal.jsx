@@ -1,16 +1,16 @@
 'use client'
 
-import { DakiyStore } from "@/context/context"
-import { useContext } from "react"
+// import { DakiyStore } from "@/context/context"
+// import { useContext } from "react"
+import EditJobState from "../EditJobState"
 
 // Edit Job Modal
 export default function EditJobModal({ currentProject }) {
-    const { setProject } = useContext(DakiyStore)
 
-    const handleLoadProject = () => {
-        setProject(currentProject)
-        document.getElementById('project_edit_successful').showModal()
-    }
+    // const handleLoadProject = () => {
+    //     setProject(currentProject)
+    //     document.getElementById('project_edit_successful').showModal()
+    // }
 
     return (
         <>
@@ -27,13 +27,7 @@ export default function EditJobModal({ currentProject }) {
 
             <dialog id="edit_job_modal" className="modal modal-bottom sm:modal-middle">
                 <form method="dialog" className="modal-box">
-                    <h3 className="text-lg font-bold text-success">
-                        Are you sure you want to edit this project?
-                    </h3>
-                    <div className="flex w-full items-center justify-center">
-                        <button onClick={handleLoadProject} className="btn btn-error btn-lg m-2" >Yes</button>
-                        <button className="btn btn-success btn-lg m-2">No</button>
-                    </div>
+                    <EditJobState currentProject={currentProject} />
                 </form>
             </dialog>
         </>

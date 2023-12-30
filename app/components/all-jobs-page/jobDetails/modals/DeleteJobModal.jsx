@@ -1,15 +1,23 @@
 'use client'
 import { useRouter } from "next/navigation"
 import { deleteProject } from "../supabaseTables"
+import { useContext } from "react"
+import { DakiyStore } from "@/context/context"
 
 // Delete Job Modal
 export default function DeleteJobModal({ currentProject, setDeleteState }) {
+    const { setProjects, projects } = useContext(DakiyStore)
     const router = useRouter()
 
     const handleDeleteProject = async () => {
         const isDeleted = await deleteProject(currentProject)
+
         if (isDeleted) {
             // setDeleteState(false)
+            // Create a new array by spreading the projects and excluding the object with the matching ID
+            const updatedProjects = projects.filter(project => project.id !== currentProject.id)
+            // Update the projects context state using the spread operator
+            setProjects([...updatedProjects]);
             document.getElementById('project_delete_successful').showModal()
             router.push('/all-jobs')
         }
