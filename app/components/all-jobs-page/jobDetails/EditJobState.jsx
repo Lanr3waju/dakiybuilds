@@ -66,10 +66,10 @@ function EditJobState() {
 
     return (
         <div className="font-Roboto">
-            <h2 className="text-2xl font-semibold mb-1">Update Job Details</h2>
-            <p className='text-warning m-2 font-medium text-right'>Press `esc` to cancel</p>
+            <h2 className="mb-1 text-2xl font-semibold">Update Job Details</h2>
+            <p className='m-2 text-right font-medium text-warning'>Press `esc` to cancel</p>
             <HorizontalLine />
-            <p className="p-4 bg-info text-info-content font-medium rounded-md mx-2 my-4 w-full max-w-md">
+            <p className="mx-2 my-4 w-full max-w-md rounded-md bg-info p-4 font-medium text-info-content">
                 This form serves to capture new data or events related to the project&apos;s progression, rather than modify existing information.
             </p>
             <input
@@ -78,7 +78,7 @@ function EditJobState() {
                 value={formData.newFinishDate}
                 onChange={handleChange}
                 placeholder="Enter new finish date"
-                className="input input-bordered input-primary w-full max-w-md m-2"
+                className="input input-bordered input-primary m-2 w-full max-w-md"
             />
             <input
                 type="number"
@@ -86,7 +86,7 @@ function EditJobState() {
                 value={formData.newContractSum}
                 onChange={handleChange}
                 placeholder="Enter new contract sum"
-                className="input input-bordered input-primary w-full max-w-md m-2"
+                className="input input-bordered input-primary m-2 w-full max-w-md"
             />
             <input
                 type="number"
@@ -94,19 +94,19 @@ function EditJobState() {
                 value={formData.subsequentPayments}
                 onChange={handleChange}
                 placeholder="Enter subsequent payments made"
-                className="input input-bordered input-primary w-full max-w-md m-2"
+                className="input input-bordered input-primary m-2 w-full max-w-md"
             />
             <textarea
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
                 placeholder="Enter descriptions for variations, payment, and/or changes"
-                className="textarea textarea-info tracking-widest w-full m-2  max-w-md placeholder:font-Roboto"
+                className="textarea textarea-info m-2 w-full max-w-md  tracking-widest placeholder:font-Roboto"
             ></textarea>
-            {error && <p className="text-error m-2">{error}</p>}
+            {error && <p className="m-2 text-error">{error}</p>}
             <button
                 type="button"
-                className='btn btn-secondary w-full m-2 max-w-md '
+                className='btn btn-secondary m-2 w-full max-w-md '
                 onClick={handleSubmit}
                 disabled={!formData.subsequentPayments && !formData.newContractSum && !formData.newFinishDate || formData.description.length < 50}
             >

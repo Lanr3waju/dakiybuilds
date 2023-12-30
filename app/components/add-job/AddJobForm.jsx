@@ -89,7 +89,7 @@ const AddJobForm = () => {
         Add Job
       </h2>
       <HorizontalLine />
-      <h2 className="font-bold text-primary-warning">
+      <h2 className="text-primary-warning font-bold">
         Kindly fill the information with great care as it will not be modifiable after this step!
       </h2>
       <h3 className='mt-1 text-sm font-medium italic text-warning'>Kindly note that the contract sum is valued in Nigerian Naira! ₦</h3>
