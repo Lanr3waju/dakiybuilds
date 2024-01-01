@@ -1,19 +1,17 @@
 'use client'
-
 import EditJobState from "../EditJobState"
 
 // Edit Job Modal
 export default function EditJobModal({ currentProject }) {
 
-
     return (
         <>
             <dialog id="project_edit_successful" className="modal">
                 <div className="modal-box w-11/12 max-w-5xl">
-                    <h3 className="text-lg font-bold text-success">Project Deleted Successfully</h3>
+                    <h3 className="text-lg font-bold text-success">Project Updated Successfully</h3>
                     <div className="modal-action">
                         <form method="dialog">
-                            <button className="btn">Close</button>
+                            <button>Close</button>
                         </form>
                     </div>
                 </div>

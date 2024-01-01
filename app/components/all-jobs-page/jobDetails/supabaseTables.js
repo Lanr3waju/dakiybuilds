@@ -39,3 +39,21 @@ export const deleteProject = async (currentProject) => {
         return false
     }
 }
+
+export const insertProjectPlusTable = async ({ newFinishDate, newContractSum, subsequentPayments, description }, { id }) => {
+    const { error } = await supabase
+        .from('projects_plus')
+        .insert([
+            {
+                project_id: id,
+                new_finish_date: newFinishDate,
+                new_contract_sum: newContractSum,
+                subsequent_payments: subsequentPayments,
+                description: description
+            }
+        ]).select()
+
+    if (error) {
+        return error
+    }
+}

@@ -1,33 +1,18 @@
 'use client'
-// function EditJobState() {
-//     return (
-//         <>
-//             <h2>Edit Job</h2>
-//             <section>
-//                 <input type="text" placeholder="Enter new finish date" className="input input-bordered input-primary w-full max-w-md m-2" />
-//                 <input type="text" placeholder="Enter new contract sum" className="input input-bordered input-primary w-full max-w-md m-2" />
-//                 <input type="text" placeholder="Enter subsequent payments made" className="input input-bordered input-primary w-full max-w-md m-2" />
-//                 <textarea className="textarea textarea-info tracking-widest w-full m-2  max-w-md" placeholder="Enter descriptions for variations, payment and/or changes to the finish date and/or contract sum"></textarea>
-//                 <button className="btn btn-secondary w-full m-2 max-w-md" type="button">Submit</button>
-//                 <button className="btn btn-error w-full max-w-md m-2">Cancel</button>
-//             </section>
-//             <p className="p-4 bg-info text-info-content font-medium rounded-md m-2 w-full max-w-md">This form exists to register data / events that that takes shape as the project progresses and not to modify any existing information on the project.</p>
-//         </>
-//     )
-// }
-
-// export default EditJobState
 
 import { useState } from 'react'
 import HorizontalLine from '../../utils/HorizontalLine'
+import { insertProjectPlusTable } from './supabaseTables'
 
-function EditJobState() {
-    const [formData, setFormData] = useState({
+function EditJobState({ currentProject }) {
+    const initialFormData = {
         newFinishDate: '',
         newContractSum: '',
         subsequentPayments: '',
         description: ''
-    })
+    }
+
+    const [formData, setFormData] = useState(initialFormData)
 
     const [error, setError] = useState('')
 
@@ -57,52 +42,71 @@ function EditJobState() {
         validateForm()
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+        validateForm()
         e.preventDefault()
         // Check conditions and update isValid and error state
-        if (validateForm())
-            console.log(formData)
+        if (validateForm()) {
+            const error = await insertProjectPlusTable(formData, currentProject)
+            if (error) {
+                alert(error.message)
+            } else {
+                window.project_edit_successful.showModal()
+                setFormData(initialFormData)
+            }
+        }
     }
 
     return (
         <div className="font-Roboto">
-            <h2 className="mb-1 text-2xl font-semibold">Update Job Details</h2>
-            <p className='m-2 text-right font-medium text-warning'>Press `esc` to cancel</p>
+            <h2 className="mb-1 flex items-center justify-between text-2xl font-semibold">Update Job Details <span className='text-sm font-medium text-warning'> Press `esc` to cancel</span></h2>
             <HorizontalLine />
-            <p className="mx-2 my-4 w-full max-w-md rounded-md bg-info p-4 font-medium text-info-content">
+            <p className=" mx-auto my-4 w-full max-w-md rounded-md bg-info p-4 font-medium text-info-content">
                 This form serves to capture new data or events related to the project&apos;s progression, rather than modify existing information.
             </p>
-            <input
-                type="date"
-                name="newFinishDate"
-                value={formData.newFinishDate}
-                onChange={handleChange}
-                placeholder="Enter new finish date"
-                className="input input-bordered input-primary m-2 w-full max-w-md"
-            />
-            <input
-                type="number"
-                name="newContractSum"
-                value={formData.newContractSum}
-                onChange={handleChange}
-                placeholder="Enter new contract sum"
-                className="input input-bordered input-primary m-2 w-full max-w-md"
-            />
-            <input
-                type="number"
-                name="subsequentPayments"
-                value={formData.subsequentPayments}
-                onChange={handleChange}
-                placeholder="Enter subsequent payments made"
-                className="input input-bordered input-primary m-2 w-full max-w-md"
-            />
-            <textarea
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                placeholder="Enter descriptions for variations, payment, and/or changes"
-                className="textarea textarea-info m-2 w-full max-w-md  tracking-widest placeholder:font-Roboto"
-            ></textarea>
+            <label className='mb-4 font-Roboto text-sm font-semibold tracking-widest text-primary-content/40'> Enter new project finish date :
+                <input
+                    type="date"
+                    name="newFinishDate"
+                    value={formData.newFinishDate}
+                    onChange={handleChange}
+                    placeholder="Enter new finish date"
+                    className="input input-bordered input-primary mb-6 w-full max-w-md"
+                />
+            </label>
+
+            <label className='mb-4 font-Roboto text-sm font-semibold tracking-widest text-primary-content/40'> Enter new contract sum:
+                <input
+                    type="number"
+                    name="newContractSum"
+                    value={formData.newContractSum}
+                    onChange={handleChange}
+                    placeholder="Enter new contract sum"
+                    className="input input-bordered input-primary mb-6 w-full max-w-md"
+                />
+            </label>
+
+            <label className='mb-4 font-Roboto text-sm font-semibold tracking-widest text-primary-content/40'> Enter subsequent payments made by client:
+                <input
+                    type="number"
+                    name="subsequentPayments"
+                    value={formData.subsequentPayments}
+                    onChange={handleChange}
+                    placeholder="Enter subsequent payments"
+                    className="input input-bordered input-primary mb-6 w-full max-w-md"
+                />
+            </label>
+
+            <label className='mb-4 font-Roboto text-sm font-semibold tracking-widest text-primary-content/40'> Enter appropriate description:
+                <textarea
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    placeholder="Enter descriptions for variations, payment, and/or changes"
+                    className="textarea textarea-info mb-4 w-full  max-w-md tracking-widest placeholder:font-Roboto"
+                ></textarea>
+            </label>
+
             {error && <p className="m-2 text-error">{error}</p>}
             <button
                 type="button"

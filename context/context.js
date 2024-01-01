@@ -15,7 +15,7 @@ function Context({ children }) {
 
     useEffect(() => {
         fetchProjectID()
-    }, [])
+    }, [projects, project])
 
     return (
         <DakiyStore.Provider value={{ project, setProject, setProjects, projects }}>
