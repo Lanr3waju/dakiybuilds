@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import HorizontalLine from '../../utils/HorizontalLine'
 import { insertProjectPlusTable } from './supabaseTables'
+import { DakiyStore } from '@/context/context'
 
 function EditJobState({ currentProject }) {
     const initialFormData = {
@@ -12,17 +13,22 @@ function EditJobState({ currentProject }) {
         description: ''
     }
 
-    const [formData, setFormData] = useState(initialFormData)
+    const { updateFormData, setUpdateFormData } = useContext(DakiyStore)
 
     const [error, setError] = useState('')
 
     const validateForm = () => {
-        if (!formData.subsequentPayments && !formData.newContractSum && !formData.newFinishDate) {
+        if (!updateFormData.subsequentPayments && !updateFormData.newContractSum && !updateFormData.newFinishDate) {
             setError('Please fill in any of updated fields.')
             return false
         }
 
-        if (formData.description.length < 50) {
+        if (updateFormData.newFinishDate < currentProject.start_date) {
+            setError('The new finish date cannot be less than project start date.')
+            return false
+        }
+
+        if (updateFormData.description.length < 50) {
             setError('The description of the event should be at least 50 characters.')
             return false
         }
@@ -35,7 +41,7 @@ function EditJobState({ currentProject }) {
 
     const handleChange = (e) => {
         const { name, value } = e.target
-        setFormData(prevState => ({
+        setUpdateFormData(prevState => ({
             ...prevState,
             [name]: value
         }))
@@ -47,12 +53,12 @@ function EditJobState({ currentProject }) {
         e.preventDefault()
         // Check conditions and update isValid and error state
         if (validateForm()) {
-            const error = await insertProjectPlusTable(formData, currentProject)
+            const error = await insertProjectPlusTable(updateFormData, currentProject)
             if (error) {
                 alert(error.message)
             } else {
                 window.project_edit_successful.showModal()
-                setFormData(initialFormData)
+                setUpdateFormData(initialFormData)
             }
         }
     }
@@ -68,7 +74,7 @@ function EditJobState({ currentProject }) {
                 <input
                     type="date"
                     name="newFinishDate"
-                    value={formData.newFinishDate}
+                    value={updateFormData.newFinishDate}
                     onChange={handleChange}
                     placeholder="Enter new finish date"
                     className="input input-bordered input-primary mb-6 w-full max-w-md"
@@ -79,7 +85,7 @@ function EditJobState({ currentProject }) {
                 <input
                     type="number"
                     name="newContractSum"
-                    value={formData.newContractSum}
+                    value={updateFormData.newContractSum}
                     onChange={handleChange}
                     placeholder="Enter new contract sum"
                     className="input input-bordered input-primary mb-6 w-full max-w-md"
@@ -90,7 +96,7 @@ function EditJobState({ currentProject }) {
                 <input
                     type="number"
                     name="subsequentPayments"
-                    value={formData.subsequentPayments}
+                    value={updateFormData.subsequentPayments}
                     onChange={handleChange}
                     placeholder="Enter subsequent payments"
                     className="input input-bordered input-primary mb-6 w-full max-w-md"
@@ -100,7 +106,7 @@ function EditJobState({ currentProject }) {
             <label className='mb-4 font-Roboto text-sm font-semibold tracking-widest text-primary-content/40'> Enter appropriate description:
                 <textarea
                     name="description"
-                    value={formData.description}
+                    value={updateFormData.description}
                     onChange={handleChange}
                     placeholder="Enter descriptions for variations, payment, and/or changes"
                     className="textarea textarea-info mb-4 w-full  max-w-md tracking-widest placeholder:font-Roboto"
@@ -112,7 +118,7 @@ function EditJobState({ currentProject }) {
                 type="button"
                 className='btn btn-secondary m-2 w-full max-w-md '
                 onClick={handleSubmit}
-                disabled={!formData.subsequentPayments && !formData.newContractSum && !formData.newFinishDate || formData.description.length < 50}
+                disabled={error !== ''}
             >
                 Submit
             </button>

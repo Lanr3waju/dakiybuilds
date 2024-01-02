@@ -26,7 +26,7 @@ const AddJobForm = () => {
   const [jobData, setJobData] = useState(initialJobData)
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
-  const { setProjects, projects } = useContext(DakiyStore)
+  const { setProjects, projects, setProjectSumAndDate } = useContext(DakiyStore)
 
 
   const refs = {
@@ -64,8 +64,9 @@ const AddJobForm = () => {
       if (!errorMessage) {
         setProjects([...projects, jobData])
         setIsLoading(false)
-        setJobData(initialJobData)
+        setProjectSumAndDate(prevState => ({ ...prevState, projectContractSum: jobData.contractSum, projectFinishDate: jobData.estimatedFinishDate }))
         window.job_addition_modal.showModal()
+        setJobData(initialJobData)
       } else {
         setIsLoading(false)
         alert(errorMessage)

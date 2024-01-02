@@ -8,6 +8,18 @@ function Context({ children }) {
     const [project, setProject] = useState({})
     const [projects, setProjects] = useState([])
 
+    const [updateFormData, setUpdateFormData] = useState({
+        newFinishDate: '',
+        newContractSum: '',
+        subsequentPayments: '',
+        description: ''
+    })
+
+    const [projectSumAndDate, setProjectSumAndDate] = useState({
+        projectFinishDate: '',
+        projectContractSum: ''
+    })
+
     async function fetchProjectID() {
         const res = await getProjects()
         setProjects(res)
@@ -15,10 +27,17 @@ function Context({ children }) {
 
     useEffect(() => {
         fetchProjectID()
-    }, [projects, project])
+    }, [projects, project, updateFormData])
 
     return (
-        <DakiyStore.Provider value={{ project, setProject, setProjects, projects }}>
+        <DakiyStore.Provider
+            value={
+                {
+                    project, setProject,
+                    setProjects, projects,
+                    updateFormData, setUpdateFormData,
+                    projectSumAndDate, setProjectSumAndDate
+                }}>
             {children}
         </DakiyStore.Provider>
     )

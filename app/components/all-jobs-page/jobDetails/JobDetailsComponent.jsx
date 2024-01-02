@@ -17,15 +17,38 @@ import { addNewLineBeforeHyphen } from "../../utils/formatProjectDescription"
 
 function JobDetailsComponent() {
     const pathname = usePathname()
-    const { projects } = useContext(DakiyStore)
+    const { projects, projectSumAndDate, setProjectSumAndDate } = useContext(DakiyStore)
     const [currentProject, setCurrentProject] = useState({})
     const [deleteState, setDeleteState] = useState(false)
 
     useEffect(() => {
         const projectID = pathname.replace("/all-jobs/", "")
         const selectedProject = projects?.find(({ id }) => projectID === id)
-        selectedProject && setCurrentProject(selectedProject)
-    }, [pathname, projects])
+        if (selectedProject) {
+            setCurrentProject(selectedProject)
+
+            // make the new contract sum and new finish date the project's finish date and contract sum if it exists
+            const { new_contract_sum, new_finish_date } = selectedProject
+
+            if (new_contract_sum && new_finish_date && new_contract_sum !== projectSumAndDate.projectContractSum && new_finish_date !== projectSumAndDate.projectFinishDate) {
+                setProjectSumAndDate(prevState => ({
+                    ...prevState,
+                    projectContractSum: new_contract_sum,
+                    projectFinishDate: new_finish_date,
+                }))
+            } else if (new_contract_sum && new_contract_sum !== projectSumAndDate.projectContractSum) {
+                setProjectSumAndDate(prevState => ({
+                    ...prevState,
+                    projectContractSum: new_contract_sum
+                }))
+            } else if (new_finish_date && new_finish_date !== projectSumAndDate.projectFinishDate) {
+                setProjectSumAndDate(prevState => ({
+                    ...prevState,
+                    projectFinishDate: new_finish_date
+                }))
+            }
+        }
+    }, [projects, pathname, setProjectSumAndDate, projectSumAndDate.projectContractSum, projectSumAndDate.projectFinishDate])
 
     return (
         <>
@@ -43,18 +66,19 @@ function JobDetailsComponent() {
                     <Progress progress={currentProject.progress} />
                     <Image className="mt-4 max-h-96 w-full object-cover" priority quality={100} width={800} height={500} src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/project-site-picture/${replaceSpacesWithHyphensAndLowerCase(currentProject.name)}`} alt="Picture of site" />
                     <span className="mb-6 mt-1 text-center text-sm font-medium text-info">(picture of site)</span>
-                    <p className="my-3 font-Roboto text-lg uppercase"><span className="m-1 block font-Raleway text-sm text-secondary-content/70">Project Contract Sum:</span>₦{addCommasToMoney(currentProject.contract_sum)} - ({numberToWords(currentProject.contract_sum)} Naira)</p>
+                    <p className="my-3 font-Roboto text-lg uppercase"><span className="m-1 block font-Raleway text-sm text-secondary-content/70">Project Contract Sum:</span>₦{addCommasToMoney(projectSumAndDate.projectContractSum)} - ({numberToWords(projectSumAndDate.projectContractSum)} Naira)</p>
+                    <p className="font-Roboto text-lg uppercase"><span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">Balance Due to Contractor:</span>₦{addCommasToMoney((projectSumAndDate.projectContractSum - currentProject.initial_advance_payment))}</p>
                     <p className="font-Roboto text-lg uppercase"><span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">Initial Advance Payment:</span>₦{addCommasToMoney(currentProject.initial_advance_payment)} - ({numberToWords(currentProject.initial_advance_payment)} Naira)</p>
-                    <p className="font-Roboto text-lg uppercase"><span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">Balance Due to Contractor:</span>₦{addCommasToMoney((currentProject.contract_sum - currentProject.initial_advance_payment))}</p>
+                    <p className="font-Roboto text-lg uppercase"><span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">Total contract payments:</span>₦0 Naira</p>
                     <p className="font-Roboto text-lg uppercase"><span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">Expenditure:</span>₦0 Naira</p>
                 </section>
                 <section className="ml-1 w-11/12 rounded-md border-4 border-base-300 p-4 pb-5 shadow-md shadow-base-300">
                     <p className="mb-3 text-lg uppercase"><span className="m-1 text-center text-sm text-secondary-content/70">Project Type:</span>{currentProject.type}</p>
                     <p className="mb-3 font-Roboto text-lg uppercase"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Project Start Date:</span>{currentProject.start_date}</p>
-                    <p className="mb-3 font-Roboto text-lg uppercase"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Project Estimated Finish Date:</span>{currentProject.finish_date}</p>
-                    <p className="mb-3 font-Roboto text-lg uppercase"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Project Duration:</span>{getWeeksBetween(currentProject.start_date, currentProject.finish_date)}</p>
-                    <p className="mb-3 font-Roboto text-lg uppercase md:block"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Duration to Project Completion:</span>{getRemainingTime(currentProject.start_date, currentProject.finish_date)}</p>
-                    <p className="mb-3 font-Roboto text-lg uppercase"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Project Lapse Time:</span>{getLapseTime(currentProject.start_date, currentProject.finish_date)}</p>
+                    <p className="mb-3 font-Roboto text-lg uppercase"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Project Estimated Finish Date:</span>{projectSumAndDate.projectFinishDate}</p>
+                    <p className="mb-3 font-Roboto text-lg uppercase"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Project Duration:</span>{getWeeksBetween(currentProject.start_date, projectSumAndDate.projectFinishDate)}</p>
+                    <p className="mb-3 font-Roboto text-lg uppercase md:block"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Duration to Project Completion:</span>{getRemainingTime(currentProject.start_date, projectSumAndDate.projectFinishDate)}</p>
+                    <p className="mb-3 font-Roboto text-lg uppercase"><span className="m-1 font-Raleway text-sm text-secondary-content/70">Project Lapse Time:</span>{getLapseTime(currentProject.start_date, projectSumAndDate.projectFinishDate)}</p>
                     <Divider sx={{ my: 3 }} />
                     <p className="mb-3 text-lg uppercase"><span className="m-1 text-sm text-secondary-content/70">Client Name:</span>{currentProject.client_name}</p>
                     <p className="mb-3 text-lg uppercase"><span className="m-1 text-sm text-secondary-content/70">Client Email:</span> {currentProject.client_email}</p>
