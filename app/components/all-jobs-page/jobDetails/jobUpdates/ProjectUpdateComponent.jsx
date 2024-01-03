@@ -3,7 +3,7 @@
 function ProjectUpdateComponent() {
     return (
         <section className="p-6">
-            <h2 className="text-lg font-medium text-center">
+            <h2 className="text-center text-lg font-medium">
                 Hello Progress
             </h2>
         </section>

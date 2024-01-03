@@ -98,7 +98,7 @@ const AddJobForm = () => {
         Add Job
       </h2>
       <HorizontalLine />
-      <h2 className="text-primary-warning font-bold">
+      <h2 className="font-bold text-primary">
         Kindly fill the information with great care as it will not be modifiable after this step!
       </h2>
       <h3 className='mt-1 text-sm font-medium italic text-warning'>Kindly note that the contract sum is valued in Nigerian Naira! ₦</h3>
@@ -112,7 +112,7 @@ const AddJobForm = () => {
         {/* File Upload */}
         <section>
           <p className='text-sm font-medium'>Upload site picture; if available <span className='text-warning'> (900kb maximum image size ) please wait till you get an alert &apos;File uploaded successfully&apos; before leaving page.</span></p>
-          <div className='flex items center'>
+          <div className='flex items-center'>
             <input disabled={!jobData.jobName || !jobData.jobLocation} className='file-input file-input-bordered file-input-primary mb-1 w-full max-w-md' type="file" onChange={handleFileChange} />
             {isLoading && <span className="loading loading-spinner loading-md ml-6 text-primary"></span>}
           </div>

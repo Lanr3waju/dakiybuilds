@@ -42,8 +42,8 @@ export default function DeleteJobModal({ currentProject, setDeleteState }) {
                         Are you sure you want to delete this project?
                     </h3>
                     <div className="flex w-full items-center justify-center">
-                        <button onClick={handleDeleteProject} className="btn btn-error btn-outline m-2 px-6" >Yes</button>
-                        <button className="btn btn-success btn-outline m-2 px-6" onClick={() => setDeleteState(false)}>No</button>
+                        <button onClick={handleDeleteProject} className="btn btn-outline btn-error m-2 px-6" >Yes</button>
+                        <button className="btn btn-outline btn-success m-2 px-6" onClick={() => setDeleteState(false)}>No</button>
                     </div>
                 </form>
             </dialog>

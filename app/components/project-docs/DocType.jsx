@@ -5,7 +5,7 @@ function DocType({ name }) {
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   return (
     <section className="mt-5">
-      <h2 className="font-semibold uppercase text-primary-focus md:text-lg">
+      <h2 className="font-semibold uppercase text-primary md:text-lg">
         {name}
       </h2>
       <HorizontalLine />
