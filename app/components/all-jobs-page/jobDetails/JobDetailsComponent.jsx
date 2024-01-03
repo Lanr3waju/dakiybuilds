@@ -14,12 +14,14 @@ import DeleteJobState from "./DeleteJobState"
 import EditJobModal from "./modals/EditJobModal"
 import { getLapseTime, getRemainingTime, getWeeksBetween } from "../../add-job/calculateProjectDuration"
 import { addNewLineBeforeHyphen } from "../../utils/formatProjectDescription"
+import UpdateNotification from "./UpdateNotification"
 
 function JobDetailsComponent() {
     const pathname = usePathname()
     const { projects, projectSumAndDate, setProjectSumAndDate } = useContext(DakiyStore)
     const [currentProject, setCurrentProject] = useState({})
     const [deleteState, setDeleteState] = useState(false)
+    const [update, setUpdate] = useState(false)
 
     useEffect(() => {
         const projectID = pathname.replace("/all-jobs/", "")
@@ -50,6 +52,12 @@ function JobDetailsComponent() {
         }
     }, [projects, pathname, setProjectSumAndDate, projectSumAndDate.projectContractSum, projectSumAndDate.projectFinishDate])
 
+    useEffect(() => {
+        if (currentProject.new_contract_sum || currentProject.new_finish_date || currentProject.latest_client_payment) {
+            setUpdate(true)
+        }
+    }, [currentProject]);
+
     return (
         <>
             <LoadJobModal currentProject={currentProject} />
@@ -61,6 +69,7 @@ function JobDetailsComponent() {
                 </h2>
             </header>
 
+            {update && <UpdateNotification />}
             <section className="flex flex-col items-start justify-between p-4 font-Raleway font-medium text-primary-content/75 md:flex-row">
                 <section className="mb-6 mr-1 w-11/12 rounded-md border-4 border-base-300 p-6 pb-10 shadow-md shadow-base-300" >
                     <Progress progress={currentProject.progress} />

@@ -54,6 +54,14 @@ const AddJobForm = () => {
     })
   }
 
+  const handleFileChange = async (event) => {
+    setIsLoading(true)
+    const result = await handleFileUpload(event, jobData.jobName)
+    if (result !== '') {
+      setIsLoading(false)
+    }
+  }
+
   const handleSubmission = async (event) => {
     event.preventDefault()
     const newErrors = validateForm(jobData)
@@ -104,7 +112,10 @@ const AddJobForm = () => {
         {/* File Upload */}
         <section>
           <p className='text-sm font-medium'>Upload site picture; if available <span className='text-warning'> (900kb maximum image size ) please wait till you get an alert &apos;File uploaded successfully&apos; before leaving page.</span></p>
-          <input disabled={!jobData.jobName || !jobData.jobLocation} className='file-input file-input-bordered file-input-primary mb-1 w-full max-w-md' type="file" onChange={async (event) => await handleFileUpload(event, jobData.jobName)} />
+          <div className='flex items center'>
+            <input disabled={!jobData.jobName || !jobData.jobLocation} className='file-input file-input-bordered file-input-primary mb-1 w-full max-w-md' type="file" onChange={handleFileChange} />
+            {isLoading && <span className="loading loading-spinner loading-md ml-6 text-primary"></span>}
+          </div>
           <p className='m-1 rounded-md bg-error p-2 text-xs text-error-content'>Please note that you have to add job name and location below before you can upload site picture</p>
         </section>
 

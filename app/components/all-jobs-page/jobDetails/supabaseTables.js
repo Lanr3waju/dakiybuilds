@@ -21,23 +21,30 @@ const deleteProjectTable = async (currentProject) => {
 }
 
 // This function updates the project table based on the new contract sum and new finish date
-const updateProjectTable = async (newContractSum, newFinishDate, id) => {
-    // Define the update object
+const updateProjectTable = async (newContractSum, newFinishDate, subsequentPayments, id) => {
+
+// Initialize an empty object to store properties that need to be updated.
     let updateObject = {}
 
-    // If newContractSum is provided and newFinishDate is not, update new_contract_sum
-    if (newContractSum && newFinishDate === '') {
-        updateObject.new_contract_sum = newContractSum
+    // Check if 'newContractSum' exists and is truthy.
+    if (newContractSum) {
+        // If 'newContractSum' is truthy, add it to the 'updateObject' with the key 'new_contract_sum'.
+        updateObject = { ...updateObject, new_contract_sum: newContractSum }
     }
-    // If newFinishDate is provided and newContractSum is not, update new_finish_date
-    else if (newFinishDate && newContractSum === '') {
-        updateObject.new_finish_date = newFinishDate
+
+    // Check if 'newFinishDate' exists and is truthy.
+    if (newFinishDate) {
+        // If 'newFinishDate' is truthy, add it to the 'updateObject' with the key 'new_finish_date'.
+        updateObject = { ...updateObject, new_finish_date: newFinishDate }
     }
-    // If both are provided, update both
-    else {
-        updateObject.new_contract_sum = newContractSum
-        updateObject.new_finish_date = newFinishDate
+
+    // Check if 'subsequentPayments' exists and is truthy.
+    if (subsequentPayments) {
+        // If 'subsequentPayments' is truthy, add it to the 'updateObject' with the key 'latest_client_payment'.
+        updateObject = { ...updateObject, latest_client_payment: subsequentPayments }
     }
+
+    // The 'updateObject' will contain properties based on the conditions evaluated above.
 
     // Perform the update operation
     const { error } = await supabase
@@ -76,7 +83,7 @@ export const deleteProject = async (currentProject) => {
 }
 
 export const insertProjectPlusTable = async ({ newFinishDate, newContractSum, subsequentPayments, description }, { id }) => {
-    const updateProjectTableResult = await updateProjectTable(newContractSum, newFinishDate, id)
+    const updateProjectTableResult = await updateProjectTable(newContractSum, newFinishDate, subsequentPayments, id)
 
     if (updateProjectTableResult === true) {
         const { error } = await supabase

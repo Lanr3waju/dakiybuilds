@@ -8,9 +8,8 @@ export const handleFileUpload = async (event, fileName) => {
     if (file) {
         if (file.size > 1 * 1024 * 1024) {
             alert('File size exceeds 1MB, upload another picture')
-            return
+            return false
         }
-        // Upload the file to Supabase storage without specifying the file path
         await uploadToSupabase(file, fileName)
     }
 }
