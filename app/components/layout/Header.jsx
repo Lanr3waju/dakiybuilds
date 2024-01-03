@@ -1,6 +1,6 @@
 'use client'
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles'
-import { usePathname } from 'next/navigation.js'
+import { usePathname, useRouter } from 'next/navigation.js'
 import CssBaseline from '@mui/material/CssBaseline'
 import MuiDrawer from '@mui/material/Drawer'
 import Box from '@mui/material/Box'
@@ -15,6 +15,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import { mainListItems, SecondaryListItems } from './ListItems.js'
 import { useState } from 'react'
 import removeForwardSlash from '../utils/removeForwardSlash.js'
+import { ArrowBack } from '@mui/icons-material'
 
 const drawerWidth = 240
 
@@ -68,6 +69,7 @@ const defaultTheme = createTheme()
 
 export default function DashboardComponent({ children }) {
   const pathname = usePathname()
+  const router = useRouter()
   const [open, setOpen] = useState(true)
   const toggleDrawer = () => {
     setOpen(!open)
@@ -96,7 +98,7 @@ export default function DashboardComponent({ children }) {
                 }}
               >
                 <div className=' rounded-lg border-2 border-base-200 px-2'>
-                <MenuIcon />
+                  <MenuIcon />
                 </div>
               </IconButton>
               <Typography
@@ -106,14 +108,17 @@ export default function DashboardComponent({ children }) {
                 noWrap
                 sx={{ flexGrow: 1 }}
               >
-                {
-                  pathname.toLowerCase().includes("project-logs/")
-                    ? "Log-Details"
-                    : pathname.toLowerCase().includes("all-jobs/")
-                      ? "Job Details"
-                      : removeForwardSlash(pathname)
-                }
-
+                <div className='flex justify-between w-full items-center'>
+                  {
+                    pathname.toLowerCase().includes("project-logs/")
+                      ? "Log-Details"
+                      : pathname.toLowerCase().includes("/update-sheet")
+                        ? "Job Details (Progress Update Sheet)"
+                        : pathname.toLowerCase().includes("all-jobs/")
+                          ? "Job Details"
+                          : removeForwardSlash(pathname)
+                  }
+                  <button disabled={pathname.toLowerCase().includes("/dakiyboard")} className="btn btn-secondary btn-sm disabled:cursor-not-allowed" onClick={() => router.back()}><ArrowBack /></button></div>
               </Typography>
             </Toolbar>
           </AppBar>

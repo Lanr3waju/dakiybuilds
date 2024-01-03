@@ -13,9 +13,11 @@ function EditJobState({ currentProject }) {
         description: ''
     }
 
+    const [isLoading, setIsLoading] = useState(false)
+
     const { updateFormData, setUpdateFormData } = useContext(DakiyStore)
 
-    const [error, setError] = useState('')
+    const [error, setError] = useState('All fields are empty')
 
     const validateForm = () => {
         if (!updateFormData.subsequentPayments && !updateFormData.newContractSum && !updateFormData.newFinishDate) {
@@ -23,13 +25,13 @@ function EditJobState({ currentProject }) {
             return false
         }
 
-        if (updateFormData.newFinishDate < currentProject.start_date) {
+        if (updateFormData.newFinishDate !== '' && updateFormData.newFinishDate < currentProject.start_date) {
             setError('The new finish date cannot be less than project start date.')
             return false
         }
 
-        if (updateFormData.description.length < 50) {
-            setError('The description of the event should be at least 50 characters.')
+        if (updateFormData.description.length < 40) {
+            setError('The description of the event should be at least 40 characters.')
             return false
         }
 
@@ -53,11 +55,14 @@ function EditJobState({ currentProject }) {
         e.preventDefault()
         // Check conditions and update isValid and error state
         if (validateForm()) {
+            setIsLoading(true)
             const error = await insertProjectPlusTable(updateFormData, currentProject)
             if (error) {
                 alert(error.message)
+                setIsLoading(false)
             } else {
                 window.project_edit_successful.showModal()
+                setIsLoading(false)
                 setUpdateFormData(initialFormData)
             }
         }
@@ -118,9 +123,9 @@ function EditJobState({ currentProject }) {
                 type="button"
                 className='btn btn-secondary m-2 w-full max-w-md '
                 onClick={handleSubmit}
-                disabled={error !== ''}
+                disabled={error !== '' || isLoading}
             >
-                Submit
+                {isLoading ? <span className="loading loading-dots loading-lg"></span> : "Submit"}
             </button>
         </div>
     )

@@ -23,23 +23,23 @@ const deleteProjectTable = async (currentProject) => {
 // This function updates the project table based on the new contract sum and new finish date
 const updateProjectTable = async (newContractSum, newFinishDate, subsequentPayments, id) => {
 
-// Initialize an empty object to store properties that need to be updated.
+    // Initialize an empty object to store properties that need to be updated.
     let updateObject = {}
 
     // Check if 'newContractSum' exists and is truthy.
-    if (newContractSum) {
+    if (newContractSum !== '') {
         // If 'newContractSum' is truthy, add it to the 'updateObject' with the key 'new_contract_sum'.
         updateObject = { ...updateObject, new_contract_sum: newContractSum }
     }
 
     // Check if 'newFinishDate' exists and is truthy.
-    if (newFinishDate) {
+    if (newFinishDate !== '') {
         // If 'newFinishDate' is truthy, add it to the 'updateObject' with the key 'new_finish_date'.
         updateObject = { ...updateObject, new_finish_date: newFinishDate }
     }
 
     // Check if 'subsequentPayments' exists and is truthy.
-    if (subsequentPayments) {
+    if (subsequentPayments !== '') {
         // If 'subsequentPayments' is truthy, add it to the 'updateObject' with the key 'latest_client_payment'.
         updateObject = { ...updateObject, latest_client_payment: subsequentPayments }
     }
@@ -82,10 +82,10 @@ export const deleteProject = async (currentProject) => {
     }
 }
 
-export const insertProjectPlusTable = async ({ newFinishDate, newContractSum, subsequentPayments, description }, { id }) => {
-    const updateProjectTableResult = await updateProjectTable(newContractSum, newFinishDate, subsequentPayments, id)
-
-    if (updateProjectTableResult === true) {
+export const insertProjectPlusTable = async ({ newFinishDate, newContractSum, subsequentPayments, description }, { id, new_finish_date, new_contract_sum }) => {
+    if (newFinishDate === new_finish_date || newContractSum === new_contract_sum) {
+        return { message: 'Please enter a new finish date or a new contract sum.' }
+    } else {
         const { error } = await supabase
             .from('projects_plus')
             .insert([
@@ -100,8 +100,11 @@ export const insertProjectPlusTable = async ({ newFinishDate, newContractSum, su
 
         if (error) {
             return error
+        } else {
+            const updateProjectTableResult = await updateProjectTable(newContractSum, newFinishDate, subsequentPayments, id)
+            if (updateProjectTableResult !== true) {
+                return updateProjectTableResult
+            }
         }
-    } else {
-        return updateProjectTableResult
     }
 }

@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
   }
 
   return (
-    <html lang="en" data-theme="dim" className={bodyClass}>
+    <html lang="en" data-theme="valentine" className={bodyClass}>
       <head>
         <title>{title}</title>
       </head>
