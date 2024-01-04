@@ -108,3 +108,17 @@ export const insertProjectPlusTable = async ({ newFinishDate, newContractSum, su
         }
     }
 }
+
+export const getProjectsPlus = async (projectId) => {
+    let { data: projectsPlus, error } = await supabase
+        .from('projects_plus')
+        .select('*')
+        // Filters
+        .eq('project_id', projectId)
+
+    if (error) {
+        console.error(error)
+    } else {
+        return projectsPlus
+    }
+}

@@ -18,49 +18,19 @@ import UpdateNotification from "./jobUpdates/UpdateNotification"
 
 function JobDetailsComponent() {
     const pathname = usePathname()
-    const { projects, projectSumAndDate, setProjectSumAndDate } = useContext(DakiyStore)
+    const { projects, projectSumAndDate, setCurrentProjectId } = useContext(DakiyStore)
     const [currentProject, setCurrentProject] = useState({})
     const [deleteState, setDeleteState] = useState(false)
     const [update, setUpdate] = useState(false)
 
     useEffect(() => {
         const projectID = pathname.replace("/all-jobs/", "")
+        setCurrentProjectId(projectID)
         const selectedProject = projects?.find(({ id }) => projectID === id)
         if (selectedProject) {
             setCurrentProject(selectedProject)
-
-            // make the new contract sum and new finish date the project's finish date and contract sum if it exists
-            const { new_contract_sum, new_finish_date } = selectedProject
-
-            if (new_contract_sum) {
-                setProjectSumAndDate(prevState => ({
-                    ...prevState,
-                    projectContractSum: new_contract_sum
-                }))
-            }
-
-            if (new_finish_date) {
-                setProjectSumAndDate(prevState => ({
-                    ...prevState,
-                    projectFinishDate: new_finish_date
-                }))
-            }
-
-            if (!new_contract_sum) {
-                setProjectSumAndDate(prevState => ({
-                    ...prevState,
-                    projectContractSum: selectedProject.contract_sum
-                }))
-            }
-
-            if (!new_finish_date) {
-                setProjectSumAndDate(prevState => ({
-                    ...prevState,
-                    projectFinishDate: selectedProject.finish_date
-                }))
-            }
         }
-    }, [projects, pathname, setProjectSumAndDate, projectSumAndDate.projectContractSum, projectSumAndDate.projectFinishDate])
+    }, [pathname, projects])
 
     useEffect(() => {
         if (currentProject.new_contract_sum || currentProject.new_finish_date || currentProject.latest_client_payment) {
@@ -73,7 +43,7 @@ function JobDetailsComponent() {
             <LoadJobModal currentProject={currentProject} />
             <EditJobModal currentProject={currentProject} />
             <header>
-                <h2 className="m-4 text-center font-Poppins text-2xl font-bold uppercase text-primary">
+                <h2 className="m-4 mt-6 text-center font-Poppins text-2xl font-bold uppercase text-primary">
                     {currentProject.name}
                     <span className="m-1 text-center font-Raleway text-xl font-bold uppercase text-primary-content/50">({currentProject.location})</span>
                 </h2>

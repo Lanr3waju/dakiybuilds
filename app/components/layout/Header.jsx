@@ -108,7 +108,7 @@ export default function DashboardComponent({ children }) {
                 noWrap
                 sx={{ flexGrow: 1 }}
               >
-                <div className='flex w-full items-center justify-between'>
+                <div className='flex w-full flex-col items-center justify-between p-3 sm:flex-row md:flex-row md:p-1'>
                   {
                     pathname.toLowerCase().includes("project-logs/")
                       ? "Log-Details"
