@@ -6,7 +6,9 @@ import { cookies } from "next/headers"
 const supabase = createServerComponentClient({ cookies })
 let projectData
 
+
 export const getProjects = async () => {
+
     const user = await getUser()
 
     // Get user organization id

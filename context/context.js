@@ -26,9 +26,11 @@ function Context({ children }) {
     }
 
     useEffect(() => {
-        fetchProjectID()
-    }, [projects, project, updateFormData])
-
+        const getProjectID = async () => {
+            await fetchProjectID()
+        }
+        getProjectID()
+    }, [project, updateFormData])
     return (
         <DakiyStore.Provider
             value={

@@ -27,6 +27,7 @@ const AddJobForm = () => {
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const { setProjects, projects, setProjectSumAndDate } = useContext(DakiyStore)
+  const [picture, setPicture] = useState(false)
 
 
   const refs = {
@@ -59,6 +60,10 @@ const AddJobForm = () => {
     const result = await handleFileUpload(event, jobData.jobName)
     if (result !== '') {
       setIsLoading(false)
+    }
+    if (result === true) {
+      setIsLoading(false)
+      setPicture(true)
     }
   }
 
@@ -113,7 +118,7 @@ const AddJobForm = () => {
         <section>
           <p className='text-sm font-medium'>Upload site picture; if available <span className='text-warning'> (900kb maximum image size ) please wait till you get an alert &apos;File uploaded successfully&apos; before leaving page.</span></p>
           <div className='flex items-center'>
-            <input disabled={!jobData.jobName || !jobData.jobLocation} className='file-input file-input-bordered file-input-primary mb-1 w-full max-w-md' type="file" onChange={handleFileChange} />
+            <input disabled={!jobData.jobName || !jobData.jobLocation} className='file-input file-input-bordered file-input-primary mb-1 w-full max-w-md' type="file" accept="image/png, image/jpeg, image/webp" onChange={handleFileChange} />
             {isLoading && <span className="loading loading-spinner loading-md ml-6 text-primary"></span>}
           </div>
           <p className='m-1 rounded-md bg-error p-2 text-xs text-error-content'>Please note that you have to add job name and location below before you can upload site picture</p>
@@ -148,7 +153,7 @@ const AddJobForm = () => {
                   value={jobData[field]}
                   onChange={handleInputChange}
                   ref={refs[field]}
-                  className="textarea textarea-primary textarea-lg w-full p-1 text-sm tracking-widest"
+                  className="textarea textarea-primary textarea-lg w-full p-3 text-sm tracking-widest"
                   placeholder="Enter project description">
                 </textarea>)
                 :
@@ -184,7 +189,7 @@ const AddJobForm = () => {
           className="btn btn-primary mt-4"
           disabled={isLoading}
         >
-          {isLoading ? <span className="loading loading-dots loading-lg"></span> : "Add Job"}
+          {isLoading ? <span className="loading loading-dots loading-lg"></span> : picture ? "Add Job" : "You've not uploaded site picture, Submit Anyways?"}
         </button>
       </form>
     </section>
