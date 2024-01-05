@@ -36,7 +36,7 @@ function JobDetailsComponent() {
         if (currentProject.new_contract_sum || currentProject.new_finish_date || currentProject.latest_client_payment) {
             setUpdate(true)
         }
-    }, [currentProject]);
+    }, [currentProject])
 
     return (
         <>
@@ -53,7 +53,12 @@ function JobDetailsComponent() {
             <section className="flex flex-col items-start justify-between p-4 font-Raleway font-medium text-primary-content/75 md:flex-row">
                 <section className="mb-6 mr-1 w-11/12 rounded-md border-4 border-base-300 p-6 pb-10 shadow-md shadow-base-300" >
                     <Progress progress={currentProject.progress} />
-                    <Image className="mt-4 max-h-96 w-full object-cover" priority quality={100} width={800} height={500} src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/project-site-picture/${replaceSpacesWithHyphensAndLowerCase(currentProject.name)}`} alt="Picture of site" />
+                    <Image className="mt-4 h-auto w-full object-cover"
+                        priority quality={100}
+                        width={800}
+                        height={500}
+                        src={currentProject.name ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/project-site-picture/${replaceSpacesWithHyphensAndLowerCase(currentProject.name)}` : '/logo.png'}
+                        alt="Picture of site" />
                     <span className="mb-6 mt-1 text-center text-sm font-medium text-info">(picture of site)</span>
                     <p className="my-3 font-Roboto text-lg uppercase"><span className="m-1 block font-Raleway text-sm text-secondary-content/70">Project Contract Sum:</span>₦{addCommasToMoney(projectSumAndDate.projectContractSum)} - ({numberToWords(projectSumAndDate.projectContractSum)} Naira)</p>
                     <p className="font-Roboto text-lg uppercase"><span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">Balance Due to Contractor:</span>₦{addCommasToMoney((projectSumAndDate.projectContractSum - currentProject.initial_advance_payment))}</p>
