@@ -17,10 +17,7 @@ module.exports = {
       "coffee",
       "dim",
       "nord",
-    ],
-    darkTheme: 'luxury',
-    lightTheme: 'autumn',
-    base: true,
+    ]
   },
 
   content: [

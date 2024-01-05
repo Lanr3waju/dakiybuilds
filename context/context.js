@@ -1,6 +1,6 @@
 'use client'
 import { createContext, useEffect, useState } from "react"
-import { getProjects } from "./supabaseTables"
+import { getAppTheme, getProjects } from "./supabaseTables"
 
 export const DakiyStore = createContext()
 
@@ -8,6 +8,7 @@ function Context({ children }) {
     const [project, setProject] = useState({})
     const [projects, setProjects] = useState([])
     const [currentProjectId, setCurrentProjectId] = useState('')
+    const [selectedTheme, setSelectedTheme] = useState('')
 
     const [updateFormData, setUpdateFormData] = useState({
         newFinishDate: '',
@@ -21,17 +22,25 @@ function Context({ children }) {
         projectContractSum: ''
     })
 
-    async function fetchProjectID() {
-        const res = await getProjects()
-        setProjects(res)
-    }
-
     useEffect(() => {
         const getProjectID = async () => {
-            await fetchProjectID()
+            const res = await getProjects()
+            setProjects(res)
         }
         getProjectID()
     }, [project, updateFormData])
+
+    useEffect(() => {
+        // Get selected theme from DB
+        const appTheme = async () => {
+            const savedAppTheme = await getAppTheme()
+            if (savedAppTheme !== '') {
+                const element = document.getElementById('app')
+                element.setAttribute('data-theme', savedAppTheme)
+            }
+        }
+        appTheme()
+    }, [selectedTheme])
 
     useEffect(() => {
         const currentProject = projects?.find(({ id }) => currentProjectId === id)
@@ -77,7 +86,8 @@ function Context({ children }) {
                     setProjects, projects,
                     updateFormData, setUpdateFormData,
                     projectSumAndDate, setProjectSumAndDate,
-                    setCurrentProjectId
+                    setCurrentProjectId,
+                    setSelectedTheme,
                 }}>
             {children}
         </DakiyStore.Provider>

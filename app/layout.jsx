@@ -11,8 +11,7 @@ export const dynamic = 'force-dynamic'
 export default function RootLayout({ children }) {
   const pathname = usePathname()
   let title = removeForwardSlash(pathname)
-  let bodyClass;
-
+  let bodyClass
 
   if (pathname === '/') {
     title = 'Login'
@@ -25,18 +24,18 @@ export default function RootLayout({ children }) {
   }
 
   return (
-    <html lang="en" data-theme="cupcake" className={bodyClass}>
+    <html data-theme='valentine' id='app' lang="en" className={bodyClass}>
       <head>
         <title>{title}</title>
       </head>
-      <body className='font-Raleway'>
-        <Context>
-        {pathname !== '/project-schedule/gantt-chart' && pathname !== '/' && pathname !== 'create-profile' && pathname !== '/add-job' ?
-          (<Header children={children} />) :
-          (children)
-        }
-        </Context>
-      </body>
+      <Context>
+        <body className='font-Raleway'>
+          {pathname !== '/project-schedule/gantt-chart' && pathname !== '/' && pathname !== 'create-profile' && pathname !== '/add-job' ?
+            (<Header children={children} />) :
+            (children)
+          }
+        </body>
+      </Context>
     </html>
   )
 }
