@@ -157,28 +157,27 @@ const AddJobForm = () => {
                   placeholder="Enter project description">
                 </textarea>)
                 :
-                (
+                (<div className='flex items-start w-full justify-around'>
                   <input
                     ref={refs[field]}
-                    className='input input-bordered input-primary my-2 font-Roboto'
-                    type={
-                      field === 'clientEmail'
-                        ? 'email'
-                        : field === 'clientTelephone'
-                          ? 'tel'
-                          : field === 'contractSum' ||
-                            field === 'initialAdvancePayment'
-                            ? 'number'
-                            : field === 'agreedStartDate' ||
-                              field === 'estimatedFinishDate'
-                              ? 'date'
-                              : 'text'
-                    }
+                    className='input input-bordered input-primary mb-6 font-Roboto w-full'
+                    type={field === 'clientEmail'
+                      ? 'email'
+                      : field === 'clientTelephone'
+                        ? 'tel'
+                        : field === 'contractSum' ||
+                          field === 'initialAdvancePayment'
+                          ? 'number'
+                          : field === 'agreedStartDate' ||
+                            field === 'estimatedFinishDate'
+                            ? 'date'
+                            : 'text'}
                     id={field}
                     name={field}
                     value={jobData[field]}
-                    onChange={handleInputChange}
-                  />
+                    onChange={handleInputChange} />
+                  <span className='text-2xl font-Poppins font-bold max-w-fit text-secondary ml-1 mt-2' >{field === 'contractSum' || field === 'initialAdvancePayment' ? '₦' : ''}</span>
+                </div>
                 )}
             {errors[field] && (
               <p className="mb-5 text-error">{errors[field]}</p>

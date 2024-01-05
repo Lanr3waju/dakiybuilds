@@ -34,9 +34,14 @@ function ProjectUpdateComponent() {
             <h3>Latest Finish Date: <span className="font-Roboto tracking-wider">{projectFinishDate}</span></h3>
             <ul>
                 {
-                    projectUpates && projectUpates.map((update) => (
-                        <li key={update.id}>
+                    projectUpates && projectUpates.map(({ id, subsequent_payments, description, new_contract_sum, new_finish_date, created_at }) => (
+                        <li key={id}>
                             Hello Update
+                            {subsequent_payments && <p><span>Payment made by the client to the contractor:</span>₦{addCommasToMoney(subsequent_payments) - numberToWords(subsequent_payments)} Naira</p>}
+                            {new_contract_sum && <p><span>New contract sum agreed:</span>{new_contract_sum}</p>}
+                            {new_finish_date && <p><span>New finish date agreed:</span>{new_finish_date}</p>}
+                            <p><span>Description of Update:</span>{description}</p>
+                            <p><span>Update Date:</span>{created_at}</p>
                         </li>
                     ))
                 }
