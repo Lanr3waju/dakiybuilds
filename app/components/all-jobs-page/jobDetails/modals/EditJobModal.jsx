@@ -8,7 +8,7 @@ export default function EditJobModal({ currentProject }) {
         <>
             <dialog id="project_edit_successful" className="modal">
                 <div className="modal-box w-11/12 max-w-5xl">
-                    <h3 className="text-md font-bold text-success">Project Updated Successfully</h3>
+                    <h3 className="text-lg font-bold text-success">Project Updated Successfully</h3>
                     <div className="modal-action">
                         <form method="dialog">
                             <button>Close</button>

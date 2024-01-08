@@ -41,7 +41,7 @@ function ProjectLogsPage() {
     <>
       {projects ?
         (
-          <section section className="p-3 " >
+          <section className="p-3 " >
             <button onClick={handleAddLog} className="btn btn-neutral mx-auto mb-4 block w-2/4">
               {addLog ? 'Close form' : 'Add new log'}
             </button>

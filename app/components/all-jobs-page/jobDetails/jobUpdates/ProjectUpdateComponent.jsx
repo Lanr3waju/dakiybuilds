@@ -22,7 +22,6 @@ function ProjectUpdateComponent() {
             const results = await getProjectsPlus(projectId)
             if (results) {
                 setProjectUpdates(results)
-                console.log(results)
             }
 
         }
@@ -31,10 +30,10 @@ function ProjectUpdateComponent() {
 
     return (
         <section className="p-6">
-            <div className="flex flex-col w-full lg:flex-row mb-4">
-                <div className="grid flex-grow h-32 card bg-base-300 rounded-box p-2 font-bold uppercase font-Poppins text-info">Latest Contract Sum: <span className="font-bold uppercase font-Poppins text-xl md:text-3xl tracking-wider text-black">₦{addCommasToMoney(projectContractSum)} - ({numberToWords(projectContractSum)} Naira)</span></div>
+            <div className="mb-4 flex w-full flex-col lg:flex-row">
+                <div className="card grid h-32 grow rounded-box bg-base-300 p-2 font-Poppins font-bold uppercase text-info">Latest Contract Sum: <span className="font-Poppins text-xl font-bold uppercase tracking-wider text-black md:text-3xl">₦{addCommasToMoney(projectContractSum)} - ({numberToWords(projectContractSum)} Naira)</span></div>
                 <div className="divider lg:divider-horizontal"></div>
-                <div className="grid flex-grow h-32 card bg-base-300 rounded-box p-2 font-bold uppercase font-Poppins text-info">Latest Finish Date: (yyyy-mm-dd)<span className="font-bold uppercase font-Poppins text-xl md:text-3xl tracking-wider text-black">{projectFinishDate}</span></div>
+                <div className="card grid h-32 grow rounded-box bg-base-300 p-2 font-Poppins font-bold uppercase text-info">Latest Finish Date: (yyyy-mm-dd)<span className="font-Poppins text-xl font-bold uppercase tracking-wider text-black md:text-3xl">{projectFinishDate}</span></div>
             </div>
             <ul className="timeline timeline-vertical timeline-snap-icon max-md:timeline-compact">
                 {
@@ -46,9 +45,9 @@ function ProjectUpdateComponent() {
                             </div >
                             <div className={index === 0 || index % 2 === 0 ? "timeline-start mb-10 md:text-end" : "timeline-end mb-10"}>
                                 <time className="font-Roboto font-bold">{extractDate(created_at)}</time>
-                                {subsequent_payments && subsequent_payments !== '0' && <div className="text-xl text-black font-Poppins font-bold tracking-wider mb-3"><span className="text-info text-base font-semibold uppercase">Payment made by the client to the contractor:</span>₦{addCommasToMoney(subsequent_payments)} - {numberToWords(subsequent_payments)} Naira</div>}
-                                {new_contract_sum && new_contract_sum !== '0' && <div className="text-xl text-black font-Poppins font-bold tracking-wider mb-3"><span className="text-info text-base font-semibold uppercase">New contract sum agreed:</span>₦{addCommasToMoney(new_contract_sum)} - {numberToWords(new_contract_sum)} Naira</div>}
-                                {new_finish_date && <div className="text-xl text-black font-Poppins font-bold tracking-wider mb-3"><span className="text-info text-base font-semibold uppercase">New finish date agreed:  </span>{new_finish_date}</div>}
+                                {subsequent_payments && subsequent_payments !== '0' && <div className="mb-3 font-Poppins text-xl font-bold tracking-wider text-black"><span className="block text-base font-semibold uppercase text-info">Payment made by the client to the contractor:</span>₦{addCommasToMoney(subsequent_payments)} - {numberToWords(subsequent_payments)} Naira</div>}
+                                {new_contract_sum && new_contract_sum !== '0' && <div className="mb-3 font-Poppins text-xl font-bold tracking-wider text-black"><span className="block text-base font-semibold uppercase text-info">New contract sum agreed:</span>₦{addCommasToMoney(new_contract_sum)} - {numberToWords(new_contract_sum)} Naira</div>}
+                                {new_finish_date && <div className="mb-3 font-Poppins text-xl font-bold tracking-wider text-black"><span className="block text-base font-semibold uppercase text-info">New finish date agreed:  </span>{new_finish_date}</div>}
                                 {description}
                             </div>
                             <hr />

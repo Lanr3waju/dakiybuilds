@@ -157,10 +157,10 @@ const AddJobForm = () => {
                   placeholder="Enter project description">
                 </textarea>)
                 :
-                (<div className='flex items-start w-full justify-around'>
+                (<div className='flex w-full items-start justify-around'>
                   <input
                     ref={refs[field]}
-                    className='input input-bordered input-primary mb-6 font-Roboto w-full'
+                    className='input input-bordered input-primary mb-6 w-full font-Roboto'
                     type={field === 'clientEmail'
                       ? 'email'
                       : field === 'clientTelephone'
@@ -176,7 +176,7 @@ const AddJobForm = () => {
                     name={field}
                     value={jobData[field]}
                     onChange={handleInputChange} />
-                  <span className='text-2xl font-Poppins font-bold max-w-fit text-secondary ml-1 mt-2' >{field === 'contractSum' || field === 'initialAdvancePayment' ? '₦' : ''}</span>
+                  <span className='ml-1 mt-2 max-w-fit font-Poppins text-2xl font-bold text-secondary' >{field === 'contractSum' || field === 'initialAdvancePayment' ? '₦' : ''}</span>
                 </div>
                 )}
             {errors[field] && (
