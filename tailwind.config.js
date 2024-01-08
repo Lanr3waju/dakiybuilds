@@ -1,10 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   daisyui: {
-    themes: ['retro'],
-    darkTheme: 'retro',
-    lightTheme: 'retro',
-    base: true,
+    themes: [
+      "dark",
+      "cupcake",
+      "bumblebee",
+      "corporate",
+      "retro",
+      "cyberpunk",
+      "valentine",
+      "pastel",
+      "dracula",
+      "cmyk",
+      "acid",
+      "lemonade",
+      "coffee",
+      "dim",
+      "nord",
+    ]
   },
 
   content: [

@@ -1,5 +1,6 @@
 'use client'
 import HorizontalLine from '../utils/HorizontalLine'
+import ProjectThemes from './ProjectThemes'
 import EditableProjectForm from './UpdateProjectInfo'
 
 function ProjectSettingsPage() {
@@ -20,6 +21,7 @@ function ProjectSettingsPage() {
         <h2 className="font-semibold uppercase text-primary-content/75">
           Advanced
         </h2>
+        <ProjectThemes />
         <section className="my-3 rounded-lg border-2 border-warning bg-warning/10 p-4 text-center">
           <h3 className="my-3 font-semibold text-warning-content">
             This button logs you out of your organization.

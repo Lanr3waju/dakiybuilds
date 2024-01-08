@@ -1,6 +1,6 @@
 'use client'
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles'
-import { usePathname } from 'next/navigation.js'
+import { usePathname, useRouter } from 'next/navigation.js'
 import CssBaseline from '@mui/material/CssBaseline'
 import MuiDrawer from '@mui/material/Drawer'
 import Box from '@mui/material/Box'
@@ -12,9 +12,10 @@ import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import { mainListItems, secondaryListItems } from './ListItems.js'
+import { mainListItems, SecondaryListItems } from './ListItems.js'
 import { useState } from 'react'
 import removeForwardSlash from '../utils/removeForwardSlash.js'
+import { ArrowBack } from '@mui/icons-material'
 
 const drawerWidth = 240
 
@@ -68,7 +69,8 @@ const defaultTheme = createTheme()
 
 export default function DashboardComponent({ children }) {
   const pathname = usePathname()
-  const [open, setOpen] = useState(false)
+  const router = useRouter()
+  const [open, setOpen] = useState(true)
   const toggleDrawer = () => {
     setOpen(!open)
   }
@@ -87,7 +89,7 @@ export default function DashboardComponent({ children }) {
             >
               <IconButton
                 edge="start"
-                className="bg-primary-content text-neutral-content"
+                className="text-base-200"
                 aria-label="open drawer"
                 onClick={toggleDrawer}
                 sx={{
@@ -95,7 +97,9 @@ export default function DashboardComponent({ children }) {
                   ...(open && { display: 'none' }),
                 }}
               >
-                <MenuIcon />
+                <div className=' rounded-lg border-2 border-base-200 px-2'>
+                  <MenuIcon />
+                </div>
               </IconButton>
               <Typography
                 component="h1"
@@ -104,8 +108,17 @@ export default function DashboardComponent({ children }) {
                 noWrap
                 sx={{ flexGrow: 1 }}
               >
-                {pathname.toLowerCase().includes("project-logs/") ? "Log-Details" : removeForwardSlash(pathname)}
-
+                <div className='flex w-full flex-col items-center justify-between p-3 sm:flex-row md:flex-row md:p-1'>
+                  {
+                    pathname.toLowerCase().includes("project-logs/")
+                      ? "Log-Details"
+                      : pathname.toLowerCase().includes("/update-sheet")
+                        ? "Job Details (Progress Update Sheet)"
+                        : pathname.toLowerCase().includes("all-jobs/")
+                          ? "Job Details"
+                          : removeForwardSlash(pathname)
+                  }
+                  <button disabled={pathname.toLowerCase().includes("/dakiyboard")} className="btn btn-secondary btn-sm disabled:cursor-not-allowed" onClick={() => router.back()}><ArrowBack /></button></div>
               </Typography>
             </Toolbar>
           </AppBar>
@@ -116,7 +129,7 @@ export default function DashboardComponent({ children }) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'flex-end',
-                px: [1],
+                px: [3],
               }}
             >
               <IconButton onClick={toggleDrawer}>
@@ -124,10 +137,10 @@ export default function DashboardComponent({ children }) {
               </IconButton>
             </Toolbar>
             <Divider />
-            <List className="h-[90vh] bg-base-200" component="nav">
+            <List className="min-h-screen bg-base-200" component="nav">
               {mainListItems}
               <Divider sx={{ my: 1 }} />
-              {secondaryListItems}
+              <SecondaryListItems />
             </List>
           </Drawer>
         </div>

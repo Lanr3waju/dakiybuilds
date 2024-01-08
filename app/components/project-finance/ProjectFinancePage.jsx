@@ -7,21 +7,21 @@ import Payments from './Payments'
 function ProjectFinancePage() {
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold uppercase text-primary-focus">
+      <h2 className="text-lg font-semibold uppercase text-primary">
         Finances
       </h2>
       <HorizontalLine />
-      <section className="mx-auto my-8 rounded-lg border-2 border-accent-focus bg-accent/10 p-4">
+      <section className="mx-auto my-8 rounded-lg border-2 border-accent bg-accent/10 p-4">
         <Progress progress={55} />
         <div className="flex w-full justify-between font-Poppins text-sm font-semibold text-primary-content/70">
           <div
-            className="tooltip tooltip-info tooltip-bottom z-50 cursor-pointer before:w-[5rem] before:content-[attr(data-tip)]"
+            className="tooltip tooltip-bottom tooltip-info z-50 cursor-pointer before:w-[5rem] before:content-[attr(data-tip)]"
             data-tip="Expended Costs"
           >
             11, 000, 000.00
           </div>
           <div
-            className="tooltip tooltip-info tooltip-bottom z-50 cursor-pointer before:w-[5rem] before:content-[attr(data-tip)]"
+            className="tooltip tooltip-bottom tooltip-info z-50 cursor-pointer before:w-[5rem] before:content-[attr(data-tip)]"
             data-tip="Total Prime Cost"
           >
             25, 000, 000.00

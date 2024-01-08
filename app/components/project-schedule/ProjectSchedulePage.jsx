@@ -17,7 +17,7 @@ function ProjectSchedulePage() {
       {openGantt && <div className='flex h-full w-full items-center justify-center'><progress className="progress progress-success mx-auto my-9 h-4 w-4/5"></progress></div>}
 
       <main className={`${openGantt ? "hidden" : "p-4"}`} >
-      <section className="mx-auto my-8 rounded-lg border-2 border-accent-focus bg-accent/10 p-4">
+        <section className="mx-auto my-8 rounded-lg border-2 border-accent bg-accent/10 p-4">
         <Progress progress={55} />
         <div className="flex w-full justify-between font-Poppins text-sm font-semibold text-primary-content/70">
           <div>23rd November, 2023</div>

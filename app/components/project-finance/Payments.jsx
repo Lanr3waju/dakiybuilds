@@ -28,7 +28,7 @@ function Payments() {
                   <td className="capitalize">{beneficiary}</td>
                   <td>{date}</td>
                   <td>
-                    <button className="btn  btn-info btn-outline btn-xs">
+                    <button className="btn  btn-outline btn-info btn-xs">
                       details
                     </button>
                   </td>

@@ -1,23 +1,24 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
-import { cookies } from "next/headers"
-import getUser from '../../utils/getUser'
+'use client'
+import { useEffect, useState } from 'react'
 import { getGreeting } from './getTime'
+import getUserName from './supabaseTables'
 
-async function Greeting() {
-  const supabase = createServerComponentClient({ cookies })
-  const user = await getUser()
-  let { data: profiles } = await supabase
-    .from('profiles')
-    .select("full_name")
-    // Filters
-    .eq('id', user.id)
+function Greeting() {
+  const [userName, setUserName] = useState('')
 
+  const fetchUser = async () => {
+    const user = await getUserName()
+    setUserName(user)
+  }
 
-  const fullName = profiles[0].full_name
+  useEffect(() => {
+    fetchUser()
+  }, [])
+
 
   return (
     <h2 className="mt-4 text-xl font-semibold">
-      Hello {fullName}, {getGreeting()}.
+      Hello {userName}, {getGreeting()}.
     </h2>
   )
 }

@@ -45,7 +45,7 @@ export function AddDocs() {
         className="flex flex-col py-2 md:flex-row md:items-end"
         onSubmit={onSubmit}
       >
-        <label className="max-w-sm justify-start font-semibold uppercase text-secondary-focus md:mr-3">
+        <label className="max-w-sm justify-start font-semibold uppercase text-secondary md:mr-3">
           Add document
           <HorizontalLine />
           <input
@@ -55,7 +55,7 @@ export function AddDocs() {
             className="file-input file-input-bordered file-input-accent w-full max-w-sm"
           />
         </label>
-        <select className="select select-warning my-3 w-full max-w-sm text-secondary-focus md:m-0 md:mr-3">
+        <select className="select select-warning my-3 w-full max-w-sm text-secondary md:m-0 md:mr-3">
           <option disabled selected>
             Select Document Category
           </option>

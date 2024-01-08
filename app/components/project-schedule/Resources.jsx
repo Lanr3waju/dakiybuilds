@@ -11,7 +11,7 @@ function Resources() {
               <th>S/N</th>
               <th>
                 <div
-                  className="tooltip tooltip-info tooltip-bottom z-50 cursor-pointer"
+                  className="tooltip tooltip-bottom tooltip-info z-50 cursor-pointer"
                   data-tip="Resource name"
                 >
                   Name
@@ -19,7 +19,7 @@ function Resources() {
               </th>
               <th>
                 <div
-                  className="tooltip tooltip-info tooltip-bottom z-50 cursor-pointer"
+                  className="tooltip tooltip-bottom tooltip-info z-50 cursor-pointer"
                   data-tip="Category of the resource"
                 >
                   Group
@@ -27,7 +27,7 @@ function Resources() {
               </th>
               <th>
                 <div
-                  className="tooltip tooltip-info tooltip-bottom z-50 cursor-pointer"
+                  className="tooltip tooltip-bottom tooltip-info z-50 cursor-pointer"
                   data-tip="Unit rate of each resource"
                 >
                   Rate (₦)
@@ -35,7 +35,7 @@ function Resources() {
               </th>
               <th>
                 <div
-                  className="tooltip tooltip-info tooltip-bottom cursor-pointer"
+                  className="tooltip tooltip-bottom tooltip-info cursor-pointer"
                   data-tip="Number of resource required"
                 >
                   Quantity
@@ -43,7 +43,7 @@ function Resources() {
               </th>
               <th>
                 <div
-                  className="tooltip tooltip-info tooltip-bottom cursor-pointer"
+                  className="tooltip tooltip-bottom tooltip-info cursor-pointer"
                   data-tip="Resource unit of measurement"
                 >
                   Unit
@@ -51,7 +51,7 @@ function Resources() {
               </th>
               <th>
                 <div
-                  className="tooltip tooltip-info tooltip-bottom cursor-pointer"
+                  className="tooltip tooltip-bottom tooltip-info cursor-pointer"
                   data-tip="Total resource cost"
                 >
                   Cost

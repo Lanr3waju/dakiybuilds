@@ -85,7 +85,7 @@ function OrganizationForm({ setActivateUserForm, activateUserForm }) {
                 noValidate
                 onSubmit={handleSubmission}
             >
-                <h2 className="my-3 font-bold text-primary-focus md:text-lg">Organization Details (Step 1 of 2)</h2>
+                <h2 className="my-3 font-bold text-primary md:text-lg">Organization Details (Step 1 of 2)</h2>
                 <HorizontalLine />
 
                 {renderInputField(
