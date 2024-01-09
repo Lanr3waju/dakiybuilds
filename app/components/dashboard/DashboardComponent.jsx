@@ -7,9 +7,13 @@ import Weather from './getCurrentWeather/Weather.jsx'
 import GetDate from './greeting/GetDate.jsx'
 import Overview from './Overview/Overview.jsx'
 import Milestone from './Overview/Milestone.jsx'
+import { useContext } from 'react'
+import { DakiyStore } from '@/context/context.js'
 
 export default function DashboardComponent() {
+  const { projects } = useContext(DakiyStore)
   return (
+    projects ? (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       {/* Progress Bar */}
       <Progress progress={80} />
@@ -58,5 +62,10 @@ export default function DashboardComponent() {
         </Grid>
       </Grid>
     </Container>
+    ) : (
+      <h1 className="m-7 rounded-lg border-2 border-error bg-error-content p-2 text-center text-lg font-bold uppercase text-error">
+        Add or Select a Project to Access the Project&apos;s Logs
+      </h1>
+    )
   )
 }

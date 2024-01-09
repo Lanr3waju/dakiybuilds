@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { initialOrganizationFormData } from "./initialFormData"
 import HorizontalLine from "../utils/HorizontalLine"
 import { renderInputField } from "./RenderFields"
@@ -86,6 +86,10 @@ function OrganizationForm({ setActivateUserForm, activateUserForm }) {
                 onSubmit={handleSubmission}
             >
                 <h2 className="my-3 font-bold text-primary md:text-lg">Organization Details (Step 1 of 2)</h2>
+                <ul className="steps steps-vertical lg:steps-horizontal">
+                    <li className="step">Register Organization Profile</li>
+                    <li className="step">Register Organization User </li>
+                </ul>
                 <HorizontalLine />
 
                 {renderInputField(

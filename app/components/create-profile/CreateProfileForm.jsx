@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import SuccessModal from './SuccessModal'
 import OrganizationForm from './OrganizationForm'
 import UserForm from './UserForm'

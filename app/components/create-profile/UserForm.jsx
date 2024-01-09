@@ -60,7 +60,7 @@ function UserForm({ activateUserForm }) {
             if (!profileErrorMessage) {
                 setIsLoading(false)
                 window.account_creation_modal.showModal()
-                router.push("/dakiyboard")
+                router.push("/add-job")
             } else {
                 setIsLoading(false)
                 alert(profileErrorMessage)
