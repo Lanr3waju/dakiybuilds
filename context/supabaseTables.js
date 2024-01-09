@@ -25,7 +25,6 @@ export const updateAppTheme = async (selectedTheme) => {
 
 export const getAppTheme = async () => {
     const userProfile = await getUserProfile()
-    console.log(userProfile)
     if (userProfile === true) {
         const user = await getUser()
 

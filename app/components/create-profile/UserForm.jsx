@@ -78,14 +78,19 @@ function UserForm({ activateUserForm }) {
 
     return (
         <section className={`${activateUserForm ? "block" : "hidden"}`}>
+            <div className="flex md:flex-row flex-col justify-between items-end">
+                <h2 className="my-3 font-bold text-primary md:text-lg uppercase">User Details</h2>
+                <ul className="steps steps-vertical">
+                    <li className="step text-sm text-primary step-primary">Organization Profile</li>
+                    <li className="step text-sm">Organization User Profile</li>
+                </ul>
+            </div>
+            <HorizontalLine />
             <form
                 className="mx-auto my-4 flex w-11/12 flex-col rounded-lg bg-base-200 p-8 font-Raleway text-xs font-semibold uppercase text-primary-content/50 shadow-lg shadow-base-300 md:text-lg md:font-bold"
                 noValidate
                 onSubmit={handleSubmission}
             >
-                <h2 className="mb-3 font-bold text-primary md:text-lg">Your Details (Step 2 of 2)</h2>
-                <HorizontalLine />
-
                 {renderInputField(
                     "firstName",
                     "Your first name",

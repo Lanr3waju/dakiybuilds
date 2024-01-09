@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
 import Link from 'next/link'
 import SuccessModal from './SuccessModal'
@@ -23,12 +23,7 @@ const AddJobForm = () => {
     projectDescription: '',
   }
 
-  const [jobData, setJobData] = useState(initialJobData)
-  const [errors, setErrors] = useState({})
-  const [isLoading, setIsLoading] = useState(false)
-  const { setProjects, projects, setProjectSumAndDate } = useContext(DakiyStore)
-  const [picture, setPicture] = useState(false)
-
+  const containerRef = useRef(null)
 
   const refs = {
     jobName: useRef(null),
@@ -43,6 +38,31 @@ const AddJobForm = () => {
     estimatedFinishDate: useRef(null),
     projectDescription: useRef(null),
   }
+
+  const [jobData, setJobData] = useState(initialJobData)
+  const [errors, setErrors] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
+  const { setProjects, projects, setProjectSumAndDate } = useContext(DakiyStore)
+  const [picture, setPicture] = useState(false)
+
+  useEffect(() => {
+    const handleWheel = (e) => {
+      e.preventDefault() // Prevent the default scrolling behavior
+    }
+
+    // Get all number input elements and attach the wheel event listener
+    const numberInputs = containerRef.current.querySelectorAll('input[type="number"]')
+    numberInputs.forEach((input) => {
+      input.addEventListener('wheel', handleWheel)
+    })
+
+    // Cleanup: Remove the event listener when the component unmounts
+    return () => {
+      numberInputs.forEach((input) => {
+        input.removeEventListener('wheel', handleWheel)
+      })
+    }
+  }, []) // Empty dependency array ensures the effect runs once when the component mounts
 
   const jobTypes = ['construction', 'demolition', 'renovation', 'maintenance']
 
@@ -107,7 +127,7 @@ const AddJobForm = () => {
         Kindly fill the information with great care as it will not be modifiable after this step!
       </h2>
       <h3 className='mt-1 text-sm font-medium italic text-warning'>Kindly note that the contract sum is valued in Nigerian Naira! ₦</h3>
-      <form onSubmit={handleSubmission} className="mx-auto mb-10 mt-5 flex w-5/6 flex-col rounded-lg bg-base-200 p-10 shadow-md shadow-base-300">
+      <form ref={containerRef} onSubmit={handleSubmission} className="mx-auto mb-10 mt-5 flex w-5/6 flex-col rounded-lg bg-base-200 p-10 shadow-md shadow-base-300">
         <Link
           className="btn btn-error mb-3 ml-auto w-full text-3xl md:max-w-fit"
           href="/dakiyboard"

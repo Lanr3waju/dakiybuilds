@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import HorizontalLine from '../../utils/HorizontalLine'
 import { insertProjectPlusTable } from './supabaseTables'
 import { DakiyStore } from '@/context/context'
@@ -13,11 +13,32 @@ function EditJobState({ currentProject }) {
         description: ''
     }
 
+    const containerRef = useRef(null)
+
     const [isLoading, setIsLoading] = useState(false)
 
     const { updateFormData, setUpdateFormData } = useContext(DakiyStore)
 
     const [error, setError] = useState('All fields are empty')
+
+    useEffect(() => {
+        const handleWheel = (e) => {
+            e.preventDefault() // Prevent the default scrolling behavior
+        }
+
+        // Get all number input elements and attach the wheel event listener
+        const numberInputs = containerRef.current.querySelectorAll('input[type="number"]')
+        numberInputs.forEach((input) => {
+            input.addEventListener('wheel', handleWheel)
+        })
+
+        // Cleanup: Remove the event listener when the component unmounts
+        return () => {
+            numberInputs.forEach((input) => {
+                input.removeEventListener('wheel', handleWheel)
+            })
+        }
+    }, []) // Empty dependency array ensures the effect runs once when the component mounts
 
     const validateForm = () => {
         if (!updateFormData.subsequentPayments && !updateFormData.newContractSum && !updateFormData.newFinishDate) {
@@ -69,7 +90,7 @@ function EditJobState({ currentProject }) {
     }
 
     return (
-        <div className="font-Roboto">
+        <div className="font-Roboto" ref={containerRef}>
             <h2 className="mb-1 flex items-center justify-between text-2xl font-semibold">Update Job Details <span className='text-sm font-medium text-warning'> Press `esc` to cancel</span></h2>
             <HorizontalLine />
             <p className=" mx-auto my-4 w-full max-w-md rounded-md bg-info p-4 font-medium text-info-content">
