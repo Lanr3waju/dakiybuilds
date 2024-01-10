@@ -78,10 +78,10 @@ function UserForm({ activateUserForm }) {
 
     return (
         <section className={`${activateUserForm ? "block" : "hidden"}`}>
-            <div className="flex md:flex-row flex-col justify-between items-end">
-                <h2 className="my-3 font-bold text-primary md:text-lg uppercase">User Details</h2>
+            <div className="flex flex-col items-end justify-between md:flex-row">
+                <h2 className="my-3 font-bold uppercase text-primary md:text-lg">User Details</h2>
                 <ul className="steps steps-vertical">
-                    <li className="step text-sm text-primary step-primary">Organization Profile</li>
+                    <li className="step step-primary text-sm text-primary">Organization Profile</li>
                     <li className="step text-sm">Organization User Profile</li>
                 </ul>
             </div>

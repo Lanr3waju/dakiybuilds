@@ -80,8 +80,8 @@ function OrganizationForm({ setActivateUserForm, activateUserForm }) {
 
     return (
         <section className={`${activateUserForm ? "hidden" : "block"}`}>
-            <div className="flex md:flex-row flex-col justify-between items-end">
-                <h2 className="my-3 font-bold text-primary md:text-lg uppercase">Organization Details</h2>
+            <div className="flex flex-col items-end justify-between md:flex-row">
+                <h2 className="my-3 font-bold uppercase text-primary md:text-lg">Organization Details</h2>
                 <ul className="steps steps-vertical">
                     <li className="step text-sm">Organization Profile</li>
                     <li className="step text-sm">Organization User Profile</li>

@@ -31,7 +31,7 @@ function ProjectDetails() {
   return (
     <section className="mt-3 font-Roboto">
       <section>
-        <h2 className="font-semibold uppercase text-primary-content tracking-widest">
+        <h2 className="font-semibold uppercase tracking-widest text-primary-content">
         {project.name}
       </h2>
         <Image className="my-4 w-4/6 object-cover"
@@ -40,13 +40,13 @@ function ProjectDetails() {
           height={300}
         src={pictureSrc}
         alt="Picture of site" />
-        <h3 className='uppercase text-primary font-semibold mt-3 text-xs'>Site Location: <span className='text-lg tracking-wider font-semibold text-primary-content/75 block'>{project.location}</span></h3>
-        <h3 className='text-primary font-semibold text-xs uppercase mt-3'>Contract Sum: <span className='text-lg tracking-wider font-semibold text-primary-content/75 block'>₦{addCommasToMoney(workingProjectSumAndDate.workingProjectContractSum)}</span></h3>
-        <h3 className='text-primary font-semibold text-xs uppercase mt-3'>Contract Finish Date: <span className='text-lg tracking-wider font-semibold text-primary-content/75 block'>{workingProjectSumAndDate.workingProjectFinishDate}</span></h3>
+        <h3 className='mt-3 text-xs font-semibold uppercase text-primary'>Site Location: <span className='block text-lg font-semibold tracking-wider text-primary-content/75'>{project.location}</span></h3>
+        <h3 className='mt-3 text-xs font-semibold uppercase text-primary'>Contract Sum: <span className='block text-lg font-semibold tracking-wider text-primary-content/75'>₦{addCommasToMoney(workingProjectSumAndDate.workingProjectContractSum)}</span></h3>
+        <h3 className='mt-3 text-xs font-semibold uppercase text-primary'>Contract Finish Date: <span className='block text-lg font-semibold tracking-wider text-primary-content/75'>{workingProjectSumAndDate.workingProjectFinishDate}</span></h3>
       </section>
       <section className="mt-3">
-        <h3 className='text-primary font-semibold text-xs uppercase mt-3'>Client Name: <span className='text-lg tracking-wider font-semibold text-primary-content/75 block'>{project.client_name}</span></h3>
-        <p className='text-primary font-semibold text-xs uppercase mt-3'>Client Email: <span className='text-lg tracking-wider font-semibold text-primary-content/75 block'>{project.client_email}</span></p>
+        <h3 className='mt-3 text-xs font-semibold uppercase text-primary'>Client Name: <span className='block text-lg font-semibold tracking-wider text-primary-content/75'>{project.client_name}</span></h3>
+        <p className='mt-3 text-xs font-semibold uppercase text-primary'>Client Email: <span className='block text-lg font-semibold tracking-wider text-primary-content/75'>{project.client_email}</span></p>
       </section>
     </section>
   )
