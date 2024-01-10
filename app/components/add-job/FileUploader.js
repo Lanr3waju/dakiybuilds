@@ -32,7 +32,7 @@ export const handleFileUpload = async (event, fileName) => {
 
 const uploadToSupabase = async (file, fileName) => {
     const pictureName = replaceSpacesWithHyphensAndLowerCase(fileName)
-    const { error } = await supabaseStorage.storage.from('project-site-picture').upload(pictureName, file) // Using file.name as the file path
+    const { error } = await supabaseStorage.storage.from('project-site-picture').upload(pictureName, file, { upsert: true }) // Using file.name as the file path
 
     if (error) {
         alert('Picture with the same name already exists, try changing the name of the project')

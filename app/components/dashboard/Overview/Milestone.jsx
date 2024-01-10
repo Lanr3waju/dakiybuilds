@@ -7,7 +7,7 @@ function Milestone() {
         Milestones:
       </h2>
       <HorizontalLine />
-      <p>Add project to see project milestones</p>
+      <p>No milestones yet</p>
     </section>
   )
 }

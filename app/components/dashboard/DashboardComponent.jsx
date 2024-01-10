@@ -1,5 +1,7 @@
+'use client'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
+import Link from 'next/link'
 import Paper from '@mui/material/Paper'
 import Progress from '../utils/Progress.jsx'
 import Greeting from './greeting/Greeting.jsx'
@@ -7,12 +9,16 @@ import Weather from './getCurrentWeather/Weather.jsx'
 import GetDate from './greeting/GetDate.jsx'
 import Overview from './Overview/Overview.jsx'
 import Milestone from './Overview/Milestone.jsx'
+import { useContext } from 'react'
+import { DakiyStore } from '@/context/context.js'
 
 export default function DashboardComponent() {
+  const { project } = useContext(DakiyStore)
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+    Object.keys(project).length > 0 ? (
+      <Container className='my-4' maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       {/* Progress Bar */}
-      <Progress progress={80} />
+        <Progress progress={project.progress} />
       <Grid container spacing={3}>
         {/* Greeting */}
         <Grid item xs={12} md={8} lg={8}>
@@ -34,7 +40,7 @@ export default function DashboardComponent() {
               p: 2,
               display: 'flex',
               flexDirection: 'column',
-              height: 500,
+              height: 750,
               backgroundColor: 'primary',
             }}
           >
@@ -58,5 +64,10 @@ export default function DashboardComponent() {
         </Grid>
       </Grid>
     </Container>
+    ) : (
+      <h1 className="m-7 rounded-lg border-2 border-error bg-error-content p-2 text-center text-lg font-bold uppercase text-error">
+          Add and Select a Project <Link className="link link-info" href='/all-jobs'>Here</Link> to access the Dashboard
+      </h1>
+    )
   )
 }

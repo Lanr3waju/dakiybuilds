@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { initialOrganizationFormData } from "./initialFormData"
 import HorizontalLine from "../utils/HorizontalLine"
 import { renderInputField } from "./RenderFields"
@@ -80,12 +80,19 @@ function OrganizationForm({ setActivateUserForm, activateUserForm }) {
 
     return (
         <section className={`${activateUserForm ? "hidden" : "block"}`}>
+            <div className="flex flex-col items-end justify-between md:flex-row">
+                <h2 className="my-3 font-bold uppercase text-primary md:text-lg">Organization Details</h2>
+                <ul className="steps steps-vertical">
+                    <li className="step text-sm">Organization Profile</li>
+                    <li className="step text-sm">Organization User Profile</li>
+                </ul>
+            </div>
+            <HorizontalLine />
             <form
                 className="mx-auto my-4 flex w-11/12 flex-col rounded-lg bg-base-200 p-8 font-Raleway text-xs font-semibold uppercase text-primary-content/50 shadow-lg shadow-base-300 md:text-lg md:font-bold"
                 noValidate
                 onSubmit={handleSubmission}
             >
-                <h2 className="my-3 font-bold text-primary md:text-lg">Organization Details (Step 1 of 2)</h2>
                 <HorizontalLine />
 
                 {renderInputField(
