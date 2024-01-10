@@ -16,9 +16,9 @@ export default function DashboardComponent() {
   const { project } = useContext(DakiyStore)
   return (
     Object.keys(project).length > 0 ? (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Container className='my-4' maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       {/* Progress Bar */}
-      <Progress progress={80} />
+        <Progress progress={project.progress} />
       <Grid container spacing={3}>
         {/* Greeting */}
         <Grid item xs={12} md={8} lg={8}>
@@ -40,7 +40,7 @@ export default function DashboardComponent() {
               p: 2,
               display: 'flex',
               flexDirection: 'column',
-              height: 500,
+              height: 750,
               backgroundColor: 'primary',
             }}
           >

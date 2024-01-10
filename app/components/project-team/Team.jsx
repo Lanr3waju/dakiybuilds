@@ -1,3 +1,4 @@
+'use client'
 import { DakiyStore } from '@/context/context'
 import AddButon from '../utils/AddButon'
 import TeamMembers from './TeamMembers'
@@ -14,7 +15,7 @@ function Team() {
     </section>
     ) : (
       <h1 className="m-7 rounded-lg border-2 border-error bg-error-content p-2 text-center text-lg font-bold uppercase text-error">
-        Add and Select a Project <Link className="link link-info" href='/all-jobs'>Here</Link> to access the Dashboard
+          Add and Select a Project <Link className="link link-info" href='/all-jobs'>Here</Link> to access the project team members
       </h1>
     )
   )

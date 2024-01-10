@@ -7,6 +7,7 @@ import { validateForm } from './validateForm'
 import { projectsTable } from './supabase-tables'
 import { DakiyStore } from '@/context/context'
 import { handleFileUpload } from './FileUploader'
+import { DoneOutline } from '@mui/icons-material'
 
 const AddJobForm = () => {
   const initialJobData = {
@@ -99,6 +100,7 @@ const AddJobForm = () => {
         setIsLoading(false)
         setProjectSumAndDate(prevState => ({ ...prevState, projectContractSum: jobData.contractSum, projectFinishDate: jobData.estimatedFinishDate }))
         window.job_addition_modal.showModal()
+        setPicture(false)
         setJobData(initialJobData)
       } else {
         setIsLoading(false)
@@ -139,7 +141,8 @@ const AddJobForm = () => {
           <p className='text-sm font-medium'>Upload site picture; if available <span className='text-warning'> (900kb maximum image size ) please wait till you get an alert &apos;File uploaded successfully&apos; before leaving page.</span></p>
           <div className='flex items-center'>
             <input disabled={!jobData.jobName || !jobData.jobLocation} className='file-input file-input-bordered file-input-primary mb-1 w-full max-w-md' type="file" accept="image/png, image/jpeg, image/webp" onChange={handleFileChange} />
-            {isLoading && <span className="loading loading-spinner loading-md ml-6 text-primary"></span>}
+            {isLoading && <span className="loading loading-spinner loading-md ml-4 text-primary"></span>}
+            {picture && <DoneOutline className='text-green-500 ml-4' />}
           </div>
           <p className='m-1 rounded-md bg-error p-2 text-xs text-error-content'>Please note that you have to add job name and location below before you can upload site picture</p>
         </section>

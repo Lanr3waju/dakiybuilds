@@ -22,13 +22,24 @@ function Context({ children }) {
         projectContractSum: ''
     })
 
+    const [workingProjectSumAndDate, setWorkingProjectSumAndDate] = useState({
+        workingProjectFinishDate: '',
+        workingProjectContractSum: ''
+    })
+
+    useEffect(() => {
+        if (projects?.length === 1) {
+            setProject(projects[0])
+        }
+    }, [projects])
+
     useEffect(() => {
         const getProjectID = async () => {
             const res = await getProjects()
             setProjects(res)
         }
         getProjectID()
-    }, [project, updateFormData])
+    }, [updateFormData])
 
     useEffect(() => {
         // Get selected theme from DB
@@ -76,7 +87,45 @@ function Context({ children }) {
                 }))
             }
         }
-    }, [currentProjectId, projects, projectSumAndDate.projectContractSum, projectSumAndDate.projectFinishDate])
+    }, [currentProjectId, projects])
+
+    useEffect(() => {
+        const workingProject = projects?.find(({ id }) => project.id === id)
+        if (workingProject) {
+            // make the new contract sum and new finish date the project's finish date and contract sum if it exists
+            const { new_contract_sum, new_finish_date } = workingProject
+
+            if (new_contract_sum) {
+                setWorkingProjectSumAndDate(prevState => ({
+                    ...prevState,
+                    workingProjectContractSum: new_contract_sum
+                }))
+            }
+
+            if (new_finish_date) {
+                setWorkingProjectSumAndDate(prevState => ({
+                    ...prevState,
+                    workingProjectFinishDate: new_finish_date
+                }))
+            }
+
+            if (!new_contract_sum) {
+                setWorkingProjectSumAndDate(prevState => ({
+                    ...prevState,
+                    workingProjectContractSum: project.contract_sum
+                }))
+            }
+
+            if (!new_finish_date) {
+                setWorkingProjectSumAndDate(prevState => ({
+                    ...prevState,
+                    workingProjectFinishDate: project.finish_date
+                }))
+            }
+        }
+    }, [projects])
+
+    console.log(projects)
 
     return (
         <DakiyStore.Provider
@@ -88,6 +137,7 @@ function Context({ children }) {
                     projectSumAndDate, setProjectSumAndDate,
                     setCurrentProjectId,
                     setSelectedTheme,
+                    workingProjectSumAndDate,
                 }}>
             {children}
         </DakiyStore.Provider>
