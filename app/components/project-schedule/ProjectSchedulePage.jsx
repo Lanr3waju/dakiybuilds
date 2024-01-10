@@ -1,18 +1,22 @@
 'use client'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
 import Progress from '../utils/Progress'
 import NewResourceForm from './NewResource'
 import Resources from './Resources'
+import { DakiyStore } from '@/context/context'
+import Link from 'next/link'
 
 function ProjectSchedulePage() {
   const [openGantt, setOpenGantt] = useState(false)
+  const { project } = useContext(DakiyStore)
 
   const handleGantt = () => {
     setOpenGantt(true)
   }
 
   return (
+    Object.keys(project).length > 0 ? (
     <>
       {openGantt && <div className='flex h-full w-full items-center justify-center'><progress className="progress progress-success mx-auto my-9 h-4 w-4/5"></progress></div>}
 
@@ -41,6 +45,11 @@ function ProjectSchedulePage() {
       </section>
     </main>
     </>
+    ) : (
+      <h1 className="m-7 rounded-lg border-2 border-error bg-error-content p-2 text-center text-lg font-bold uppercase text-error">
+        Add and Select a Project <Link className="link link-info" href='/all-jobs'>Here</Link> to access the Schedules
+      </h1>
+    )
   )
 }
 

@@ -1,6 +1,7 @@
 'use client'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
+import Link from 'next/link'
 import Paper from '@mui/material/Paper'
 import Progress from '../utils/Progress.jsx'
 import Greeting from './greeting/Greeting.jsx'
@@ -12,9 +13,9 @@ import { useContext } from 'react'
 import { DakiyStore } from '@/context/context.js'
 
 export default function DashboardComponent() {
-  const { projects } = useContext(DakiyStore)
+  const { project } = useContext(DakiyStore)
   return (
-    projects ? (
+    Object.keys(project).length > 0 ? (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       {/* Progress Bar */}
       <Progress progress={80} />
@@ -65,7 +66,7 @@ export default function DashboardComponent() {
     </Container>
     ) : (
       <h1 className="m-7 rounded-lg border-2 border-error bg-error-content p-2 text-center text-lg font-bold uppercase text-error">
-        Add or Select a Project to Access the Project&apos;s Logs
+          Add and Select a Project <Link className="link link-info" href='/all-jobs'>Here</Link> to access the Dashboard
       </h1>
     )
   )

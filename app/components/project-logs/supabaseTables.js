@@ -4,35 +4,18 @@ import { cookies } from "next/headers"
 import getUser from "../utils/getUser"
 
 const supabase = createServerComponentClient({ cookies })
-let projectData
 
-export const getProjectId = async () => {
-    const user = await getUser()
-    let { data: projects } = await supabase
-        .from('projects')
-        .select("id")
-        // Filters
-        .eq('user_id', user.id)
-    projectData = projects
-
-    if (!projectData[0].id) {
-        return false
-    } else {
-        return projectData[0].id
-    }
-}
-
-export const getLogs = async () => {
+export const getLogs = async (projectId) => {
     let { data: logs } = await supabase
         .from('logs')
         .select("*")
         // Filters
-        .eq('project_id', projectData ? projectData[0].id : "")
+        .eq('project_id', projectId)
     return logs
 }
 
 
-export const logsTable = async (log) => {
+export const logsTable = async (log, projectId) => {
     const user = await getUser()
     const currentDate = new Date().toLocaleDateString()
     const { logBody, logTitle } = log
@@ -40,7 +23,7 @@ export const logsTable = async (log) => {
     const { error } = await supabase
         .from('logs')
         .insert([
-            { created_at: currentDate, title: logTitle, note: logBody, project_id: projectData ? projectData[0].id : "", user_id: user.id },
+            { created_at: currentDate, title: logTitle, note: logBody, project_id: projectId, user_id: user.id },
         ])
         .select()
     if (error) return error

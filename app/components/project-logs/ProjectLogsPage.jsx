@@ -1,35 +1,27 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
 import AddLogs from './AddLogs'
-import { getLogs, getProjectId } from './supabaseTables'
+import { getLogs } from './supabaseTables'
 import Link from 'next/link'
+import { DakiyStore } from '@/context/context'
 
 function ProjectLogsPage() {
   const initialLogData = { logBody: '', logTitle: '' }
   const [addLog, setAddLog] = useState(false)
-  const [projects, setProjects] = useState(false)
   const [log, setLog] = useState(initialLogData)
   const [logs, setLogs] = useState([])
+  const { project } = useContext(DakiyStore)
 
   const handleAddLog = () => {
     setAddLog(!addLog)
   }
 
-  async function fetchProjectID() {
-    const res = await getProjectId()
-    setProjects(res)
-  }
-
   // Updates the logs state in the context state when a new log is added
   async function updateLogs() {
-    const logs = await getLogs()
+    const logs = await getLogs(project.id)
     setLogs(logs)
   }
-
-  useEffect(() => {
-    fetchProjectID()
-  }, [])
 
   useEffect(() => {
     updateLogs()
@@ -39,7 +31,7 @@ function ProjectLogsPage() {
   // TODO Use intersection observer API to render logs on scroll, add filters / sort buttons
   return (
     <>
-      {projects ?
+      {Object.keys(project).length > 0 ?
         (
           <section className="p-3 " >
             <button onClick={handleAddLog} className="btn btn-neutral mx-auto mb-4 block w-2/4">
@@ -64,7 +56,10 @@ function ProjectLogsPage() {
           </section>
         )
         :
-        <h1 className='m-7 rounded-lg border-2 border-error bg-error-content p-2 text-center text-lg font-bold uppercase text-error'>Add or Select a Project to Access the Project&apos;s Logs</h1>}
+        <h1 className="m-7 rounded-lg border-2 border-error bg-error-content p-2 text-center text-lg font-bold uppercase text-error">
+          Add and Select a Project <Link className="link link-info" href='/all-jobs'>Here</Link> to access the Logs
+        </h1>
+      }
     </>
   )
 }

@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
 import { logsTable } from './supabaseTables'
+import { DakiyStore } from '@/context/context'
 
 const AddLogs = ({ setAddLog, setLog, log }) => {
     const [isLoading, setIsLoading] = useState(false)
+    const { project } = useContext(DakiyStore)
 
     const handleTextAreaChange = ({ target }) => {
         const { name, value } = target
@@ -22,7 +24,7 @@ const AddLogs = ({ setAddLog, setLog, log }) => {
         event.preventDefault()
         setIsLoading(true)
         if (validateForm()) {
-            const error = await logsTable(log)
+            const error = await logsTable(log, project.id)
             const errorMessage = error?.message
             if (!errorMessage) {
                 setIsLoading(false)
