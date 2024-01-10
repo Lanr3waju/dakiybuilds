@@ -24,6 +24,7 @@ function JobDetailsComponent() {
     const [deleteState, setDeleteState] = useState(false)
     const [update, setUpdate] = useState(false)
     const [contractPayments, setContractPayments] = useState(0)
+    const [pictureSrc, setPictureSrc] = useState('')
 
     const getProjectUpdates = async (id, initial_advance_payment) => {
         const results = await getProjectsPlus(id)
@@ -39,6 +40,26 @@ function JobDetailsComponent() {
             setContractPayments(Number(contractPayments) + Number(initial_advance_payment))
         }
     }
+
+    useEffect(() => {
+        // Create the URL based on the currentProject name
+        const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/project-site-picture/${replaceSpacesWithHyphensAndLowerCase(currentProject.name)}`
+
+        // Fetch the image to see if it exists
+        fetch(url)
+            .then(response => {
+                if (response.ok) {
+                    setPictureSrc(url) // Set the image URL if it exists
+                } else {
+                    // Set a fallback image if it doesn't exist
+                    setPictureSrc('/logo.png') // Update with your actual fallback image path
+                }
+            })
+            .catch(() => {
+                // Set a fallback image in case of an error
+                setPictureSrc('/logo.png') // Update with your actual fallback image path
+            })
+    }, [currentProject.name]);
 
     useEffect(() => {
         const projectID = pathname.replace("/all-jobs/", "")
@@ -76,7 +97,7 @@ function JobDetailsComponent() {
                         priority quality={100}
                         width={800}
                         height={500}
-                        src={currentProject.name ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/project-site-picture/${replaceSpacesWithHyphensAndLowerCase(currentProject.name)}` : '/logo.png'}
+                        src={pictureSrc ? pictureSrc : '/logo.png'}
                         alt="Picture of site" />
                     <span className="mb-6 mt-1 text-center text-sm font-medium text-info">(picture of site)</span>
                     <p className="my-3 font-Roboto text-lg uppercase"><span className="m-1 block font-Raleway text-sm text-secondary-content/70">Project Contract Sum:</span>₦{addCommasToMoney(projectSumAndDate.projectContractSum)} - ({numberToWords(projectSumAndDate.projectContractSum)} Naira)</p>

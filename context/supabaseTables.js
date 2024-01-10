@@ -9,7 +9,6 @@ let projectData
 
 export const updateAppTheme = async (selectedTheme) => {
     const userProfile = await getUserProfile()
-    console.log(userProfile)
     if (userProfile) {
         const user = await getUser()
 
@@ -44,7 +43,6 @@ export const getProjects = async () => {
 
     const user = await getUser()
     const userProfile = await getUserProfile()
-    console.log(userProfile)
 
     if (userProfile === true) {
         // Get user organization id
