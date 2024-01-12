@@ -39,8 +39,8 @@ function UserForm({ activateUserForm }) {
         // Validate tel
         if (!userFormData.tel) {
             errors.tel = "Mobile number is required"
-        } else if (!/^\d{10}$/.test(userFormData.tel)) {
-            errors.tel = "Invalid telephone format, should be 10 digits e.g. (8051551565)"
+        } else if (!/^\d{11}$/.test(userFormData.tel)) {
+            errors.tel = "Invalid telephone format, should be 11 digits e.g. (8051551565)"
         }
 
         setFormErrors(errors)
@@ -60,7 +60,7 @@ function UserForm({ activateUserForm }) {
             if (!profileErrorMessage) {
                 setIsLoading(false)
                 window.account_creation_modal.showModal()
-                router.push("/add-job")
+                router.push("/dakiyboard")
             } else {
                 setIsLoading(false)
                 alert(profileErrorMessage)

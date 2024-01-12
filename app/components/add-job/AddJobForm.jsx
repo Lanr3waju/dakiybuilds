@@ -203,7 +203,7 @@ const AddJobForm = () => {
                 </div>
                 )}
             {errors[field] && (
-              <p className="mb-5 text-error">{errors[field]}</p>
+              <p className="mb-5 font-Roboto text-error">{errors[field]}</p>
             )}
           </React.Fragment>
         ))}

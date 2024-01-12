@@ -5,6 +5,7 @@ import AddLogs from './AddLogs'
 import { getLogs } from './supabaseTables'
 import Link from 'next/link'
 import { DakiyStore } from '@/context/context'
+import extractDate from '../utils/extractDateFromTimestamp'
 
 function ProjectLogsPage() {
   const initialLogData = { logBody: '', logTitle: '' }
@@ -19,8 +20,10 @@ function ProjectLogsPage() {
 
   // Updates the logs state in the context state when a new log is added
   async function updateLogs() {
-    const logs = await getLogs(project.id)
-    setLogs(logs)
+    if (project) {
+      const logs = await getLogs(project.id)
+      setLogs(logs)
+    }
   }
 
   useEffect(() => {
@@ -48,7 +51,7 @@ function ProjectLogsPage() {
                   >
                     <span className="mb-3 block w-full text-left font-semibold uppercase leading-loose tracking-wider">{log.title}</span>
                     <HorizontalLine />
-                    <div className="font-Poppins">{log.created_at}</div>
+                    <div className="font-Poppins">{extractDate(log.created_at)}</div>
                   </Link>
                 ))}
               </div>

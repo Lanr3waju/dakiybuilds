@@ -6,10 +6,11 @@ import NewResourceForm from './NewResource'
 import Resources from './Resources'
 import { DakiyStore } from '@/context/context'
 import Link from 'next/link'
+import extractDate from '../utils/extractDateFromTimestamp'
 
 function ProjectSchedulePage() {
   const [openGantt, setOpenGantt] = useState(false)
-  const { project } = useContext(DakiyStore)
+  const { project, workingProjectSumAndDate } = useContext(DakiyStore)
 
   const handleGantt = () => {
     setOpenGantt(true)
@@ -22,10 +23,10 @@ function ProjectSchedulePage() {
 
       <main className={`${openGantt ? "hidden" : "p-4"}`} >
         <section className="mx-auto my-8 rounded-lg border-2 border-accent bg-accent/10 p-4">
-        <Progress progress={55} />
+            <Progress progress={project.progress} />
         <div className="flex w-full justify-between font-Poppins text-sm font-semibold text-primary-content/70">
-          <div>23rd November, 2023</div>
-          <div>30th December, 2024</div>
+              <div>{extractDate(project.start_date)}</div>
+              <div>{extractDate(workingProjectSumAndDate.workingProjectFinishDate)}</div>
         </div>
         <a
             onClick={handleGantt}
