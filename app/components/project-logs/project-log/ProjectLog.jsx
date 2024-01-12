@@ -1,12 +1,15 @@
 'use client'
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import HorizontalLine from "../../utils/HorizontalLine"
 import { getLoggerName, getLogs } from "../supabaseTables"
 import EditIcon from '@mui/icons-material/Edit'
 import UpdateLogForm from "./UpdateLogForm"
+import { DakiyStore } from "@/context/context"
+import extractDate from "../../utils/extractDateFromTimestamp"
 
 function ProjectLog() {
+    const { projects, project } = useContext(DakiyStore)
     const [log, setLog] = useState({})
     const [updateLog, setUpdateLog] = useState(false)
     const [newLog, setNewLog] = useState('')
@@ -14,7 +17,7 @@ function ProjectLog() {
     const currentLogID = usePathname().replace("/project-logs/", "")
 
     async function loadLog() {
-        const logs = await getLogs()
+        const logs = await getLogs(project.id)
         const log = logs?.find((log) => log.id === currentLogID)
 
         if (log) {
@@ -33,7 +36,7 @@ function ProjectLog() {
 
     useEffect(() => {
         loadLog()
-    }, [])
+    }, [projects, project])
 
     return (
         <section className="m-6 rounded-tr-2xl bg-slate-50 p-4 shadow-md shadow-base-300">
@@ -45,7 +48,7 @@ function ProjectLog() {
             {updateLog ? <UpdateLogForm setNewLog={setNewLog} setUpdateLog={setUpdateLog} newLog={newLog} currentLogID={currentLogID} log={log} setLog={setLog} /> :
                 <p className="mb-2 mt-3 leading-9 tracking-wide underline underline-offset-4">{log?.note}</p>
             }
-            <p className="mt-5 font-Poppins text-base leading-5 tracking-wide text-primary-content">{log?.created_at}</p>
+            <p className="mt-5 font-Poppins text-base leading-5 tracking-wide text-primary-content">{extractDate(log?.created_at)}</p>
             <p className="text-right font-bold text-primary">Log by: <span className="font-semibold text-primary-content/75">{loggerName}</span></p>
         </section >
     )

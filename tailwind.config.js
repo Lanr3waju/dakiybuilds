@@ -17,7 +17,8 @@ module.exports = {
       "coffee",
       "dim",
       "nord",
-    ]
+    ],
+    base: 'retro'
   },
 
   content: [

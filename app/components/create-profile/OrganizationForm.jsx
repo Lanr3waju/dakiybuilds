@@ -37,8 +37,8 @@ function OrganizationForm({ setActivateUserForm, activateUserForm }) {
         // Validate organizationTel
         if (!organizationFormData.organizationTel) {
             errors.organizationTel = "Organization tel is required"
-        } else if (!/^\d{10}$/.test(organizationFormData.organizationTel)) {
-            errors.organizationTel = "Invalid telephone format, should be 10 digits e.g. (8051551565)"
+        } else if (!/^\d{11}$/.test(organizationFormData.organizationTel)) {
+            errors.organizationTel = "Invalid telephone format, should be 11 digits e.g. (08051551565)"
         }
 
         // Validate staffs

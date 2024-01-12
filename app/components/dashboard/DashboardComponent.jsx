@@ -3,20 +3,33 @@ import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Link from 'next/link'
 import Paper from '@mui/material/Paper'
+import { getProjects } from '@/context/supabaseTables.js'
 import Progress from '../utils/Progress.jsx'
 import Greeting from './greeting/Greeting.jsx'
 import Weather from './getCurrentWeather/Weather.jsx'
 import GetDate from './greeting/GetDate.jsx'
 import Overview from './Overview/Overview.jsx'
 import Milestone from './Overview/Milestone.jsx'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { DakiyStore } from '@/context/context.js'
+import { usePathname } from 'next/navigation.js'
+
 
 export default function DashboardComponent() {
-  const { project } = useContext(DakiyStore)
+  const { project, setProjects } = useContext(DakiyStore)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const projects = await getProjects()
+      if (projects) setProjects(projects)
+    }
+    fetchProjects()
+  }, [pathname, setProjects])
+
   return (
     Object.keys(project).length > 0 ? (
-      <Container className='my-4' maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Container className='my-8' maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       {/* Progress Bar */}
         <Progress progress={project.progress} />
       <Grid container spacing={3}>

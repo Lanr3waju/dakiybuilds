@@ -2,10 +2,12 @@
 
 import { useContext, useEffect, useRef, useState } from 'react'
 import HorizontalLine from '../../utils/HorizontalLine'
-import { insertProjectPlusTable } from './supabaseTables'
+import { updateProjectTable } from './supabaseTables'
+import { insertProjectPlusTable } from '@/context/supabaseTables'
 import { DakiyStore } from '@/context/context'
+import EditJobModal from './modals/EditJobModal'
 
-function EditJobState({ currentProject }) {
+function EditJobState({ currentProject, contractPayments, setEditState }) {
     const initialFormData = {
         newFinishDate: '',
         newContractSum: '',
@@ -17,7 +19,9 @@ function EditJobState({ currentProject }) {
 
     const [isLoading, setIsLoading] = useState(false)
 
-    const { updateFormData, setUpdateFormData } = useContext(DakiyStore)
+    const [formData, setFormData] = useState(initialFormData)
+
+    const { setUpdateFormData } = useContext(DakiyStore)
 
     const [error, setError] = useState('All fields are empty')
 
@@ -41,18 +45,18 @@ function EditJobState({ currentProject }) {
     }, []) // Empty dependency array ensures the effect runs once when the component mounts
 
     const validateForm = () => {
-        if (!updateFormData.subsequentPayments && !updateFormData.newContractSum && !updateFormData.newFinishDate) {
+        if (!formData.subsequentPayments && !formData.newContractSum && !formData.newFinishDate) {
             setError('Please fill in any of updated fields.')
             return false
         }
 
-        if (updateFormData.newFinishDate !== '' && updateFormData.newFinishDate < currentProject.start_date) {
+        if (formData.newFinishDate !== '' && formData.newFinishDate < currentProject.start_date) {
             setError('The new finish date cannot be less than project start date.')
             return false
         }
 
-        if (updateFormData.description.length < 40) {
-            setError('The description of the event should be at least 40 characters.')
+        if (formData.description.length < 25) {
+            setError('The description of the event should be at least 25 characters.')
             return false
         }
 
@@ -62,13 +66,14 @@ function EditJobState({ currentProject }) {
 
     }
 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         const { name, value } = e.target
-        setUpdateFormData(prevState => ({
+        setFormData(prevState => ({
             ...prevState,
             [name]: value
         }))
         validateForm()
+        await updateProjectTable(formData, currentProject)
     }
 
     const handleSubmit = async (e) => {
@@ -77,78 +82,86 @@ function EditJobState({ currentProject }) {
         // Check conditions and update isValid and error state
         if (validateForm()) {
             setIsLoading(true)
-            const error = await insertProjectPlusTable(updateFormData, currentProject)
-            if (error) {
-                alert(error.message)
+            setUpdateFormData(formData)
+            const insertProjectPlusTableResult = await insertProjectPlusTable(formData, currentProject)
+            await updateProjectTable(formData, currentProject)
+            if (insertProjectPlusTableResult !== true) {
+                alert(insertProjectPlusTableResult.message)
                 setIsLoading(false)
-            } else {
+            } else if (insertProjectPlusTableResult === true) {
                 window.project_edit_successful.showModal()
                 setIsLoading(false)
-                setUpdateFormData(initialFormData)
+                setFormData(initialFormData)
             }
         }
     }
 
     return (
-        <div className="font-Roboto" ref={containerRef}>
-            <h2 className="mb-1 flex items-center justify-between text-2xl font-semibold">Update Job Details <span className='text-sm font-medium text-warning'> Press `esc` to cancel</span></h2>
+        <>
+            <EditJobModal />
+            <div className="mx-auto my-4 flex w-3/4 max-w-fit flex-col rounded-xl border-4 border-base-300 bg-base-200 p-4 font-Roboto" ref={containerRef}>
+                <h2 className="mb-1 flex items-center justify-between text-2xl font-semibold">Update Job Details <button onClick={() => setEditState(false)} className='btn btn-square btn-error text-lg'> X</button></h2>
             <HorizontalLine />
-            <p className=" mx-auto my-4 w-full max-w-md rounded-md bg-info p-4 font-medium text-info-content">
+                <p className="my-4 w-full rounded-md bg-info p-4 font-medium text-info-content">
                 This form serves to capture new data or events related to the project&apos;s progression, rather than modify existing information.
             </p>
-            <label className='mb-4 font-Roboto text-sm font-semibold tracking-widest text-primary-content/40'> Enter new project finish date :
+                <label className='mb-2 font-Roboto text-sm font-semibold tracking-widest text-primary-content/40'> Enter new project finish date :
                 <input
                     type="date"
                     name="newFinishDate"
-                    value={updateFormData.newFinishDate}
+                        value={formData.newFinishDate}
                     onChange={handleChange}
                     placeholder="Enter new finish date"
-                    className="input input-bordered input-primary mb-6 w-full max-w-md"
+                        className="input input-bordered input-primary mb-6 block w-full"
                 />
             </label>
 
-            <label className='mb-4 font-Roboto text-sm font-semibold tracking-widest text-primary-content/40'> Enter new contract sum:
+                <label className='mb-2 font-Roboto text-sm font-semibold tracking-widest text-primary-content/40'> Enter new contract sum:
                 <input
                     type="number"
                     name="newContractSum"
-                    value={updateFormData.newContractSum}
+                        value={formData.newContractSum}
                     onChange={handleChange}
                     placeholder="Enter new contract sum"
-                    className="input input-bordered input-primary mb-6 w-full max-w-md"
+                        className="input input-bordered input-primary mb-6 block w-full"
+                        min={0}
                 />
             </label>
 
-            <label className='mb-4 font-Roboto text-sm font-semibold tracking-widest text-primary-content/40'> Enter subsequent payments made by client:
+                <label className='mb-2 font-Roboto text-sm font-semibold tracking-widest text-primary-content/40'> Enter subsequent payments made by client:
                 <input
                     type="number"
                     name="subsequentPayments"
-                    value={updateFormData.subsequentPayments}
+                        value={formData.subsequentPayments}
                     onChange={handleChange}
                     placeholder="Enter subsequent payments"
-                    className="input input-bordered input-primary mb-6 w-full max-w-md"
+                        className="input input-bordered input-primary mb-6 block w-full"
+                        min={0}
+                        max={currentProject.contract_sum - contractPayments}
                 />
             </label>
 
-            <label className='mb-4 font-Roboto text-sm font-semibold tracking-widest text-primary-content/40'> Enter appropriate description:
+                <label className='mb-2 font-Roboto text-sm font-semibold tracking-widest text-primary-content/40'> Enter appropriate description:
                 <textarea
                     name="description"
-                    value={updateFormData.description}
+                        value={formData.description}
                     onChange={handleChange}
                     placeholder="Enter descriptions for variations, payment, and/or changes"
-                    className="textarea textarea-info mb-4 w-full  max-w-md tracking-widest placeholder:font-Roboto"
+                        className="textarea textarea-info mb-2 block w-full tracking-widest placeholder:font-Roboto"
                 ></textarea>
             </label>
 
             {error && <p className="m-2 text-error">{error}</p>}
             <button
                 type="button"
-                className='btn btn-secondary m-2 w-full max-w-md '
+                    className='btn btn-secondary m-2 block w-full '
                 onClick={handleSubmit}
                 disabled={error !== '' || isLoading}
             >
                 {isLoading ? <span className="loading loading-dots loading-lg"></span> : "Submit"}
             </button>
         </div>
+        </>
     )
 }
 

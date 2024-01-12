@@ -6,11 +6,13 @@ import getUser from "../utils/getUser"
 const supabase = createServerComponentClient({ cookies })
 
 export const getLogs = async (projectId) => {
-    let { data: logs } = await supabase
+    let { data: logs, error } = await supabase
         .from('logs')
         .select("*")
         // Filters
         .eq('project_id', projectId)
+
+    if (error) console.error(error)
     return logs
 }
 

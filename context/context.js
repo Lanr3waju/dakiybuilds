@@ -8,7 +8,7 @@ function Context({ children }) {
     const [project, setProject] = useState({})
     const [projects, setProjects] = useState([])
     const [currentProjectId, setCurrentProjectId] = useState('')
-    const [selectedTheme, setSelectedTheme] = useState('')
+    const [selectedTheme, setSelectedTheme] = useState('retro')
 
     const [updateFormData, setUpdateFormData] = useState({
         newFinishDate: '',
@@ -123,9 +123,7 @@ function Context({ children }) {
                 }))
             }
         }
-    }, [projects])
-
-    console.log(projects)
+    }, [project.contract_sum, project.finish_date, project.id, projects])
 
     return (
         <DakiyStore.Provider
@@ -133,11 +131,11 @@ function Context({ children }) {
                 {
                     project, setProject,
                     setProjects, projects,
-                    updateFormData, setUpdateFormData,
+                    setUpdateFormData,
                     projectSumAndDate, setProjectSumAndDate,
                     setCurrentProjectId,
                     setSelectedTheme,
-                    workingProjectSumAndDate,
+                    workingProjectSumAndDate, setWorkingProjectSumAndDate
                 }}>
             {children}
         </DakiyStore.Provider>

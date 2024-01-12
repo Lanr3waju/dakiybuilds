@@ -21,7 +21,7 @@ const deleteProjectTable = async (currentProject) => {
 }
 
 // This function updates the project table based on the new contract sum and new finish date
-const updateProjectTable = async (newContractSum, newFinishDate, subsequentPayments, id) => {
+export const updateProjectTable = async ({ newContractSum, newFinishDate, subsequentPayments }, { id }) => {
 
     // Initialize an empty object to store properties that need to be updated.
     let updateObject = {}
@@ -47,6 +47,7 @@ const updateProjectTable = async (newContractSum, newFinishDate, subsequentPayme
     // The 'updateObject' will contain properties based on the conditions evaluated above.
 
     // Perform the update operation
+    if (id) {
     const { error } = await supabase
         .from('projects')
         .update(updateObject)
@@ -58,6 +59,9 @@ const updateProjectTable = async (newContractSum, newFinishDate, subsequentPayme
         return error
     } else {
         return true
+    }
+    } else {
+        console.error('Wrong ID')
     }
 }
 
@@ -79,33 +83,6 @@ export const deleteProject = async (currentProject) => {
         return true
     } else {
         return false
-    }
-}
-
-export const insertProjectPlusTable = async ({ newFinishDate, newContractSum, subsequentPayments, description }, { id, new_finish_date, new_contract_sum }) => {
-    if (newFinishDate === new_finish_date || newContractSum === new_contract_sum) {
-        return { message: 'Please enter a new finish date or a new contract sum.' }
-    } else {
-        const { error } = await supabase
-            .from('projects_plus')
-            .insert([
-                {
-                    project_id: id,
-                    new_finish_date: newFinishDate,
-                    new_contract_sum: newContractSum,
-                    subsequent_payments: subsequentPayments,
-                    description: description
-                }
-            ]).select()
-
-        if (error) {
-            return error
-        } else {
-            const updateProjectTableResult = await updateProjectTable(newContractSum, newFinishDate, subsequentPayments, id)
-            if (updateProjectTableResult !== true) {
-                return updateProjectTableResult
-            }
-        }
     }
 }
 
