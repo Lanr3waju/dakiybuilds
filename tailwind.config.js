@@ -18,7 +18,8 @@ module.exports = {
       "dim",
       "nord",
     ],
-    base: 'retro'
+    dark: 'retro',
+    base: 'true'
   },
 
   content: [
