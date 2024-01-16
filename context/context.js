@@ -43,10 +43,12 @@ function Context({ children }) {
 
     useEffect(() => {
         // Get selected theme from DB
+        const element = document.getElementById('app')
         const appTheme = async () => {
             const savedAppTheme = await getAppTheme()
-            if (savedAppTheme !== '') {
-                const element = document.getElementById('app')
+            if (savedAppTheme === null) {
+                element.setAttribute('data-theme', selectedTheme)
+            } else {
                 element.setAttribute('data-theme', savedAppTheme)
             }
         }
