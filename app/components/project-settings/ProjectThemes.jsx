@@ -1,21 +1,14 @@
 'use client'
 
 import { DakiyStore } from "@/context/context"
-import { updateAppTheme } from "@/context/supabaseTables"
 import { useContext } from "react"
 
 function ProjectThemes() {
     const { setSelectedTheme } = useContext(DakiyStore)
 
     // 2. Create a handler to update the selected theme
-    const handleThemeChange = async (event) => {
+    const handleThemeChange = (event) => {
         setSelectedTheme(event.target.value)
-
-        // Store theme to DB for use for organization across app, users and devices
-        const error = await updateAppTheme(event.target.value)
-        if (error) {
-            alert(error.message)
-        }
     }
 
     return (

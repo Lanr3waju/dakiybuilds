@@ -24,12 +24,12 @@ export default function RootLayout({ children }) {
   }
 
   return (
-    <html data-theme='retro' id='app' lang="en" className={bodyClass}>
+    <html data-theme='corporate' id='app' lang="en" className={bodyClass}>
       <head>
         <title>{title}</title>
       </head>
       <Context>
-        <body className='mt-4 font-Raleway'>
+        <body className={pathname === '/' ? 'font-Raleway' : 'font-Raleway mt-4'}>
           {pathname !== '/project-schedule/gantt-chart' && pathname !== '/' && pathname !== 'create-profile' && pathname !== '/add-job' && pathname !== '/create-profile' ?
             (<Header children={children} />) :
             (children)

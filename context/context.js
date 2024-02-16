@@ -1,6 +1,6 @@
 'use client'
 import { createContext, useEffect, useState } from "react"
-import { getAppTheme, getProjects } from "./supabaseTables"
+import { getAppTheme, getProjects, updateAppTheme } from "./supabaseTables"
 
 export const DakiyStore = createContext()
 
@@ -8,7 +8,7 @@ function Context({ children }) {
     const [project, setProject] = useState({})
     const [projects, setProjects] = useState([])
     const [currentProjectId, setCurrentProjectId] = useState('')
-    const [selectedTheme, setSelectedTheme] = useState('retro')
+    const [selectedTheme, setSelectedTheme] = useState('corporate')
 
     const [updateFormData, setUpdateFormData] = useState({
         newFinishDate: '',
@@ -42,18 +42,31 @@ function Context({ children }) {
     }, [updateFormData])
 
     useEffect(() => {
+        async function fetchData() {
+            // You can await here
+            if (selectedTheme !== 'corporate') {
+                const error = await updateAppTheme(selectedTheme)
+                if (error) {
+                    alert(error.message)
+                }
+            }
+        }
+        fetchData()
+    }, [selectedTheme]);
+
+    useEffect(() => {
         // Get selected theme from DB
-        const element = document.getElementById('app')
+        const element = document.getElementById('app');
         const appTheme = async () => {
             const savedAppTheme = await getAppTheme()
-            if (savedAppTheme === null) {
-                element.setAttribute('data-theme', selectedTheme)
+            if (!savedAppTheme) {
+                element.setAttribute('data-theme', selectedTheme);
             } else {
-                element.setAttribute('data-theme', savedAppTheme)
+                element.setAttribute('data-theme', savedAppTheme);
             }
         }
         appTheme()
-    }, [selectedTheme])
+    }, [selectedTheme]);
 
     useEffect(() => {
         const currentProject = projects?.find(({ id }) => currentProjectId === id)
