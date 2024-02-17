@@ -66,7 +66,7 @@ function Context({ children }) {
             }
         }
         appTheme()
-    }, [selectedTheme]);
+    }, [selectedTheme])
 
     useEffect(() => {
         const currentProject = projects?.find(({ id }) => currentProjectId === id)

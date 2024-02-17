@@ -3,7 +3,7 @@ import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Link from 'next/link'
 import Paper from '@mui/material/Paper'
-import { getProjects } from '@/context/supabaseTables.js'
+import { getAppTheme, getProjects } from '@/context/supabaseTables.js'
 import Progress from '../utils/Progress.jsx'
 import Greeting from './greeting/Greeting.jsx'
 import Weather from './getCurrentWeather/Weather.jsx'
@@ -16,8 +16,18 @@ import { usePathname } from 'next/navigation.js'
 
 
 export default function DashboardComponent() {
-  const { project, setProjects } = useContext(DakiyStore)
+  const { project, setProjects, setSelectedTheme } = useContext(DakiyStore)
   const pathname = usePathname()
+
+  useEffect(() => {
+    const appTheme = async () => {
+      const savedAppTheme = await getAppTheme()
+      if (savedAppTheme) {
+        setSelectedTheme(savedAppTheme)
+      }
+    }
+    appTheme()
+  }, [])
 
   useEffect(() => {
     const fetchProjects = async () => {
