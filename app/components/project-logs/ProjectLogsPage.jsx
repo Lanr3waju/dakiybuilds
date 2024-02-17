@@ -28,8 +28,7 @@ function ProjectLogsPage() {
 
   useEffect(() => {
     updateLogs()
-  }, [addLog])
-
+  }, [addLog, project])
 
   // TODO Use intersection observer API to render logs on scroll, add filters / sort buttons
   return (
