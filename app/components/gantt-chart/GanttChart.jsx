@@ -58,7 +58,7 @@ function GanttChart() {
     name: 'name',
     group: 'group',
     rate: 'rate',
-    quantity: 'quantity'
+    quantity: 'quantity',
   }
   const editSettings = {
     allowAdding: true,

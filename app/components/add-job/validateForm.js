@@ -23,7 +23,8 @@ export const validateForm = (jobData) => {
   }
 
   if (!jobData.initialAdvancePayment) {
-    errors.initialAdvancePayment = 'Initial Advance Payment is required, enter 0 if no payment has been made by client'
+    errors.initialAdvancePayment =
+      'Initial Advance Payment is required, enter 0 if no payment has been made by client'
   }
 
   if (!jobData.clientEmail) {
@@ -35,7 +36,8 @@ export const validateForm = (jobData) => {
   if (!jobData.clientTelephone) {
     errors.clientTelephone = 'Client Telephone is required'
   } else if (!/^\d{11}$/.test(jobData.clientTelephone)) {
-    errors.clientTelephone = 'Invalid telephone format, should be 11 digits e.g. (08012345678)'
+    errors.clientTelephone =
+      'Invalid telephone format, should be 11 digits e.g. (08012345678)'
   }
 
   if (!jobData.agreedStartDate) {
@@ -56,5 +58,4 @@ export const validateForm = (jobData) => {
   }
 
   return errors
-
 }

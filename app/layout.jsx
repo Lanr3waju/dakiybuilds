@@ -15,25 +15,32 @@ export default function RootLayout({ children }) {
 
   if (pathname === '/') {
     title = 'Login'
-    bodyClass = "bg-base-100"
+    bodyClass = 'bg-base-100'
   } else if (pathname === '/project-schedule/gantt-chart') {
     title = 'gantt-chart'
-    bodyClass = "bg-white"
+    bodyClass = 'bg-white'
   } else {
-    bodyClass = "bg-base-100"
+    bodyClass = 'bg-base-100'
   }
 
   return (
-    <html data-theme='corporate' id='app' lang="en" className={bodyClass}>
+    <html data-theme="corporate" id="app" lang="en" className={bodyClass}>
       <head>
         <title>{title}</title>
       </head>
       <Context>
-        <body className={pathname === '/' ? 'font-Raleway' : 'mt-4 font-Raleway'}>
-          {pathname !== '/project-schedule/gantt-chart' && pathname !== '/' && pathname !== 'create-profile' && pathname !== '/add-job' && pathname !== '/create-profile' ?
-            (<Header children={children} />) :
-            (children)
-          }
+        <body
+          className={pathname === '/' ? 'font-Raleway' : 'mt-4 font-Raleway'}
+        >
+          {pathname !== '/project-schedule/gantt-chart' &&
+          pathname !== '/' &&
+          pathname !== 'create-profile' &&
+          pathname !== '/add-job' &&
+          pathname !== '/create-profile' ? (
+            <Header children={children} />
+          ) : (
+            children
+          )}
         </body>
       </Context>
     </html>

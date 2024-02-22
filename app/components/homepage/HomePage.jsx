@@ -1,13 +1,13 @@
 import Image from 'next/image'
-import HomePageLoginForm from './HomePageLoginForm'
-import ForgotPasswordModal from './ForgotPasswordModal'
 import Carousel from './Carousel'
+import { ArrowForwardRounded, ArrowRightSharp } from '@mui/icons-material'
+import HomePageFooter from './HomePageFooter'
+import HomePageLoginForm from './HomePageLoginForm'
 
-function HomeComponent() {
+const HomeComponent = () => {
   return (
     <>
-      <ForgotPasswordModal />
-      <header className="flex justify-between border-b-4 border-base-300 bg-neutral-content px-2">
+      <header className="sticky z-50 flex w-full justify-between border-b-4 border-base-300 px-2">
         <Image
           className="h-20 w-2/3 object-cover md:w-1/4"
           src="/logo.png"
@@ -39,70 +39,148 @@ function HomeComponent() {
           />
         </div>
       </header>
-      <main className="px-2 py-9 text-center leading-loose md:px-4 md:py-20 md:text-left">
-
-        <section className='flex justify-center flex-col md:flex-row'>
-          {/*
-          <div className="h-96 carousel carousel-vertical rounded-box mb-4 md:mb-0 md:mx-4">
-            <div className="carousel-item h-full">
-              <Image
-                className="w-full h-full object-cover rounded-box"
-                src="https://res.cloudinary.com/dbzorthz8/image/upload/v1708292446/jo-szczepanska-5aiRb5f464A-unsplash_u2nbum.jpg"
-                width={500}
-                quality={100}
-                height={300}
-                loading="lazy"
-                alt="sticker tags on brown board"
-              />
-            </div>
-            <div className="carousel-item h-full">
-              <Image
-                className="w-full h-full object-cover rounded-box"
-                src="https://res.cloudinary.com/dbzorthz8/image/upload/v1708292733/Gemini_Generated_Image_2_cgkmny.jpg"
-                width={500}
-                quality={100}
-                height={300}
-                loading="lazy"
-                alt="in with the new and out with the old"
-              />
-            </div>
-            <div className="carousel-item h-full">
-              <Image
-                className="w-full h-full object-cover rounded-box"
-                src="https://res.cloudinary.com/dbzorthz8/image/upload/v1708292465/lukas-blazek-mcSDtbWXUZU-unsplash_phvfdi.jpg"
-                width={500}
-                quality={100}
-                height={300}
-                loading="lazy"
-                alt="gantt chart on laptop screen"
-              />
-            </div>
-          </div> */}
+      <main className="text-center leading-loose">
+        <section className="flex flex-col justify-center bg-gradient-to-b from-base-100 to-base-200 px-4 py-10 text-left md:flex-row md:px-2 md:py-16">
           <Carousel />
-          <section className="md:max-w-2xl md:mx-4">
-            <h1
-              className="max-w-[36rem] font-Poppins text-4xl font-extrabold leading-snug tracking-tight text-base-content/80 md:text-5xl xl:max-w-[43.5rem]"
-            >
-              Welcome to{' '}
-              <span className="text-secondary font-Fascinate">
-                dakiyBuilds
-              </span>
-            </h1>
-            <h2 className="font-Poppins text-xl font-extrabold text-base-content/80 md:text-2xl">
-              Your Modern Web-Based Construction Manager!
+          <section className="md:mx-4 md:max-w-2xl md:text-left">
+            <h2 className="font-Poppins text-lg font-extrabold text-success/70 md:text-2xl">
+              Construction Management Made Easy
             </h2>
-            <p className="py-4 font-light text-base-content/60 md:text-lg xl:text-2xl">
+            <h1 className="max-w-[600px] font-Poppins text-3xl font-extrabold leading-10 tracking-wider text-base-content/80 md:text-5xl md:leading-[65px]">
+              Ditch the paperwork, build smarter with{' '}
+              <span className="font-Fascinate text-secondary">dakiyBuilds</span>
+            </h1>
+            <p className="max-w-6/12 mx-auto py-4 font-Raleway text-xl font-normal leading-7 tracking-widest text-base-content/80  md:mx-0 md:max-w-[550px] md:py-2 md:font-light md:leading-8">
               Join the revolution in construction management. Experience the
               future of building projects with dakiyBuilds.
             </p>
-            <p className="text-xs text-success md:text-sm">
-              Made with 🤎 from Yaba College of Technology (Building Technology
-              Department){' '}
-            </p>
+            <button className="btn btn-success mx-auto max-w-full px-9 text-white">
+              Get Started <ArrowForwardRounded />
+            </button>
           </section>
         </section>
-        <HomePageLoginForm />
+        <section className="px-4 py-12 md:px-12">
+          <h1 className="font-Poppins font-bold md:text-3xl">
+            Why use a web-based management system ? 🤔
+          </h1>
+          <ul className="mt-4 flex flex-wrap justify-center">
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+              <h2 className="text-xl font-bold">Real-time updates:</h2>
+              <p className="text-base-content/80">
+                {' '}
+                Changes made by one user are instantly reflected for everyone,
+                ensuring everyone has the latest information and reducing the
+                risk of outdated data leading to errors.
+              </p>
+            </li>
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+              <h2 className="text-xl font-bold">Remote Access</h2>
+              <p className="text-base-content/80">
+                Access your project from anywhere and at any time. No need to
+                carry around bulky files and documents.
+              </p>
+            </li>
+            <li className="m-3 w-full rounded-lg border-2 border-solid  border-base-300 p-7 md:w-5/12">
+              <h2 className="text-xl font-bold">Centralized Communication</h2>
+              <p className="text-base-content/80">
+                Access your project from anywhere and at any time. No need to
+                carry around bulky files and documents.
+              </p>
+            </li>
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+              <h2 className="text-xl font-bold">Automated Workflows</h2>
+              <p className="text-base-content/80">
+                Automate routine tasks like scheduling, progress tracking, and
+                document management, freeing up time for more strategic work.
+              </p>
+            </li>
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+              <h2 className="text-xl font-bold">Improved Data Analysis</h2>
+              <p className="text-base-content/80">
+                Data collected in the system can be easily analyzed to identify
+                trends, improve decision-making, and optimize project
+                performance.
+              </p>
+            </li>
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+              <h2 className="text-xl font-bold">Reduced Errors</h2>
+              <p className="text-base-content/80">
+                Streamlined processes and centralized data minimize the risk of
+                errors caused by manual data entry and document management.
+              </p>
+            </li>
+          </ul>
+        </section>
+        <section className="border-4 border-b-base-300 bg-neutral-content px-4 py-12 md:px-12">
+          <h1 className="font-Poppins font-bold md:text-3xl">
+            Why chose <span className="font-Fascinate">dakiyBuilds ? 🤨</span>
+          </h1>
+          <ul className="mt-4 flex flex-wrap justify-center">
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+              <h2 className="text-xl font-bold">
+                Built by the industry, for the industry:
+              </h2>
+              <p className="text-base-content/80">
+                {' '}
+                We understand your unique challenges and pain points.
+                Dakiybuilds is designed specifically for construction workflows.
+              </p>
+            </li>
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+              <h2 className="text-xl font-bold">
+                Simple to learn, powerful to use:
+              </h2>
+              <p className="text-base-content/80">
+                Get started quickly with our intuitive interface and
+                user-friendly features. No IT expertise needed.
+              </p>
+            </li>
+            <li className="m-3 w-full rounded-lg border-2 border-solid  border-base-300 p-7 md:w-5/12">
+              <h2 className="text-xl font-bold">Provides a Free tier</h2>
+              <p className="text-base-content/80">
+                Access core features like document storage, team management,
+                scheduling, and basic budget tracking completely FREE
+              </p>
+            </li>
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+              <h2 className="text-xl font-bold">Future proof your projects</h2>
+              <p className="text-base-content/80">
+                Get ready for the evolution! Dakiybuilds is constantly evolving,
+                with exciting AI-powered features and integrations coming soon.
+              </p>
+            </li>
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+              <h2 className="text-xl font-bold">Made In Nigeria </h2>
+              <p className="text-base-content/80">
+                Most importantly, DakiyBuilds is made in Nigeria, thus, designed
+                to suit the unique processes / practices in the Nigerian &
+                African Construction Industry.
+              </p>
+            </li>
+            <li className="m-3 w-full rounded-lg p-7 md:w-5/12 "></li>
+          </ul>
+        </section>
+        <section className="flex bg-neutral px-4 py-12 text-white md:px-12">
+          <section className="w-3/6 text-left">
+            <h2 className="text-2xl font-bold leading-[50px] tracking-wide">
+              Do not miss this limited-time opportunity to be among the first
+              users and experience the future of construction management!
+            </h2>
+            <section>
+              <p className="my-1 text-5xl font-extrabold text-success">
+                Sign up for your FREE account now!{' '}
+                <ArrowRightSharp className="animate-pulse text-9xl" />{' '}
+              </p>
+              <div className="my-1 text-xl font-bold text-warning">OR</div>
+              <button className="btn btn-error btn-lg mx-auto mt-8 w-3/4 px-9 uppercase text-error-content">
+                Request a demo
+              </button>
+            </section>
+          </section>
+          <HomePageLoginForm />
+        </section>
       </main>
+      <HomePageFooter />
     </>
   )
 }

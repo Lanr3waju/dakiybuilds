@@ -1,9 +1,7 @@
-import JobDetailsComponent from "@/app/components/all-jobs-page/jobDetails/JobDetailsComponent"
+import JobDetailsComponent from '@/app/components/all-jobs-page/jobDetails/JobDetailsComponent'
 
 function JobDetails() {
-    return (
-        <JobDetailsComponent />
-    )
+  return <JobDetailsComponent />
 }
 
 export default JobDetails

@@ -97,7 +97,7 @@ export default function DashboardComponent({ children }) {
                   ...(open && { display: 'none' }),
                 }}
               >
-                <div className=' rounded-lg border-2 border-base-200 px-2'>
+                <div className=" rounded-lg border-2 border-base-200 px-2">
                   <MenuIcon />
                 </div>
               </IconButton>
@@ -108,17 +108,22 @@ export default function DashboardComponent({ children }) {
                 noWrap
                 sx={{ flexGrow: 1 }}
               >
-                <div className='flex w-full flex-col items-center justify-between p-3 sm:flex-row md:flex-row md:p-1'>
-                  {
-                    pathname.toLowerCase().includes("project-logs/")
-                      ? "Log-Details"
-                      : pathname.toLowerCase().includes("/update-sheet")
-                        ? "Job Details (Progress Update Sheet)"
-                        : pathname.toLowerCase().includes("all-jobs/")
-                          ? "Job Details"
-                          : removeForwardSlash(pathname)
-                  }
-                  <button disabled={pathname.toLowerCase().includes("/dakiyboard")} className="btn btn-secondary btn-sm disabled:cursor-not-allowed" onClick={() => router.back()}><ArrowBack /></button></div>
+                <div className="flex w-full flex-col items-center justify-between p-3 sm:flex-row md:flex-row md:p-1">
+                  {pathname.toLowerCase().includes('project-logs/')
+                    ? 'Log-Details'
+                    : pathname.toLowerCase().includes('/update-sheet')
+                    ? 'Job Details (Progress Update Sheet)'
+                    : pathname.toLowerCase().includes('all-jobs/')
+                    ? 'Job Details'
+                    : removeForwardSlash(pathname)}
+                  <button
+                    disabled={pathname.toLowerCase().includes('/dakiyboard')}
+                    className="btn btn-secondary btn-sm disabled:cursor-not-allowed"
+                    onClick={() => router.back()}
+                  >
+                    <ArrowBack />
+                  </button>
+                </div>
               </Typography>
             </Toolbar>
           </AppBar>
