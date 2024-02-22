@@ -2,8 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import HorizontalLine from '../utils/HorizontalLine'
 
-const HomePageFooter = () => {
-  return (
+const HomePageFooter = () => (
     <footer className="flex justify-around bg-slate-100 px-4 py-16 md:px-12">
       <section className="max-w-md text-xs">
         <Image
@@ -48,5 +47,5 @@ const HomePageFooter = () => {
       </div>
     </footer>
   )
-}
+
 export default HomePageFooter

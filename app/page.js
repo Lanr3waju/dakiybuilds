@@ -11,7 +11,7 @@ async function HomePage() {
   }
 
   return (
-    <div>
+    <div className='!scroll-smooth' style={{ scrollBehavior: 'smooth' }}>
       <HomeComponent />
     </div>
   )

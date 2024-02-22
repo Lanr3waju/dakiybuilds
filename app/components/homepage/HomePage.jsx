@@ -1,10 +1,13 @@
+'use client'
 import Image from 'next/image'
+import { Link } from 'react-scroll'
 import Carousel from './Carousel'
-import { ArrowForwardRounded, ArrowRightSharp } from '@mui/icons-material'
+import { AirSharp, ArrowForwardRounded, ArrowRightSharp, Diversity1Sharp, EngineeringSharp, EqualizerSharp, ErrorOutlineSharp, HubSharp, InsightsSharp, PriceCheck, ShieldSharp, UpdateSharp } from '@mui/icons-material'
 import HomePageFooter from './HomePageFooter'
 import HomePageLoginForm from './HomePageLoginForm'
 
 const HomeComponent = () => {
+
   return (
     <>
       <header className="sticky z-50 flex w-full justify-between border-b-4 border-base-300 px-2">
@@ -54,9 +57,14 @@ const HomeComponent = () => {
               Join the revolution in construction management. Experience the
               future of building projects with dakiyBuilds.
             </p>
-            <button className="btn btn-success mx-auto max-w-full px-9 text-white">
+            <Link to="get-started"
+              spy={true}
+              smooth={true}
+              offset={0}
+              duration={1000}
+              className="btn btn-success mx-auto max-w-full px-9 text-white !scroll-smooth">
               Get Started <ArrowForwardRounded />
-            </button>
+            </Link>
           </section>
         </section>
         <section className="px-4 py-12 md:px-12">
@@ -64,8 +72,8 @@ const HomeComponent = () => {
             Why use a web-based management system ? 🤔
           </h1>
           <ul className="mt-4 flex flex-wrap justify-center">
-            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
-              <h2 className="text-xl font-bold">Real-time updates:</h2>
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 "> <UpdateSharp className='text-5xl' />
+              <h2 className="text-xl font-bold">Real-time updates: </h2>
               <p className="text-base-content/80">
                 {' '}
                 Changes made by one user are instantly reflected for everyone,
@@ -73,28 +81,28 @@ const HomeComponent = () => {
                 risk of outdated data leading to errors.
               </p>
             </li>
-            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 "> <Diversity1Sharp className='text-5xl' />
               <h2 className="text-xl font-bold">Remote Access</h2>
               <p className="text-base-content/80">
                 Access your project from anywhere and at any time. No need to
                 carry around bulky files and documents.
               </p>
             </li>
-            <li className="m-3 w-full rounded-lg border-2 border-solid  border-base-300 p-7 md:w-5/12">
+            <li className="m-3 w-full rounded-lg border-2 border-solid  border-base-300 p-7 md:w-5/12"><HubSharp className='text-5xl' />
               <h2 className="text-xl font-bold">Centralized Communication</h2>
               <p className="text-base-content/80">
                 Access your project from anywhere and at any time. No need to
                 carry around bulky files and documents.
               </p>
             </li>
-            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 "> <InsightsSharp className='text-5xl' />
               <h2 className="text-xl font-bold">Automated Workflows</h2>
               <p className="text-base-content/80">
                 Automate routine tasks like scheduling, progress tracking, and
                 document management, freeing up time for more strategic work.
               </p>
             </li>
-            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 "> <EqualizerSharp className='text-5xl' />
               <h2 className="text-xl font-bold">Improved Data Analysis</h2>
               <p className="text-base-content/80">
                 Data collected in the system can be easily analyzed to identify
@@ -102,7 +110,7 @@ const HomeComponent = () => {
                 performance.
               </p>
             </li>
-            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 "><ErrorOutlineSharp className='text-5xl' />
               <h2 className="text-xl font-bold">Reduced Errors</h2>
               <p className="text-base-content/80">
                 Streamlined processes and centralized data minimize the risk of
@@ -116,7 +124,7 @@ const HomeComponent = () => {
             Why chose <span className="font-Fascinate">dakiyBuilds ? 🤨</span>
           </h1>
           <ul className="mt-4 flex flex-wrap justify-center">
-            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 "> <EngineeringSharp className='text-5xl' />
               <h2 className="text-xl font-bold">
                 Built by the industry, for the industry:
               </h2>
@@ -126,7 +134,7 @@ const HomeComponent = () => {
                 Dakiybuilds is designed specifically for construction workflows.
               </p>
             </li>
-            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 "> <AirSharp className='text-5xl' />
               <h2 className="text-xl font-bold">
                 Simple to learn, powerful to use:
               </h2>
@@ -135,14 +143,14 @@ const HomeComponent = () => {
                 user-friendly features. No IT expertise needed.
               </p>
             </li>
-            <li className="m-3 w-full rounded-lg border-2 border-solid  border-base-300 p-7 md:w-5/12">
+            <li className="m-3 w-full rounded-lg border-2 border-solid  border-base-300 p-7 md:w-5/12"><PriceCheck className='text-5xl' />
               <h2 className="text-xl font-bold">Provides a Free tier</h2>
               <p className="text-base-content/80">
                 Access core features like document storage, team management,
                 scheduling, and basic budget tracking completely FREE
               </p>
             </li>
-            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+            <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 "> <ShieldSharp className='text-5xl' />
               <h2 className="text-xl font-bold">Future proof your projects</h2>
               <p className="text-base-content/80">
                 Get ready for the evolution! Dakiybuilds is constantly evolving,
@@ -150,7 +158,7 @@ const HomeComponent = () => {
               </p>
             </li>
             <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
-              <h2 className="text-xl font-bold">Made In Nigeria </h2>
+              <h2 className="text-xl font-bold">Made In Nigeria 🟩⬜🟩</h2>
               <p className="text-base-content/80">
                 Most importantly, DakiyBuilds is made in Nigeria, thus, designed
                 to suit the unique processes / practices in the Nigerian &
@@ -160,7 +168,7 @@ const HomeComponent = () => {
             <li className="m-3 w-full rounded-lg p-7 md:w-5/12 "></li>
           </ul>
         </section>
-        <section className="flex bg-neutral px-4 py-12 text-white md:px-12">
+        <section id='get-started' className="flex bg-neutral px-4 py-12 text-white md:px-12 !scroll-smooth">
           <section className="w-3/6 text-left">
             <h2 className="text-2xl font-bold leading-[50px] tracking-wide">
               Do not miss this limited-time opportunity to be among the first
