@@ -1,5 +1,6 @@
 /* eslint-disable react/no-children-prop */
 'use client'
+import { Analytics } from '@vercel/analytics/react'
 import { usePathname } from 'next/navigation'
 import Header from './components/layout/Header'
 import './styles/globals.css'
@@ -37,14 +38,15 @@ export default function RootLayout({ children }) {
           }
         >
           {pathname !== '/project-schedule/gantt-chart' &&
-          pathname !== '/' &&
-          pathname !== 'create-profile' &&
-          pathname !== '/add-job' &&
-          pathname !== '/create-profile' ? (
+            pathname !== '/' &&
+            pathname !== 'create-profile' &&
+            pathname !== '/add-job' &&
+            pathname !== '/create-profile' ? (
             <Header children={children} />
           ) : (
             children
           )}
+          <Analytics />
         </body>
       </Context>
     </html>
