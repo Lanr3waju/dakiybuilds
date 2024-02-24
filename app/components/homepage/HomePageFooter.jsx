@@ -2,7 +2,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import HorizontalLine from '../utils/HorizontalLine'
 import ScrollRevealComponent from './ScrollRevealComponent'
-import { LinkRounded, MailLockSharp, PhoneAndroidSharp, SupportAgentSharp } from '@mui/icons-material'
+import {
+  LinkRounded,
+  MailLockSharp,
+  PhoneAndroidSharp,
+  SupportAgentSharp,
+} from '@mui/icons-material'
 
 const HomePageFooter = () => (
   <footer className="flex justify-around bg-slate-100 px-4 py-16 md:px-12 flex-col md:flex-row">
@@ -46,14 +51,49 @@ const HomePageFooter = () => (
     </section>
     <div className="md:w-2/4 w-full px-3 py-10 text-base font-bold text-success md:text-2xl">
       <ScrollRevealComponent>
-        <div className="md:text-5xl text-2xl tracking-tighter my-5  text-center md:text-left">🟢⚪🟢</div>
+        <div className="md:text-5xl text-2xl tracking-tighter my-5  text-center md:text-left">
+          🟢⚪🟢
+        </div>
       </ScrollRevealComponent>
       <HorizontalLine />
-      <div className='text-sm text-primary-content/70 font-Roboto tracking-wider'>
-        <h2 className='font-bold uppercase font-Poppins tracking-wider text-primary-content/70 mt-6 md:mb-2 mb-4 text-3xl md:text-xl text-center md:text-left'><SupportAgentSharp className='text-primary-content/70 text-3xl text-center md:text-left' /> Contact US:</h2>
-        <p className='md:my-1 my-2'><PhoneAndroidSharp /> <Link href='tel:+23407041444880' target='_blank' className='link-primary'>+234070DakiyBuilds</Link> (Speak with one of our support specialist)</p>
-        <p className='md:my-1 my-2'><MailLockSharp />  <Link href='mailto:lanr3waju@gmail.com' target='_blank' className='link-primary'>info@dakiybuilds.co</Link> (Send us a mail)</p>
-        <p className='md:my-1 my-2'><LinkRounded />  <Link href="https://www.linkedin.com/in/lanr3waju/" target='_blank' className="link-primary">Abass Olanrewaju Wasiu</Link> (Connect with our founder on LinkedIn)</p>
+      <div className="text-sm text-primary-content/70 font-Roboto tracking-wider">
+        <h2 className="font-bold uppercase font-Poppins tracking-wider text-primary-content/70 mt-6 md:mb-2 mb-4 text-3xl md:text-xl text-center md:text-left">
+          <SupportAgentSharp className="text-primary-content/70 text-3xl text-center md:text-left" />{' '}
+          Contact US:
+        </h2>
+        <p className="md:my-1 my-2">
+          <PhoneAndroidSharp />{' '}
+          <Link
+            href="tel:+23407041444880"
+            target="_blank"
+            className="link-primary"
+          >
+            +234070DakiyBuilds
+          </Link>{' '}
+          (Speak with one of our support specialist)
+        </p>
+        <p className="md:my-1 my-2">
+          <MailLockSharp />{' '}
+          <Link
+            href="mailto:lanr3waju@gmail.com"
+            target="_blank"
+            className="link-primary"
+          >
+            info@dakiybuilds.co
+          </Link>{' '}
+          (Send us a mail)
+        </p>
+        <p className="md:my-1 my-2">
+          <LinkRounded />{' '}
+          <Link
+            href="https://www.linkedin.com/in/lanr3waju/"
+            target="_blank"
+            className="link-primary"
+          >
+            Abass Olanrewaju Wasiu
+          </Link>{' '}
+          (Connect with our founder on LinkedIn)
+        </p>
       </div>
     </div>
   </footer>

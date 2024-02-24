@@ -7,7 +7,6 @@ import DakiybuildsPromoSection from './DakiybuildsPromoSection'
 import GetStartedSection from './GetStartedSection'
 
 const HomeComponent = () => {
-
   return (
     <>
       <HomePageHeader />
