@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   let bodyClass
 
   if (pathname === '/') {
-    title = 'Login'
+    title = 'Homepage'
     bodyClass = 'bg-base-100'
   } else if (pathname === '/project-schedule/gantt-chart') {
     title = 'gantt-chart'
