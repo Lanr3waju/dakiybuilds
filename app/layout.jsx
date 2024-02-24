@@ -1,6 +1,7 @@
 /* eslint-disable react/no-children-prop */
 'use client'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { usePathname } from 'next/navigation'
 import Header from './components/layout/Header'
 import './styles/globals.css'
@@ -47,6 +48,7 @@ export default function RootLayout({ children }) {
             children
           )}
           <Analytics />
+          <SpeedInsights />
         </body>
       </Context>
     </html>

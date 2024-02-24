@@ -31,6 +31,7 @@
     "@syncfusion/ej2-react-gantt": "^22.2.11",
     "@syncfusion/ej2-splitbuttons": "^22.2.8",
     "@vercel/analytics": "^1.2.2",
+    "@vercel/speed-insights": "^1.0.10",
     "axios": "^1.6.1",
     "eslint": "8.46.0",
     "eslint-config-next": "^14.0.4",
