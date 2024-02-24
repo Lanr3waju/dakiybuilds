@@ -91,7 +91,7 @@ function HomePageLoginForm() {
   const { email, password, retypePassword } = formErrors
 
   return (
-    <section className="max-w-xl rounded-md bg-base-200/95 px-2 py-9 leading-loose text-base-content shadow-md shadow-base-300 md:w-3/6 ">
+    <section id='login-signup' className="max-w-xl mx-auto md:mx-0 rounded-md bg-base-200 px-2 py-9 leading-loose text-base-content md:w-3/6 ">
       <h1 className="font-Poppins text-lg font-semibold uppercase text-base-content">
         {createAccount ? 'Create Account Form' : 'Login Form'}
       </h1>

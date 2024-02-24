@@ -44,7 +44,7 @@ const Carousel = () => {
             transition: 'transform 8s',
           }}
           className="mt-1 h-full w-full rounded-box object-cover shadow-sm shadow-primary"
-          src="https://res.cloudinary.com/dbzorthz8/image/upload/v1708292733/Gemini_Generated_Image_2_cgkmny.jpg"
+          src="https://res.cloudinary.com/dbzorthz8/image/upload/v1708687246/in1_ol7iqb.jpg"
           width={500}
           quality={100}
           height={300}
