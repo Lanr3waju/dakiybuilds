@@ -5,7 +5,7 @@ function RequestDemoModal() {
   return (
     <dialog
       id="request_demo_modal"
-      className="modal modal-bottom sm:modal-middle bg-base-300/20 rounded-lg"
+      className="modal modal-bottom rounded-lg bg-base-300/20 sm:modal-middle"
     >
       <div className="modal-box">
         <RequestDemoForm />

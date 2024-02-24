@@ -32,8 +32,8 @@ export default function RootLayout({ children }) {
         <body
           className={
             pathname === '/'
-              ? 'font-Raleway !scroll-smooth'
-              : 'mt-4 font-Raleway !scroll-smooth'
+              ? '!scroll-smooth font-Raleway'
+              : 'mt-4 !scroll-smooth font-Raleway'
           }
         >
           {pathname !== '/project-schedule/gantt-chart' &&

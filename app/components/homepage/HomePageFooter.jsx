@@ -10,8 +10,8 @@ import {
 } from '@mui/icons-material'
 
 const HomePageFooter = () => (
-  <footer className="flex justify-around bg-slate-100 px-4 py-16 md:px-12 flex-col md:flex-row">
-    <section className="w-full md:max-w-md text-base font-light md:text-xs text-center mx-auto md:mx-0 md:text-left leading-10 tracking-widest md:leading-4 text-primary-content/75">
+  <footer className="flex flex-col justify-around bg-slate-100 px-4 py-16 md:flex-row md:px-12">
+    <section className="mx-auto w-full text-center text-base font-light leading-10 tracking-widest text-primary-content/75 md:mx-0 md:max-w-md md:text-left md:text-xs md:leading-4">
       <Image
         className="h-20 w-full object-cover md:w-3/4 "
         src="/logo.png"
@@ -22,7 +22,7 @@ const HomePageFooter = () => (
         alt="logo"
       />
       <ScrollRevealComponent>
-        <p className="tracking wider mt-4 md:mt-1 mb-4 font-Poppins leading-5">
+        <p className="tracking wider my-4 font-Poppins leading-5 md:mt-1">
           DakiyBuilds was created by{' '}
           <Link
             href="https://www.linkedin.com/in/lanr3waju/"
@@ -49,19 +49,19 @@ const HomePageFooter = () => (
         </p>
       </ScrollRevealComponent>
     </section>
-    <div className="md:w-2/4 w-full px-3 py-10 text-base font-bold text-success md:text-2xl">
+    <div className="w-full px-3 py-10 text-base font-bold text-success md:w-2/4 md:text-2xl">
       <ScrollRevealComponent>
-        <div className="md:text-5xl text-2xl tracking-tighter my-5  text-center md:text-left">
+        <div className="my-5 text-center text-2xl tracking-tighter  md:text-left md:text-5xl">
           🟢⚪🟢
         </div>
       </ScrollRevealComponent>
       <HorizontalLine />
-      <div className="text-sm text-primary-content/70 font-Roboto tracking-wider">
-        <h2 className="font-bold uppercase font-Poppins tracking-wider text-primary-content/70 mt-6 md:mb-2 mb-4 text-3xl md:text-xl text-center md:text-left">
-          <SupportAgentSharp className="text-primary-content/70 text-3xl text-center md:text-left" />{' '}
+      <div className="font-Roboto text-sm tracking-wider text-primary-content/70">
+        <h2 className="mb-4 mt-6 text-center font-Poppins text-3xl font-bold uppercase tracking-wider text-primary-content/70 md:mb-2 md:text-left md:text-xl">
+          <SupportAgentSharp className="text-center text-3xl text-primary-content/70 md:text-left" />{' '}
           Contact US:
         </h2>
-        <p className="md:my-1 my-2">
+        <p className="my-2 md:my-1">
           <PhoneAndroidSharp />{' '}
           <Link
             href="tel:+23407041444880"
@@ -72,7 +72,7 @@ const HomePageFooter = () => (
           </Link>{' '}
           (Speak with one of our support specialist)
         </p>
-        <p className="md:my-1 my-2">
+        <p className="my-2 md:my-1">
           <MailLockSharp />{' '}
           <Link
             href="mailto:lanr3waju@gmail.com"
@@ -83,7 +83,7 @@ const HomePageFooter = () => (
           </Link>{' '}
           (Send us a mail)
         </p>
-        <p className="md:my-1 my-2">
+        <p className="my-2 md:my-1">
           <LinkRounded />{' '}
           <Link
             href="https://www.linkedin.com/in/lanr3waju/"

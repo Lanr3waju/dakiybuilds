@@ -11,7 +11,7 @@ import {
 function WPMSPromoSection() {
   return (
     <section className="px-4 py-12 md:px-12">
-      <h1 className="font-Poppins font-bold md:text-3xl text-2xl">
+      <h1 className="font-Poppins text-2xl font-bold md:text-3xl">
         Why use a web-based management system ? 🤔
       </h1>
       <ScrollRevealComponent>

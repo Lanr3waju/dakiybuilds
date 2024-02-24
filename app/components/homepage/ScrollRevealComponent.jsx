@@ -18,7 +18,7 @@ const ScrollRevealComponent = ({ children }) => {
 
   return (
     <div
-      className={`transition-all duration-1000 delay-150 ease-in-out ${
+      className={`transition-all delay-150 duration-1000 ease-in-out ${
         isVisible ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'
       }`}
       ref={domRef}

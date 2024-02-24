@@ -10,7 +10,7 @@ import {
 function DakiybuildsPromoSection() {
   return (
     <section className="border-4 border-b-base-300 bg-neutral-content px-4 py-12 md:px-12">
-      <h1 className="font-Poppins font-bold md:text-3xl text-2xl">
+      <h1 className="font-Poppins text-2xl font-bold md:text-3xl">
         Why chose <span className="font-Fascinate">dakiyBuilds ? 🤨</span>
       </h1>
       <ScrollRevealComponent>

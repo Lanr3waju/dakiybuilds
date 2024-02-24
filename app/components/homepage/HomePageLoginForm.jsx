@@ -93,7 +93,7 @@ function HomePageLoginForm() {
   return (
     <section
       id="login-signup"
-      className="max-w-xl mx-auto md:mx-0 rounded-md bg-base-200 px-2 py-9 leading-loose text-base-content md:w-3/6 "
+      className="mx-auto max-w-xl rounded-md bg-base-200 px-2 py-9 leading-loose text-base-content md:mx-0 md:w-3/6 "
     >
       <h1 className="font-Poppins text-lg font-semibold uppercase text-base-content">
         {createAccount ? 'Create Account Form' : 'Login Form'}

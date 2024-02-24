@@ -24,7 +24,7 @@ function HeroSection() {
           smooth={true}
           offset={0}
           duration={1000}
-          className="btn btn-success mx-auto max-w-full px-9 text-white !scroll-smooth"
+          className="btn btn-success mx-auto max-w-full !scroll-smooth px-9 text-white"
         >
           Get Started <ArrowForwardRounded />
         </Link>
