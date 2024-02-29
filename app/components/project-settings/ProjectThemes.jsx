@@ -1,14 +1,23 @@
 'use client'
 
 import { DakiyStore } from '@/context/context'
+import { updateAppTheme } from '@/context/supabaseTables'
 import { useContext } from 'react'
 
 function ProjectThemes() {
   const { setSelectedTheme } = useContext(DakiyStore)
 
   // 2. Create a handler to update the selected theme
-  const handleThemeChange = (event) => {
-    setSelectedTheme(event.target.value)
+  const handleThemeChange = async (event) => {
+    const selectedTheme = event.target.value
+    setSelectedTheme(selectedTheme)
+
+    if (selectedTheme !== 'corporate') {
+      const error = await updateAppTheme(selectedTheme)
+      if (error) {
+        alert(error.message)
+      }
+    }
   }
 
   return (
@@ -29,16 +38,6 @@ function ProjectThemes() {
         tabIndex={0}
         className="dropdown-content z-[1] w-52 rounded-box bg-base-300 p-2 shadow-2xl"
       >
-        <li>
-          <input
-            type="radio"
-            name="theme-dropdown"
-            className="theme-controller btn btn-ghost btn-sm btn-block justify-start"
-            onChange={handleThemeChange}
-            aria-label="Default"
-            value="default"
-          />
-        </li>
         <li>
           <input
             type="radio"

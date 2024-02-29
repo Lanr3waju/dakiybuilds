@@ -135,7 +135,7 @@ const AddJobForm = () => {
         Kindly fill the information with great care as it will not be modifiable
         after this step!
       </h2>
-      <h3 className="mt-1 text-sm font-medium italic text-warning">
+      <h3 className="mt-1 text-sm font-medium italic text-error">
         Kindly note that the contract sum is valued in Nigerian Naira! ₦
       </h3>
       <form
@@ -153,7 +153,7 @@ const AddJobForm = () => {
         <section>
           <p className="text-sm font-medium">
             Upload site picture; if available{' '}
-            <span className="text-warning">
+            <span className="text-error">
               {' '}
               (900kb maximum image size ) please wait till you get an alert
               &apos;File uploaded successfully&apos; before leaving page.
@@ -172,7 +172,7 @@ const AddJobForm = () => {
             )}
             {picture && <DoneOutline className="ml-4 text-green-500" />}
           </div>
-          <p className="m-1 rounded-md bg-error p-2 text-xs text-error-content">
+          <p className="m-1 rounded-md bg-error p-2 text-xs text-white">
             Please note that you have to add job name and location below before
             you can upload site picture
           </p>

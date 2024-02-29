@@ -39,10 +39,10 @@ export default function RootLayout({ children }) {
           }
         >
           {pathname !== '/project-schedule/gantt-chart' &&
-            pathname !== '/' &&
-            pathname !== 'create-profile' &&
-            pathname !== '/add-job' &&
-            pathname !== '/create-profile' ? (
+          pathname !== '/' &&
+          pathname !== 'create-profile' &&
+          pathname !== '/add-job' &&
+          pathname !== '/create-profile' ? (
             <Header children={children} />
           ) : (
             children
