@@ -1,7 +1,7 @@
-import ProjectUpdateComponent from "@/app/components/all-jobs-page/jobDetails/jobUpdates/ProjectUpdateComponent"
+import ProjectUpdateComponent from '@/app/components/all-jobs-page/jobDetails/jobUpdates/ProjectUpdateComponent'
 
 function UpdateSheetPage() {
-    return <ProjectUpdateComponent />
+  return <ProjectUpdateComponent />
 }
 
 export default UpdateSheetPage

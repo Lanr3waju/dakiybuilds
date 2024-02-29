@@ -14,7 +14,6 @@ import { useContext, useEffect } from 'react'
 import { DakiyStore } from '@/context/context.js'
 import { usePathname } from 'next/navigation.js'
 
-
 export default function DashboardComponent() {
   const { project, setProjects, setSelectedTheme } = useContext(DakiyStore)
   const pathname = usePathname()
@@ -37,11 +36,10 @@ export default function DashboardComponent() {
     fetchProjects()
   }, [pathname, setProjects])
 
-  return (
-    Object.keys(project).length > 0 ? (
-      <Container className='my-8' maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+  return Object.keys(project).length > 0 ? (
+    <Container className="my-8" maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       {/* Progress Bar */}
-        <Progress progress={project.progress} />
+      <Progress progress={project.progress} />
       <Grid container spacing={3}>
         {/* Greeting */}
         <Grid item xs={12} md={8} lg={8}>
@@ -87,10 +85,13 @@ export default function DashboardComponent() {
         </Grid>
       </Grid>
     </Container>
-    ) : (
-      <h1 className="m-7 rounded-lg border-2 border-error bg-error-content p-2 text-center text-lg font-bold uppercase text-error">
-          Add and Select a Project <Link className="link link-info" href='/all-jobs'>Here</Link> to access the Dashboard
-      </h1>
-    )
+  ) : (
+    <h1 className="m-7 rounded-lg border-2 border-error bg-error-content p-2 text-center text-lg font-bold uppercase text-error">
+      Add and Select a Project{' '}
+      <Link className="link link-info" href="/all-jobs">
+        Here
+      </Link>{' '}
+      to access the Dashboard
+    </h1>
   )
 }

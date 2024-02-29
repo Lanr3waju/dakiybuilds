@@ -2,12 +2,12 @@ export const initialUserFormData = {
   firstName: '',
   lastName: '',
   profession: '',
-  tel: ''
+  tel: '',
 }
 
 export const initialOrganizationFormData = {
   organizationName: '',
   organizationEmail: '',
   organizationTel: '',
-  staffs: ''
+  staffs: '',
 }

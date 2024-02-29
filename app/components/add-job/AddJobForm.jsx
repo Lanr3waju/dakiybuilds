@@ -52,7 +52,9 @@ const AddJobForm = () => {
     }
 
     // Get all number input elements and attach the wheel event listener
-    const numberInputs = containerRef.current.querySelectorAll('input[type="number"]')
+    const numberInputs = containerRef.current.querySelectorAll(
+      'input[type="number"]'
+    )
     numberInputs.forEach((input) => {
       input.addEventListener('wheel', handleWheel)
     })
@@ -98,7 +100,11 @@ const AddJobForm = () => {
       if (!errorMessage) {
         setProjects([...projects, jobData])
         setIsLoading(false)
-        setProjectSumAndDate(prevState => ({ ...prevState, projectContractSum: jobData.contractSum, projectFinishDate: jobData.estimatedFinishDate }))
+        setProjectSumAndDate((prevState) => ({
+          ...prevState,
+          projectContractSum: jobData.contractSum,
+          projectFinishDate: jobData.estimatedFinishDate,
+        }))
         window.job_addition_modal.showModal()
         setPicture(false)
         setJobData(initialJobData)
@@ -126,10 +132,17 @@ const AddJobForm = () => {
       </h2>
       <HorizontalLine />
       <h2 className="font-bold text-primary">
-        Kindly fill the information with great care as it will not be modifiable after this step!
+        Kindly fill the information with great care as it will not be modifiable
+        after this step!
       </h2>
-      <h3 className='mt-1 text-sm font-medium italic text-warning'>Kindly note that the contract sum is valued in Nigerian Naira! ₦</h3>
-      <form ref={containerRef} onSubmit={handleSubmission} className="mx-auto mb-10 mt-5 flex w-5/6 flex-col rounded-lg bg-base-200 p-10 shadow-md shadow-base-300">
+      <h3 className="mt-1 text-sm font-medium italic text-warning">
+        Kindly note that the contract sum is valued in Nigerian Naira! ₦
+      </h3>
+      <form
+        ref={containerRef}
+        onSubmit={handleSubmission}
+        className="mx-auto mb-10 mt-5 flex w-5/6 flex-col rounded-lg bg-base-200 p-10 shadow-md shadow-base-300"
+      >
         <Link
           className="btn btn-error mb-3 ml-auto w-full text-3xl md:max-w-fit"
           href="/dakiyboard"
@@ -138,18 +151,38 @@ const AddJobForm = () => {
         </Link>
         {/* File Upload */}
         <section>
-          <p className='text-sm font-medium'>Upload site picture; if available <span className='text-warning'> (900kb maximum image size ) please wait till you get an alert &apos;File uploaded successfully&apos; before leaving page.</span></p>
-          <div className='flex items-center'>
-            <input disabled={!jobData.jobName || !jobData.jobLocation} className='file-input file-input-bordered file-input-primary mb-1 w-full max-w-md' type="file" accept="image/png, image/jpeg, image/webp" onChange={handleFileChange} />
-            {isLoading && <span className="loading loading-spinner loading-md ml-4 text-primary"></span>}
-            {picture && <DoneOutline className='ml-4 text-green-500' />}
+          <p className="text-sm font-medium">
+            Upload site picture; if available{' '}
+            <span className="text-warning">
+              {' '}
+              (900kb maximum image size ) please wait till you get an alert
+              &apos;File uploaded successfully&apos; before leaving page.
+            </span>
+          </p>
+          <div className="flex items-center">
+            <input
+              disabled={!jobData.jobName || !jobData.jobLocation}
+              className="file-input file-input-bordered file-input-primary mb-1 w-full max-w-md"
+              type="file"
+              accept="image/png, image/jpeg, image/webp"
+              onChange={handleFileChange}
+            />
+            {isLoading && (
+              <span className="loading loading-spinner loading-md ml-4 text-primary"></span>
+            )}
+            {picture && <DoneOutline className="ml-4 text-green-500" />}
           </div>
-          <p className='m-1 rounded-md bg-error p-2 text-xs text-error-content'>Please note that you have to add job name and location below before you can upload site picture</p>
+          <p className="m-1 rounded-md bg-error p-2 text-xs text-error-content">
+            Please note that you have to add job name and location below before
+            you can upload site picture
+          </p>
         </section>
 
         {Object.keys(refs).map((field) => (
           <React.Fragment key={field}>
-            {field.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
+            {field
+              .replace(/([A-Z])/g, ' $1')
+              .replace(/^./, (str) => str.toUpperCase())}
             {field === 'jobType' ? (
               <select
                 ref={refs[field]}
@@ -168,50 +201,59 @@ const AddJobForm = () => {
                   </option>
                 ))}
               </select>
-            ) :
-              field === 'projectDescription' ? (
-                <textarea
+            ) : field === 'projectDescription' ? (
+              <textarea
+                id={field}
+                name={field}
+                value={jobData[field]}
+                onChange={handleInputChange}
+                ref={refs[field]}
+                className="textarea textarea-primary textarea-lg w-full p-3 text-sm tracking-widest"
+                placeholder="Enter project description"
+              ></textarea>
+            ) : (
+              <div className="flex w-full items-start justify-around">
+                <input
+                  ref={refs[field]}
+                  className="input input-bordered input-primary mb-6 w-full font-Roboto"
+                  type={
+                    field === 'clientEmail'
+                      ? 'email'
+                      : field === 'clientTelephone'
+                      ? 'tel'
+                      : field === 'contractSum' ||
+                        field === 'initialAdvancePayment'
+                      ? 'number'
+                      : field === 'agreedStartDate' ||
+                        field === 'estimatedFinishDate'
+                      ? 'date'
+                      : 'text'
+                  }
                   id={field}
                   name={field}
                   value={jobData[field]}
                   onChange={handleInputChange}
-                  ref={refs[field]}
-                  className="textarea textarea-primary textarea-lg w-full p-3 text-sm tracking-widest"
-                  placeholder="Enter project description">
-                </textarea>)
-                :
-                (<div className='flex w-full items-start justify-around'>
-                  <input
-                    ref={refs[field]}
-                    className='input input-bordered input-primary mb-6 w-full font-Roboto'
-                    type={field === 'clientEmail'
-                      ? 'email'
-                      : field === 'clientTelephone'
-                        ? 'tel'
-                        : field === 'contractSum' ||
-                          field === 'initialAdvancePayment'
-                          ? 'number'
-                          : field === 'agreedStartDate' ||
-                            field === 'estimatedFinishDate'
-                            ? 'date'
-                            : 'text'}
-                    id={field}
-                    name={field}
-                    value={jobData[field]}
-                    onChange={handleInputChange} />
-                  <span className='ml-1 mt-2 max-w-fit font-Poppins text-2xl font-bold text-secondary' >{field === 'contractSum' || field === 'initialAdvancePayment' ? '₦' : ''}</span>
-                </div>
-                )}
+                />
+                <span className="ml-1 mt-2 max-w-fit font-Poppins text-2xl font-bold text-secondary">
+                  {field === 'contractSum' || field === 'initialAdvancePayment'
+                    ? '₦'
+                    : ''}
+                </span>
+              </div>
+            )}
             {errors[field] && (
               <p className="mb-5 font-Roboto text-error">{errors[field]}</p>
             )}
           </React.Fragment>
         ))}
-        <button
-          className="btn btn-primary mt-4"
-          disabled={isLoading}
-        >
-          {isLoading ? <span className="loading loading-dots loading-lg"></span> : picture ? "Add Job" : "You've not uploaded site picture, Submit Anyways?"}
+        <button className="btn btn-primary mt-4" disabled={isLoading}>
+          {isLoading ? (
+            <span className="loading loading-dots loading-lg"></span>
+          ) : picture ? (
+            'Add Job'
+          ) : (
+            "You've not uploaded site picture, Submit Anyways?"
+          )}
         </button>
       </form>
     </section>

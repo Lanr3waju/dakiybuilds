@@ -14,9 +14,7 @@ async function DakiyBoard() {
     redirect('/create-profile')
   }
 
-  return (
-    < DashboardComponent />
-  )
+  return <DashboardComponent />
 }
 
 export default DakiyBoard

@@ -12,7 +12,7 @@ function HomePageLoginForm() {
     email: '',
     password: '',
     retypePassword: '',
-    status: 0
+    status: 0,
   })
   const [formErrors, setFormErrors] = useState({
     email: 'Field is required',
@@ -29,7 +29,7 @@ function HomePageLoginForm() {
     setLoginResponse('')
 
     const formData = new FormData(event.target)
-    const value = createAccount ? "sign-up" : "login"
+    const value = createAccount ? 'sign-up' : 'login'
     const response = await fetch(`/auth/${value}`, {
       method: 'POST',
       body: formData,
@@ -91,13 +91,19 @@ function HomePageLoginForm() {
   const { email, password, retypePassword } = formErrors
 
   return (
-    <section className="mt-5 max-w-xl rounded-md bg-base-200/95 px-2 py-9 leading-loose text-base-content shadow-md shadow-base-300 md:w-3/6 ">
+    <section
+      id="login-signup"
+      className="mx-auto max-w-xl rounded-md bg-base-200 px-2 py-9 leading-loose text-base-content md:mx-0 md:w-3/6 "
+    >
       <h1 className="font-Poppins text-lg font-semibold uppercase text-base-content">
         {createAccount ? 'Create Account Form' : 'Login Form'}
       </h1>
       <HorizontalLine />
 
-      <FormHeader createAccount={createAccount} setCreateAccount={setCreateAccount} />
+      <FormHeader
+        createAccount={createAccount}
+        setCreateAccount={setCreateAccount}
+      />
 
       <form className="flex flex-col text-left" onSubmit={handleSubmission}>
         <InputField
@@ -132,21 +138,43 @@ function HomePageLoginForm() {
         )}
 
         {!createAccount ? (
-          <button disabled={email !== "" || password !== "" || isLoading} className="btn btn-neutral btn-active mt-5 disabled:btn-disabled">
-            {isLoading ? <span className="loading loading-dots loading-lg"></span> : "Login"}
+          <button
+            disabled={email !== '' || password !== '' || isLoading}
+            className="btn btn-neutral btn-active mt-5 disabled:btn-disabled"
+          >
+            {isLoading ? (
+              <span className="loading loading-dots loading-lg"></span>
+            ) : (
+              'Login'
+            )}
           </button>
         ) : (
           <button
-              disabled={email !== "" || password !== "" || retypePassword !== "" || isLoading}
-              className="btn btn-neutral btn-active mt-5 disabled:btn-disabled"
+            disabled={
+              email !== '' ||
+              password !== '' ||
+              retypePassword !== '' ||
+              isLoading
+            }
+            className="btn btn-neutral btn-active mt-5 disabled:btn-disabled"
           >
-              {isLoading ? <span className="loading loading-dots loading-lg"></span> : "Signup"}
+            {isLoading ? (
+              <span className="loading loading-dots loading-lg"></span>
+            ) : (
+              'Signup'
+            )}
           </button>
         )}
         <div className="my-2 h-fit p-3">
-          {loginResponse &&
-            <span className={`text-base font-semibold ${formData.status === 301 ? "text-success" : "text-error"}`}>{loginResponse}</span>
-          }
+          {loginResponse && (
+            <span
+              className={`text-base font-semibold ${
+                formData.status === 301 ? 'text-success' : 'text-error'
+              }`}
+            >
+              {loginResponse}
+            </span>
+          )}
         </div>
       </form>
     </section>

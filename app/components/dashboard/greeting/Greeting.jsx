@@ -15,7 +15,6 @@ function Greeting() {
     fetchUser()
   }, [])
 
-
   return (
     <h2 className="mt-4 text-xl font-semibold">
       Hello {userName}, {getGreeting()}.

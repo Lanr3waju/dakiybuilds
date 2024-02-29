@@ -11,7 +11,7 @@ async function HomePage() {
   }
 
   return (
-    <div className="bg-[url('/yct-logo.png')] bg-right-bottom bg-no-repeat">
+    <div className="!scroll-smooth" style={{ scrollBehavior: 'smooth' }}>
       <HomeComponent />
     </div>
   )

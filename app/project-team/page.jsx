@@ -6,7 +6,6 @@ import getUserProfile from '../components/utils/getUserProfile'
 export const dynamic = 'force-dynamic'
 
 async function ProjectTeam() {
-
   const userProfile = await getUserProfile()
   const isLoggedIn = await userSession()
 

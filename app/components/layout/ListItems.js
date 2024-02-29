@@ -19,15 +19,15 @@ import { useContext } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
 import { getAcronym } from '../utils/getAcronym'
 
-
-
 export const mainListItems = (
   <>
     <Link href="/dakiyboard">
-
       <ListItemButton>
         <ListItemIcon>
-          <div className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Dakiy_\a_Board']" data-tip>
+          <div
+            className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Dakiy_\a_Board']"
+            data-tip
+          >
             <DashboardIcon />
           </div>
         </ListItemIcon>
@@ -38,7 +38,10 @@ export const mainListItems = (
     <Link href="/project-documents">
       <ListItemButton>
         <ListItemIcon>
-          <div className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Project_\a_Docs']" data-tip>
+          <div
+            className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Project_\a_Docs']"
+            data-tip
+          >
             <Folder />
           </div>
         </ListItemIcon>
@@ -49,7 +52,10 @@ export const mainListItems = (
     <Link href="/project-schedule">
       <ListItemButton>
         <ListItemIcon>
-          <div className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Project_\a_Schedule']" data-tip>
+          <div
+            className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Project_\a_Schedule']"
+            data-tip
+          >
             <CalendarMonth />
           </div>
         </ListItemIcon>
@@ -60,7 +66,10 @@ export const mainListItems = (
     <Link href="/project-team">
       <ListItemButton>
         <ListItemIcon>
-          <div className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Project_\a_Team']" data-tip>
+          <div
+            className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Project_\a_Team']"
+            data-tip
+          >
             <PeopleIcon />
           </div>
         </ListItemIcon>
@@ -71,7 +80,10 @@ export const mainListItems = (
     <Link href="/project-logs">
       <ListItemButton>
         <ListItemIcon>
-          <div className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Project_\a_Logs']" data-tip>
+          <div
+            className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Project_\a_Logs']"
+            data-tip
+          >
             <Notes />
           </div>
         </ListItemIcon>
@@ -82,7 +94,10 @@ export const mainListItems = (
     <Link href="/project-finances">
       <ListItemButton>
         <ListItemIcon>
-          <div className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Project_\a_Finance']" data-tip>
+          <div
+            className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Project_\a_Finance']"
+            data-tip
+          >
             <RequestQuote />
           </div>
         </ListItemIcon>
@@ -93,7 +108,10 @@ export const mainListItems = (
     <Link href="/all-jobs">
       <ListItemButton>
         <ListItemIcon>
-          <div className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'All_\a_Jobs']" data-tip>
+          <div
+            className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'All_\a_Jobs']"
+            data-tip
+          >
             <BusinessCenterRounded />
           </div>
         </ListItemIcon>
@@ -104,7 +122,10 @@ export const mainListItems = (
     <Link href="/project-settings">
       <ListItemButton>
         <ListItemIcon>
-          <div className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Project_\a_Settings']" data-tip>
+          <div
+            className="ml-2 md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Project_\a_Settings']"
+            data-tip
+          >
             <Settings />
           </div>
         </ListItemIcon>
@@ -125,11 +146,15 @@ export const SecondaryListItems = () => {
         quality={100}
         height={70}
         loading="lazy"
-        alt="logo" />
+        alt="logo"
+      />
       <Link href="/add-job">
         <ListItemButton>
           <ListItemIcon>
-            <div className="md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Add_\a_Job']" data-tip>
+            <div
+              className="md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Add_\a_Job']"
+              data-tip
+            >
               + <BusinessCenterRounded />
             </div>
           </ListItemIcon>
@@ -137,15 +162,19 @@ export const SecondaryListItems = () => {
         </ListItemButton>
       </Link>
       <HorizontalLine />
-      {projects && projects.map(({ name, id }) => (
-          <Link className='font-Poppins font-bold text-primary-content/80' key={id} href={`/all-jobs/${id}`}>
+      {projects &&
+        projects.map(({ name, id }) => (
+          <Link
+            className="font-Poppins font-bold text-primary-content/80"
+            key={id}
+            href={`/all-jobs/${id}`}
+          >
             <ListItemButton>
               <h2>{getAcronym(name)}</h2>
             </ListItemButton>
             <Divider />
           </Link>
-        ))
-      }
-    </div >
+        ))}
+    </div>
   )
 }

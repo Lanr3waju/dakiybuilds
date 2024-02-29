@@ -60,17 +60,19 @@ function Resources() {
             </tr>
           </thead>
           <tbody>
-            {resourceData.map(({ id, name, group, rate, quantity, resourceUnit, cost }) => (
-              <tr key={id} className='capitalize'>
-                <th>{id}</th>
-                <td>{name}</td>
-                <td>{group}</td>
-                <td>{addCommasToMoney(rate)}</td>
-                <td>{quantity}</td>
-                <td>{resourceUnit}</td>
-                <td>{addCommasToMoney(cost)}</td>
-              </tr>
-            ))}
+            {resourceData.map(
+              ({ id, name, group, rate, quantity, resourceUnit, cost }) => (
+                <tr key={id} className="capitalize">
+                  <th>{id}</th>
+                  <td>{name}</td>
+                  <td>{group}</td>
+                  <td>{addCommasToMoney(rate)}</td>
+                  <td>{quantity}</td>
+                  <td>{resourceUnit}</td>
+                  <td>{addCommasToMoney(cost)}</td>
+                </tr>
+              )
+            )}
           </tbody>
           <tfoot className="bg-primary-content text-neutral-content">
             <tr>

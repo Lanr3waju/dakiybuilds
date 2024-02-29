@@ -22,5 +22,5 @@ export async function POST(request) {
     return NextResponse.json({ message: error.message, status: error.status })
   }
 
-  return NextResponse.json({ message: "Request successful", status: 301 })
+  return NextResponse.json({ message: 'Request successful', status: 301 })
 }

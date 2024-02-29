@@ -18,5 +18,5 @@ export async function POST(request) {
     return NextResponse.json({ message: error.message, status: error.status })
   }
 
-  return NextResponse.json({ message: "Request successful", status: 200, })
+  return NextResponse.json({ message: 'Request successful', status: 200 })
 }

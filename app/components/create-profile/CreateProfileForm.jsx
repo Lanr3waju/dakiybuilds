@@ -7,7 +7,6 @@ import UserForm from './UserForm'
 function CreateProfileForm() {
   const [activateUserForm, setActivateUserForm] = useState(false)
 
-
   return (
     <section className="p-4">
       <SuccessModal />
@@ -17,7 +16,10 @@ function CreateProfileForm() {
           dakiybuilds
         </span>
       </h1>
-      <OrganizationForm activateUserForm={activateUserForm} setActivateUserForm={setActivateUserForm} />
+      <OrganizationForm
+        activateUserForm={activateUserForm}
+        setActivateUserForm={setActivateUserForm}
+      />
       <UserForm activateUserForm={activateUserForm} />
     </section>
   )
