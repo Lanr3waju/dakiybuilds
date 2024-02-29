@@ -39,7 +39,7 @@ function ProjectDetails() {
           {project.name}
         </h2>
         <Image
-          className="my-4 w-4/6 object-cover"
+          className="my-4 h-80 w-4/6 object-contain"
           priority
           quality={100}
           width={400}

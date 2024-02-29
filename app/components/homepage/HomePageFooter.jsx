@@ -24,25 +24,46 @@ const HomePageFooter = () => (
 
       <ScrollRevealComponent>
         <p className="tracking wider my-4 font-Poppins leading-5 md:mt-1">
-          DakiyBuilds was created in the Building Technology Department of Yaba College of
-          Technology in Lagos, Nigeria. The system was created to solve the
-          unique challenges faced by construction professionals in Nigeria and
-          Africa
+          DakiyBuilds was created in the Building Technology Department of Yaba
+          College of Technology in Lagos, Nigeria. The system was created to
+          solve the unique challenges faced by construction professionals in
+          Nigeria and Africa
         </p>
       </ScrollRevealComponent>
+      <HorizontalLine />
+      <div className="my-4 flex items-center justify-center md:justify-start">
+        <ScrollRevealComponent>
+          <div className="mx-2 text-lg  tracking-tighter md:text-left">
+            🟢⚪🟢
+          </div>
+        </ScrollRevealComponent>
+        <Image
+          className=" mx-2 w-1/12 object-cover"
+          src="/yct-logo.png"
+          width={200}
+          quality={100}
+          height={50}
+          loading="lazy"
+          alt="yabatech logo"
+        />
+        <Image
+          className=" mx-2 w-1/12 object-cover"
+          src="/naobs-logo.png"
+          width={200}
+          quality={100}
+          height={50}
+          loading="lazy"
+          alt="naobs logo"
+        />
+      </div>
     </section>
     <div className="w-full px-3 py-10 text-base font-bold text-success md:w-2/4 md:text-2xl">
-      <ScrollRevealComponent>
-        <div className="my-5 text-center text-2xl tracking-tighter  md:text-left md:text-5xl">
-          🟢⚪🟢
-        </div>
-      </ScrollRevealComponent>
-      <HorizontalLine />
       <div className="font-Roboto text-sm tracking-wider text-primary-content/70">
         <h2 className="mb-4 mt-6 text-center font-Poppins text-3xl font-bold uppercase tracking-wider text-primary-content/70 md:mb-2 md:text-left md:text-xl">
           <SupportAgentSharp className="text-center text-3xl text-primary-content/70 md:text-left" />{' '}
           Contact US:
         </h2>
+        <HorizontalLine />
         <p className="my-2 md:my-1">
           <PhoneAndroidSharp />{' '}
           <Link
@@ -76,27 +97,6 @@ const HomePageFooter = () => (
           </Link>{' '}
           (Connect with our founder on LinkedIn)
         </p>
-      </div>
-      <div className='flex my-3'>
-        <Image
-          className=" w-1/5 object-cover md:w-1/5 "
-          src="/yct-logo.png"
-          width={500}
-          quality={100}
-          height={100}
-          loading="lazy"
-          alt="yabatech logo"
-        />
-        <div className='divider'></div>
-        <Image
-          className=" w-1/5 object-cover md:w-1/5 "
-          src="/naobs-logo.png"
-          width={500}
-          quality={100}
-          height={100}
-          loading="lazy"
-          alt="naobs logo"
-        />
       </div>
     </div>
   </footer>

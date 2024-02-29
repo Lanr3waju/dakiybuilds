@@ -1,6 +1,6 @@
 'use client'
 import { createContext, useEffect, useState } from 'react'
-import { getAppTheme, getProjects, updateAppTheme } from './supabaseTables'
+import { getAppTheme, getProjects } from './supabaseTables'
 
 export const DakiyStore = createContext()
 
@@ -40,19 +40,6 @@ function Context({ children }) {
     }
     getProjectID()
   }, [updateFormData])
-
-  useEffect(() => {
-    async function fetchData() {
-      // You can await here
-      if (selectedTheme !== 'corporate') {
-        const error = await updateAppTheme(selectedTheme)
-        if (error) {
-          alert(error.message)
-        }
-      }
-    }
-    fetchData()
-  }, [selectedTheme])
 
   useEffect(() => {
     // Get selected theme from DB

@@ -10,8 +10,7 @@ const Carousel = () => {
     const carousel = carouselRef.current
     const interval = setInterval(() => {
       setCurrentIndex((currentIndex + 1) % carousel.children.length)
-    }, 8000) // Adjust the interval as needed (5000 milliseconds = 5 seconds)
-
+    }, 6000) // Adjust the interval as needed (5000 milliseconds = 5 seconds)
     return () => clearInterval(interval)
   }, [currentIndex])
 
@@ -25,7 +24,7 @@ const Carousel = () => {
           style={{
             overflowY: 'scroll',
             transform: `translateY(-${currentIndex * 105}%)`,
-            transition: 'transform 8s',
+            transition: 'transform 6s',
           }}
           className="h-full w-full rounded-box object-cover"
           src="https://res.cloudinary.com/dbzorthz8/image/upload/v1708292446/jo-szczepanska-5aiRb5f464A-unsplash_u2nbum.jpg"
@@ -41,7 +40,7 @@ const Carousel = () => {
           style={{
             overflowY: 'scroll',
             transform: `translateY(-${currentIndex * 105}%)`,
-            transition: 'transform 8s',
+            transition: 'transform 6s',
           }}
           className="mt-1 h-full w-full rounded-box object-cover shadow-sm shadow-primary"
           src="https://res.cloudinary.com/dbzorthz8/image/upload/v1708687246/in1_ol7iqb.jpg"
@@ -57,7 +56,7 @@ const Carousel = () => {
           style={{
             overflowY: 'scroll',
             transform: `translateY(-${currentIndex * 100}%)`,
-            transition: 'transform 8s',
+            transition: 'transform 6s',
           }}
           className="mt-1 h-full w-full rounded-box object-cover"
           src="https://res.cloudinary.com/dbzorthz8/image/upload/v1708292465/lukas-blazek-mcSDtbWXUZU-unsplash_phvfdi.jpg"
