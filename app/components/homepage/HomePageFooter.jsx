@@ -21,31 +21,13 @@ const HomePageFooter = () => (
         loading="lazy"
         alt="logo"
       />
+
       <ScrollRevealComponent>
         <p className="tracking wider my-4 font-Poppins leading-5 md:mt-1">
-          DakiyBuilds was created by{' '}
-          <Link
-            href="https://www.linkedin.com/in/lanr3waju/"
-            className="link-info"
-          >
-            Abass Olanrewaju Wasiu
-          </Link>
-          , a graduate of the Building Technology Department of Yaba College of
+          DakiyBuilds was created in the Building Technology Department of Yaba College of
           Technology in Lagos, Nigeria. The system was created to solve the
           unique challenges faced by construction professionals in Nigeria and
           Africa
-        </p>
-      </ScrollRevealComponent>
-      <HorizontalLine />
-      <ScrollRevealComponent>
-        <p className="font-Poppins leading-5 tracking-wider">
-          After working as an Assistant Site Manager during my internship, where
-          I faced the challenge of manually tracking site activities,
-          interpreting blueprints, and monitoring progress, I realized the
-          inefficiencies of existing workflows. This experience inspired the
-          creation of DakiyBuids, a web-based construction management system
-          aimed at streamlining operations and preventing delays. DakiyBuids
-          continues to evolve to meet the growing needs of the industry.
         </p>
       </ScrollRevealComponent>
     </section>
@@ -94,6 +76,27 @@ const HomePageFooter = () => (
           </Link>{' '}
           (Connect with our founder on LinkedIn)
         </p>
+      </div>
+      <div className='flex my-3'>
+        <Image
+          className=" w-1/5 object-cover md:w-1/5 "
+          src="/yct-logo.png"
+          width={500}
+          quality={100}
+          height={100}
+          loading="lazy"
+          alt="yabatech logo"
+        />
+        <div className='divider'></div>
+        <Image
+          className=" w-1/5 object-cover md:w-1/5 "
+          src="/naobs-logo.png"
+          width={500}
+          quality={100}
+          height={100}
+          loading="lazy"
+          alt="naobs logo"
+        />
       </div>
     </div>
   </footer>

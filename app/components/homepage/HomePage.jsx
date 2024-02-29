@@ -13,7 +13,7 @@ const HomeComponent = () => {
       <main className="text-center leading-loose">
         <HeroSection />
         <WPMSPromoSection />
-        <DakiybuildsPromoSection />
+        {/* <DakiybuildsPromoSection /> */}
         <GetStartedSection />
       </main>
       <HomePageFooter />
