@@ -3,7 +3,7 @@ import HomePageFooter from './HomePageFooter'
 import HomePageHeader from './HomePageHeader'
 import HeroSection from './HeroSection'
 import WPMSPromoSection from './WPMSPromoSection'
-import DakiybuildsPromoSection from './DakiybuildsPromoSection'
+// import DakiybuildsPromoSection from './DakiybuildsPromoSection'
 import GetStartedSection from './GetStartedSection'
 
 const HomeComponent = () => {
