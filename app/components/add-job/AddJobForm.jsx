@@ -177,7 +177,6 @@ const AddJobForm = () => {
             you can upload site picture
           </p>
         </section>
-
         {Object.keys(refs).map((field) => (
           <React.Fragment key={field}>
             {field

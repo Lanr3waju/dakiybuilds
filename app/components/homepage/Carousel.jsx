@@ -11,7 +11,6 @@ const Carousel = () => {
     const interval = setInterval(() => {
       setCurrentIndex((currentIndex + 1) % carousel.children.length)
     }, 6000) // Adjust the interval as needed (5000 milliseconds = 5 seconds)
-
     return () => clearInterval(interval)
   }, [currentIndex])
 
