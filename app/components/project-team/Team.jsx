@@ -26,7 +26,7 @@ function Team() {
     e.preventDefault()
     // Check if email is valid before submission
     if (validateEmail(email)) {
-      console.log('email')
+      alert('Verification email sent to ' + email)
       setEmail('')
     }
   }
