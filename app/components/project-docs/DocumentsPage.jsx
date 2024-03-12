@@ -12,12 +12,7 @@ function DocumentsPage() {
     <section className="p-4">
       <SearchDocs />
       <AddDocs />
-      <DocType name="Drawings" />
-      <DocType name="Contract Documents" />
-      <DocType name="Schedules" />
-      <DocType name="Work Orders" />
-      <DocType name="Change Orders" />
-      <DocType name="Payment Requests & Receipts" />
+      <DocType name="Document" />
     </section>
   ) : (
     <h1 className="m-7 rounded-lg border-2 border-error bg-error-content p-2 text-center text-lg font-bold uppercase text-error">
