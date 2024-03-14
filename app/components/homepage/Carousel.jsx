@@ -31,7 +31,7 @@ const Carousel = () => {
           width={500}
           quality={100}
           height={300}
-          loading="lazy"
+          priority
           alt="sticker tags on brown board"
         />
       </div>
@@ -47,7 +47,7 @@ const Carousel = () => {
           width={500}
           quality={100}
           height={300}
-          loading="lazy"
+          priority
           alt="in with the new and out with the old"
         />
       </div>
@@ -63,7 +63,7 @@ const Carousel = () => {
           width={500}
           quality={100}
           height={300}
-          loading="lazy"
+          priority
           alt="gantt chart on laptop screen"
         />
       </div>

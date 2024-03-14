@@ -43,16 +43,14 @@ const HomePageFooter = () => (
           width={200}
           quality={100}
           height={50}
-          loading="lazy"
           alt="yabatech logo"
         />
         <Image
           className=" mx-2 w-1/12 object-cover"
-          src="/https://res.cloudinary.com/dbzorthz8/image/upload/v1710414113/naobs-logo_uacobp.png"
+          src="https://res.cloudinary.com/dbzorthz8/image/upload/v1710414113/naobs-logo_uacobp.png"
           width={200}
           quality={100}
           height={50}
-          loading="lazy"
           alt="naobs logo"
         />
       </div>
