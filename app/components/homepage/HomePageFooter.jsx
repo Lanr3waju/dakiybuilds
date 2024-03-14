@@ -80,7 +80,7 @@ const HomePageFooter = () => (
             target="_blank"
             className="link-primary"
           >
-            info@dakiybuilds.co
+            dakiybuilds@gmail.com
           </Link>{' '}
           (Send us a mail)
         </p>
