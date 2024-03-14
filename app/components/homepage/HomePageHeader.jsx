@@ -6,7 +6,7 @@ function HomePageHeader() {
     <header className="z-50 flex w-full items-center justify-between border-b-4 border-base-300 px-2">
       <Image
         className="h-20 w-2/3 object-cover md:w-1/4"
-        src="/logo.png"
+        src="/https://res.cloudinary.com/dbzorthz8/image/upload/v1710414091/logo_qbxief.png"
         width={300}
         quality={100}
         height={100}
