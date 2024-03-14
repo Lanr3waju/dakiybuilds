@@ -1,10 +1,12 @@
 # DakiyBuilds
 
-[Logo](./public/logo.png)
+![Logo](./public/logo.png)
 
-> This is a minimum viable product of a web based construction management system.
- > The construction management process in Africa and a lot of countries around the world involves a lot of manual processes, and management of physical copies of documents, as well as having as project managers, construction managers, contractors, builders etc. having to keep track of a lot of things in their head. All these results in poor project outcomes such as cost overruns and project delays.
- > All of these problems can be be greatly minimized using modern technologies and that's why dakiybuilds was created.
+> This is a minimum viable product of a web-based construction management system.
+
+ > The construction management process in Africa and a lot of countries around the world involves a lot of manual processes, and management of physical copies of documents, as well as having project managers, construction managers, contractors, builders etc. having to keep track of a lot of things in their head, all these results in poor project outcomes such as cost overruns and project delays.
+
+ > All of these problems can be greatly minimized using modern technologies and that's why dakiybuilds was created.
 
 ## Features
 
