@@ -78,7 +78,7 @@ const HomePageFooter = () => (
         <p className="my-2 md:my-1">
           <MailLockSharp />{' '}
           <Link
-            href="mailto:lanr3waju@gmail.com"
+            href="mailto:dakiybuilds@gmail.com"
             target="_blank"
             className="link-primary"
           >
