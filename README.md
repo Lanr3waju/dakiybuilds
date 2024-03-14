@@ -17,7 +17,9 @@
 - Budgeting and Scheduling
 - Team Management
 - Project Monitoring
-  - and many more to come in subsequent versions## Built With
+  - and many more to come in subsequent versions
+
+## Built With
 
 - React
   - NextJS
