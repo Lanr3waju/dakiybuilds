@@ -2,51 +2,53 @@
 
 [Logo](./public/logo.png)
 
-> This is an prototype e-commerce app with components / pages such as the homepage, category page, description page, cart page built with Next.js.
- > This app is inspired by a frontend test assessment from scandiweb, and as such, the data used and design is that of the test assessment by scandiweb.
+> This is a minimum viable product of a web based construction management system.
+ > The construction management process in Africa and a lot of countries around the world involves a lot of manual processes, and management of physical copies of documents, as well as having as project managers, construction managers, contractors, builders etc. having to keep track of a lot of things in their head. All these results in poor project outcomes such as cost overruns and project delays.
+ > All of these problems can be be greatly minimized using modern technologies and that's why dakiybuilds was created.
 
-![screenshot](./public/preview.png)
+## Features
+
+- Document Storage
+- Daily Logs
+- Budgeting and Scheduling
+- Team Management
+- Project Monitoring
+  - and many more to come in subsequent versions
+
+![Preview](<video controls src="https://res.cloudinary.com/dbzorthz8/video/upload/v1710414852/Homepage_-_Google_Chrome_2024-03-14_12-07-02_ulwv5b.mp4" title="DakiyBuilds Landing Page Preview"></video>)
+
 
 ## Built With
 
-- NextJS
-  - NextJS shallow routing
-  - NextJS Image component
-
 - React
-  - JSX
-  - React Context API
-  - React Responsive Carousel Library
-
-  - Hooks
-    - useState
-    - useEffect
-    - useContext
-
+  - NextJS
+- Supabase
+  - PostgreSQL
 - Tailwind CSS
   - DaisyUi plugin
+- Syncfusion
 
-[Live demo link](https://scandi-shop-nextjs.vercel.app/)
+[Live demo link](https://dakiybuilds.vercel.app)
 
 ### Development (Running locally)
 
 - Clone the project
 
 ```bash
-git clone https://github.com/Lanr3waju/scandi-shop-nextjs.git
+git clone https://github.com/Lanr3waju/dakiybuilds.git
 
 ```
 
 - Install Dependencies
 
 ```bash
-yarn install
+npm run install
 ```
 
 To automatically fix eslint issues found (where possible):
 
 ```bash
-yarn run lint
+npm run lint
 ```
 
 ## 👤 Author
@@ -58,7 +60,7 @@ yarn run lint
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](../../issues).
+Contact me via linkedIn [@Abass Olanrewaju](https://www.linkedin.com/in/lanr3waju/) to discuss contributions you'd like to make to the project.
 
 ## Show your support
 
@@ -66,11 +68,9 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments and Resources used
 
-- [Icons8](https://icons8.com/)
 - [daisyUI](https://daisyui.com/)
-- [Scandiweb](https://scandiweb.com/)
-- [Leandrowd React Responsive Carousel](https://github.com/leandrowd/react-responsive-carousel.git)
-- [Anxiny Image Magnifier](https://dev.to/anxiny/create-an-image-magnifier-with-react-3fd7)
+- [Supabase](https://supabase.com/)
+- [Syncfusion](https://syncfusion.com/)
 
 ## 📝 License
 
