@@ -1,15 +1,17 @@
 # DakiyBuilds
+
 ![dakiyBuildCover](https://github.com/Lanr3waju/dakiybuilds/assets/94716958/b9f01ecf-37c8-4692-80c2-513e586f703f)
 
 > Dakiybuilds is a web-based construction management system, for managing construction projects.
 
- > The construction management process in Africa and a lot of countries around the world involves a lot of manual processes, and management of physical copies of documents, as well as having project managers, construction managers, contractors, builders etc. having to keep track of a lot of things in their head, all these results in poor project outcomes such as cost overruns and project delays.
+> The construction management process in Africa and a lot of countries around the world involves a lot of manual processes, and management of physical copies of documents, as well as having project managers, construction managers, contractors, builders etc. having to keep track of a lot of things in their head, all these results in poor project outcomes such as cost overruns and project delays.
 
- > All of these problems can be greatly minimized using modern technologies and that's why dakiybuilds was created.
+> All of these problems can be greatly minimized using modern technologies and that's why dakiybuilds was created.
 
-https://github.com/Lanr3waju/dakiybuilds/assets/94716958/0ff87194-05a9-4582-821e-08992e607f70
+<https://github.com/Lanr3waju/dakiybuilds/assets/94716958/0ff87194-05a9-4582-821e-08992e607f70>
 
 ## Features
+
 - Document Storage
 - Daily Logs
 - Budgeting and Scheduling
@@ -57,7 +59,7 @@ npm run lint
 
 Contributions, issues and feature requests are welcome!
 
-Please reach out to me via LinkedIn [@Abass Olanrewaju](https://www.linkedin.com/in/lanr3waju/) to discuss contributions you'd like to make to the project.
+Please reach out to me via LinkedIn [@Abass Olanrewaju](https://www.linkedin.com/in/lanr3waju/) to discuss contributions you'd like to make to the project, or if you'd like to join me on this journey.
 
 ## Show your support
 
