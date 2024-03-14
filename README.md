@@ -10,6 +10,13 @@
 
 <https://github.com/Lanr3waju/dakiybuilds/assets/94716958/0ff87194-05a9-4582-821e-08992e607f70>
 
+## App Access
+
+> If you want to preview or test the app, login with the following credentials:
+
+    email: dakiybuilds@gmail.com
+    password: Dakiybuilds101
+
 ## Features
 
 - Document Storage

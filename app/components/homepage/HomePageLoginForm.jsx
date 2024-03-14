@@ -108,6 +108,7 @@ function HomePageLoginForm() {
       <FormHeader
         createAccount={createAccount}
         setCreateAccount={setCreateAccount}
+        setFormData={setFormData}
       />
 
       <form className="flex flex-col text-left" onSubmit={handleSubmission}>
@@ -188,6 +189,21 @@ function HomePageLoginForm() {
           )}
         </div>
       </form>
+      <section className='my-4 mx-1 font-semibold text-lg tracking-wider text-error text-left'>
+        <p>If you want to preview or test the app, click <button className="link-info" onClick={() => document.getElementById('login_credentials').showModal()}>here</button> to view credentials to access the app</p>
+        <dialog id="login_credentials" className="modal">
+          <div className="modal-box text-primary-content">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <h2 className='mb-2 font-semibold text-sm'>Use the email and password below to access the app; please note, the password is case-sensitive:</h2>
+            <HorizontalLine />
+            <h3>email: <span className="font-bold text-lg font-Roboto">dakiybuilds@gmail.com</span></h3>
+            <h3>password: <span className="font-bold text-lg font-Roboto">Dakiybuilds101</span></h3>
+          </div>
+        </dialog>
+      </section>
     </section>
   )
 }
