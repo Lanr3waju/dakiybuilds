@@ -22,6 +22,11 @@ function HomePageLoginForm() {
   const [isLoading, setIsLoading] = useState(false)
 
   const [loginResponse, setLoginResponse] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword)
+  }
 
   async function handleSubmission(event) {
     event.preventDefault()
@@ -103,6 +108,7 @@ function HomePageLoginForm() {
       <FormHeader
         createAccount={createAccount}
         setCreateAccount={setCreateAccount}
+        setFormData={setFormData}
       />
 
       <form className="flex flex-col text-left" onSubmit={handleSubmission}>
@@ -117,7 +123,7 @@ function HomePageLoginForm() {
         />
         <InputField
           name="password"
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           value={formData.password}
           onChange={validateFormInput}
           placeholder="Enter your password"
@@ -128,7 +134,7 @@ function HomePageLoginForm() {
         {createAccount && (
           <InputField
             name="retypePassword"
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             value={formData.retypePassword}
             onChange={validateFormInput}
             placeholder="Retype your password"
@@ -136,6 +142,12 @@ function HomePageLoginForm() {
             errorMessage={retypePassword}
           />
         )}
+        <div className="form-control">
+          <label className="label cursor-pointer">
+            <span className="label-text">Show Password</span>
+            <input onClick={togglePasswordVisibility} type="checkbox" className="checkbox checkbox-primary" />
+          </label>
+        </div>
 
         {!createAccount ? (
           <button
@@ -177,6 +189,21 @@ function HomePageLoginForm() {
           )}
         </div>
       </form>
+      <section className='my-4 mx-1 font-semibold text-lg tracking-wider text-error text-left'>
+        <p>If you want to preview or test the app, click <button className="link-info" onClick={() => document.getElementById('login_credentials').showModal()}>here</button> to view credentials to access the app</p>
+        <dialog id="login_credentials" className="modal">
+          <div className="modal-box text-primary-content">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <h2 className='mb-2 font-semibold text-sm'>Use the email and password below to access the app; please note, the password is case-sensitive:</h2>
+            <HorizontalLine />
+            <h3>email: <span className="font-bold text-lg font-Roboto">dakiybuilds@gmail.com</span></h3>
+            <h3>password: <span className="font-bold text-lg font-Roboto">Dakiybuilds101</span></h3>
+          </div>
+        </dialog>
+      </section>
     </section>
   )
 }

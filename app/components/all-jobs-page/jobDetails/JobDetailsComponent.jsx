@@ -49,11 +49,10 @@ function JobDetailsComponent() {
 
   useEffect(() => {
     // Create the URL based on the currentProject name
-    const url = `${
-      process.env.NEXT_PUBLIC_SUPABASE_URL
-    }/storage/v1/object/public/project-site-picture/${replaceSpacesWithHyphensAndLowerCase(
-      currentProject.name
-    )}`
+    const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL
+      }/storage/v1/object/public/project-site-picture/${replaceSpacesWithHyphensAndLowerCase(
+        currentProject.name
+      )}`
 
     // Fetch the image to see if it exists
     fetch(url)
@@ -257,7 +256,8 @@ function JobDetailsComponent() {
               ) : (
                 <button
                   onClick={() => setDeleteState(true)}
-                  className="btn btn-error m-1 w-full"
+                      className="btn btn-error m-1 w-full cursor-not-allowed"
+                      disabled
                 >
                   Delete project
                 </button>

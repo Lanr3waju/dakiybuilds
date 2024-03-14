@@ -15,14 +15,14 @@ function GetStartedSection() {
         <ScrollRevealComponent>
           <h2 className="mb-2 text-2xl font-bold leading-[50px] tracking-wide">
             Do not miss this limited-time opportunity to be among the first
-            users and experience the future of construction management!
+            users to experience and shape the future of construction management!
           </h2>
         </ScrollRevealComponent>
         <section>
           <ScrollRevealComponent>
             <p className="text-5xl font-extrabold text-success md:my-1">
               Sign up for your FREE account now!{' '}
-              <ArrowRightSharp className="mx-auto block rotate-90 animate-pulse text-[200px] md:inline md:rotate-0 md:text-9xl" />{' '}
+              <ArrowRightSharp className="mx-auto block rotate-90 animate-pulse text-[150px] md:inline md:rotate-0 leading-tight" />{' '}
             </p>
           </ScrollRevealComponent>
           <ScrollRevealComponent>
