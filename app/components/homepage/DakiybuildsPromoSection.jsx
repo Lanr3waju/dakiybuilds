@@ -62,16 +62,6 @@ function DakiybuildsPromoSection() {
           </li>
           <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
             <ScrollRevealComponent>
-              <h2 className="text-xl font-bold">Made In Nigeria 🟩⬜🟩</h2>
-              <p className="text-base-content/80">
-                Most importantly, DakiyBuilds is made in Nigeria, thus, designed
-                to suit the unique processes / practices in the Nigerian &
-                African Construction Industry.
-              </p>
-            </ScrollRevealComponent>
-          </li>
-          <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
-            <ScrollRevealComponent>
               <PhoneCallbackSharp className="text-5xl" />
               <h2 className="text-xl font-bold">24/7 Customer Support</h2>
               <p className="text-base-content/80">
@@ -79,6 +69,8 @@ function DakiybuildsPromoSection() {
                 is available 24/7 to help you with any issues you may encounter.
               </p>
             </ScrollRevealComponent>
+          </li>
+          <li className="m-3 w-full rounded-lg p-7 md:w-5/12 ">
           </li>
         </ul>
       </ScrollRevealComponent>
