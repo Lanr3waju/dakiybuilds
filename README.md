@@ -1,26 +1,21 @@
 # DakiyBuilds
+![dakiyBuildCover](https://github.com/Lanr3waju/dakiybuilds/assets/94716958/b9f01ecf-37c8-4692-80c2-513e586f703f)
 
-![Logo](./public/logo.png)
-
-> This is a minimum viable product of a web-based construction management system.
+> Dakiybuilds is a web-based construction management system, for managing construction projects.
 
  > The construction management process in Africa and a lot of countries around the world involves a lot of manual processes, and management of physical copies of documents, as well as having project managers, construction managers, contractors, builders etc. having to keep track of a lot of things in their head, all these results in poor project outcomes such as cost overruns and project delays.
 
  > All of these problems can be greatly minimized using modern technologies and that's why dakiybuilds was created.
 
-## Features
+https://github.com/Lanr3waju/dakiybuilds/assets/94716958/0ff87194-05a9-4582-821e-08992e607f70
 
+## Features
 - Document Storage
 - Daily Logs
 - Budgeting and Scheduling
 - Team Management
 - Project Monitoring
-  - and many more to come in subsequent versions
-
-![Preview](<video controls src="https://res.cloudinary.com/dbzorthz8/video/upload/v1710414852/Homepage_-_Google_Chrome_2024-03-14_12-07-02_ulwv5b.mp4" title="DakiyBuilds Landing Page Preview"></video>)
-
-
-## Built With
+  - and many more to come in subsequent versions## Built With
 
 - React
   - NextJS
@@ -55,14 +50,14 @@ npm run lint
 
 ## 👤 Author
 
-- Github: [@Lanr3waju](https://github.com/Lanr3waju>)
+- Github: [@Lanr3waju](https://github.com/Lanr3waju/)
 - LinkedIn: [@Abass Olanrewaju](https://www.linkedin.com/in/lanr3waju/)
 
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
 
-Contact me via linkedIn [@Abass Olanrewaju](https://www.linkedin.com/in/lanr3waju/) to discuss contributions you'd like to make to the project.
+Please reach out to me via LinkedIn [@Abass Olanrewaju](https://www.linkedin.com/in/lanr3waju/) to discuss contributions you'd like to make to the project.
 
 ## Show your support
 
