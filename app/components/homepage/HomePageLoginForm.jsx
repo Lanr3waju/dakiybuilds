@@ -22,6 +22,11 @@ function HomePageLoginForm() {
   const [isLoading, setIsLoading] = useState(false)
 
   const [loginResponse, setLoginResponse] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword)
+  }
 
   async function handleSubmission(event) {
     event.preventDefault()
@@ -117,7 +122,7 @@ function HomePageLoginForm() {
         />
         <InputField
           name="password"
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           value={formData.password}
           onChange={validateFormInput}
           placeholder="Enter your password"
@@ -128,7 +133,7 @@ function HomePageLoginForm() {
         {createAccount && (
           <InputField
             name="retypePassword"
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             value={formData.retypePassword}
             onChange={validateFormInput}
             placeholder="Retype your password"
@@ -136,6 +141,12 @@ function HomePageLoginForm() {
             errorMessage={retypePassword}
           />
         )}
+        <div className="form-control">
+          <label className="label cursor-pointer">
+            <span className="label-text">Show Password</span>
+            <input onClick={togglePasswordVisibility} type="checkbox" className="checkbox checkbox-primary" />
+          </label>
+        </div>
 
         {!createAccount ? (
           <button
