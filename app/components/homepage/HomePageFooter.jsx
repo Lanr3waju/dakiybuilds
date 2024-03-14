@@ -14,7 +14,7 @@ const HomePageFooter = () => (
     <section className="mx-auto w-full text-center text-base font-light leading-10 tracking-widest text-primary-content/75 md:mx-0 md:max-w-md md:text-left md:text-xs md:leading-4">
       <Image
         className="h-20 w-full object-cover md:w-3/4 "
-        src="/logo.png"
+        src="https://res.cloudinary.com/dbzorthz8/image/upload/v1710414091/logo_qbxief.png"
         width={700}
         quality={100}
         height={100}
@@ -39,7 +39,7 @@ const HomePageFooter = () => (
         </ScrollRevealComponent>
         <Image
           className=" mx-2 w-1/12 object-cover"
-          src="/yct-logo.png"
+          src="https://res.cloudinary.com/dbzorthz8/image/upload/v1710414092/yct-logo_fcf6d0.png"
           width={200}
           quality={100}
           height={50}
@@ -48,7 +48,7 @@ const HomePageFooter = () => (
         />
         <Image
           className=" mx-2 w-1/12 object-cover"
-          src="/naobs-logo.png"
+          src="/https://res.cloudinary.com/dbzorthz8/image/upload/v1710414113/naobs-logo_uacobp.png"
           width={200}
           quality={100}
           height={50}
@@ -78,7 +78,7 @@ const HomePageFooter = () => (
         <p className="my-2 md:my-1">
           <MailLockSharp />{' '}
           <Link
-            href="mailto:lanr3waju@gmail.com"
+            href="mailto:dakiybuilds@gmail.com"
             target="_blank"
             className="link-primary"
           >
