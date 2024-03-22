@@ -1,4 +1,4 @@
-# DakiyBuilds
+# DakiyBuilds (in development)
 
 ![dakiyBuildCover](https://github.com/Lanr3waju/dakiybuilds/assets/94716958/b9f01ecf-37c8-4692-80c2-513e586f703f)
 
