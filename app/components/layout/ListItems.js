@@ -141,7 +141,7 @@ export const SecondaryListItems = () => {
     <div>
       <Image
         className="h-20 bg-base-200 object-cover"
-        src="/logo.png"
+        src="https://res.cloudinary.com/dbzorthz8/image/upload/v1710414091/logo_qbxief.png"
         width={200}
         quality={100}
         height={70}
