@@ -8,7 +8,7 @@
 
 > All of these problems can be greatly minimized using modern technologies and that's why dakiybuilds is being developed.
 
-https://github.com/Lanr3waju/dakiybuilds/assets/94716958/2ac05c41-7fed-4938-b88b-eadc46238a02
+<https://github.com/Lanr3waju/dakiybuilds/assets/94716958/2ac05c41-7fed-4938-b88b-eadc46238a02>
 
 ## App Access
 
