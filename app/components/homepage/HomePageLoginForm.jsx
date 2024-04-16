@@ -98,7 +98,7 @@ function HomePageLoginForm() {
   return (
     <section
       id="login-signup"
-      className="mx-auto max-w-xl rounded-md bg-base-200 px-2 py-9 leading-loose text-base-content md:mx-0 md:w-3/6 "
+      className="mx-auto max-w-xl rounded-md bg-base-200/90 px-2 py-2 leading-loose text-base-content md:mx-0 md:w-3/6 "
     >
       <h1 className="font-Poppins text-lg font-semibold uppercase text-base-content">
         {createAccount ? 'Create Account Form' : 'Login Form'}
@@ -189,8 +189,8 @@ function HomePageLoginForm() {
           )}
         </div>
       </form>
-      <section className='my-4 mx-1 font-semibold text-lg tracking-wider text-error text-left'>
-        <p>If you want to preview or test the app, click <button className="link-info" onClick={() => document.getElementById('login_credentials').showModal()}>here</button> to view credentials to access the app</p>
+      <section className='md:mt-0 my-2  mx-1 font-medium tracking-wider text-warning-content/75 font-Poppins text-left'>
+        <p className='text-sm'>If you want to preview or test the app, click <button className="link-secondary underline" onClick={() => document.getElementById('login_credentials').showModal()}>here</button> to view credentials to access the app</p>
         <dialog id="login_credentials" className="modal">
           <div className="modal-box text-primary-content">
             <form method="dialog">

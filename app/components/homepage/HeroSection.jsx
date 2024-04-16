@@ -7,7 +7,7 @@ function HeroSection() {
     <section className="flex flex-col justify-center bg-gradient-to-b from-base-100 to-base-200 px-4 py-10 text-left md:flex-row md:px-2 md:py-16">
       <Carousel />
       <section className="md:mx-4 md:max-w-2xl md:text-left">
-        <h2 className="font-Poppins text-lg font-extrabold text-success/70 md:text-2xl">
+        <h2 className="font-Poppins text-2xl font-bold md:font-extrabold text-success/70 md:text-2xl">
           Construction Management Made Easy
         </h2>
         <h1 className="max-w-[600px] font-Poppins text-3xl font-extrabold leading-10 tracking-wider text-base-content/80 md:text-5xl md:leading-[65px]">

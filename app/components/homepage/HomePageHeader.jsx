@@ -3,7 +3,7 @@ import { Link } from 'react-scroll'
 
 function HomePageHeader() {
   return (
-    <header className="z-50 flex w-full items-center justify-between border-b-4 border-base-300 px-2">
+    <header className="z-50 sticky mt-2 flex w-full items-center justify-between shadow-md shadow-base-200 px-2">
       <Image
         className="h-20 w-2/3 object-cover md:w-1/4"
         src="https://res.cloudinary.com/dbzorthz8/image/upload/v1710414091/logo_qbxief.png"
@@ -20,7 +20,7 @@ function HomePageHeader() {
         smooth={true}
         offset={-30}
         duration={1000}
-        className="btn btn-secondary btn-sm !scroll-smooth rounded-xl text-white md:btn-md md:px-9"
+        className="btn btn-outline btn-success btn-sm !scroll-smooth text-white md:btn-md md:px-9 mr-3"
       >
         Login / Signup
       </Link>

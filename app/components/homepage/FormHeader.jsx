@@ -15,10 +15,10 @@ export default function FormHeader({ createAccount, setCreateAccount, setFormDat
         ? 'Already have an account? '
         : 'Login to access your projects, or '}
       <button
-        className="link link-info"
+        className="link link-secondary"
         onClick={handleLoginOrSignupForm}
       >
-        {createAccount ? 'Click to Login' : 'Click to Sign Up:'}
+        {createAccount ? 'click to login' : 'click to sign up:'}
       </button>
     </h2>
   )
