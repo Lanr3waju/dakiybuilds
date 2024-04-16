@@ -30,7 +30,7 @@ const HomePageFooter = () => (
       <HorizontalLine />
     </section>
     <section className="w-full py-2 text-base font-bold text-success md:text-2xl">
-      <div className="flex flex-col font-Roboto text-sm tracking-wider text-primary-content/70 md:flex-row md:items-center w-full">
+      <div className="flex w-full flex-col font-Roboto text-sm tracking-wider text-primary-content/70 md:flex-row md:items-center">
         <p className="my-1 mr-3">
           <PhoneAndroidSharp />{' '}
           <Link
