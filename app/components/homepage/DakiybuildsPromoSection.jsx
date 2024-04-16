@@ -2,20 +2,20 @@ import ScrollRevealComponent from './ScrollRevealComponent'
 import {
   AirSharp,
   EngineeringSharp,
-  PhoneCallbackSharp,
   PriceCheck,
   ShieldSharp,
+  SupportAgentSharp,
 } from '@mui/icons-material'
 
 function DakiybuildsPromoSection() {
   return (
-    <section className="border-4 border-b-base-300 bg-neutral-content px-4 py-12 md:px-12">
+    <section className="border-t-4 border-b-base-300 bg-neutral-content px-4 py-12 md:px-12">
       <h1 className="font-Poppins text-2xl font-bold md:text-3xl">
         Why chose <span className="font-Fascinate">dakiyBuilds ? 🤨</span>
       </h1>
       <ScrollRevealComponent>
         <ul className="mt-4 flex flex-wrap justify-center">
-          <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+          <li className="m-3 w-full p-7 md:w-5/12 ">
             <ScrollRevealComponent>
               <EngineeringSharp className="text-5xl" />
               <h2 className="text-xl font-bold">
@@ -28,7 +28,7 @@ function DakiybuildsPromoSection() {
               </p>
             </ScrollRevealComponent>
           </li>
-          <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+          <li className="m-3 w-full p-7 md:w-5/12 ">
             <ScrollRevealComponent>
               <AirSharp className="text-5xl" />
               <h2 className="text-xl font-bold">
@@ -40,7 +40,7 @@ function DakiybuildsPromoSection() {
               </p>
             </ScrollRevealComponent>
           </li>
-          <li className="m-3 w-full rounded-lg border-2 border-solid  border-base-300 p-7 md:w-5/12">
+          <li className="m-3 p-7 md:w-5/12">
             <ScrollRevealComponent>
               <PriceCheck className="text-5xl" />
               <h2 className="text-xl font-bold">Provides a Free tier</h2>
@@ -50,7 +50,7 @@ function DakiybuildsPromoSection() {
               </p>
             </ScrollRevealComponent>
           </li>
-          <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+          <li className="m-3 w-full p-7 md:w-5/12 ">
             <ScrollRevealComponent>
               <ShieldSharp className="text-5xl" />
               <h2 className="text-xl font-bold">Future proof your projects</h2>
@@ -60,9 +60,9 @@ function DakiybuildsPromoSection() {
               </p>
             </ScrollRevealComponent>
           </li>
-          <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+          <li className="m-3 w-full p-7 md:w-5/12 ">
             <ScrollRevealComponent>
-              <PhoneCallbackSharp className="text-5xl" />
+              <SupportAgentSharp className="text-5xl" />
               <h2 className="text-xl font-bold">24/7 Customer Support</h2>
               <p className="text-base-content/80">
                 We are here to help you every step of the way. Our support team

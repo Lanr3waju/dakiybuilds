@@ -10,13 +10,13 @@ import {
 
 function WPMSPromoSection() {
   return (
-    <section className="px-4 py-12 md:px-12">
+    <section className="border-t-4 border-base-300 px-4 py-12 md:px-12">
       <h1 className="font-Poppins text-2xl font-bold md:text-3xl">
         Why use a web-based management system ? 🤔
       </h1>
       <ScrollRevealComponent>
         <ul className="mt-4 flex flex-wrap justify-center">
-          <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+          <li className="m-3 w-full p-7 md:w-5/12 ">
             <ScrollRevealComponent>
               <UpdateSharp className="text-5xl" />
               <h2 className="text-xl font-bold">Real-time updates: </h2>
@@ -28,7 +28,7 @@ function WPMSPromoSection() {
               </p>
             </ScrollRevealComponent>
           </li>
-          <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+          <li className="m-3 w-full p-7 md:w-5/12 ">
             <ScrollRevealComponent>
               <Diversity1Sharp className="text-5xl" />
               <h2 className="text-xl font-bold">Remote Access</h2>
@@ -38,7 +38,7 @@ function WPMSPromoSection() {
               </p>
             </ScrollRevealComponent>
           </li>
-          <li className="m-3 w-full rounded-lg border-2 border-solid  border-base-300 p-7 md:w-5/12">
+          <li className="m-3 w-full p-7 md:w-5/12">
             <ScrollRevealComponent>
               <HubSharp className="text-5xl" />
               <h2 className="text-xl font-bold">Centralized Communication</h2>
@@ -48,7 +48,7 @@ function WPMSPromoSection() {
               </p>
             </ScrollRevealComponent>
           </li>
-          <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+          <li className="m-3 w-full p-7 md:w-5/12 ">
             <ScrollRevealComponent>
               <InsightsSharp className="text-5xl" />
               <h2 className="text-xl font-bold">Automated Workflows</h2>
@@ -58,7 +58,7 @@ function WPMSPromoSection() {
               </p>
             </ScrollRevealComponent>
           </li>
-          <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+          <li className="m-3 w-full p-7 md:w-5/12 ">
             <ScrollRevealComponent>
               <EqualizerSharp className="text-5xl" />
               <h2 className="text-xl font-bold">Improved Data Analysis</h2>
@@ -69,7 +69,7 @@ function WPMSPromoSection() {
               </p>
             </ScrollRevealComponent>
           </li>
-          <li className="m-3 w-full rounded-lg border-2 border-solid border-base-300 p-7 md:w-5/12 ">
+          <li className="m-3 w-full p-7 md:w-5/12 ">
             <ScrollRevealComponent>
               <ErrorOutlineSharp className="text-5xl" />
               <h2 className="text-xl font-bold">Reduced Errors</h2>
