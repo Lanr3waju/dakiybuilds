@@ -10,7 +10,7 @@ import {
 
 function WPMSPromoSection() {
   return (
-    <section className="px-4 py-12 md:px-12 border-t-4 border-base-300">
+    <section className="border-t-4 border-base-300 px-4 py-12 md:px-12">
       <h1 className="font-Poppins text-2xl font-bold md:text-3xl">
         Why use a web-based management system ? 🤔
       </h1>
