@@ -8,15 +8,25 @@ import calculatePercentage from '../utils/calculatePercentage'
 import Payments from './Payments'
 import { DakiyStore } from '@/context/context'
 import addCommasToMoney from '../utils/addCommasToNos'
+import ExpenditureRegistrationForm from './ExpenditureRegistrationForm'
 
 function ProjectFinancePage() {
   const { project, workingProjectSumAndDate } = useContext(DakiyStore)
+
   return Object.keys(project).length > 0 ? (
     <div className="p-4">
       <h2 className="text-lg font-semibold uppercase text-primary">Finances</h2>
       <HorizontalLine />
       <section className="mx-auto my-8 rounded-lg border-2 border-accent bg-accent/10 p-4">
+        <ExpenditureRegistrationForm />
         <Progress progress={0} />
+        <FinanceBar
+          progress={0}
+          finance={calculatePercentage(
+            0,
+            workingProjectSumAndDate?.workingProjectContractSum
+          )}
+        />
         <div className="flex w-full justify-between font-Poppins text-sm font-semibold text-primary-content/70">
           <div
             className="tooltip tooltip-bottom tooltip-info z-50 cursor-pointer before:w-[5rem] before:content-[attr(data-tip)]"
@@ -34,17 +44,8 @@ function ProjectFinancePage() {
             )}
           </div>
         </div>
-        <FinanceBar
-          progress={0}
-          finance={calculatePercentage(
-            0,
-            workingProjectSumAndDate?.workingProjectContractSum
-          )}
-        />
         {/* TODO: The form should contain input for Proof of Payment & selection for payment type Cr or Dr */}
-        <button className="btn btn-secondary mt-5 w-full md:w-1/4">
-          register payment
-        </button>
+        <button className="btn btn-primary mt-4" onClick={() => document.getElementById('payment_form').showModal()}>Register Expenditure</button>
       </section>
       <HorizontalLine />
       <section className="my-8">
