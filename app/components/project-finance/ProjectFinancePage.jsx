@@ -8,7 +8,7 @@ import calculatePercentage from '../utils/calculatePercentage'
 import Payments from './Payments'
 import { DakiyStore } from '@/context/context'
 import addCommasToMoney from '../utils/addCommasToNos'
-import ExpenditureRegistrationForm from './ExpenditureRegistrationForm'
+import ExpenditureRegistrationModal from './ExpenditureRegistrationModal'
 
 function ProjectFinancePage() {
   const { project, workingProjectSumAndDate } = useContext(DakiyStore)
@@ -18,7 +18,7 @@ function ProjectFinancePage() {
       <h2 className="text-lg font-semibold uppercase text-primary">Finances</h2>
       <HorizontalLine />
       <section className="mx-auto my-8 rounded-lg border-2 border-accent bg-accent/10 p-4">
-        <ExpenditureRegistrationForm />
+        <ExpenditureRegistrationModal />
         <Progress progress={0} />
         <FinanceBar
           progress={0}
