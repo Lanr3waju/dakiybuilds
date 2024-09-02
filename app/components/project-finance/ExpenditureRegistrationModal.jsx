@@ -4,7 +4,7 @@ function ExpenditureRegistrationModal() {
     return (
         <dialog id="payment_form" className="modal">
             <div className="modal-box">
-                <h3 className="font-bold text-lg text-primary-content/70">Expenditure Registration!</h3>
+                <h3 className="text-lg font-bold text-primary-content/70">Expenditure Registration!</h3>
                 <ExpenditureRegistrationForm />
                 <div className="modal-action">
                     <form method="dialog">
