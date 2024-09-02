@@ -91,7 +91,7 @@ const ExpenditureRegistrationForm = () => {
                     onChange={handleChange}
                     className="input input-bordered input-primary mb-1 block w-full"
                 />
-                {errors.amount && <span className="text-error text-xs font-semibold lowercase ">{errors.amount}</span>}
+                {errors.amount && <span className="text-xs font-semibold lowercase text-error ">{errors.amount}</span>}
             </div>
 
             <div className='mt-6'>
@@ -107,7 +107,7 @@ const ExpenditureRegistrationForm = () => {
                     <option value="CR">CR</option>
                     <option value="DR">DR</option>
                 </select>
-                {errors.type && <span className="text-error text-xs font-semibold lowercase ">{errors.type}</span>}
+                {errors.type && <span className="text-xs font-semibold lowercase text-error ">{errors.type}</span>}
             </div>
 
             <div className='mt-6'>
@@ -120,7 +120,7 @@ const ExpenditureRegistrationForm = () => {
                     onChange={handleChange}
                     className="input input-bordered input-primary mb-1 block w-full"
                 />
-                {errors.description && <span className="text-error text-xs font-semibold lowercase ">{errors.description}</span>}
+                {errors.description && <span className="text-xs font-semibold lowercase text-error ">{errors.description}</span>}
             </div>
 
             <div className='mt-6'>
@@ -133,7 +133,7 @@ const ExpenditureRegistrationForm = () => {
                     onChange={handleChange}
                     className="input input-bordered input-primary mb-1 block w-full"
                 />
-                {errors.beneficiary && <span className="text-error text-xs font-semibold lowercase ">{errors.beneficiary}</span>}
+                {errors.beneficiary && <span className="text-xs font-semibold lowercase text-error ">{errors.beneficiary}</span>}
             </div>
             <div className='mt-6'>
                 <label className="mb-2 text-sm font-semibold tracking-widest text-primary-content/40" htmlFor="evidence">Evidence (Image)
@@ -142,13 +142,13 @@ const ExpenditureRegistrationForm = () => {
                         id="evidence"
                         name="evidence"
                         onChange={handleFileChange}
-                        className="file-input file-input-bordered w-full file-input-primary"
+                        className="file-input file-input-bordered file-input-primary w-full"
                     />
-                    {errors.evidence && <span className="text-error text-xs font-semibold lowercase ">{errors.evidence}</span>}
+                    {errors.evidence && <span className="text-xs font-semibold lowercase text-error ">{errors.evidence}</span>}
                 </label>
             </div>
 
-            <button className="btn btn-secondary block w-full mt-6" type="submit" onClick={handleSubmit}>Submit</button>
+            <button className="btn btn-secondary mt-6 block w-full" type="submit" onClick={handleSubmit}>Submit</button>
         </form>
     )
 }
