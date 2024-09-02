@@ -9,7 +9,7 @@ function FinanceBar({ finance, progress }) {
 
   return (
     <>
-      <h2 className="mt-2 font-Poppins font-medium">
+      <h2 className="mt-4 font-Poppins font-medium">
         You have spent {finance}% of the cost sum
       </h2>
       <progress

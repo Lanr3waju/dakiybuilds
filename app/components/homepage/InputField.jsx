@@ -12,7 +12,7 @@ export default function InputField({
       <input
         className={` ${
           isError && 'input-error'
-          } input input-bordered input-success font-Roboto mt-3 w-full focus:border-none focus:ring-0`}
+          } input input-bordered input-success mt-3 w-full font-Roboto focus:border-none focus:ring-0`}
         name={name}
         type={type}
         value={value}

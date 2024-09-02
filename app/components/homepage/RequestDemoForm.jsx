@@ -4,7 +4,7 @@ import { useForm, ValidationError } from '@formspree/react'
 function RequestDemoForm() {
   const [state, handleSubmit] = useForm('mnqevqyv')
   if (state.succeeded) {
-    return <p className='text-primary-content font-semibold'> Thanks for requesting a demo! We&apos;ll  get back to you shortly</p >
+    return <p className='font-semibold text-primary-content'> Thanks for requesting a demo! We&apos;ll  get back to you shortly</p >
   }
   return (
     <>

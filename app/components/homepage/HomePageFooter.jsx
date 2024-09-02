@@ -3,19 +3,18 @@ import Link from 'next/link'
 import HorizontalLine from '../utils/HorizontalLine'
 import ScrollRevealComponent from './ScrollRevealComponent'
 import {
-  LinkRounded,
-  MailLockSharp,
+  LinkedIn,
+  MailSharp,
   PhoneAndroidSharp,
-  SupportAgentSharp,
 } from '@mui/icons-material'
 
 const HomePageFooter = () => (
-  <footer className="flex flex-col justify-around bg-slate-100 px-4 py-16 md:flex-row md:px-12">
-    <section className="mx-auto w-full text-center text-base font-light leading-10 tracking-widest text-primary-content/75 md:mx-0 md:max-w-md md:text-left md:text-xs md:leading-4">
+  <footer className="flex flex-col justify-around bg-slate-100 px-4 py-10 md:flex-col md:px-16">
+    <section className="mx-auto w-full text-center text-sm font-medium leading-10 tracking-widest text-primary-content/80 md:mx-0 md:max-w-[38rem] md:text-left md:text-sm md:leading-6">
       <Image
         className="h-20 w-full object-cover md:w-3/4 "
         src="https://res.cloudinary.com/dbzorthz8/image/upload/v1710414091/logo_qbxief.png"
-        width={700}
+        width={900}
         quality={100}
         height={100}
         loading="lazy"
@@ -23,80 +22,47 @@ const HomePageFooter = () => (
       />
 
       <ScrollRevealComponent>
-        <p className="tracking wider my-4 font-Poppins leading-5 md:mt-1">
-          DakiyBuilds was created in the Building Technology Department of Yaba
-          College of Technology in Lagos, Nigeria. The system was created to
-          solve the unique challenges faced by construction professionals in
-          Nigeria and Africa
+        <p className="my-2 w-full leading-6 md:mt-1">
+          A web-based construction management system meticulously crafted by professionals in the construction industry to address the challenges faced by project stakeholders (including Project Managers, Construction Managers, Architects, Builders, and Construction Companies).
+          Equipped with carefully selected features, it empowers the management team to oversee projects with precision and efficiency.
         </p>
       </ScrollRevealComponent>
       <HorizontalLine />
-      <div className="my-4 flex items-center justify-center md:justify-start">
-        <ScrollRevealComponent>
-          <div className="mx-2 text-lg  tracking-tighter md:text-left">
-            🟢⚪🟢
-          </div>
-        </ScrollRevealComponent>
-        <Image
-          className=" mx-2 w-1/12 object-cover"
-          src="https://res.cloudinary.com/dbzorthz8/image/upload/v1710414092/yct-logo_fcf6d0.png"
-          width={200}
-          quality={100}
-          height={50}
-          alt="yabatech logo"
-        />
-        <Image
-          className=" mx-2 w-1/12 object-cover"
-          src="https://res.cloudinary.com/dbzorthz8/image/upload/v1710414113/naobs-logo_uacobp.png"
-          width={200}
-          quality={100}
-          height={50}
-          alt="naobs logo"
-        />
-      </div>
     </section>
-    <div className="w-full px-3 py-10 text-base font-bold text-success md:w-2/4 md:text-2xl">
-      <div className="font-Roboto text-sm tracking-wider text-primary-content/70">
-        <h2 className="mb-4 mt-6 text-center font-Poppins text-3xl font-bold uppercase tracking-wider text-primary-content/70 md:mb-2 md:text-left md:text-xl">
-          <SupportAgentSharp className="text-center text-3xl text-primary-content/70 md:text-left" />{' '}
-          Contact US:
-        </h2>
-        <HorizontalLine />
-        <p className="my-2 md:my-1">
+    <section className="w-full py-2 text-base font-bold text-success md:text-2xl">
+      <div className="flex w-full flex-col font-Roboto text-sm tracking-wider text-primary-content/70 md:flex-row md:items-center">
+        <p className="my-1 mr-3">
           <PhoneAndroidSharp />{' '}
           <Link
             href="tel:+23407041444880"
             target="_blank"
-            className="link-primary"
+            className="link-secondary"
           >
-            +234070DakiyBuilds
+            +234 070 - DakiyBuilds
           </Link>{' '}
-          (Speak with one of our support specialist)
         </p>
-        <p className="my-2 md:my-1">
-          <MailLockSharp />{' '}
+        <p className="my-1 mr-3">
+          <MailSharp />{' '}
           <Link
             href="mailto:dakiybuilds@gmail.com"
             target="_blank"
-            className="link-primary"
+            className="link-secondary"
           >
             dakiybuilds@gmail.com
-          </Link>{' '}
-          (Send us a mail)
+          </Link>
         </p>
-        <p className="my-2 md:my-1">
-          <LinkRounded />{' '}
+        <p className="my-1 mr-3">
+          <LinkedIn />{' '}
           <Link
             href="https://www.linkedin.com/in/lanr3waju/"
             target="_blank"
-            className="link-primary"
+            className="link-secondary"
           >
             Abass Olanrewaju Wasiu
-          </Link>{' '}
-          (Connect with our founder on LinkedIn)
+          </Link>
         </p>
       </div>
-    </div>
+    </section>
   </footer>
 )
 
