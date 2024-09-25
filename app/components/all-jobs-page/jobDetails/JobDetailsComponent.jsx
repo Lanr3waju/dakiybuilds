@@ -257,7 +257,6 @@ function JobDetailsComponent() {
                 <button
                   onClick={() => setDeleteState(true)}
                       className="btn btn-error m-1 w-full cursor-not-allowed"
-                      disabled
                 >
                   Delete project
                 </button>
