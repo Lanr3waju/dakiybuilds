@@ -1,14 +1,60 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
 import addCommasToMoney from '../utils/addCommasToNos'
+import { DakiyStore } from '@/context/context'
+import BudgetBar from './BudgetBar'
 
 function BudgetingComponent({ workingProjectSumAndDate }) {
     const [budgets, setBudgets] = useState({})
     const [modifiedBudgets, setModifiedBudgets] = useState({}) // Track only modified fields
     const [totalBudget, setTotalBudget] = useState(0)
     const [showBudgetForm, setShowBudgetForm] = useState(false)
-    const categories = ['Labor', 'Materials', 'Equipment', 'Subcontractors', 'Others/Miscellaneous']
+    const categories = ['Labor', 'Material', 'Equipment', 'Subcontractor', 'Others']
+    const { expenditures } = useContext(DakiyStore)
+    const [localExpenditures, setLocalExpenditures] = useState({
+        Labor: 0,
+        Material: 0,
+        Equipment: 0,
+        Subcontractor: 0,
+        Others: 0,
+    })
+    // const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        // Create a temporary object to accumulate the amounts
+        const tempExpenditures = {
+            Labor: 0,
+            Material: 0,
+            Equipment: 0,
+            Subcontractor: 0,
+            Others: 0,
+        }
+
+        // Iterate over the fetched data and sum amounts based on categories
+        expenditures.forEach(expenditure => {
+            const { category, amount } = expenditure
+            const parsedAmount = parseFloat(amount) || 0 // Ensure amount is a number
+
+            // Update the category in the temp object by summing up amounts
+            if (category === 'Labor') {
+                tempExpenditures.Labor += parsedAmount
+            } else if (category === 'Material') {
+                tempExpenditures.Material += parsedAmount
+            } else if (category === 'Equipment') {
+                tempExpenditures.Equipment += parsedAmount
+            } else if (category === 'Subcontractor') {
+                tempExpenditures.Subcontractor += parsedAmount
+            } else if (category === 'Others' || category === 'Miscellaneous') {
+                tempExpenditures.Others += parsedAmount
+            }
+        })
+
+        // Update the state with the summed amounts
+        setLocalExpenditures(tempExpenditures)
+
+    }, [expenditures])
+
 
     // Handle input change and track modified fields
     const handleBudgetChange = (category, value) => {
@@ -72,15 +118,18 @@ function BudgetingComponent({ workingProjectSumAndDate }) {
                 </div>
             )}
 
-            <h3 className="mt-4 font-semibold text-primary">Current Budgets</h3>
+            <h3 className="mt-4 font-semibold text-primary uppercase mb-4 text-lg">Current Budgets</h3>
             <ul>
                 {categories.map((category) => (
-                    <li key={category} className="flex justify-between">
-                        <span>{category}:</span>
-                        <span className='font-Roboto'>₦{addCommasToMoney(budgets[category] || 0)}</span>
+                    <li className='mb-6' key={category}>
+                        <span className='font-semibold text-secondary-content'>{category}:</span>
+                        <span className='font-Roboto font-bold text-lg'>  ₦{addCommasToMoney(budgets[category] || 0)}</span>
+                        <BudgetBar expenditure={localExpenditures[category] || 0} budget={budgets[category] || 0} />
+                        {/* Access the corresponding expenditure for the category */}
+                        <div className='text-right font-Roboto ml-auto'>{category} Expenditure: ₦{addCommasToMoney(localExpenditures[category] || 0)}</div>
+                        <div className='mt-10'><HorizontalLine /></div>
                     </li>
                 ))}
-                <HorizontalLine />
                 <h3 className='flex justify-between mt-4 font-semibold text-primary'>
                     <span>Total:</span>
                     <span className='font-Roboto'>₦{addCommasToMoney(totalBudget)}</span>

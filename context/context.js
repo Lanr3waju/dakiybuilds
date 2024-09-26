@@ -1,6 +1,7 @@
 'use client'
 import { createContext, useEffect, useState } from 'react'
 import { getAppTheme, getProjects } from './supabaseTables'
+import { getExpendituresByProjectId } from '@/app/components/project-finance/supabaseTables'
 
 export const DakiyStore = createContext()
 
@@ -17,6 +18,8 @@ function Context({ children }) {
     description: '',
   })
 
+  const [expenditures, setExpenditures] = useState([])
+
   const [projectSumAndDate, setProjectSumAndDate] = useState({
     projectFinishDate: '',
     projectContractSum: '',
@@ -26,6 +29,8 @@ function Context({ children }) {
     workingProjectFinishDate: '',
     workingProjectContractSum: '',
   })
+
+  const [expendituresTrigger, setExpendituresTrigger] = useState({})
 
   useEffect(() => {
     if (projects?.length === 1) {
@@ -127,6 +132,37 @@ function Context({ children }) {
     }
   }, [project.contract_sum, project.finish_date, project.id, projects])
 
+  useEffect(() => {
+    const fetchExpenditures = async () => {
+      try {
+        const data = await getExpendituresByProjectId(currentProjectId)
+        // Sort the data by `created_at` (assuming it's a valid timestamp format)
+        const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        // Set the sorted data
+        setExpenditures(sortedData)
+      } catch (error) {
+        console.error('Error fetching expenditures:', error)
+      }
+    }
+    currentProjectId && fetchExpenditures()
+  }, [currentProjectId])
+
+  useEffect(() => {
+    const fetchExpenditures = async () => {
+      try {
+        const data = await getExpendituresByProjectId(currentProjectId)
+        // Sort the data by `created_at` (assuming it's a valid timestamp format)
+        const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        // Set the sorted data
+        setExpenditures(sortedData)
+      } catch (error) {
+        console.error('Error fetching expenditures:', error)
+      }
+    }
+
+    fetchExpenditures()
+  }, [expendituresTrigger])
+
   return (
     <DakiyStore.Provider
       value={{
@@ -141,6 +177,8 @@ function Context({ children }) {
         setSelectedTheme,
         workingProjectSumAndDate,
         setWorkingProjectSumAndDate,
+        expenditures,
+        setExpendituresTrigger
       }}
     >
       {children}

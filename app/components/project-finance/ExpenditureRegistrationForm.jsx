@@ -3,7 +3,7 @@ import { useContext, useState } from 'react'
 import { registerExpenditure } from './supabaseTables';
 
 const ExpenditureRegistrationForm = () => {
-    const { project } = useContext(DakiyStore)
+    const { project, setExpendituresTrigger } = useContext(DakiyStore)
     const [formData, setFormData] = useState({
         amount: '',
         category: '',
@@ -55,6 +55,7 @@ const ExpenditureRegistrationForm = () => {
         if (error?.message) {
             alert(`${error.message} Try Again!`)
         } else {
+            setExpendituresTrigger(formData)
             alert('Expenditure successfully added')
             setFormData({
                 amount: '',
@@ -99,10 +100,10 @@ const ExpenditureRegistrationForm = () => {
                 >
                     <option value="">Select Category</option>
                     <option value="Labor">Labor</option>
-                    <option value="Materials">Materials</option>
+                    <option value="Material">Material</option>
                     <option value="Equipment">Equipment</option>
-                    <option value="Subcontractors">Subcontractors</option>
-                    <option value="Others/Misc">Others/Misc</option>
+                    <option value="Subcontractor">Subcontractor</option>
+                    <option value="Others">Others</option>
                 </select>
                 {errors.category && <span className="text-xs font-semibold lowercase text-error">{errors.category}</span>}
             </div>
