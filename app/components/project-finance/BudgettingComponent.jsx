@@ -92,7 +92,7 @@ function BudgetingComponent({ workingProjectSumAndDate }) {
             {showBudgetForm && (
                 <form onSubmit={handleSubmitBudgets}>
                     {categories.map((category) => (
-                        <div key={category} className="flex justify-between my-2">
+                        <div key={category} className="my-2 flex justify-between">
                             <label className="mr-2">{category}:</label>
                             <input
                                 type="number"
@@ -118,19 +118,19 @@ function BudgetingComponent({ workingProjectSumAndDate }) {
                 </div>
             )}
 
-            <h3 className="mt-4 font-semibold text-primary uppercase mb-4 text-lg">Current Budgets</h3>
+            <h3 className="my-4 text-lg font-semibold uppercase text-primary">Current Budgets</h3>
             <ul>
                 {categories.map((category) => (
                     <li className='mb-6' key={category}>
                         <span className='font-semibold text-secondary-content'>{category}:</span>
-                        <span className='font-Roboto font-bold text-lg'>  ₦{addCommasToMoney(budgets[category] || 0)}</span>
+                        <span className='font-Roboto text-lg font-bold'>  ₦{addCommasToMoney(budgets[category] || 0)}</span>
                         <BudgetBar expenditure={localExpenditures[category] || 0} budget={budgets[category] || 0} />
                         {/* Access the corresponding expenditure for the category */}
-                        <div className='text-right font-Roboto ml-auto'>{category} Expenditure: ₦{addCommasToMoney(localExpenditures[category] || 0)}</div>
+                        <div className='ml-auto text-right font-Roboto'>{category} Expenditure: ₦{addCommasToMoney(localExpenditures[category] || 0)}</div>
                         <div className='mt-10'><HorizontalLine /></div>
                     </li>
                 ))}
-                <h3 className='flex justify-between mt-4 font-semibold text-primary'>
+                <h3 className='mt-4 flex justify-between font-semibold text-primary'>
                     <span>Total:</span>
                     <span className='font-Roboto'>₦{addCommasToMoney(totalBudget)}</span>
                 </h3>
