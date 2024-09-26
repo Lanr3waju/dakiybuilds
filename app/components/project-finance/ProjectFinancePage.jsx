@@ -9,6 +9,7 @@ import Payments from './Payments'
 import { DakiyStore } from '@/context/context'
 import addCommasToMoney from '../utils/addCommasToNos'
 import ExpenditureRegistrationModal from './ExpenditureRegistrationModal'
+import BudgetingComponent from './BudgettingComponent'
 
 function ProjectFinancePage() {
   const { project, workingProjectSumAndDate } = useContext(DakiyStore)
@@ -44,13 +45,16 @@ function ProjectFinancePage() {
             )}
           </div>
         </div>
-        {/* TODO: The form should contain input for Proof of Payment & selection for payment type Cr or Dr */}
         <button className="btn btn-primary mt-4" onClick={() => document.getElementById('payment_form').showModal()}>Register Expenditure</button>
       </section>
       <HorizontalLine />
+
+      {/* Import and use the BudgetingComponent */}
+      <BudgetingComponent workingProjectSumAndDate={workingProjectSumAndDate} />
+
       <section className="my-8">
         <h2 className="font-semibold uppercase text-primary-content/75">
-          Payments Sheet
+          Expenditure Sheet
         </h2>
         <Payments />
       </section>

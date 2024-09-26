@@ -6,7 +6,7 @@ const ExpenditureRegistrationForm = () => {
     const { project } = useContext(DakiyStore)
     const [formData, setFormData] = useState({
         amount: '',
-        type: '',
+        category: '',
         description: '',
         beneficiary: '',
         evidence: null,
@@ -21,13 +21,13 @@ const ExpenditureRegistrationForm = () => {
 
     const validateForm = () => {
         const validationErrors = {}
-        const { amount, type, description, beneficiary } = formData;
+        const { amount, category, description, beneficiary } = formData;
 
         if (!amount) validationErrors.amount = 'Amount is required'
         else if (amount <= 0) validationErrors.amount = 'Amount must be greater than zero'
         else if (amount > 10000000) validationErrors.amount = 'Amount must be less than or equal to 10,000,000';
 
-        if (!type) validationErrors.type = 'Type is required'
+        if (!category) validationErrors.type = 'Type is required'
         if (!description) validationErrors.description = 'Description is required'
         else if (description.length > 50) validationErrors.description = 'Description must be 50 characters or less';
 
@@ -58,7 +58,7 @@ const ExpenditureRegistrationForm = () => {
             alert('Expenditure successfully added')
             setFormData({
                 amount: '',
-                type: '',
+                category: '',
                 description: '',
                 beneficiary: '',
                 evidence: null,
@@ -89,19 +89,22 @@ const ExpenditureRegistrationForm = () => {
             </div>
 
             <div className='mt-6'>
-                <label htmlFor="type" className="mb-2 text-sm font-semibold tracking-widest text-primary-content/40">Type (CR-Credit / DR-Debit)</label>
+                <label htmlFor="category" className="mb-2 text-sm font-semibold tracking-widest text-primary-content/40">Category</label>
                 <select
-                    id="type"
-                    name="type"
-                    value={formData.type}
+                    id="category"
+                    name="category"
+                    value={formData.category}
                     onChange={handleChange}
                     className="input input-bordered input-primary mb-1 block w-full"
                 >
-                    <option value="">Select Type</option>
-                    <option value="CR">CR</option>
-                    <option value="DR">DR</option>
+                    <option value="">Select Category</option>
+                    <option value="Labor">Labor</option>
+                    <option value="Materials">Materials</option>
+                    <option value="Equipment">Equipment</option>
+                    <option value="Subcontractors">Subcontractors</option>
+                    <option value="Others/Misc">Others/Misc</option>
                 </select>
-                {errors.type && <span className="text-xs font-semibold lowercase text-error">{errors.type}</span>}
+                {errors.category && <span className="text-xs font-semibold lowercase text-error">{errors.category}</span>}
             </div>
 
             <div className='mt-6'>

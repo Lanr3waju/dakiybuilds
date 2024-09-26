@@ -5,7 +5,7 @@ import getUser from '../utils/getUser'
 
 const supabase = createServerComponentClient({ cookies })
 
-export const registerExpenditure = async ({ amount, type, description, beneficiary }, projectId) => {
+export const registerExpenditure = async ({ amount, category, description, beneficiary }, projectId) => {
     const user = await getUser()
 
     const { error } = await supabase
@@ -13,7 +13,7 @@ export const registerExpenditure = async ({ amount, type, description, beneficia
         .insert([
             {
                 amount,
-                type,
+                category,
                 description,
                 beneficiary,
                 user_id: user.id,
