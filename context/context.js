@@ -1,6 +1,6 @@
 'use client'
 import { createContext, useEffect, useState } from 'react'
-import { getAppTheme, getProjects } from './supabaseTables'
+import { fetchCurrentProjectId, getAppTheme, getProjects } from './supabaseTables'
 import { getExpendituresByProjectId } from '@/app/components/project-finance/supabaseTables'
 
 export const DakiyStore = createContext()
@@ -160,8 +160,25 @@ function Context({ children }) {
       }
     }
 
-    fetchExpenditures()
+    currentProjectId && fetchExpenditures()
   }, [expendituresTrigger])
+
+  useEffect(() => {
+    const loadCurrentProject = async () => {
+      const currentProjectId = await fetchCurrentProjectId()
+      if (currentProjectId) {
+        // Fetch all projects
+        const projects = await getProjects()
+        // Find the project that matches the currentProjectId
+        const currentProject = projects.find(({ id }) => id === currentProjectId)
+        if (currentProject) {
+          setProject(currentProject) // Set the project with the correct data
+          setCurrentProjectId(currentProjectId) // Set the current project ID
+        }
+      }
+    }
+    loadCurrentProject()
+  }, []);
 
   return (
     <DakiyStore.Provider

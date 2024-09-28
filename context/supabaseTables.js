@@ -92,3 +92,33 @@ export const insertProjectPlusTable = async (
     return true
   }
 }
+
+export const updateCurrentProject = async (currentProjectId) => {
+  const userProfile = await getUserProfile()
+  if (userProfile) {
+    const user = await getUser()
+
+    const { error } = await supabase
+      .from('organizations')
+      .update({ current_project: currentProjectId })
+      .eq('user_id', user.id)
+      .select()
+
+    if (error) return error
+  }
+}
+
+export const fetchCurrentProjectId = async () => {
+  const userProfile = await getUserProfile()
+  if (userProfile) {
+    const user = await getUser()
+    const { data: organizations } = await supabase
+      .from('organizations')
+      .select('current_project')
+      .eq('user_id', user.id)
+      .single()
+
+    return organizations?.current_project || null // Return null if no project ID is found
+  }
+  return null // Return null if no user profile
+}
