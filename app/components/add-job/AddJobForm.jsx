@@ -191,7 +191,7 @@ const AddJobForm = () => {
                 value={jobData[field]}
                 onChange={handleInputChange}
               >
-                <option disabled selected value="">
+                <option disabled value="">
                   Select Job Type
                 </option>
                 {jobTypes.map((type) => (
