@@ -2,9 +2,8 @@
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Link from 'next/link'
-import Paper from '@mui/material/Paper'
 import { getAppTheme, getProjects } from '@/context/supabaseTables.js'
-import Progress from '../utils/Progress.jsx'
+// import Progress from '../utils/Progress.jsx'
 import Greeting from './greeting/Greeting.jsx'
 import Weather from './getCurrentWeather/Weather.jsx'
 import GetDate from './greeting/GetDate.jsx'
@@ -49,49 +48,24 @@ export default function DashboardComponent() {
   return Object.keys(project).length > 0 ? (
     <Container className="my-8" maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       {/* Progress Bar */}
-      <Progress progress={project.progress} />
+      {/* <Progress progress={project.progress} /> */}
       <Grid container spacing={3}>
         {/* Greeting */}
         <Grid item xs={12} md={8} lg={8}>
-          <Paper
-            className="flex flex-col justify-between md:flex-row"
-            sx={{
-              p: 2,
-              display: 'flex',
-              height: 120,
-            }}
-          >
+          <section className="py-2 px-4 bg-base-200/35 mb-2 shadow-md rounded-b-md flex flex-col md:flex-row md:items-center">
             <Greeting />
+            <div className="md:w-1 md:h-7 bg-primary mx-3"></div>
             <Weather />
-          </Paper>
+          </section>
           {/* Overview */}
-          <Paper
-            className="mt-2"
-            sx={{
-              p: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              height: 750,
-              backgroundColor: 'primary',
-            }}
-          >
-            <Overview />
-          </Paper>
+          <Overview />
         </Grid>
         {/* Date and Milestone */}
         <Grid item xs={12} md={4} lg={4}>
-          <Paper
-            className="bg-info-content"
-            sx={{
-              p: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              height: '90vh',
-            }}
-          >
+          <section className="p-4 bg-base-100 shadow-md rounded-lg">
             <GetDate />
             <Milestone />
-          </Paper>
+          </section>
         </Grid>
       </Grid>
     </Container>

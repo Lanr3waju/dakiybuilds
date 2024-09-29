@@ -59,38 +59,50 @@ function ProjectDetails() {
         />
       )}
       <section className='justify-left flex flex-wrap'>
-        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-200">
+        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-300 text-xs">
           Site Location:{' '}
-          <p className="font-Roboto font-medium tracking-wider text-primary-content/75">
+          <p className="font-Roboto font-medium tracking-wider text-primary-content/75 text-sm">
             {project.location}
           </p>
         </h3>
-        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-200">
+        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-300 text-xs">
           Contract sum:{' '}
-          <p className="font-Roboto font-medium tracking-wider text-primary-content/75">
+          <p className="font-Roboto font-medium tracking-wider text-primary-content/75 text-sm">
             ₦
             {addCommasToMoney(
               workingProjectSumAndDate.workingProjectContractSum
             )}
           </p>
         </h3>
-        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-200">
+        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-300 text-xs">
+          Budget:{' '}
+          <p className="font-Roboto font-medium tracking-wider text-primary-content/75 text-sm">
+            ₦
+            {addCommasToMoney(
+              workingProjectSumAndDate.workingProjectContractSum
+            )}
+          </p>
+        </h3>
+        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-300 text-xs">
+          Expenditure:{' '}
+          <p className="font-Roboto font-medium tracking-wider text-primary-content/75 text-sm">
+            ₦
+            {addCommasToMoney(
+              workingProjectSumAndDate.workingProjectContractSum
+            )}
+          </p>
+        </h3>
+        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-300 text-xs">
           Contract finish Date:{' '}
-          <p className="font-Roboto font-medium tracking-wider text-primary-content/75">
+          <p className="font-Roboto font-medium tracking-wider text-primary-content/75 text-sm">
             {workingProjectSumAndDate.workingProjectFinishDate}
           </p>
         </h3>
-        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-200">
+        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-300 text-xs">
           Client name:{' '}
-          <p className="font-Roboto font-medium tracking-wider text-primary-content/75">
+          <p className="font-Roboto font-medium tracking-wider text-primary-content/75 text-sm">
             {project.client_name}
           </p>
-        </h3>
-        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-200">
-          Client email:{' '}
-          <p className="font-Roboto font-medium tracking-wider text-primary-content/75">
-            {project.client_email}
-        </p>
         </h3>
       </section>
     </section>
