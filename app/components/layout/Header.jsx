@@ -77,7 +77,7 @@ export default function DashboardComponent({ children }) {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box className="bg-base-100" sx={{ display: 'flex' }}>
+      <Box className="bg-base-100 min-h-full" sx={{ display: 'flex' }}>
         <CssBaseline />
         <div role="wrapper">
           <AppBar position="absolute" open={open}>
@@ -85,7 +85,7 @@ export default function DashboardComponent({ children }) {
               sx={{
                 pr: '24px', // keep right padding when drawer closed
               }}
-              className="bg-primary-content"
+              className="bg-primary"
             >
               <IconButton
                 edge="start"
@@ -108,7 +108,7 @@ export default function DashboardComponent({ children }) {
                 noWrap
                 sx={{ flexGrow: 1 }}
               >
-                <div className="flex w-full flex-col items-center justify-between p-3 sm:flex-row md:flex-row md:p-1">
+                <div className="flex w-full items-center justify-between p-3 flex-row md:p-1">
                   {pathname.toLowerCase().includes('project-logs/')
                     ? 'Log-Details'
                     : pathname.toLowerCase().includes('/update-sheet')
@@ -142,7 +142,7 @@ export default function DashboardComponent({ children }) {
               </IconButton>
             </Toolbar>
             <Divider />
-            <List className="min-h-screen bg-base-200" component="nav">
+            <List className="min-h-full bg-base-200" component="nav">
               {mainListItems}
               <Divider sx={{ my: 1 }} />
               <SecondaryListItems />
