@@ -16,7 +16,7 @@ const Weather = () => {
   }
 
   return (
-    <section className="mt-1 flex font-Poppins md:mt-4">
+    <section className="mt-1 flex font-Roboto text-sm md:mt-4">
       <p className="mr-2 font-medium capitalize text-info">
         {weather.main.temp}°C
       </p>

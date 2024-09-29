@@ -51,7 +51,7 @@ function JobDetailsComponent() {
   useEffect(() => {
     if (currentProject.name) {
       const formattedName = replaceSpacesWithHyphensAndLowerCase(currentProject.name)
-      const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/project-site-picture/${formattedName}`;
+      const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/project-site-picture/${formattedName}`
 
       // Fetch image or use fallback
       fetch(url)
@@ -68,7 +68,7 @@ function JobDetailsComponent() {
     } else {
       setPictureSrc("https://res.cloudinary.com/dbzorthz8/image/upload/v1710414091/logo_qbxief.png") // Use fallback if the project name is missing
     }
-  }, [currentProject.name]);
+  }, [currentProject.name])
 
 
   useEffect(() => {
@@ -126,8 +126,8 @@ function JobDetailsComponent() {
           </header>
 
           {update && <UpdateNotification projectID={currentProject.id} />}
-          <section className="flex flex-col items-start justify-between p-4 font-Raleway font-medium text-primary-content/75 md:flex-row">
-            <section className="mb-6 mr-1 w-11/12 rounded-md border-4 border-base-300 p-6 pb-10 shadow-md shadow-base-300">
+            <section className="flex flex-col items-start justify-between p-4 font-Raleway text-primary-content/75 md:flex-row">
+              <section className="mb-2 mr-1 w-11/12 rounded-md p-4 pb-4 shadow-lg shadow-base-300">
                 {/* <Progress progress={currentProject.progress} /> */}
               <Image
                   className="h-auto w-full object-contain"
@@ -138,17 +138,17 @@ function JobDetailsComponent() {
                   src={pictureSrc}
                   alt="Picture of site"
                 />
-              <span className="mb-6 mt-1 text-center text-sm font-medium text-info">
+                <span className="mb-6 mt-1 text-center text-xs font-medium text-info">
                 (picture of site)
               </span>
-              <p className="my-3 font-Roboto text-lg uppercase">
+                <p className="my-3 font-Roboto">
                 <span className="m-1 block font-Raleway text-sm text-secondary-content/70">
                   Project Contract Sum:
                 </span>
                 ₦{addCommasToMoney(projectSumAndDate.projectContractSum)} - (
                 {numberToWords(projectSumAndDate.projectContractSum)} Naira)
               </p>
-              <p className="font-Roboto text-lg uppercase">
+                <p className="font-Roboto">
                 <span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">
                   Balance Due to Contractor:
                 </span>
@@ -157,92 +157,92 @@ function JobDetailsComponent() {
                   projectSumAndDate.projectContractSum - contractPayments
                 )}
               </p>
-              <p className="font-Roboto text-lg uppercase">
+                <p className="font-Roboto">
                 <span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">
                   Initial Advance Payment:
                 </span>
                 ₦{addCommasToMoney(currentProject.initial_advance_payment)}
               </p>
-              <p className="font-Roboto text-lg uppercase">
+                <p className="font-Roboto">
                 <span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">
                   Total contract payments:
                 </span>
                 ₦ {addCommasToMoney(contractPayments)} Naira
               </p>
-              <p className="font-Roboto text-lg uppercase">
+                <p className="font-Roboto">
                 <span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">
                   Expenditure:
                 </span>
                 ₦0 Naira
               </p>
             </section>
-            <section className="ml-1 w-11/12 rounded-md border-4 border-base-300 p-4 pb-5 shadow-md shadow-base-300">
-              <p className="mb-3 text-lg uppercase">
-                <span className="m-1 text-center font-Roboto text-sm text-secondary-content/70">
-                  Project Type:
+              <section className="ml-1 w-11/12 rounded-md p-2 pb-2 shadow-lg shadow-base-300">
+                <p className="mb-3 font-Roboto capitalize">
+                  <span className="m-1 font-Raleway text-sm text-secondary-content/70">
+                    Project type:
                 </span>
                 {currentProject.type}
               </p>
-              <p className="mb-3 font-Roboto text-lg uppercase">
+                <p className="mb-3 font-Roboto">
                 <span className="m-1 font-Raleway text-sm text-secondary-content/70">
-                  Project Start Date:
+                    Project start date:
                 </span>
                 {currentProject.start_date}
               </p>
-              <p className="mb-3 font-Roboto text-lg uppercase">
+                <p className="mb-3 font-Roboto">
                 <span className="m-1 font-Raleway text-sm text-secondary-content/70">
-                  Project Estimated Finish Date:
+                    Project estimated finish date:
                 </span>
                 {projectSumAndDate.projectFinishDate}
               </p>
-              <p className="mb-3 font-Roboto text-lg uppercase">
+                <p className="mb-3 font-Roboto">
                 <span className="m-1 font-Raleway text-sm text-secondary-content/70">
-                  Project Duration:
+                    Project duration:
                 </span>
                 {getWeeksBetween(
                   currentProject.start_date,
                   projectSumAndDate.projectFinishDate
                 )}
               </p>
-              <p className="mb-3 font-Roboto text-lg uppercase md:block">
+                <p className="mb-3 font-Roboto md:block">
                 <span className="m-1 font-Raleway text-sm text-secondary-content/70">
-                  Duration to Project Completion:
+                    Duration to project completion:
                 </span>
                 {getRemainingTime(
                   currentProject.start_date,
                   projectSumAndDate.projectFinishDate
                 )}
               </p>
-              <p className="mb-3 font-Roboto text-lg uppercase">
+                <p className="mb-3 font-Roboto">
                 <span className="m-1 font-Raleway text-sm text-secondary-content/70">
-                  Project Lapse Time:
+                    Project lapse time:
                 </span>
                   {getLapseTime(
                   projectSumAndDate.projectFinishDate
                 )}
               </p>
               <Divider sx={{ my: 3 }} />
-              <p className="mb-3 font-Roboto text-lg font-bold uppercase tracking-wider">
-                <span className="m-1 text-sm text-secondary-content/70">
-                  Client Name:
+                <p className="mb-3 font-Roboto capitalize">
+                  <span className="m-1 font-Raleway text-sm text-secondary-content/70">
+                    Client name:
                 </span>
                 {currentProject.client_name}
               </p>
-              <p className="mb-3 font-Roboto text-lg font-semibold uppercase">
-                <span className="m-1 text-sm text-secondary-content/70">
-                  Client Email:
+                <p className="mb-3 font-Roboto capitalize">
+                  <span className="m-1 font-Raleway text-sm text-secondary-content/70">
+                    Client email:
                 </span>{' '}
                 {currentProject.client_email}
               </p>
-              <p className="mb-3 font-Roboto text-lg font-semibold uppercase">
-                <span className="m-1 text-sm text-secondary-content/70">
-                  Client Tel:
+                <p className="mb-3 font-Roboto">
+                  <span className="m-1 font-Raleway text-sm text-secondary-content/70">
+                    Client tel:
                 </span>{' '}
                 {currentProject.client_phone}
               </p>
-              <h3 className="mx-auto my-5 max-w-full overflow-auto rounded-md bg-primary/20 p-4 text-lg underline-offset-8">
+                <h3 className="mx-auto my-2 max-w-full overflow-auto rounded-md bg-primary/20 p-2 underline-offset-8">
                 <div className="m-1 text-sm uppercase text-info underline-offset-8">
-                  Project Description:
+                    Project description:
                 </div>
                 {addNewLineBeforeHyphen(currentProject.project_description)}
               </h3>
