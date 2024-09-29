@@ -12,7 +12,7 @@ function ProjectLogsPage() {
   const [addLog, setAddLog] = useState(false)
   const [log, setLog] = useState(initialLogData)
   const [logs, setLogs] = useState([])
-  const { project } = useContext(DakiyStore)
+  const { project, loading } = useContext(DakiyStore)
 
   const handleAddLog = () => {
     setAddLog(!addLog)
@@ -31,6 +31,17 @@ function ProjectLogsPage() {
   }, [addLog, project])
 
   // TODO Use intersection observer API to render logs on scroll, add filters / sort buttons
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-transparent">
+        <span className="loading loading-dots loading-lg"></span>
+        <p className="mt-4 text-lg">Fetching your project documents, please hold on...</p>
+      </div>
+    )
+  }
+
   return (
     <>
       {Object.keys(project).length > 0 ? (

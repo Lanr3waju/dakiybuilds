@@ -12,7 +12,17 @@ import ExpenditureRegistrationModal from './ExpenditureRegistrationModal'
 import BudgetingComponent from './BudgettingComponent'
 
 function ProjectFinancePage() {
-  const { project, workingProjectSumAndDate } = useContext(DakiyStore)
+  const { loading, project, workingProjectSumAndDate } = useContext(DakiyStore)
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-transparent">
+        <span className="loading loading-dots loading-lg"></span>
+        <p className="mt-4 text-lg">Fetching your project documents, please hold on...</p>
+      </div>
+    )
+  }
 
   return Object.keys(project).length > 0 ? (
     <div className="p-4">

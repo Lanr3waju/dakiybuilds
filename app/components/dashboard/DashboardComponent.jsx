@@ -15,7 +15,7 @@ import { DakiyStore } from '@/context/context.js'
 import { usePathname } from 'next/navigation.js'
 
 export default function DashboardComponent() {
-  const { project, setProjects, setSelectedTheme } = useContext(DakiyStore)
+  const { project, setProjects, setSelectedTheme, loading } = useContext(DakiyStore)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -35,6 +35,16 @@ export default function DashboardComponent() {
     }
     fetchProjects()
   }, [pathname, setProjects])
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-transparent">
+        <span className="loading loading-dots loading-lg"></span>
+        <p className="mt-4 text-lg">Fetching your project data, please hold on...</p>
+      </div>
+    )
+  }
 
   return Object.keys(project).length > 0 ? (
     <Container className="my-8" maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
