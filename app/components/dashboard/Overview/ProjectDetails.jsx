@@ -25,12 +25,12 @@ function ProjectDetails() {
           setPictureSrc(url) // Set the image URL if it exists
         } else {
           // Set a fallback image if it doesn't exist
-          setPictureSrc('/logo.png') // Update with your actual fallback image path
+          setPictureSrc("https://res.cloudinary.com/dbzorthz8/image/upload/v1710414091/logo_qbxief.png") // Update with your actual fallback image path
         }
       })
       .catch(() => {
         // Set a fallback image in case of an error
-        setPictureSrc('/logo.png') // Update with your actual fallback image path
+        setPictureSrc("https://res.cloudinary.com/dbzorthz8/image/upload/v1710414091/logo_qbxief.png") // Update with your actual fallback image path
       })
       .finally(() => {
         setIsImageLoading(false) // Stop the loading state once the fetch is done
@@ -57,7 +57,6 @@ function ProjectDetails() {
               height={300}
               src={pictureSrc}
               alt="Picture of site"
-              onError={() => setPictureSrc('/logo.png')} // Set fallback image if loading fails
             />
         )}
         <h3 className="mt-3 text-xs font-semibold uppercase text-primary">

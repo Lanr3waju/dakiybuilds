@@ -112,6 +112,7 @@ function Context({ children }) {
         projectSumAndDate,
         workingProjectSumAndDate,
         expenditures,
+        setCurrentProjectId,
         loading, // Provide loading state
       }}
     >

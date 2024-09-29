@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { DakiyStore } from '@/context/context'
 import { usePathname } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
-import Progress from '../../utils/Progress'
+// import Progress from '../../utils/Progress'
 import Divider from '@mui/material/Divider'
 import addCommasToMoney from '../../utils/addCommasToNos'
 import numberToWords from '../../utils/numberToWords'
@@ -31,6 +31,7 @@ function JobDetailsComponent() {
   const [update, setUpdate] = useState(false)
   const [contractPayments, setContractPayments] = useState(0)
   const [pictureSrc, setPictureSrc] = useState('')
+  const [loading, setLoading] = useState(true)
 
   const getProjectUpdates = async (id, initial_advance_payment) => {
     const results = await getProjectsPlus(id)
@@ -48,27 +49,27 @@ function JobDetailsComponent() {
   }
 
   useEffect(() => {
-    // Create the URL based on the currentProject name
-    const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL
-      }/storage/v1/object/public/project-site-picture/${replaceSpacesWithHyphensAndLowerCase(
-        currentProject.name
-      )}`
+    if (currentProject.name) {
+      const formattedName = replaceSpacesWithHyphensAndLowerCase(currentProject.name)
+      const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/project-site-picture/${formattedName}`;
 
-    // Fetch the image to see if it exists
-    fetch(url)
-      .then((response) => {
-        if (response.ok) {
-          setPictureSrc(url) // Set the image URL if it exists
-        } else {
-          // Set a fallback image if it doesn't exist
-          setPictureSrc('/logo.png') // Update with your actual fallback image path
-        }
-      })
-      .catch(() => {
-        // Set a fallback image in case of an error
-        setPictureSrc('/logo.png') // Update with your actual fallback image path
-      })
-  }, [currentProject.name])
+      // Fetch image or use fallback
+      fetch(url)
+        .then((response) => {
+          if (response.ok && response.headers.get('content-type').includes('image')) {
+            setPictureSrc(url)
+          } else {
+            setPictureSrc("https://res.cloudinary.com/dbzorthz8/image/upload/v1710414091/logo_qbxief.png")
+          }
+        })
+        .catch(() => {
+          setPictureSrc("https://res.cloudinary.com/dbzorthz8/image/upload/v1710414091/logo_qbxief.png")
+        })
+    } else {
+      setPictureSrc("https://res.cloudinary.com/dbzorthz8/image/upload/v1710414091/logo_qbxief.png") // Use fallback if the project name is missing
+    }
+  }, [currentProject.name]);
+
 
   useEffect(() => {
     const projectID = pathname.replace('/all-jobs/', '')
@@ -76,6 +77,7 @@ function JobDetailsComponent() {
     const selectedProject = projects?.find(({ id }) => projectID === id)
     if (selectedProject) {
       setCurrentProject(selectedProject)
+      setLoading(false)
       getProjectUpdates(
         selectedProject.id,
         selectedProject.initial_advance_payment
@@ -92,6 +94,16 @@ function JobDetailsComponent() {
       setUpdate(true)
     }
   }, [currentProject])
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-transparent">
+        <span className="loading loading-dots loading-lg"></span>
+        <p className="mt-4 text-lg">Fetching your project documents, please hold on...</p>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -116,16 +128,16 @@ function JobDetailsComponent() {
           {update && <UpdateNotification projectID={currentProject.id} />}
           <section className="flex flex-col items-start justify-between p-4 font-Raleway font-medium text-primary-content/75 md:flex-row">
             <section className="mb-6 mr-1 w-11/12 rounded-md border-4 border-base-300 p-6 pb-10 shadow-md shadow-base-300">
-              <Progress progress={currentProject.progress} />
+                {/* <Progress progress={currentProject.progress} /> */}
               <Image
-                className="mt-4 h-auto w-full object-cover"
-                priority
-                quality={100}
-                width={800}
-                height={500}
-                src={pictureSrc ? pictureSrc : '/logo.png'}
-                alt="Picture of site"
-              />
+                  className="h-auto w-full object-contain"
+                  priority
+                  quality={100}
+                  width={800}
+                  height={500}
+                  src={pictureSrc}
+                  alt="Picture of site"
+                />
               <span className="mb-6 mt-1 text-center text-sm font-medium text-info">
                 (picture of site)
               </span>
