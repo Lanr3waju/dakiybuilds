@@ -52,7 +52,7 @@ export default function DashboardComponent() {
       <Grid container spacing={3}>
         {/* Greeting */}
         <Grid item xs={12} md={8} lg={8}>
-          <section className="mb-2 flex rounded-b-md bg-base-200/35 md:px-4 py-2 px-1 shadow-md md:flex-row md:items-center">
+          <section className="mb-2 flex rounded-b-md bg-base-200/35 px-1 py-2 shadow-md md:flex-row md:items-center md:px-4">
             <Greeting />
             <div className="mx-3 bg-primary md:h-7 md:w-1"></div>
             <Weather />

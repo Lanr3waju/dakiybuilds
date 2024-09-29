@@ -77,7 +77,7 @@ export default function DashboardComponent({ children }) {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box className="bg-base-100 min-h-full" sx={{ display: 'flex' }}>
+      <Box className="min-h-full bg-base-100" sx={{ display: 'flex' }}>
         <CssBaseline />
         <div role="wrapper">
           <AppBar position="absolute" open={open}>
@@ -108,7 +108,7 @@ export default function DashboardComponent({ children }) {
                 noWrap
                 sx={{ flexGrow: 1 }}
               >
-                <div className="flex w-full items-center justify-between p-3 flex-row md:p-1">
+                <div className="flex w-full flex-row items-center justify-between p-3 md:p-1">
                   {pathname.toLowerCase().includes('project-logs/')
                     ? 'Log-Details'
                     : pathname.toLowerCase().includes('/update-sheet')
