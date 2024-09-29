@@ -217,8 +217,7 @@ function JobDetailsComponent() {
                 <span className="m-1 font-Raleway text-sm text-secondary-content/70">
                   Project Lapse Time:
                 </span>
-                {getLapseTime(
-                  currentProject.start_date,
+                  {getLapseTime(
                   projectSumAndDate.projectFinishDate
                 )}
               </p>
