@@ -22,7 +22,7 @@ const Weather = () => {
   return (
     <section className="flex flex-col font-Roboto text-sm">
       <div className="flex items-center">
-        <div className="relative w-12 h-12">
+        <div className="relative h-12 w-12">
           <Image
             src={weatherIcon}
             alt={weather.weather[0].description}

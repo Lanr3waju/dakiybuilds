@@ -3,7 +3,7 @@ import { getDate } from './getTime'
 
 function GetDate() {
   return (
-    <h2 className="mb-3 font-medium font-Roboto capitalize text-secondary-content/75">
+    <h2 className="mb-3 font-Roboto font-medium capitalize text-secondary-content/75">
       {getDate()}
     </h2>
   )

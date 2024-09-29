@@ -52,9 +52,9 @@ export default function DashboardComponent() {
       <Grid container spacing={3}>
         {/* Greeting */}
         <Grid item xs={12} md={8} lg={8}>
-          <section className="py-2 px-4 bg-base-200/35 mb-2 shadow-md rounded-b-md flex flex-col md:flex-row md:items-center">
+          <section className="mb-2 flex flex-col rounded-b-md bg-base-200/35 px-4 py-2 shadow-md md:flex-row md:items-center">
             <Greeting />
-            <div className="md:w-1 md:h-7 bg-primary mx-3"></div>
+            <div className="mx-3 bg-primary md:h-7 md:w-1"></div>
             <Weather />
           </section>
           {/* Overview */}
@@ -62,7 +62,7 @@ export default function DashboardComponent() {
         </Grid>
         {/* Date and Milestone */}
         <Grid item xs={12} md={4} lg={4}>
-          <section className="p-4 bg-base-100 shadow-md rounded-lg">
+          <section className="rounded-lg bg-base-100 p-4 shadow-md">
             <GetDate />
             <Milestone />
           </section>
