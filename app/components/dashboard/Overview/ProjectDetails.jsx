@@ -4,9 +4,11 @@ import { useContext, useEffect, useState } from 'react'
 import Image from 'next/image'
 import replaceSpacesWithHyphensAndLowerCase from '../../utils/replaceSpacesWithHyphens'
 import addCommasToMoney from '../../utils/addCommasToNos'
+
 function ProjectDetails() {
   const { project, workingProjectSumAndDate } = useContext(DakiyStore)
   const [pictureSrc, setPictureSrc] = useState('/logo.png')
+  const [isImageLoading, setIsImageLoading] = useState(true)
 
   useEffect(() => {
     // Create the URL based on the currentProject name
@@ -16,7 +18,7 @@ function ProjectDetails() {
       project.name
     )}`
 
-    // Fetch the image to see if it exists
+    // Fetch the image to verify if it exists
     fetch(url)
       .then((response) => {
         if (response.ok) {
@@ -30,6 +32,9 @@ function ProjectDetails() {
         // Set a fallback image in case of an error
         setPictureSrc('/logo.png') // Update with your actual fallback image path
       })
+      .finally(() => {
+        setIsImageLoading(false) // Stop the loading state once the fetch is done
+      })
   }, [project])
 
   return (
@@ -38,15 +43,23 @@ function ProjectDetails() {
         <h2 className="font-semibold uppercase tracking-widest text-primary-content">
           {project.name}
         </h2>
-        <Image
-          className="my-4 h-80 w-4/6 object-contain"
-          priority
-          quality={100}
-          width={400}
-          height={300}
-          src={pictureSrc}
-          alt="Picture of site"
-        />
+        {isImageLoading ? (
+          <div className="my-4 h-80 w-4/6 bg-gray-200 flex items-center justify-center">
+            {/* Placeholder for loading */}
+            <p>Loading image...</p>
+          </div>
+        ) : (
+            <Image
+              className="my-4 h-80 w-4/6 object-contain"
+              priority
+              quality={100}
+              width={400}
+              height={300}
+              src={pictureSrc}
+              alt="Picture of site"
+              onError={() => setPictureSrc('/logo.png')} // Set fallback image if loading fails
+            />
+        )}
         <h3 className="mt-3 text-xs font-semibold uppercase text-primary">
           Site Location:{' '}
           <span className="block text-lg font-semibold tracking-wider text-primary-content/75">
