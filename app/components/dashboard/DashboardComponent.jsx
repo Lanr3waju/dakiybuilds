@@ -39,7 +39,7 @@ export default function DashboardComponent() {
   // Loading state
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen bg-transparent">
+      <div className="flex h-screen flex-col items-center justify-center bg-transparent">
         <span className="loading loading-dots loading-lg"></span>
         <p className="mt-4 text-lg">Fetching your project data, please hold on...</p>
       </div>
