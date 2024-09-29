@@ -98,7 +98,7 @@ function JobDetailsComponent() {
   // Loading state
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen bg-transparent">
+      <div className="flex h-screen flex-col items-center justify-center bg-transparent">
         <span className="loading loading-dots loading-lg"></span>
         <p className="mt-4 text-lg">Fetching your project documents, please hold on...</p>
       </div>
@@ -127,7 +127,7 @@ function JobDetailsComponent() {
 
           {update && <UpdateNotification projectID={currentProject.id} />}
             <section className="flex flex-col items-start justify-between p-4 font-Raleway text-primary-content/75 md:flex-row">
-              <section className="mb-2 mr-1 w-11/12 rounded-md p-4 pb-4 shadow-lg shadow-base-300">
+              <section className="mb-2 mr-1 w-11/12 rounded-md p-4 shadow-lg shadow-base-300">
                 {/* <Progress progress={currentProject.progress} /> */}
               <Image
                   className="h-auto w-full object-contain"
@@ -176,7 +176,7 @@ function JobDetailsComponent() {
                 ₦0 Naira
               </p>
             </section>
-              <section className="ml-1 w-11/12 rounded-md p-2 pb-2 shadow-lg shadow-base-300">
+              <section className="ml-1 w-11/12 rounded-md p-2 shadow-lg shadow-base-300">
                 <p className="mb-3 font-Roboto capitalize">
                   <span className="m-1 font-Raleway text-sm text-secondary-content/70">
                     Project type:

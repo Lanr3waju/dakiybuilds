@@ -43,7 +43,7 @@ function ProjectDetails() {
         {project.name}
       </h2>
       {isImageLoading ? (
-        <div className="my-4 h-80 w-4/6 bg-gray-200 flex items-center justify-center">
+        <div className="my-4 flex h-80 w-4/6 items-center justify-center bg-gray-200">
           {/* Placeholder for loading */}
           <p>Loading image...</p>
         </div>
@@ -58,37 +58,37 @@ function ProjectDetails() {
           alt="Picture of site"
         />
       )}
-      <section className='flex justify-left flex-wrap'>
-        <h3 className="p-2 m-1 shadow-md shadow-base-200 text-primary-content/75">
+      <section className='justify-left flex flex-wrap'>
+        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-200">
           Site Location:{' '}
-          <p className="font-medium font-Roboto tracking-wider text-primary-content/75">
+          <p className="font-Roboto font-medium tracking-wider text-primary-content/75">
             {project.location}
           </p>
         </h3>
-        <h3 className="p-2 m-1 shadow-md shadow-base-200 text-primary-content/75">
+        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-200">
           Contract sum:{' '}
-          <p className="font-medium font-Roboto tracking-wider text-primary-content/75">
+          <p className="font-Roboto font-medium tracking-wider text-primary-content/75">
             ₦
             {addCommasToMoney(
               workingProjectSumAndDate.workingProjectContractSum
             )}
           </p>
         </h3>
-        <h3 className="p-2 m-1 shadow-md shadow-base-200 text-primary-content/75">
+        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-200">
           Contract finish Date:{' '}
-          <p className="font-medium font-Roboto tracking-wider text-primary-content/75">
+          <p className="font-Roboto font-medium tracking-wider text-primary-content/75">
             {workingProjectSumAndDate.workingProjectFinishDate}
           </p>
         </h3>
-        <h3 className="p-2 m-1 shadow-md shadow-base-200 text-primary-content/75">
+        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-200">
           Client name:{' '}
-          <p className="font-medium font-Roboto font-Roboto tracking-wider text-primary-content/75">
+          <p className="font-Roboto font-medium tracking-wider text-primary-content/75">
             {project.client_name}
           </p>
         </h3>
-        <h3 className="p-2 m-1 shadow-md shadow-base-200 text-primary-content/75">
+        <h3 className="m-1 p-2 text-primary-content/75 shadow-md shadow-base-200">
           Client email:{' '}
-          <p className="font-medium font-Roboto font-Roboto tracking-wider text-primary-content/75">
+          <p className="font-Roboto font-medium tracking-wider text-primary-content/75">
             {project.client_email}
         </p>
         </h3>
