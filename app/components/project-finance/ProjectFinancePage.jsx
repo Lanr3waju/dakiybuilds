@@ -3,7 +3,6 @@ import { useContext } from 'react'
 import Link from 'next/link'
 import FinanceBar from '../utils/FinanceBar'
 import HorizontalLine from '../utils/HorizontalLine'
-import calculatePercentage from '../utils/calculatePercentage'
 import Payments from './Payments'
 import { DakiyStore } from '@/context/context'
 import addCommasToMoney from '../utils/addCommasToNos'
@@ -42,18 +41,15 @@ function ProjectFinancePage() {
         <ExpenditureRegistrationModal />
         <BudgetRegistrationModal />
         <FinanceBar
-          progress={0}
-          finance={calculatePercentage(
-            totalExpenditure,
-            workingProjectSumAndDate?.workingProjectContractSum
-          )}
+          expenditure={totalExpenditure}
+          contractSum={workingProjectSumAndDate?.workingProjectContractSum}
         />
         <div className="flex w-full justify-between font-Poppins text-sm font-semibold text-primary-content/70">
           <div
             className="tooltip tooltip-bottom tooltip-info z-50 cursor-pointer before:w-[5rem] before:content-[attr(data-tip)]"
             data-tip="Expended Costs"
           >
-            ₦ 0
+            ₦{addCommasToMoney(totalExpenditure)}
           </div>
           <div
             className="tooltip tooltip-bottom tooltip-info z-50 cursor-pointer before:w-[5rem] before:content-[attr(data-tip)]"

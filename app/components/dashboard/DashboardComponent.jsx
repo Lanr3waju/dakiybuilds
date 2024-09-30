@@ -12,9 +12,10 @@ import Milestone from './Overview/Milestone.jsx'
 import { useContext, useEffect } from 'react'
 import { DakiyStore } from '@/context/context.js'
 import { usePathname } from 'next/navigation.js'
+import addCommasToMoney from '../utils/addCommasToNos.js'
 
 export default function DashboardComponent() {
-  const { project, setProjects, setSelectedTheme, loading } = useContext(DakiyStore)
+  const { project, setProjects, setSelectedTheme, loading, workingProjectSumAndDate, totalExpenditure, totalBudget } = useContext(DakiyStore)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -47,8 +48,16 @@ export default function DashboardComponent() {
 
   return Object.keys(project).length > 0 ? (
     <Container className="my-4" maxWidth="lg" sx={{ mb: 4 }}>
-      {/* Progress Bar */}
-      {/* <Progress progress={project.progress} /> */}
+      {totalBudget > workingProjectSumAndDate?.workingProjectContractSum && (
+        <div className="alert alert-warning m-2 font-Roboto text-xs">
+          Warning! Your budget exceeds the contract sum by ₦{addCommasToMoney(totalBudget - workingProjectSumAndDate?.workingProjectContractSum)} naira.
+        </div>
+      )}
+      {totalExpenditure > workingProjectSumAndDate?.workingProjectContractSum && (
+        <div className="alert alert-warning m-2 font-Roboto text-xs">
+          Warning! Your expenditure exceeds the contract sum by ₦{addCommasToMoney(totalExpenditure - workingProjectSumAndDate?.workingProjectContractSum)} naira.
+        </div>
+      )}
       <Grid container spacing={3}>
         {/* Greeting */}
         <Grid item xs={12} md={8} lg={8}>

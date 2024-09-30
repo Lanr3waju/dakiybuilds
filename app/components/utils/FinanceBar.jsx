@@ -1,26 +1,59 @@
-function FinanceBar({ finance, progress }) {
-  let FinanceBarColor = 'progress-error'
+import { useState, useEffect } from "react"
 
-  const validFinance = isNaN(finance) ? 0 : finance;
+function FinanceBar({ expenditure, contractSum }) {
+  const [progress, setProgress] = useState(0)
+  const [progressText, setProgressText] = useState('')
+  const [progressBarColor, setProgressBarColor] = useState('progress-error')
+  const [textColor, setTextColor] = useState('text-error')
 
-  if (finance < progress) {
-    FinanceBarColor = 'progress-success'
-  } else if (finance === progress) {
-    FinanceBarColor = 'progress-warning'
-  }
+  useEffect(() => {
+    let newProgress = 0
+    let newProgressText = ''
+    let newProgressBarColor = 'progress-error'
+    let newTextColor = 'text-error'
 
+    // Calculate progress
+    if (expenditure > contractSum && contractSum !== 0) {
+      newProgress = 100 // Max out the progress when contractSum is exceeded
+      newProgressText = `You have spent ${Math.round((expenditure / contractSum) * 100) - 100}% more than your contract sum`
+    } else if (contractSum === 0) {
+      newProgressText = 'No contract sum set'
+      newTextColor = 'text-error'
+      newProgress = 0
+    } else {
+      newProgress = Math.round((expenditure / contractSum) * 100)
+      newProgressText = `You have spent ${newProgress}% of your contract sum`
+    }
 
+    // Determine color based on progress
+    if (newProgress >= 0 && newProgress < 30) {
+      newProgressBarColor = 'progress-success'
+      newTextColor = 'text-success'
+    } else if (newProgress >= 30 && newProgress <= 70) {
+      newProgressBarColor = 'progress-warning'
+      newTextColor = 'text-warning'
+    } else if (newProgress > 70) {
+      newProgressBarColor = 'progress-error'
+      newTextColor = 'text-error'
+    }
+
+    // Batch the updates to avoid multiple re-renders
+    setProgress(newProgress)
+    setProgressText(newProgressText)
+    setProgressBarColor(newProgressBarColor)
+    setTextColor(newTextColor)
+  }, [expenditure, contractSum])
 
   return (
     <>
-      <h2 className="mt-4 font-Poppins text-sm font-medium">
-        You have spent {validFinance}% of the contract sum
+      <h2 className={`ml-auto text-right font-Roboto text-xs ${textColor}`}>
+        {progressText}
       </h2>
-      <progress
-        className={`progress ${FinanceBarColor} h-3 w-full`}
-        value={validFinance}
+      < progress
+        className={`progress font-Roboto ${progressBarColor} h-2 w-full`}
+        value={progress}
         max="100"
-      ></progress>
+      ></progress >
     </>
   )
 }
