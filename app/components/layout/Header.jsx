@@ -85,7 +85,7 @@ export default function DashboardComponent({ children }) {
               sx={{
                 pr: '24px', // keep right padding when drawer closed
               }}
-              className="bg-primary"
+              className="bg-base-100"
             >
               <IconButton
                 edge="start"

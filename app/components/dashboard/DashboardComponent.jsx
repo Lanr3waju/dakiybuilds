@@ -46,7 +46,7 @@ export default function DashboardComponent() {
   }
 
   return Object.keys(project).length > 0 ? (
-    <Container className="my-8" maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+    <Container className="my-4" maxWidth="lg" sx={{ mb: 4 }}>
       {/* Progress Bar */}
       {/* <Progress progress={project.progress} /> */}
       <Grid container spacing={3}>
