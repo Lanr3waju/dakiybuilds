@@ -5,17 +5,12 @@ import HorizontalLine from '../utils/HorizontalLine'
 import { useContext } from 'react'
 
 const categories = ['Labor', 'Material', 'Equipment', 'Subcontractor', 'Others']
-function BudgetComponent({ workingProjectSumAndDate }) {
+function BudgetComponent() {
     const { totalBudget, localExpenditures, budgets } = useContext(DakiyStore)
     return (
         <div className='p-2'>
-            {totalBudget > workingProjectSumAndDate?.workingProjectContractSum && (
-                <div className="alert alert-error mt-4 font-Roboto">
-                    Total budget exceeds the contract sum by ₦{addCommasToMoney(totalBudget - workingProjectSumAndDate?.workingProjectContractSum)}!
-                </div>
-            )}
             <h3 className="my-4 font-semibold capitalize text-primary">Current Budgets</h3>
-            <ul className='justify-left flex flex-col place-items-end md:flex-row md:flex-wrap'>
+            <ul className='flex flex-col place-items-end md:flex-row md:flex-wrap'>
                 {categories.map((category) => (
                     <li className='m-1 mr-auto text-sm md:w-5/12' key={category}>
                         <span className='text-sm font-medium text-secondary-content/65'>Budget for {category}:</span>

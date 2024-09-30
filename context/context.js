@@ -2,7 +2,7 @@
 
 import { createContext, useEffect, useState } from 'react'
 import { fetchCurrentProjectId, getAppTheme, getProjects } from './supabaseTables'
-import { getExpendituresByProjectId } from '@/app/components/project-finance/supabaseTables'
+import { getBudgetsByProjectId, getExpendituresByProjectId } from '@/app/components/project-finance/supabaseTables'
 
 // Create a context for managing and sharing state across components
 export const DakiyStore = createContext()
@@ -15,6 +15,7 @@ function Context({ children }) {
   const [loading, setLoading] = useState(true) // Loading state
   const [expenditures, setExpenditures] = useState([]) // List of expenditures for the selected project
   const [totalBudget, setTotalBudget] = useState(0) // Total budget for the selected project
+  const [totalExpenditure, setTotalExpenditure] = useState(0) // Total expenditure for the selected project
   const [localExpenditures, setLocalExpenditures] = useState({
     Labor: 0,
     Material: 0,
@@ -119,15 +120,56 @@ function Context({ children }) {
       if (currentProjectId) {
         try {
           const data = await getExpendituresByProjectId(currentProjectId)
-          const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+
+          // Sort data by the created_at date
+          const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
           setExpenditures(sortedData);
+
+          // Calculate total expenditure by summing the amount values
+          const totalExpenditure = sortedData.reduce((total, expenditure) => {
+            return total + parseFloat(expenditure.amount || 0) // Convert string to number
+          }, 0)
+
+          setTotalExpenditure(totalExpenditure) // Set the total expenditure
         } catch (error) {
           console.error('Error fetching expenditures:', error);
         }
       }
     }
+
     fetchExpenditures()
+  }, [currentProjectId])
+
+
+  useEffect(() => {
+    const fetchBudgets = async () => {
+      if (currentProjectId) {
+        try {
+          const data = await getBudgetsByProjectId(currentProjectId)
+
+          if (data && data.length > 0) {
+            const budget = data[0]
+            setBudgets(budget)
+
+            // Calculate the total budget by summing the values of Labor, Material, Equipment, Subcontractor, Others
+            const totalBudget = Object.keys(budget).reduce((total, key) => {
+              if (['Labor', 'Material', 'Equipment', 'Subcontractor', 'Others'].includes(key)) {
+                return total + parseFloat(budget[key] || 0) // Convert string to number
+              }
+              return total
+            }, 0)
+
+            setTotalBudget(totalBudget) // Set the total budget
+          }
+        } catch (error) {
+          console.error('Error fetching budgets:', error)
+        }
+      }
+    }
+
+    fetchBudgets()
   }, [currentProjectId]);
+
 
   return (
     <DakiyStore.Provider
@@ -147,8 +189,8 @@ function Context({ children }) {
         setCurrentProjectId,
         loading, // Provide loading state
         totalBudget, // Provide total budget
-        setTotalBudget, // Provide total budget setter
         localExpenditures, // Provide local expenditures
+        totalExpenditure, // Provide total expenditure
       }}
     >
       {children}

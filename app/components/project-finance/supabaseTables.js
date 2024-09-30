@@ -41,3 +41,38 @@ export const getExpendituresByProjectId = async (projectId) => {
     }
     return expenditures // Return the expenditures data
 }
+
+export const setBudget = async ({ Labor, material, Equipment, Subcontractor, Others }, projectId) => {
+    const user = await getUser()
+    const { error } = await supabase
+        .from('budgets')
+        .insert([
+            {
+                Labor,
+                material,
+                Equipment,
+                Subcontractor,
+                Others,
+                user_id: user.id,
+                project_id: projectId,
+            },
+        ])
+
+    if (error) {
+        console.error('Error setting budget:', error)
+        return error
+    }
+}
+
+export const getBudgetsByProjectId = async (projectId) => {
+    const { data: budgets, error } = await supabase
+        .from('budgets')
+        .select('Labor, Material, Equipment, Subcontractor, Others')
+        .eq('project_id', projectId)
+
+    if (error) {
+        console.error('Error fetching budgets:', error)
+        return []
+    }
+    return budgets // Return the expenditures data
+}

@@ -12,7 +12,7 @@ import BudgetRegistrationModal from './BudgettingRegistrationModal'
 import BudgetComponent from './BudgetComponent'
 
 function ProjectFinancePage() {
-  const { loading, project, workingProjectSumAndDate } = useContext(DakiyStore)
+  const { loading, project, workingProjectSumAndDate, totalBudget, totalExpenditure } = useContext(DakiyStore)
 
   // Loading state
   if (loading) {
@@ -26,6 +26,16 @@ function ProjectFinancePage() {
 
   return Object.keys(project).length > 0 ? (
     <div className="p-4">
+      {totalBudget > workingProjectSumAndDate?.workingProjectContractSum && (
+        <div className="alert alert-warning m-2 font-Roboto text-xs">
+          Warning! Your budget exceeds the contract sum by ₦{addCommasToMoney(totalBudget - workingProjectSumAndDate?.workingProjectContractSum)} naira.
+        </div>
+      )}
+      {totalExpenditure > workingProjectSumAndDate?.workingProjectContractSum && (
+        <div className="alert alert-warning m-2 font-Roboto text-xs">
+          Warning! Your expenditure exceeds the contract sum by ₦{addCommasToMoney(totalExpenditure - workingProjectSumAndDate?.workingProjectContractSum)} naira.
+        </div>
+      )}
       <h2 className="font-semibold capitalize text-primary">Finances</h2>
       <HorizontalLine />
       <section className="mx-auto my-8 rounded-lg border-2 border-accent bg-accent/10 p-4">
@@ -34,7 +44,7 @@ function ProjectFinancePage() {
         <FinanceBar
           progress={0}
           finance={calculatePercentage(
-            0,
+            totalExpenditure,
             workingProjectSumAndDate?.workingProjectContractSum
           )}
         />
@@ -55,9 +65,9 @@ function ProjectFinancePage() {
             )}
           </div>
         </div>
-        <div className='justify-between'>
+        <div className='flex justify-between'>
           <button className="btn btn-primary btn-sm mt-4 text-xs" onClick={() => document.getElementById('payment_form').showModal()}>Register Expenditure</button>
-          <button className="btn btn-success btn-sm mt-4 text-xs" onClick={() => document.getElementById('budget_form').showModal()}>Set Budget</button>
+          <button className="btn btn-success btn-sm mt-4 text-xs" disabled={totalBudget > 1} onClick={() => document.getElementById('budget_form').showModal()}>Set Budget</button>
         </div>
       </section>
       <HorizontalLine />

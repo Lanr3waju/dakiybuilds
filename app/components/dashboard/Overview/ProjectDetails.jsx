@@ -6,7 +6,7 @@ import replaceSpacesWithHyphensAndLowerCase from '../../utils/replaceSpacesWithH
 import addCommasToMoney from '../../utils/addCommasToNos'
 
 function ProjectDetails() {
-  const { project, workingProjectSumAndDate } = useContext(DakiyStore)
+  const { project, workingProjectSumAndDate, totalBudget, totalExpenditure } = useContext(DakiyStore)
   const [pictureSrc, setPictureSrc] = useState('/logo.png')
   const [isImageLoading, setIsImageLoading] = useState(true)
 
@@ -79,7 +79,7 @@ function ProjectDetails() {
           <p className="font-Roboto text-sm font-medium tracking-wider text-primary-content/75">
             ₦
             {addCommasToMoney(
-              workingProjectSumAndDate.workingProjectContractSum
+              totalBudget
             )}
           </p>
         </h3>
@@ -88,7 +88,7 @@ function ProjectDetails() {
           <p className="font-Roboto text-sm font-medium tracking-wider text-primary-content/75">
             ₦
             {addCommasToMoney(
-              workingProjectSumAndDate.workingProjectContractSum
+              totalExpenditure
             )}
           </p>
         </h3>
