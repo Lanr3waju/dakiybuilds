@@ -85,7 +85,7 @@ export default function DashboardComponent({ children }) {
               sx={{
                 pr: '24px', // keep right padding when drawer closed
               }}
-              className="bg-base-100"
+              className="bg-primary"
             >
               <IconButton
                 edge="start"
@@ -142,7 +142,7 @@ export default function DashboardComponent({ children }) {
               </IconButton>
             </Toolbar>
             <Divider />
-            <List className="min-h-full bg-base-200" component="nav">
+            <List className="bg-base-200" component="nav">
               {mainListItems}
               <Divider sx={{ my: 1 }} />
               <SecondaryListItems />

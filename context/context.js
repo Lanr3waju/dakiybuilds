@@ -14,6 +14,15 @@ function Context({ children }) {
   const [selectedTheme, setSelectedTheme] = useState('corporate') // Theme setting
   const [loading, setLoading] = useState(true) // Loading state
   const [expenditures, setExpenditures] = useState([]) // List of expenditures for the selected project
+  const [totalBudget, setTotalBudget] = useState(0) // Total budget for the selected project
+  const [localExpenditures, setLocalExpenditures] = useState({
+    Labor: 0,
+    Material: 0,
+    Equipment: 0,
+    Subcontractor: 0,
+    Others: 0,
+  })
+  const [budgets, setBudgets] = useState({})
 
   const [updateFormData, setUpdateFormData] = useState({
     newFinishDate: '',
@@ -41,6 +50,27 @@ function Context({ children }) {
     }
     loadTheme()
   }, [selectedTheme])
+
+  useEffect(() => {
+    const tempExpenditures = {
+      Labor: 0,
+      Material: 0,
+      Equipment: 0,
+      Subcontractor: 0,
+      Others: 0,
+    }
+
+    expenditures.forEach(expenditure => {
+      const { category, amount } = expenditure
+      const parsedAmount = parseFloat(amount) || 0
+
+      if (tempExpenditures[category] !== undefined) {
+        tempExpenditures[category] += parsedAmount
+      }
+    })
+
+    setLocalExpenditures(tempExpenditures)
+  }, [expenditures])
 
   // Fetch all projects and set the current project when the app loads
   useEffect(() => {
@@ -102,6 +132,8 @@ function Context({ children }) {
   return (
     <DakiyStore.Provider
       value={{
+        budgets,
+        setBudgets,
         project,
         setProject,
         setSelectedTheme,
@@ -114,6 +146,9 @@ function Context({ children }) {
         expenditures,
         setCurrentProjectId,
         loading, // Provide loading state
+        totalBudget, // Provide total budget
+        setTotalBudget, // Provide total budget setter
+        localExpenditures, // Provide local expenditures
       }}
     >
       {children}

@@ -3,13 +3,13 @@ import { useContext } from 'react'
 import Link from 'next/link'
 import FinanceBar from '../utils/FinanceBar'
 import HorizontalLine from '../utils/HorizontalLine'
-import Progress from '../utils/Progress'
 import calculatePercentage from '../utils/calculatePercentage'
 import Payments from './Payments'
 import { DakiyStore } from '@/context/context'
 import addCommasToMoney from '../utils/addCommasToNos'
 import ExpenditureRegistrationModal from './ExpenditureRegistrationModal'
-import BudgetingComponent from './BudgettingComponent'
+import BudgetRegistrationModal from './BudgettingRegistrationModal'
+import BudgetComponent from './BudgetComponent'
 
 function ProjectFinancePage() {
   const { loading, project, workingProjectSumAndDate } = useContext(DakiyStore)
@@ -26,11 +26,11 @@ function ProjectFinancePage() {
 
   return Object.keys(project).length > 0 ? (
     <div className="p-4">
-      <h2 className="text-lg font-semibold uppercase text-primary">Finances</h2>
+      <h2 className="font-semibold capitalize text-primary">Finances</h2>
       <HorizontalLine />
       <section className="mx-auto my-8 rounded-lg border-2 border-accent bg-accent/10 p-4">
         <ExpenditureRegistrationModal />
-        <Progress progress={0} />
+        <BudgetRegistrationModal />
         <FinanceBar
           progress={0}
           finance={calculatePercentage(
@@ -55,15 +55,18 @@ function ProjectFinancePage() {
             )}
           </div>
         </div>
-        <button className="btn btn-primary mt-4" onClick={() => document.getElementById('payment_form').showModal()}>Register Expenditure</button>
+        <div className='justify-between'>
+          <button className="btn btn-primary btn-sm mt-4 text-xs" onClick={() => document.getElementById('payment_form').showModal()}>Register Expenditure</button>
+          <button className="btn btn-success btn-sm mt-4 text-xs" onClick={() => document.getElementById('budget_form').showModal()}>Set Budget</button>
+        </div>
       </section>
       <HorizontalLine />
 
       {/* Import and use the BudgetingComponent */}
-      <BudgetingComponent workingProjectSumAndDate={workingProjectSumAndDate} />
+      <BudgetComponent workingProjectSumAndDate={workingProjectSumAndDate} />
 
       <section className="my-8">
-        <h2 className="font-semibold uppercase text-primary-content/75">
+        <h2 className="font-semibold capitalize text-primary-content/75">
           Expenditure Sheet
         </h2>
         <Payments />
