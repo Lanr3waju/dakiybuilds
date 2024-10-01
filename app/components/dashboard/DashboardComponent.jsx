@@ -1,6 +1,5 @@
 'use client'
 import Container from '@mui/material/Container'
-import Grid from '@mui/material/Grid'
 import Link from 'next/link'
 import { getAppTheme, getProjects } from '@/context/supabaseTables.js'
 import Greeting from './greeting/Greeting.jsx'
@@ -15,9 +14,10 @@ import BudgetExpenditureChart from '../project-finance/BudgetExpenditureChart.js
 import ProjectLogByTitles from '../project-logs/ProjectLogByTitles.jsx'
 import HorizontalLine from '../utils/HorizontalLine.jsx'
 import Alert from '../utils/Alert.jsx'
+import Grid from '@mui/material/Grid2';
 
 export default function DashboardComponent() {
-  const { project, setProjects, setSelectedTheme, loading, workingProjectSumAndDate, totalExpenditure, totalBudget, budgets, expenditures } = useContext(DakiyStore)
+  const { project, setProjects, setSelectedTheme, loading, workingProjectSumAndDate, totalExpenditure, totalBudget } = useContext(DakiyStore)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function DashboardComponent() {
           {/* Overview */}
           <h2 className='font-bold text-primary-content/80'>Overview</h2>
           <HorizontalLine />
-          <BudgetExpenditureChart budgets={budgets} expenditures={expenditures} />
+          <BudgetExpenditureChart />
           <Overview />
         </Grid>
         {/* Date and Project Logs */}
