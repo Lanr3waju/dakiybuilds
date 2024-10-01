@@ -14,8 +14,8 @@ function Payments() {
   return (
     <section className="mt-5">
       <div className="overflow-x-auto font-Roboto">
-        <table className="table table-zebra table-xs border-4 border-secondary/50 py-2 md:table-md">
-          <thead className="bg-primary font-Poppins uppercase tracking-wider text-primary-content">
+        <table className="table table-zebra table-xs border-4 border-secondary/50 py-2 md:table-sm">
+          <thead className="bg-primary font-Poppins text-sm text-primary-content/75">
             <tr>
               <th>Amount (₦)</th>
               <th>Category</th>
@@ -24,7 +24,7 @@ function Payments() {
               <th>Date</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='text-sm'>
             {localExpenditures?.length === 0 ? (
               <tr>
                 <td colSpan="7" className="text-center">No current expenditures.</td>

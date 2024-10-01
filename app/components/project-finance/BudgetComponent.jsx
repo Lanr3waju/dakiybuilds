@@ -12,7 +12,7 @@ function BudgetComponent() {
             <h3 className="my-4 font-semibold capitalize text-primary">Current Budgets</h3>
             <ul className='flex flex-col place-items-end md:flex-row md:flex-wrap'>
                 {categories.map((category) => (
-                    <li className='m-1 mr-auto text-sm md:w-5/12' key={category}>
+                    <li className='m-1 mr-auto w-full text-sm md:w-5/12' key={category}>
                         <span className='text-sm font-medium text-secondary-content/65'>Budget for {category}:</span>
                         <span className='font-Roboto font-medium text-secondary-content/70'>  ₦{addCommasToMoney(budgets[category] || 0)}</span>
                         <BudgetBar expenditure={localExpenditures[category] || 0} budget={budgets[category] || 0} />

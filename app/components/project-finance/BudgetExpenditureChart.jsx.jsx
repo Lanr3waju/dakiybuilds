@@ -1,4 +1,4 @@
-import { LineChart } from '@mui/x-charts'
+import { LineChart } from "@mui/x-charts"
 
 export default function BudgetExpenditureChart({ budgets, expenditures }) {
     // Extract expenditure by category (sum of all expenditures per category)
