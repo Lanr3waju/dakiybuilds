@@ -58,7 +58,7 @@ function ProjectDetails() {
           alt="Picture of site"
         />
       )}
-      <section className='justify-left flex flex-wrap'>
+      <section className='flex flex-wrap'>
         <h3 className="m-1 p-2 text-xs text-primary-content/75 shadow-md shadow-base-300">
           Site Location:{' '}
           <p className="font-Roboto text-sm font-medium tracking-wider text-primary-content/75">
