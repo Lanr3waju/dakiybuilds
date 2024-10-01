@@ -3,6 +3,7 @@
 import { createContext, useEffect, useState } from 'react'
 import { fetchCurrentProjectId, getAppTheme, getProjects } from './supabaseTables'
 import { getBudgetsByProjectId, getExpendituresByProjectId } from '@/app/components/project-finance/supabaseTables'
+import { getLogs } from '@/app/components/project-logs/supabaseTables'
 
 // Create a context for managing and sharing state across components
 export const DakiyStore = createContext()
@@ -16,6 +17,7 @@ function Context({ children }) {
   const [expenditures, setExpenditures] = useState([]) // List of expenditures for the selected project
   const [totalBudget, setTotalBudget] = useState(0) // Total budget for the selected project
   const [totalExpenditure, setTotalExpenditure] = useState(0) // Total expenditure for the selected project
+  const [logs, setLogs] = useState([]) // List of logs for the selected project
   const [localExpenditures, setLocalExpenditures] = useState({
     Labor: 0,
     Material: 0,
@@ -170,6 +172,16 @@ function Context({ children }) {
     fetchBudgets()
   }, [currentProjectId]);
 
+  useEffect(() => {
+    const fetchLogs = async () => {
+      if (project) {
+        const logs = await getLogs(currentProjectId)
+        setLogs(logs)
+      }
+    }
+    fetchLogs()
+  }, [currentProjectId, project])
+
 
   return (
     <DakiyStore.Provider
@@ -191,6 +203,8 @@ function Context({ children }) {
         totalBudget, // Provide total budget
         localExpenditures, // Provide local expenditures
         totalExpenditure, // Provide total expenditure
+        logs,
+        setLogs,
       }}
     >
       {children}

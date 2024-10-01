@@ -31,14 +31,15 @@ export default function BudgetExpenditureChart({ budgets, expenditures }) {
     const budgetData = categories.map((category) => budgetByCategory[category])
 
     return (
-        <LineChart
-            width={500}
-            height={300}
-            series={[
-                { data: expenditureData, label: 'Expenditure' },
-                { data: budgetData, label: 'Budget' },
-            ]}
-            xAxis={[{ scaleType: 'point', data: categories }]} // Categories as labels
-        />
+        <section className='my-2 rounded-lg bg-base-100 p-2 shadow-md'>
+            <h2 className='font-Roboto text-sm font-medium text-primary-content'>Expenditure / Budget</h2>
+            <LineChart className='h-60 w-full md:h-80'
+                series={[
+                    { data: expenditureData, label: 'Expenditure' },
+                    { data: budgetData, label: 'Budget' },
+                ]}
+                xAxis={[{ scaleType: 'point', data: categories }]} // Categories as labels
+            />
+        </section>
     )
 }

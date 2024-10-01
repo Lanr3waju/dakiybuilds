@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
           className={
             pathname === '/'
               ? '!scroll-smooth font-Raleway'
-              : 'mt-4 !scroll-smooth font-Raleway'
+              : '!scroll-smooth font-Raleway'
           }
         >
           {pathname !== '/project-schedule/gantt-chart' &&

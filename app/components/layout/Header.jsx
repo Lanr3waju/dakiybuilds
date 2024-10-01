@@ -64,7 +64,6 @@ const Drawer = styled(MuiDrawer, {
   },
 }))
 
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme()
 
 export default function DashboardComponent({ children }) {
@@ -77,9 +76,9 @@ export default function DashboardComponent({ children }) {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box className="min-h-full bg-base-100" sx={{ display: 'flex' }}>
+      <Box className="bg-base-100" sx={{ display: 'flex' }}>
         <CssBaseline />
-        <div role="wrapper">
+        <div className='bg-base-200' role="wrapper">
           <AppBar position="absolute" open={open}>
             <Toolbar
               sx={{
@@ -112,10 +111,10 @@ export default function DashboardComponent({ children }) {
                   {pathname.toLowerCase().includes('project-logs/')
                     ? 'Log-Details'
                     : pathname.toLowerCase().includes('/update-sheet')
-                    ? 'Job Details (Progress Update Sheet)'
-                    : pathname.toLowerCase().includes('all-jobs/')
-                    ? 'Job Details'
-                    : removeForwardSlash(pathname)}
+                      ? 'Job Details (Progress Update Sheet)'
+                      : pathname.toLowerCase().includes('all-jobs/')
+                        ? 'Job Details'
+                        : removeForwardSlash(pathname)}
                   <button
                     disabled={pathname.toLowerCase().includes('/dakiyboard')}
                     className="btn btn-secondary btn-sm disabled:cursor-not-allowed"
@@ -130,11 +129,11 @@ export default function DashboardComponent({ children }) {
 
           <Drawer variant="permanent" open={open}>
             <Toolbar
+              className='bg-base-100'
               sx={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'flex-end',
-                px: [3],
               }}
             >
               <IconButton onClick={toggleDrawer}>
@@ -142,11 +141,13 @@ export default function DashboardComponent({ children }) {
               </IconButton>
             </Toolbar>
             <Divider />
-            <List className="bg-base-200" component="nav">
-              {mainListItems}
-              <Divider sx={{ my: 1 }} />
-              <SecondaryListItems />
-            </List>
+            <div className="h-full bg-base-200">
+              <List component="nav">
+                {mainListItems}
+                <Divider sx={{ my: 1 }} />
+                <SecondaryListItems />
+              </List>
+            </div>
           </Drawer>
         </div>
         <Box

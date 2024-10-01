@@ -3,17 +3,18 @@ import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Link from 'next/link'
 import { getAppTheme, getProjects } from '@/context/supabaseTables.js'
-// import Progress from '../utils/Progress.jsx'
 import Greeting from './greeting/Greeting.jsx'
 import Weather from './getCurrentWeather/Weather.jsx'
 import GetDate from './greeting/GetDate.jsx'
 import Overview from './Overview/Overview.jsx'
-import Milestone from './Overview/Milestone.jsx'
 import { useContext, useEffect } from 'react'
 import { DakiyStore } from '@/context/context.js'
 import { usePathname } from 'next/navigation.js'
 import addCommasToMoney from '../utils/addCommasToNos.js'
 import BudgetExpenditureChart from '../project-finance/BudgetExpenditureChart.jsx.jsx'
+import ProjectLogByTitles from '../project-logs/ProjectLogByTitles.jsx'
+import HorizontalLine from '../utils/HorizontalLine.jsx'
+import Alert from '../utils/Alert.jsx'
 
 export default function DashboardComponent() {
   const { project, setProjects, setSelectedTheme, loading, workingProjectSumAndDate, totalExpenditure, totalBudget, budgets, expenditures } = useContext(DakiyStore)
@@ -50,14 +51,10 @@ export default function DashboardComponent() {
   return Object.keys(project).length > 0 ? (
     <Container className="my-4" maxWidth="lg" sx={{ mb: 4 }}>
       {totalBudget > workingProjectSumAndDate?.workingProjectContractSum && (
-        <div className="alert alert-warning m-2 font-Roboto text-xs">
-          Warning! Your budget exceeds the contract sum by ₦{addCommasToMoney(totalBudget - workingProjectSumAndDate?.workingProjectContractSum)} naira.
-        </div>
+        <Alert message={`Your budget exceeds the contract sum by ₦${addCommasToMoney(totalBudget - workingProjectSumAndDate?.workingProjectContractSum)} naira.`} />
       )}
       {totalExpenditure > workingProjectSumAndDate?.workingProjectContractSum && (
-        <div className="alert alert-warning m-2 font-Roboto text-xs">
-          Warning! Your expenditure exceeds the contract sum by ₦{addCommasToMoney(totalExpenditure - workingProjectSumAndDate?.workingProjectContractSum)} naira.
-        </div>
+        <Alert message={`Your expenditure exceeds the contract sum by ₦${addCommasToMoney(totalExpenditure - workingProjectSumAndDate?.workingProjectContractSum)} naira.`} />
       )}
       <Grid container spacing={3}>
         {/* Greeting */}
@@ -68,14 +65,16 @@ export default function DashboardComponent() {
             <Weather />
           </section>
           {/* Overview */}
-          <Overview />
+          <h2 className='font-bold text-primary-content/80'>Overview</h2>
+          <HorizontalLine />
           <BudgetExpenditureChart budgets={budgets} expenditures={expenditures} />
+          <Overview />
         </Grid>
-        {/* Date and Milestone */}
+        {/* Date and Project Logs */}
         <Grid item xs={12} md={4} lg={4}>
           <section className="rounded-lg bg-base-100 p-4 shadow-md">
             <GetDate />
-            <Milestone />
+            <ProjectLogByTitles />
           </section>
         </Grid>
       </Grid>

@@ -39,7 +39,7 @@ function ProjectDetails() {
   return (
     <section className="mt-3 font-Raleway text-sm">
 
-      <h2 className="font-bold capitalize tracking-widest text-primary-content/75">
+      <h2 className="font-bold capitalize text-primary-content/75">
         {project.name}
       </h2>
       {isImageLoading ? (
