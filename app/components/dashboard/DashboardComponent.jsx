@@ -13,9 +13,10 @@ import { useContext, useEffect } from 'react'
 import { DakiyStore } from '@/context/context.js'
 import { usePathname } from 'next/navigation.js'
 import addCommasToMoney from '../utils/addCommasToNos.js'
+import BudgetExpenditureChart from '../project-finance/BudgetExpenditureChart.jsx.jsx'
 
 export default function DashboardComponent() {
-  const { project, setProjects, setSelectedTheme, loading, workingProjectSumAndDate, totalExpenditure, totalBudget } = useContext(DakiyStore)
+  const { project, setProjects, setSelectedTheme, loading, workingProjectSumAndDate, totalExpenditure, totalBudget, budgets, expenditures } = useContext(DakiyStore)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -68,6 +69,7 @@ export default function DashboardComponent() {
           </section>
           {/* Overview */}
           <Overview />
+          <BudgetExpenditureChart budgets={budgets} expenditures={expenditures} />
         </Grid>
         {/* Date and Milestone */}
         <Grid item xs={12} md={4} lg={4}>
