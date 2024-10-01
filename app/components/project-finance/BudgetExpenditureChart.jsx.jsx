@@ -1,6 +1,12 @@
+import { DakiyStore } from "@/context/context"
 import { LineChart } from "@mui/x-charts/LineChart"
+import { useContext } from "react"
 
-export default function BudgetExpenditureChart({ budgets, expenditures }) {
+
+// Set up the x-axis categories
+const categories = ['Labor', 'Material', 'Equipment', 'Subcontractor', 'Others']
+export default function BudgetExpenditureChart() {
+    const { budgets, expenditures } = useContext(DakiyStore)
     // Extract expenditure by category (sum of all expenditures per category)
     const expenditureByCategory = expenditures.reduce((acc, exp) => {
         const category = exp.category
@@ -22,9 +28,6 @@ export default function BudgetExpenditureChart({ budgets, expenditures }) {
         Subcontractor: parseFloat(budgets.Subcontractor || 0),
         Others: parseFloat(budgets.Others || 0),
     }
-
-    // Set up the x-axis categories
-    const categories = ['Labor', 'Material', 'Equipment', 'Subcontractor', 'Others']
 
     // Prepare data for the chart
     const expenditureData = categories.map((category) => expenditureByCategory[category] || 0)
