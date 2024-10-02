@@ -27,7 +27,6 @@ const Weather = () => {
             src={weatherIcon}
             alt={weather.weather[0].description}
             fill
-            objectFit="cover"
             sizes="100%" // Optimize the image based on its container
           />
         </div>

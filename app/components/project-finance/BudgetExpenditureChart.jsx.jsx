@@ -1,24 +1,25 @@
 import { DakiyStore } from "@/context/context"
 import { LineChart } from "@mui/x-charts/LineChart"
-import { useContext } from "react"
-
+import { useContext } from "react";
 
 // Set up the x-axis categories
-const categories = ['Labor', 'Material', 'Equipment', 'Subcontractor', 'Others']
+const categories = ['Labor', 'Material', 'Equipment', 'Subcontractor', 'Others'];
+
 export default function BudgetExpenditureChart() {
     const { budgets, expenditures } = useContext(DakiyStore)
+
     // Extract expenditure by category (sum of all expenditures per category)
     const expenditureByCategory = expenditures.reduce((acc, exp) => {
         const category = exp.category
-        const amount = parseFloat(exp.amount || 0)
+        const amount = parseFloat(exp.amount || 0);
 
         if (!acc[category]) {
-            acc[category] = 0
+            acc[category] = 0;
         }
-        acc[category] += amount
+        acc[category] += amount;
 
         return acc
-    }, {})
+    }, {});
 
     // Extract budget by category
     const budgetByCategory = {
@@ -27,11 +28,16 @@ export default function BudgetExpenditureChart() {
         Equipment: parseFloat(budgets.Equipment || 0),
         Subcontractor: parseFloat(budgets.Subcontractor || 0),
         Others: parseFloat(budgets.Others || 0),
-    }
+    };
 
     // Prepare data for the chart
     const expenditureData = categories.map((category) => expenditureByCategory[category] || 0)
     const budgetData = categories.map((category) => budgetByCategory[category])
+
+    // Check if data is valid before rendering the chart
+    if (expenditureData.length === 0 || budgetData.length === 0) {
+        return <p>No data available for the chart.</p>
+    }
 
     return (
         <section className='my-2 rounded-lg bg-base-100 p-2 shadow-md'>
