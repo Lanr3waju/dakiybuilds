@@ -1,12 +1,12 @@
-'use client'
+'use client';
 
 import { createContext, useEffect, useState } from 'react'
 import { fetchCurrentProjectId, getAppTheme, getProjects } from './supabaseTables'
 import { getBudgetsByProjectId, getExpendituresByProjectId } from '@/app/components/project-finance/supabaseTables'
-import { getLogs } from '@/app/components/project-logs/supabaseTables'
+import { getLogs } from '@/app/components/project-logs/supabaseTables';
 
 // Create a context for managing and sharing state across components
-export const DakiyStore = createContext()
+export const DakiyStore = createContext();
 
 function Context({ children }) {
   const [project, setProject] = useState({}) // Current selected project
@@ -24,25 +24,25 @@ function Context({ children }) {
     Equipment: 0,
     Subcontractor: 0,
     Others: 0,
-  })
-  const [budgets, setBudgets] = useState({})
+  });
+  const [budgets, setBudgets] = useState({});
 
   const [updateFormData, setUpdateFormData] = useState({
     newFinishDate: '',
     newContractSum: '',
     subsequentPayments: '',
     description: '',
-  })
+  });
 
   const [projectSumAndDate, setProjectSumAndDate] = useState({
     projectFinishDate: '',
     projectContractSum: '',
-  })
+  });
 
   const [workingProjectSumAndDate, setWorkingProjectSumAndDate] = useState({
     workingProjectFinishDate: '',
     workingProjectContractSum: '',
-  })
+  });
 
   // Load the theme from the database or fallback to the default theme
   useEffect(() => {
@@ -51,9 +51,10 @@ function Context({ children }) {
       const savedAppTheme = await getAppTheme()
       element.setAttribute('data-theme', savedAppTheme || selectedTheme)
     }
-    loadTheme()
-  }, [selectedTheme])
+    loadTheme();
+  }, [selectedTheme]);
 
+  // Update local expenditures based on fetched expenditures
   useEffect(() => {
     const tempExpenditures = {
       Labor: 0,
@@ -61,48 +62,51 @@ function Context({ children }) {
       Equipment: 0,
       Subcontractor: 0,
       Others: 0,
-    }
+    };
 
-    expenditures.forEach(expenditure => {
-      const { category, amount } = expenditure
-      const parsedAmount = parseFloat(amount) || 0
-
+    expenditures.forEach(({ category, amount }) => {
+      const parsedAmount = parseFloat(amount) || 0;
       if (tempExpenditures[category] !== undefined) {
-        tempExpenditures[category] += parsedAmount
+        tempExpenditures[category] += parsedAmount;
       }
-    })
+    });
 
-    setLocalExpenditures(tempExpenditures)
-  }, [expenditures])
+    setLocalExpenditures(tempExpenditures);
+  }, [expenditures]);
 
   // Fetch all projects and set the current project when the app loads
   useEffect(() => {
     const loadProjects = async () => {
-      setLoading(true) // Start loading
-      const fetchedProjects = await getProjects()
-      setProjects(fetchedProjects);
+      setLoading(true);
+      try {
+        const fetchedProjects = await getProjects();
+        setProjects(fetchedProjects);
 
-      // Auto-select the first project if only one exists
-      if (fetchedProjects.length === 1) {
-        setProject(fetchedProjects[0])
-        setCurrentProjectId(fetchedProjects[0].id);
-      }
+        // Auto-select the first project if only one exists
+        if (fetchedProjects.length === 1) {
+          setProject(fetchedProjects[0])
+          setCurrentProjectId(fetchedProjects[0].id);
+        }
 
-      // Fetch current project ID and set project details
-      const fetchedCurrentProjectId = await fetchCurrentProjectId();
-      if (fetchedCurrentProjectId) {
-        setCurrentProjectId(fetchedCurrentProjectId)
-        const matchedProject = fetchedProjects.find(({ id }) => id === fetchedCurrentProjectId)
-        if (matchedProject) setProject(matchedProject);
+        // Fetch current project ID and set project details
+        const fetchedCurrentProjectId = await fetchCurrentProjectId();
+        if (fetchedCurrentProjectId) {
+          setCurrentProjectId(fetchedCurrentProjectId)
+          const matchedProject = fetchedProjects.find(({ id }) => id === fetchedCurrentProjectId)
+          if (matchedProject) setProject(matchedProject);
+        }
+      } catch (error) {
+        console.error('Error loading projects:', error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false) // End loading
     }
-    loadProjects()
-  }, [])
+    loadProjects();
+  }, []);
 
   // Update project sum and date when the current project changes
   useEffect(() => {
-    const currentProject = projects.find(({ id }) => id === currentProjectId)
+    const currentProject = Array.isArray(projects) ? projects.find(({ id }) => id === currentProjectId) : null;
     if (currentProject) {
       const { new_contract_sum, new_finish_date, contract_sum, finish_date } = currentProject;
       setProjectSumAndDate({
@@ -119,69 +123,63 @@ function Context({ children }) {
   // Fetch and sort expenditures when the current project changes
   useEffect(() => {
     const fetchExpenditures = async () => {
-      if (currentProjectId) {
+      if (currentProjectId && currentProjectId.trim() !== '') {
         try {
-          const data = await getExpendituresByProjectId(currentProjectId)
-
-          // Sort data by the created_at date
+          const data = await getExpendituresByProjectId(currentProjectId);
           const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
           setExpenditures(sortedData);
 
-          // Calculate total expenditure by summing the amount values
-          const totalExpenditure = sortedData.reduce((total, expenditure) => {
-            return total + parseFloat(expenditure.amount || 0) // Convert string to number
-          }, 0)
-
-          setTotalExpenditure(totalExpenditure) // Set the total expenditure
+          const totalExpenditure = sortedData.reduce((total, { amount }) => total + parseFloat(amount || 0), 0);
+          setTotalExpenditure(totalExpenditure);
         } catch (error) {
           console.error('Error fetching expenditures:', error);
         }
       }
     }
+    fetchExpenditures();
+  }, [currentProjectId]);
 
-    fetchExpenditures()
-  }, [currentProjectId])
-
-
+  // Fetch budgets when the current project changes
   useEffect(() => {
     const fetchBudgets = async () => {
-      if (currentProjectId) {
+      if (currentProjectId && currentProjectId.trim() !== '') {
         try {
-          const data = await getBudgetsByProjectId(currentProjectId)
+          const data = await getBudgetsByProjectId(currentProjectId);
+          if (data && Array.isArray(data) && data.length > 0) {
+            const budget = data[0];
+            setBudgets(budget);
 
-          if (data && data.length > 0) {
-            const budget = data[0]
-            setBudgets(budget)
-
-            // Calculate the total budget by summing the values of Labor, Material, Equipment, Subcontractor, Others
             const totalBudget = Object.keys(budget).reduce((total, key) => {
               if (['Labor', 'Material', 'Equipment', 'Subcontractor', 'Others'].includes(key)) {
-                return total + parseFloat(budget[key] || 0) // Convert string to number
+                return total + parseFloat(budget[key] || 0);
               }
-              return total
-            }, 0)
+              return total;
+            }, 0);
 
-            setTotalBudget(totalBudget) // Set the total budget
+            setTotalBudget(totalBudget);
           }
         } catch (error) {
-          console.error('Error fetching budgets:', error)
+          console.error('Error fetching budgets:', error);
+        }
+      }
+    };
+    fetchBudgets();
+  }, [currentProjectId]);
+
+  // Fetch logs when the current project changes
+  useEffect(() => {
+    const fetchLogs = async () => {
+      if (currentProjectId) {
+        try {
+          const logs = await getLogs(currentProjectId)
+          setLogs(logs);
+        } catch (error) {
+          console.error('Error fetching logs:', error);
         }
       }
     }
-
-    fetchBudgets()
+    fetchLogs();
   }, [currentProjectId]);
-
-  useEffect(() => {
-    const fetchLogs = async () => {
-      if (project) {
-        const logs = await getLogs(currentProjectId)
-        setLogs(logs)
-      }
-    }
-    fetchLogs()
-  }, [currentProjectId, project])
-
 
   return (
     <DakiyStore.Provider
@@ -199,10 +197,10 @@ function Context({ children }) {
         workingProjectSumAndDate,
         expenditures,
         setCurrentProjectId,
-        loading, // Provide loading state
-        totalBudget, // Provide total budget
-        localExpenditures, // Provide local expenditures
-        totalExpenditure, // Provide total expenditure
+        loading,
+        totalBudget,
+        localExpenditures,
+        totalExpenditure,
         logs,
         setLogs,
       }}

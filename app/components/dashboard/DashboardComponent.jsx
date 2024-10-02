@@ -10,7 +10,7 @@ import { useContext, useEffect } from 'react'
 import { DakiyStore } from '@/context/context.js'
 import { usePathname } from 'next/navigation.js'
 import addCommasToMoney from '../utils/addCommasToNos.js'
-// import BudgetExpenditureChart from '../project-finance/BudgetExpenditureChart.jsx.jsx'
+import BudgetExpenditureChart from '../project-finance/BudgetExpenditureChart.jsx.jsx'
 import ProjectLogByTitles from '../project-logs/ProjectLogByTitles.jsx'
 import HorizontalLine from '../utils/HorizontalLine.jsx'
 import Alert from '../utils/Alert.jsx'
@@ -67,7 +67,7 @@ export default function DashboardComponent() {
           {/* Overview */}
           <h2 className='font-bold text-primary-content/80'>Overview</h2>
           <HorizontalLine />
-          {/* <BudgetExpenditureChart /> */}
+          <BudgetExpenditureChart />
           <Overview />
         </Grid>
         {/* Date and Project Logs */}
