@@ -50,7 +50,7 @@ function Context({ children }) {
       const element = document.getElementById('app')
       const savedAppTheme = await getAppTheme()
       element.setAttribute('data-theme', savedAppTheme || selectedTheme)
-    }
+    };
     loadTheme();
   }, [selectedTheme]);
 
@@ -80,29 +80,40 @@ function Context({ children }) {
       setLoading(true);
       try {
         const fetchedProjects = await getProjects();
-        setProjects(fetchedProjects);
 
-        // Auto-select the first project if only one exists
-        if (fetchedProjects.length === 1) {
-          setProject(fetchedProjects[0])
-          setCurrentProjectId(fetchedProjects[0].id);
-        }
+        // Check if fetchedProjects is an array and not undefined
+        if (Array.isArray(fetchedProjects)) {
+          setProjects(fetchedProjects);
 
-        // Fetch current project ID and set project details
-        const fetchedCurrentProjectId = await fetchCurrentProjectId();
-        if (fetchedCurrentProjectId) {
-          setCurrentProjectId(fetchedCurrentProjectId)
-          const matchedProject = fetchedProjects.find(({ id }) => id === fetchedCurrentProjectId)
-          if (matchedProject) setProject(matchedProject);
+          // Auto-select the first project if only one exists
+          if (fetchedProjects.length === 1) {
+            setProject(fetchedProjects[0])
+            setCurrentProjectId(fetchedProjects[0].id)
+          }
+
+          // Fetch current project ID and set project details
+          const fetchedCurrentProjectId = await fetchCurrentProjectId()
+          if (fetchedCurrentProjectId) {
+            setCurrentProjectId(fetchedCurrentProjectId)
+
+            const matchedProject = fetchedProjects.find(({ id }) => id === fetchedCurrentProjectId)
+            if (matchedProject) {
+              setProject(matchedProject)
+            }
+          }
+        } else {
+          console.warn('Fetched projects is not an array or is undefined');
         }
       } catch (error) {
         console.error('Error loading projects:', error);
       } finally {
         setLoading(false);
       }
-    }
+    };
+
     loadProjects();
   }, []);
+
 
   // Update project sum and date when the current project changes
   useEffect(() => {
@@ -129,13 +140,16 @@ function Context({ children }) {
           const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
           setExpenditures(sortedData);
 
-          const totalExpenditure = sortedData.reduce((total, { amount }) => total + parseFloat(amount || 0), 0);
+          const totalExpenditure = sortedData.reduce(
+            (total, { amount }) => total + parseFloat(amount || 0),
+            0
+          );
           setTotalExpenditure(totalExpenditure);
         } catch (error) {
           console.error('Error fetching expenditures:', error);
         }
       }
-    }
+    };
     fetchExpenditures();
   }, [currentProjectId]);
 
@@ -171,13 +185,13 @@ function Context({ children }) {
     const fetchLogs = async () => {
       if (currentProjectId) {
         try {
-          const logs = await getLogs(currentProjectId)
+          const logs = await getLogs(currentProjectId);
           setLogs(logs);
         } catch (error) {
           console.error('Error fetching logs:', error);
         }
       }
-    }
+    };
     fetchLogs();
   }, [currentProjectId]);
 

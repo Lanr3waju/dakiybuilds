@@ -1,3 +1,4 @@
+'use client'
 import { DakiyStore } from "@/context/context"
 import { LineChart } from "@mui/x-charts/LineChart"
 import { useContext } from "react";
