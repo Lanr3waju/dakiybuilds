@@ -159,6 +159,8 @@ function Context({ children }) {
       if (currentProjectId && currentProjectId.trim() !== '') {
         try {
           const data = await getBudgetsByProjectId(currentProjectId);
+
+          // Check if the data is valid
           if (data && Array.isArray(data) && data.length > 0) {
             const budget = data[0];
             setBudgets(budget);
@@ -171,14 +173,26 @@ function Context({ children }) {
             }, 0);
 
             setTotalBudget(totalBudget);
+          } else {
+            // Handle the case where data is an empty array or invalid
+            setBudgets({})
+            setTotalBudget(0);
           }
         } catch (error) {
           console.error('Error fetching budgets:', error);
         }
+      } else {
+        // Reset budgets and total budget when there is no valid project ID
+        setBudgets({})
+        setTotalBudget(0);
       }
     };
+
     fetchBudgets();
+    console.log('currentProjectId:', currentProjectId)
+    console.log('budgets:', budgets)
   }, [currentProjectId]);
+
 
   // Fetch logs when the current project changes
   useEffect(() => {
