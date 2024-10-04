@@ -1,6 +1,6 @@
 'use client'
 import { DakiyStore } from "@/context/context"
-import { LineChart } from "@mui/x-charts/LineChart"
+import { LineChart } from "@mui/x-charts"
 import { useContext } from "react";
 
 // Set up the x-axis categories
@@ -43,7 +43,7 @@ export default function BudgetExpenditureChart() {
     return (
         <section className='my-2 rounded-lg bg-base-100 p-2 shadow-md'>
             <h2 className='font-Roboto text-sm font-medium text-primary-content'>Expenditure / Budget</h2>
-            <LineChart className='h-60 w-full md:h-80'
+            <LineChart className='h-60 w-full md:h-80 block'
                 series={[
                     { data: expenditureData, label: 'Expenditure' },
                     { data: budgetData, label: 'Budget' },
