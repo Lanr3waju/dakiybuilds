@@ -2,13 +2,13 @@ import { useState, useContext } from 'react'
 import { DakiyStore } from '@/context/context'
 import { setBudget } from './supabaseTables' // Adjust the import path as necessary
 
-const categories = ['Labor', 'Material', 'Equipment', 'Subcontractor', 'Others'];
+const categories = ['Labor', 'Material', 'Equipment', 'Subcontractor', 'Others']
 
 function BudgetForm() {
     const { setBudgets, project } = useContext(DakiyStore)
     const [modifiedBudgets, setModifiedBudgets] = useState({})
     const [errors, setErrors] = useState({})
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleBudgetChange = (category, value) => {
         // Convert category to lowercase for the modifiedBudgets state
@@ -57,23 +57,25 @@ function BudgetForm() {
             setModifiedBudgets({})
         }
         setIsLoading(false)
-    };
+    }
 
     const isSubmitEnabled = () => {
         return Object.values(modifiedBudgets).every(value => value >= 0) // Ensure all fields are filled
-    };
+    }
 
     return (
         <form onSubmit={handleSubmitBudgets}>
             {categories.map((category) => (
                 <div key={category} className="my-2">
-                    <label className="mr-2 block">{category}:</label>
-                    <input
-                        type="number"
-                        placeholder="Budget Amount"
-                        className="input input-bordered my-2 w-full font-Roboto"
-                        onChange={(e) => handleBudgetChange(category, parseFloat(e.target.value))}
-                    />
+                    <label className="mr-2 block">{category}:
+                        <input
+                            name={category}
+                            type="number"
+                            placeholder="Budget Amount"
+                            className="input input-bordered my-2 w-full font-Roboto"
+                            onChange={(e) => handleBudgetChange(category, parseFloat(e.target.value))}
+                        />
+                    </label>
                     {errors[category] && <div className="text-xs font-semibold capitalize text-error">{errors[category]}</div>}
                 </div>
             ))}

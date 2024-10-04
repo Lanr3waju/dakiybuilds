@@ -58,7 +58,7 @@ export default function DashboardComponent() {
       )}
       <Grid container spacing={3}>
         {/* Greeting */}
-        <Grid item xs={12} md={8} lg={8}>
+        <Grid item size={{ xs: 12, md: 8, lg: 8 }}>
           <section className="mb-2 flex rounded-b-md bg-base-200/35 px-1 py-2 shadow-md md:flex-row md:items-center md:px-4">
             <Greeting />
             <div className="mx-3 bg-primary md:h-7 md:w-1"></div>
@@ -71,7 +71,7 @@ export default function DashboardComponent() {
           <Overview />
         </Grid>
         {/* Date and Project Logs */}
-        <Grid item xs={12} md={4} lg={4}>
+        <Grid item size={{ xs: 12, md: 4, lg: 4 }}>
           <section className="rounded-lg bg-base-100 p-4 shadow-md">
             <GetDate />
             <ProjectLogByTitles />

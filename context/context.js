@@ -189,8 +189,6 @@ function Context({ children }) {
     };
 
     fetchBudgets();
-    console.log('currentProjectId:', currentProjectId)
-    console.log('budgets:', budgets)
   }, [currentProjectId]);
 
 
