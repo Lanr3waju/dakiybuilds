@@ -1,16 +1,25 @@
 'use client'
 
 import { DakiyStore } from '@/context/context'
+import { updateCurrentProject } from '@/context/supabaseTables'
 import { useContext } from 'react'
 
 // Load Job Modal
 export default function LoadJobModal({ currentProject }) {
   const { setProject } = useContext(DakiyStore)
 
-  const handleLoadProject = () => {
+  const handleLoadProject = async () => {
+    // Update the current project in the database
+    const updateError = await updateCurrentProject(currentProject.id)
+    if (updateError) {
+      console.error('Error updating current project to the DB:', updateError)
+      // return // Optionally handle the error (e.g., show a notification)
+    }
+
+  // Set the project in state and show the modal
     setProject(currentProject)
     document.getElementById('project_load_successful').showModal()
-  }
+  };
 
   return (
     <>

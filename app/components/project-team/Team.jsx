@@ -7,7 +7,7 @@ import Link from 'next/link'
 function Team() {
   const [email, setEmail] = useState('')
   const [emailError, setEmailError] = useState('true')
-  const { project } = useContext(DakiyStore)
+  const { loading, project } = useContext(DakiyStore)
 
   function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -29,6 +29,16 @@ function Team() {
       alert('Verification email sent to ' + email)
       setEmail('')
     }
+  }
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="flex h-screen flex-col items-center justify-center bg-transparent">
+        <span className="loading loading-dots loading-lg"></span>
+        <p className="mt-4 text-lg">Fetching your project documents, please hold on...</p>
+      </div>
+    )
   }
 
   return Object.keys(project).length > 0 ? (

@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
+  transpilePackages: ['@mui/x-charts'],
   images: {
     remotePatterns: [
       {
@@ -9,6 +11,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'openweathermap.org',
       },
     ],
   },

@@ -138,7 +138,7 @@ export const mainListItems = (
 export const SecondaryListItems = () => {
   const { projects } = useContext(DakiyStore)
   return (
-    <div>
+    <>
       <Image
         className="h-20 bg-base-200 object-cover"
         src="https://res.cloudinary.com/dbzorthz8/image/upload/v1710414091/logo_qbxief.png"
@@ -155,10 +155,10 @@ export const SecondaryListItems = () => {
               className="md:tooltip md:tooltip-bottom md:before:whitespace-pre-wrap md:before:[--tw-content:'Add_\a_Job']"
               data-tip
             >
-              + <BusinessCenterRounded />
+              <BusinessCenterRounded />+
             </div>
           </ListItemIcon>
-          + Add Jobs
+          Add Jobs
         </ListItemButton>
       </Link>
       <HorizontalLine />
@@ -175,6 +175,6 @@ export const SecondaryListItems = () => {
             <Divider />
           </Link>
         ))}
-    </div>
+    </>
   )
 }

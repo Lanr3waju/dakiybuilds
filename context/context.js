@@ -1,146 +1,234 @@
-'use client'
-import { createContext, useEffect, useState } from 'react'
-import { getAppTheme, getProjects } from './supabaseTables'
+'use client';
 
-export const DakiyStore = createContext()
+import { createContext, useEffect, useState } from 'react'
+import { fetchCurrentProjectId, getAppTheme, getProjects } from './supabaseTables'
+import { getBudgetsByProjectId, getExpendituresByProjectId } from '@/app/components/project-finance/supabaseTables'
+import { getLogs } from '@/app/components/project-logs/supabaseTables';
+
+// Create a context for managing and sharing state across components
+export const DakiyStore = createContext();
 
 function Context({ children }) {
-  const [project, setProject] = useState({})
-  const [projects, setProjects] = useState([])
-  const [currentProjectId, setCurrentProjectId] = useState('')
-  const [selectedTheme, setSelectedTheme] = useState('corporate')
+  const [project, setProject] = useState({}) // Current selected project
+  const [projects, setProjects] = useState([]) // List of all projects
+  const [currentProjectId, setCurrentProjectId] = useState('') // Current selected project ID
+  const [selectedTheme, setSelectedTheme] = useState('corporate') // Theme setting
+  const [loading, setLoading] = useState(true) // Loading state
+  const [expenditures, setExpenditures] = useState([]) // List of expenditures for the selected project
+  const [totalBudget, setTotalBudget] = useState(0) // Total budget for the selected project
+  const [totalExpenditure, setTotalExpenditure] = useState(0) // Total expenditure for the selected project
+  const [logs, setLogs] = useState([]) // List of logs for the selected project
+  const [localExpenditures, setLocalExpenditures] = useState({
+    Labor: 0,
+    Material: 0,
+    Equipment: 0,
+    Subcontractor: 0,
+    Others: 0,
+  });
+  const [budgets, setBudgets] = useState({});
 
   const [updateFormData, setUpdateFormData] = useState({
     newFinishDate: '',
     newContractSum: '',
     subsequentPayments: '',
     description: '',
-  })
+  });
 
   const [projectSumAndDate, setProjectSumAndDate] = useState({
     projectFinishDate: '',
     projectContractSum: '',
-  })
+  });
 
   const [workingProjectSumAndDate, setWorkingProjectSumAndDate] = useState({
     workingProjectFinishDate: '',
     workingProjectContractSum: '',
-  })
+  });
 
+  // Load the theme from the database or fallback to the default theme
   useEffect(() => {
-    if (projects?.length === 1) {
-      setProject(projects[0])
-    }
-  }, [projects])
-
-  useEffect(() => {
-    const getProjectID = async () => {
-      const res = await getProjects()
-      setProjects(res)
-    }
-    getProjectID()
-  }, [updateFormData])
-
-  useEffect(() => {
-    // Get selected theme from DB
-    const element = document.getElementById('app')
-    const appTheme = async () => {
+    const loadTheme = async () => {
+      const element = document.getElementById('app')
       const savedAppTheme = await getAppTheme()
-      if (!savedAppTheme) {
-        element.setAttribute('data-theme', selectedTheme)
-      } else {
-        element.setAttribute('data-theme', savedAppTheme)
-      }
-    }
-    appTheme()
-  }, [selectedTheme])
+      element.setAttribute('data-theme', savedAppTheme || selectedTheme)
+    };
+    loadTheme();
+  }, [selectedTheme]);
 
+  // Update local expenditures based on fetched expenditures
   useEffect(() => {
-    const currentProject = projects?.find(({ id }) => currentProjectId === id)
+    const tempExpenditures = {
+      Labor: 0,
+      Material: 0,
+      Equipment: 0,
+      Subcontractor: 0,
+      Others: 0,
+    };
+
+    expenditures.forEach(({ category, amount }) => {
+      const parsedAmount = parseFloat(amount) || 0;
+      if (tempExpenditures[category] !== undefined) {
+        tempExpenditures[category] += parsedAmount;
+      }
+    });
+
+    setLocalExpenditures(tempExpenditures);
+  }, [expenditures]);
+
+  // Fetch all projects and set the current project when the app loads
+  useEffect(() => {
+    const loadProjects = async () => {
+      setLoading(true);
+      try {
+        const fetchedProjects = await getProjects();
+
+        // Check if fetchedProjects is an array and not undefined
+        if (Array.isArray(fetchedProjects)) {
+          setProjects(fetchedProjects);
+
+          // Auto-select the first project if only one exists
+          if (fetchedProjects.length === 1) {
+            setProject(fetchedProjects[0])
+            setCurrentProjectId(fetchedProjects[0].id)
+          }
+
+          // Fetch current project ID and set project details
+          const fetchedCurrentProjectId = await fetchCurrentProjectId()
+          if (fetchedCurrentProjectId) {
+            setCurrentProjectId(fetchedCurrentProjectId)
+
+            const matchedProject = fetchedProjects.find(({ id }) => id === fetchedCurrentProjectId)
+            if (matchedProject) {
+              setProject(matchedProject)
+            }
+          }
+        } else {
+          console.warn('Fetched projects is not an array or is undefined');
+        }
+      } catch (error) {
+        console.error('Error loading projects:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProjects();
+  }, []);
+
+
+  // Update project sum and date when the current project changes
+  useEffect(() => {
+    const currentProject = Array.isArray(projects) ? projects.find(({ id }) => id === currentProjectId) : null;
     if (currentProject) {
-      // make the new contract sum and new finish date the project's finish date and contract sum if it exists
-      const { new_contract_sum, new_finish_date } = currentProject
-
-      if (new_contract_sum) {
-        setProjectSumAndDate((prevState) => ({
-          ...prevState,
-          projectContractSum: new_contract_sum,
-        }))
-      }
-
-      if (new_finish_date) {
-        setProjectSumAndDate((prevState) => ({
-          ...prevState,
-          projectFinishDate: new_finish_date,
-        }))
-      }
-
-      if (!new_contract_sum) {
-        setProjectSumAndDate((prevState) => ({
-          ...prevState,
-          projectContractSum: currentProject.contract_sum,
-        }))
-      }
-
-      if (!new_finish_date) {
-        setProjectSumAndDate((prevState) => ({
-          ...prevState,
-          projectFinishDate: currentProject.finish_date,
-        }))
-      }
+      const { new_contract_sum, new_finish_date, contract_sum, finish_date } = currentProject;
+      setProjectSumAndDate({
+        projectContractSum: new_contract_sum || contract_sum,
+        projectFinishDate: new_finish_date || finish_date,
+      });
+      setWorkingProjectSumAndDate({
+        workingProjectContractSum: new_contract_sum || contract_sum,
+        workingProjectFinishDate: new_finish_date || finish_date,
+      });
     }
-  }, [currentProjectId, projects])
+  }, [currentProjectId, projects]);
 
+  // Fetch and sort expenditures when the current project changes
   useEffect(() => {
-    const workingProject = projects?.find(({ id }) => project.id === id)
-    if (workingProject) {
-      // make the new contract sum and new finish date the project's finish date and contract sum if it exists
-      const { new_contract_sum, new_finish_date } = workingProject
+    const fetchExpenditures = async () => {
+      if (currentProjectId && currentProjectId.trim() !== '') {
+        try {
+          const data = await getExpendituresByProjectId(currentProjectId);
+          const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+          setExpenditures(sortedData);
 
-      if (new_contract_sum) {
-        setWorkingProjectSumAndDate((prevState) => ({
-          ...prevState,
-          workingProjectContractSum: new_contract_sum,
-        }))
+          const totalExpenditure = sortedData.reduce(
+            (total, { amount }) => total + parseFloat(amount || 0),
+            0
+          );
+          setTotalExpenditure(totalExpenditure);
+        } catch (error) {
+          console.error('Error fetching expenditures:', error);
+        }
       }
+    };
+    fetchExpenditures();
+  }, [currentProjectId]);
 
-      if (new_finish_date) {
-        setWorkingProjectSumAndDate((prevState) => ({
-          ...prevState,
-          workingProjectFinishDate: new_finish_date,
-        }))
-      }
+  // Fetch budgets when the current project changes
+  useEffect(() => {
+    const fetchBudgets = async () => {
+      if (currentProjectId && currentProjectId.trim() !== '') {
+        try {
+          const data = await getBudgetsByProjectId(currentProjectId);
 
-      if (!new_contract_sum) {
-        setWorkingProjectSumAndDate((prevState) => ({
-          ...prevState,
-          workingProjectContractSum: project.contract_sum,
-        }))
-      }
+          // Check if the data is valid
+          if (data && Array.isArray(data) && data.length > 0) {
+            const budget = data[0];
+            setBudgets(budget);
 
-      if (!new_finish_date) {
-        setWorkingProjectSumAndDate((prevState) => ({
-          ...prevState,
-          workingProjectFinishDate: project.finish_date,
-        }))
+            const totalBudget = Object.keys(budget).reduce((total, key) => {
+              if (['Labor', 'Material', 'Equipment', 'Subcontractor', 'Others'].includes(key)) {
+                return total + parseFloat(budget[key] || 0);
+              }
+              return total;
+            }, 0);
+
+            setTotalBudget(totalBudget);
+          } else {
+            // Handle the case where data is an empty array or invalid
+            setBudgets({})
+            setTotalBudget(0);
+          }
+        } catch (error) {
+          console.error('Error fetching budgets:', error);
+        }
+      } else {
+        // Reset budgets and total budget when there is no valid project ID
+        setBudgets({})
+        setTotalBudget(0);
       }
-    }
-  }, [project.contract_sum, project.finish_date, project.id, projects])
+    };
+
+    fetchBudgets();
+  }, [currentProjectId]);
+
+
+  // Fetch logs when the current project changes
+  useEffect(() => {
+    const fetchLogs = async () => {
+      if (currentProjectId) {
+        try {
+          const logs = await getLogs(currentProjectId);
+          setLogs(logs);
+        } catch (error) {
+          console.error('Error fetching logs:', error);
+        }
+      }
+    };
+    fetchLogs();
+  }, [currentProjectId]);
 
   return (
     <DakiyStore.Provider
       value={{
+        budgets,
+        setBudgets,
         project,
         setProject,
-        setProjects,
+        setSelectedTheme,
         projects,
+        setProjects,
+        updateFormData,
         setUpdateFormData,
         projectSumAndDate,
-        setProjectSumAndDate,
-        setCurrentProjectId,
-        setSelectedTheme,
         workingProjectSumAndDate,
-        setWorkingProjectSumAndDate,
+        expenditures,
+        setCurrentProjectId,
+        loading,
+        totalBudget,
+        localExpenditures,
+        totalExpenditure,
+        logs,
+        setLogs,
       }}
     >
       {children}

@@ -5,90 +5,85 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 
 const supabase = createServerComponentClient({ cookies })
-let projectData
+
+const fetchUserAndOrganization = async () => {
+  const userProfile = await getUserProfile()
+  if (!userProfile) return null
+
+  const user = await getUser()
+  const { data: organizations, error } = await supabase
+    .from('organizations')
+    .select('id, current_project, theme')
+    .eq('user_id', user.id)
+    .single();
+
+  if (error || !organizations) {
+    console.error('Error fetching organization data:', error)
+    return null;
+  }
+
+  return { user, organizations }
+}
 
 export const updateAppTheme = async (selectedTheme) => {
-  const userProfile = await getUserProfile()
-  if (userProfile) {
-    const user = await getUser()
+  const { organizations } = await fetchUserAndOrganization()
+  if (!organizations) return;
 
-    const { error } = await supabase
-      .from('organizations')
-      .update({ theme: selectedTheme })
-      .eq('user_id', user.id)
-      .select()
+  const { error } = await supabase
+    .from('organizations')
+    .update({ theme: selectedTheme })
+    .eq('id', organizations.id);
 
-    if (error) return error
-  }
+  if (error) return error
 }
 
 export const getAppTheme = async () => {
-  const userProfile = await getUserProfile()
-  if (userProfile === true) {
-    const user = await getUser()
-
-    let { data: organizations } = await supabase
-      .from('organizations')
-      .select('theme')
-      // Filters
-      .eq('user_id', user.id)
-
-    if (organizations) {
-      return organizations[0].theme
-    }
-  }
+  const { organizations } = await fetchUserAndOrganization()
+  return organizations ? organizations.theme : null
 }
 
 export const getProjects = async () => {
-  const user = await getUser()
-  const userProfile = await getUserProfile()
+  const { organizations } = await fetchUserAndOrganization()
+  if (!organizations) return [];
 
-  if (userProfile === true) {
-    // Get user organization id
-    let { data: organizations } = await supabase
-      .from('organizations')
-      .select('id')
-      // Filters
-      .eq('user_id', user.id)
-    const organizationId = organizations[0].id
-
-    // fetch projects with user's organization id
-    let { data: projects } = await supabase
-      .from('projects')
-      .select('*')
-      // Filters
-      .eq('organization_id', organizationId)
-
-    projectData = projects
-
-    if (!projectData) {
-      return []
-    } else {
-      return projectData
-    }
-  }
-}
-
-export const insertProjectPlusTable = async (
-  { newFinishDate, newContractSum, subsequentPayments, description },
-  { id }
-) => {
-  const { error } = await supabase
-    .from('projects_plus')
-    .insert([
-      {
-        project_id: id,
-        new_finish_date: newFinishDate,
-        new_contract_sum: newContractSum,
-        subsequent_payments: subsequentPayments,
-        description: description,
-      },
-    ])
-    .select()
+  const { data: projects, error } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('organization_id', organizations.id);
 
   if (error) {
-    return error
-  } else {
-    return true
+    console.error('Error fetching projects:', error)
+    return []
   }
+
+  return projects || []
+}
+
+export const insertProjectPlusTable = async (projectData, { id }) => {
+  const { error } = await supabase
+    .from('projects_plus')
+    .insert([{ project_id: id, ...projectData }]);
+
+  if (error) {
+    console.error('Error inserting project plus data:', error)
+    return error
+  }
+  return true
+}
+
+export const updateCurrentProject = async (currentProjectId) => {
+  const { organizations } = await fetchUserAndOrganization()
+  if (!organizations) return;
+
+  const { error } = await supabase
+    .from('organizations')
+    .update({ current_project: currentProjectId })
+    .eq('id', organizations.id);
+
+  if (error) return error
+}
+
+export const fetchCurrentProjectId = async () => {
+  const { organizations } = await fetchUserAndOrganization()
+  return organizations ? organizations.current_project : null
 }

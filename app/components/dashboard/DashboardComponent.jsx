@@ -1,21 +1,23 @@
 'use client'
 import Container from '@mui/material/Container'
-import Grid from '@mui/material/Grid'
 import Link from 'next/link'
-import Paper from '@mui/material/Paper'
 import { getAppTheme, getProjects } from '@/context/supabaseTables.js'
-import Progress from '../utils/Progress.jsx'
 import Greeting from './greeting/Greeting.jsx'
 import Weather from './getCurrentWeather/Weather.jsx'
 import GetDate from './greeting/GetDate.jsx'
 import Overview from './Overview/Overview.jsx'
-import Milestone from './Overview/Milestone.jsx'
 import { useContext, useEffect } from 'react'
 import { DakiyStore } from '@/context/context.js'
 import { usePathname } from 'next/navigation.js'
+import addCommasToMoney from '../utils/addCommasToNos.js'
+import BudgetExpenditureChart from '../project-finance/BudgetExpenditureChart.jsx.jsx'
+import ProjectLogByTitles from '../project-logs/ProjectLogByTitles.jsx'
+import HorizontalLine from '../utils/HorizontalLine.jsx'
+import Alert from '../utils/Alert.jsx'
+import Grid from '@mui/material/Grid2';
 
 export default function DashboardComponent() {
-  const { project, setProjects, setSelectedTheme } = useContext(DakiyStore)
+  const { project, setProjects, setSelectedTheme, loading, workingProjectSumAndDate, totalExpenditure, totalBudget } = useContext(DakiyStore)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -26,7 +28,7 @@ export default function DashboardComponent() {
       }
     }
     appTheme()
-  }, [])
+  }, [project])
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -36,52 +38,44 @@ export default function DashboardComponent() {
     fetchProjects()
   }, [pathname, setProjects])
 
+  // Loading state
+  if (loading) {
+    return (
+      <div className="flex h-screen flex-col items-center justify-center bg-transparent">
+        <span className="loading loading-dots loading-lg"></span>
+        <p className="mt-4 text-lg">Fetching your project data, please hold on...</p>
+      </div>
+    )
+  }
+
   return Object.keys(project).length > 0 ? (
-    <Container className="my-8" maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      {/* Progress Bar */}
-      <Progress progress={project.progress} />
+    <Container className="my-4" maxWidth="lg" sx={{ mb: 4 }}>
+      {totalBudget > workingProjectSumAndDate?.workingProjectContractSum && (
+        <Alert message={`Your budget exceeds the contract sum by ₦${addCommasToMoney(totalBudget - workingProjectSumAndDate?.workingProjectContractSum)} naira.`} />
+      )}
+      {totalExpenditure > workingProjectSumAndDate?.workingProjectContractSum && (
+        <Alert message={`Your expenditure exceeds the contract sum by ₦${addCommasToMoney(totalExpenditure - workingProjectSumAndDate?.workingProjectContractSum)} naira.`} />
+      )}
       <Grid container spacing={3}>
         {/* Greeting */}
-        <Grid item xs={12} md={8} lg={8}>
-          <Paper
-            className="flex flex-col justify-between md:flex-row"
-            sx={{
-              p: 2,
-              display: 'flex',
-              height: 120,
-            }}
-          >
+        <Grid item size={{ xs: 12, md: 8, lg: 8 }}>
+          <section className="mb-2 flex rounded-b-md bg-base-200/35 px-1 py-2 shadow-md md:flex-row md:items-center md:px-4">
             <Greeting />
+            <div className="mx-3 bg-primary md:h-7 md:w-1"></div>
             <Weather />
-          </Paper>
+          </section>
           {/* Overview */}
-          <Paper
-            className="mt-2"
-            sx={{
-              p: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              height: 750,
-              backgroundColor: 'primary',
-            }}
-          >
-            <Overview />
-          </Paper>
+          <h2 className='font-bold text-primary-content/80'>Overview</h2>
+          <HorizontalLine />
+          <BudgetExpenditureChart />
+          <Overview />
         </Grid>
-        {/* Date and Milestone */}
-        <Grid item xs={12} md={4} lg={4}>
-          <Paper
-            className="bg-info-content"
-            sx={{
-              p: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              height: '90vh',
-            }}
-          >
+        {/* Date and Project Logs */}
+        <Grid item size={{ xs: 12, md: 4, lg: 4 }}>
+          <section className="rounded-lg bg-base-100 p-4 shadow-md">
             <GetDate />
-            <Milestone />
-          </Paper>
+            <ProjectLogByTitles />
+          </section>
         </Grid>
       </Grid>
     </Container>

@@ -16,8 +16,9 @@ function Greeting() {
   }, [])
 
   return (
-    <h2 className="mt-4 text-xl font-semibold">
-      Hello {userName}, {getGreeting()}.
+    <h2 className="font-Raleway text-xs font-medium">
+      Hello {userName},
+      <p>{getGreeting()}.</p>
     </h2>
   )
 }

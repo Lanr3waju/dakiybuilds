@@ -10,10 +10,20 @@ import extractDate from '../utils/extractDateFromTimestamp'
 
 function ProjectSchedulePage() {
   const [openGantt, setOpenGantt] = useState(false)
-  const { project, workingProjectSumAndDate } = useContext(DakiyStore)
+  const { loading, project, workingProjectSumAndDate } = useContext(DakiyStore)
 
   const handleGantt = () => {
     setOpenGantt(true)
+  }
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="flex h-screen flex-col items-center justify-center bg-transparent">
+        <span className="loading loading-dots loading-lg"></span>
+        <p className="mt-4 text-lg">Fetching your project documents, please hold on...</p>
+      </div>
+    )
   }
 
   return Object.keys(project).length > 0 ? (
