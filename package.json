@@ -19,7 +19,6 @@
     "@formspree/react": "^2.5.1",
     "@mui/icons-material": "^6.1.1",
     "@mui/material": "^6.1.1",
-    "@mui/x-charts": "^7.18.0",
     "@supabase/auth-helpers-nextjs": "^0.8.1",
     "@supabase/supabase-js": "^2.38.0",
     "@syncfusion/ej2-base": "^22.2.10",
@@ -44,7 +43,7 @@
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.8.1",
     "react-scroll": "^1.9.0",
-    "recharts": "^2.7.2",
+    "recharts": "^2.12.7",
     "resize-observer-polyfill": "^1.5.1",
     "sharp": "^0.32.5"
   },

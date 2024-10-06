@@ -2,7 +2,7 @@ import React from 'react'
 
 function Alert({ message }) {
     return (
-        <div role="alert" className="alert alert-warning my-1 font-Roboto text-xs">
+        <div role="alert" className="alert alert-error my-1 font-Roboto text-xs">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 shrink-0 stroke-current"

@@ -23,7 +23,7 @@ import EditJobState from './EditJobState'
 
 function JobDetailsComponent() {
   const pathname = usePathname()
-  const { projects, projectSumAndDate, setCurrentProjectId, project } =
+  const { projects, projectSumAndDate, setCurrentProjectId, project, totalBudget, totalExpenditure } =
     useContext(DakiyStore)
   const [currentProject, setCurrentProject] = useState({})
   const [deleteState, setDeleteState] = useState(false)
@@ -171,10 +171,17 @@ function JobDetailsComponent() {
               </p>
                 <p className="font-Roboto">
                 <span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">
-                  Expenditure:
-                </span>
-                ₦0 Naira
-              </p>
+                    Budget:
+                  </span>
+                  ₦ {addCommasToMoney(totalBudget)} Naira
+                </p>
+                <p className="font-Roboto">
+                  <span className="m-1 mt-4 block font-Raleway text-sm text-secondary-content/70">
+                    Expenditure:
+                  </span>
+                  ₦ {addCommasToMoney(totalExpenditure)} Naira
+                </p>
+
             </section>
               <section className="ml-1 w-11/12 rounded-md p-2 shadow-lg shadow-base-300">
                 <p className="mb-3 font-Roboto capitalize">
