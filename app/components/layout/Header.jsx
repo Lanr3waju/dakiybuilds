@@ -141,7 +141,7 @@ export default function DashboardComponent({ children }) {
               </IconButton>
             </Toolbar>
             <Divider />
-            <div className="h-full bg-base-200">
+            <div className="h-full bg-base-200 text-xs">
               <List component="nav">
                 {mainListItems}
                 <Divider sx={{ my: 1 }} />

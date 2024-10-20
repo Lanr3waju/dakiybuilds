@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
 import { createContext, useEffect, useState } from 'react'
 import { fetchCurrentProjectId, getAppTheme, getProjects } from './supabaseTables'
 import { getBudgetsByProjectId, getExpendituresByProjectId } from '@/app/components/project-finance/supabaseTables'
-import { getLogs } from '@/app/components/project-logs/supabaseTables';
+import { getLogs } from '@/app/components/project-logs/supabaseTables'
 
 // Create a context for managing and sharing state across components
-export const DakiyStore = createContext();
+export const DakiyStore = createContext()
 
 function Context({ children }) {
   const [project, setProject] = useState({}) // Current selected project
@@ -24,25 +24,25 @@ function Context({ children }) {
     Equipment: 0,
     Subcontractor: 0,
     Others: 0,
-  });
-  const [budgets, setBudgets] = useState({});
+  })
+  const [budgets, setBudgets] = useState({})
 
   const [updateFormData, setUpdateFormData] = useState({
     newFinishDate: '',
     newContractSum: '',
     subsequentPayments: '',
     description: '',
-  });
+  })
 
   const [projectSumAndDate, setProjectSumAndDate] = useState({
     projectFinishDate: '',
     projectContractSum: '',
-  });
+  })
 
   const [workingProjectSumAndDate, setWorkingProjectSumAndDate] = useState({
     workingProjectFinishDate: '',
     workingProjectContractSum: '',
-  });
+  })
 
   // Load the theme from the database or fallback to the default theme
   useEffect(() => {
@@ -50,9 +50,9 @@ function Context({ children }) {
       const element = document.getElementById('app')
       const savedAppTheme = await getAppTheme()
       element.setAttribute('data-theme', savedAppTheme || selectedTheme)
-    };
-    loadTheme();
-  }, [selectedTheme]);
+    }
+    loadTheme()
+  }, [selectedTheme])
 
   // Update local expenditures based on fetched expenditures
   useEffect(() => {
@@ -62,28 +62,28 @@ function Context({ children }) {
       Equipment: 0,
       Subcontractor: 0,
       Others: 0,
-    };
+    }
 
     expenditures.forEach(({ category, amount }) => {
-      const parsedAmount = parseFloat(amount) || 0;
+      const parsedAmount = parseFloat(amount) || 0
       if (tempExpenditures[category] !== undefined) {
-        tempExpenditures[category] += parsedAmount;
+        tempExpenditures[category] += parsedAmount
       }
-    });
+    })
 
-    setLocalExpenditures(tempExpenditures);
-  }, [expenditures]);
+    setLocalExpenditures(tempExpenditures)
+  }, [expenditures])
 
   // Fetch all projects and set the current project when the app loads
   useEffect(() => {
     const loadProjects = async () => {
-      setLoading(true);
+      setLoading(true)
       try {
-        const fetchedProjects = await getProjects();
+        const fetchedProjects = await getProjects()
 
         // Check if fetchedProjects is an array and not undefined
         if (Array.isArray(fetchedProjects)) {
-          setProjects(fetchedProjects);
+          setProjects(fetchedProjects)
 
           // Auto-select the first project if only one exists
           if (fetchedProjects.length === 1) {
@@ -102,94 +102,94 @@ function Context({ children }) {
             }
           }
         } else {
-          console.warn('Fetched projects is not an array or is undefined');
+          console.warn('Fetched projects is not an array or is undefined')
         }
       } catch (error) {
-        console.error('Error loading projects:', error);
+        console.error('Error loading projects:', error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    loadProjects();
-  }, []);
+    loadProjects()
+  }, [projects.length])
 
 
   // Update project sum and date when the current project changes
   useEffect(() => {
-    const currentProject = Array.isArray(projects) ? projects.find(({ id }) => id === currentProjectId) : null;
+    const currentProject = Array.isArray(projects) ? projects.find(({ id }) => id === currentProjectId) : null
     if (currentProject) {
-      const { new_contract_sum, new_finish_date, contract_sum, finish_date } = currentProject;
+      const { new_contract_sum, new_finish_date, contract_sum, finish_date } = currentProject
       setProjectSumAndDate({
         projectContractSum: new_contract_sum || contract_sum,
         projectFinishDate: new_finish_date || finish_date,
-      });
+      })
       setWorkingProjectSumAndDate({
         workingProjectContractSum: new_contract_sum || contract_sum,
         workingProjectFinishDate: new_finish_date || finish_date,
-      });
+      })
     }
-  }, [currentProjectId, projects]);
+  }, [currentProjectId, projects])
 
   // Fetch and sort expenditures when the current project changes
   useEffect(() => {
     const fetchExpenditures = async () => {
       if (currentProjectId && currentProjectId.trim() !== '') {
         try {
-          const data = await getExpendituresByProjectId(currentProjectId);
-          const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-          setExpenditures(sortedData);
+          const data = await getExpendituresByProjectId(currentProjectId)
+          const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          setExpenditures(sortedData)
 
           const totalExpenditure = sortedData.reduce(
             (total, { amount }) => total + parseFloat(amount || 0),
             0
-          );
-          setTotalExpenditure(totalExpenditure);
+          )
+          setTotalExpenditure(totalExpenditure)
         } catch (error) {
-          console.error('Error fetching expenditures:', error);
+          console.error('Error fetching expenditures:', error)
         }
       }
-    };
-    fetchExpenditures();
-  }, [currentProjectId]);
+    }
+    fetchExpenditures()
+  }, [currentProjectId])
 
   // Fetch budgets when the current project changes
   useEffect(() => {
     const fetchBudgets = async () => {
       if (currentProjectId && currentProjectId.trim() !== '') {
         try {
-          const data = await getBudgetsByProjectId(currentProjectId);
+          const data = await getBudgetsByProjectId(currentProjectId)
 
           // Check if the data is valid
           if (data && Array.isArray(data) && data.length > 0) {
-            const budget = data[0];
-            setBudgets(budget);
+            const budget = data[0]
+            setBudgets(budget)
 
             const totalBudget = Object.keys(budget).reduce((total, key) => {
               if (['Labor', 'Material', 'Equipment', 'Subcontractor', 'Others'].includes(key)) {
-                return total + parseFloat(budget[key] || 0);
+                return total + parseFloat(budget[key] || 0)
               }
-              return total;
-            }, 0);
+              return total
+            }, 0)
 
-            setTotalBudget(totalBudget);
+            setTotalBudget(totalBudget)
           } else {
             // Handle the case where data is an empty array or invalid
             setBudgets({})
-            setTotalBudget(0);
+            setTotalBudget(0)
           }
         } catch (error) {
-          console.error('Error fetching budgets:', error);
+          console.error('Error fetching budgets:', error)
         }
       } else {
         // Reset budgets and total budget when there is no valid project ID
         setBudgets({})
-        setTotalBudget(0);
+        setTotalBudget(0)
       }
-    };
+    }
 
-    fetchBudgets();
-  }, [currentProjectId]);
+    fetchBudgets()
+  }, [currentProjectId])
 
 
   // Fetch logs when the current project changes
@@ -197,15 +197,15 @@ function Context({ children }) {
     const fetchLogs = async () => {
       if (currentProjectId) {
         try {
-          const logs = await getLogs(currentProjectId);
-          setLogs(logs);
+          const logs = await getLogs(currentProjectId)
+          setLogs(logs)
         } catch (error) {
-          console.error('Error fetching logs:', error);
+          console.error('Error fetching logs:', error)
         }
       }
-    };
-    fetchLogs();
-  }, [currentProjectId]);
+    }
+    fetchLogs()
+  }, [currentProjectId])
 
   return (
     <DakiyStore.Provider
