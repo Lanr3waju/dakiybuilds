@@ -1,62 +1,67 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import HorizontalLine from '../utils/HorizontalLine'
+import { DakiyStore } from '@/context/context'
+import { handleFileUpload } from './fileUploader'
+import replaceSpacesWithHyphensAndLowerCase from '../utils/replaceSpacesWithHyphens'
+import AlertSuccess from '../utils/AlertSuccess'
 
 export function AddDocs() {
-  const [file, setFile] = useState()
-  const [fileUploaded, setFileUploaded] = useState(false)
+  const { currentProjectId } = useContext(DakiyStore) // Assuming you have currentProjectId in your context
+  const [file, setFile] = useState('')
+  const [category, setCategory] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [uploadSuccess, setUploadSuccess] = useState(false);
 
   const onSubmit = async (e) => {
+    setIsLoading(true)
     e.preventDefault()
-    if (!file) return
-    setFileUploaded(true)
-  }
+    if (!file || !category) {
+      alert('Please select a file and a category before uploading.')
+      return
+    }
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      // Code to be executed after 3 seconds
-      setFileUploaded(false)
-    }, 3000)
-    return () => clearTimeout(timer)
-  }, [fileUploaded])
+    const fileName = `${currentProjectId}-${replaceSpacesWithHyphensAndLowerCase(file.name)}-${category}`
+    const result = await handleFileUpload({ target: { files: [file] } }, fileName)
+    if (result) {
+      setUploadSuccess(true)
+      setIsLoading(false)
+      setFile('')
+      setCategory('')
+      setTimeout(() => setUploadSuccess(false), 5000) // Reset success message after 3 seconds
+    }
+    setIsLoading(false)
+  };
 
   return (
-    <div>
-      {fileUploaded && (
-        <div className="alert alert-success absolute left-0 transition-all delay-100">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 shrink-0 stroke-current"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <span>File Uploaded Sucessfully!</span>
-        </div>
+    <section>
+      {uploadSuccess && (
+        <AlertSuccess message='File uploaded successfully' />
       )}
+      <h2 className='text-base font-semibold w-full'>
+        Add Documents
+        <HorizontalLine />
+      </h2>
       <form
-        className="flex flex-col py-2 md:flex-row md:items-end"
+        className="flex flex-col py-2 md:flex-row md:items-end text-xs"
         onSubmit={onSubmit}
       >
         <label className="max-w-sm justify-start font-semibold uppercase text-secondary md:mr-3">
-          Add document
-          <HorizontalLine />
           <input
             name="file"
             onChange={(e) => setFile(e.target.files?.[0])}
             type="file"
-            className="file-input file-input-bordered file-input-accent w-full max-w-sm"
+            className="file-input file-input-bordered file-input-accent w-full max-w-sm file-input-md"
+            accept=".pdf, .doc, .docx, .png, .jpg, .jpeg, .webp" // Allowed file types
           />
         </label>
-        <select className="select select-warning my-3 w-full max-w-sm text-secondary md:m-0 md:mr-3">
-          <option disabled selected>
+        <select
+          className="select select-warning my-3 w-full max-w-sm text-secondary md:m-0 md:mr-3 select-md"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option disabled value="">
             Select Document Category
           </option>
           <option>Drawings</option>
@@ -67,15 +72,14 @@ export function AddDocs() {
           <option>Payment Requests & Receipts</option>
         </select>
         <button
-          className="btn btn-accent mt-2 md:m-0"
+          className="btn btn-accent mt-2 md:m-0 btn-md"
           type="submit"
-          value="Upload"
+          disabled={!file || !category || isLoading} // Disable if no file or category is selected
         >
-          {' '}
-          Upload
+          {isLoading ? <span className="loading loading-spinner loading-xs"></span> : 'Upload'}
         </button>
       </form>
-    </div>
+    </section>
   )
 }
 

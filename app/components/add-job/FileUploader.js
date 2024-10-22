@@ -35,7 +35,7 @@ export const handleFileUpload = async (event, fileName) => {
 const uploadToSupabase = async (file, fileName) => {
   const pictureName = replaceSpacesWithHyphensAndLowerCase(fileName)
   const { error } = await supabaseStorage.storage
-    .from('project-site-picture')
+    .from('project-documents')
     .upload(pictureName, file, { upsert: true }) // Using file.name as the file path
 
   if (error) {

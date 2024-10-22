@@ -1,10 +1,10 @@
 function FilterBtn() {
   return (
     <details className="dropdown">
-      <summary className="btn btn-circle btn-accent m-1 text-xs font-semibold text-neutral-content">
+      <summary className="btn btn-circle btn-accent m-1 text-xs font-semibold text-secondary-content">
         Filter
       </summary>
-      <ul className="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
+      <ul className="menu dropdown-content z-[1] w-52 rounded-box bg-accent text-accent-content p-2 shadow text-xs">
         <li>
           <a>Filter by Format</a>
         </li>

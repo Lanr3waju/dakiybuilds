@@ -20,10 +20,10 @@ function DocumentsPage() {
   }
 
   return Object.keys(project).length > 0 ? (
-    <section className="p-4">
+    <section className="p-4 text-xs">
       <SearchDocs />
       <AddDocs />
-      <DocType name="Document" />
+      <DocType />
     </section>
   ) : (
     <h1 className="m-7 rounded-lg border-2 border-error bg-error-content p-2 text-center text-lg font-bold uppercase text-error">

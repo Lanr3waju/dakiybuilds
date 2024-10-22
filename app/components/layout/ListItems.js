@@ -20,7 +20,7 @@ import HorizontalLine from '../utils/HorizontalLine'
 import { getAcronym } from '../utils/getAcronym'
 
 export const mainListItems = (
-  <>
+  <div className='text-xs'>
     <Link href="/dakiyboard">
       <ListItemButton>
         <ListItemIcon>
@@ -132,7 +132,7 @@ export const mainListItems = (
         <ListItemText primary="Project Settings" />
       </ListItemButton>
     </Link>
-  </>
+  </div>
 )
 
 export const SecondaryListItems = () => {
@@ -158,7 +158,7 @@ export const SecondaryListItems = () => {
               <BusinessCenterRounded />+
             </div>
           </ListItemIcon>
-          Add Jobs
+          <div className='uppercase font-semibold'>Add Jobs</div>
         </ListItemButton>
       </Link>
       <HorizontalLine />

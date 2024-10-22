@@ -222,6 +222,7 @@ function Context({ children }) {
         projectSumAndDate,
         workingProjectSumAndDate,
         expenditures,
+        currentProjectId,
         setCurrentProjectId,
         loading,
         totalBudget,
