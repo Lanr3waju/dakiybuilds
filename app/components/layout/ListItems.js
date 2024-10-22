@@ -158,7 +158,7 @@ export const SecondaryListItems = () => {
               <BusinessCenterRounded />+
             </div>
           </ListItemIcon>
-          <div className='uppercase font-semibold'>Add Jobs</div>
+          <div className='font-semibold uppercase'>Add Jobs</div>
         </ListItemButton>
       </Link>
       <HorizontalLine />

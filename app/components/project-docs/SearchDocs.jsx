@@ -7,9 +7,9 @@ function SearchDocs() {
       <input
         type="text"
         placeholder="Search Docs"
-        className="input input-bordered input-primary w-full input-md"
+        className="input input-bordered input-primary input-md w-full"
       />
-      <button type="submit" className="btn btn-accent ml-1 btn-md">
+      <button type="submit" className="btn btn-accent btn-md ml-1">
         Search
       </button>
     </form>

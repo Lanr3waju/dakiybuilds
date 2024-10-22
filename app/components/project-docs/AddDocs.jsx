@@ -39,12 +39,12 @@ export function AddDocs() {
       {uploadSuccess && (
         <AlertSuccess message='File uploaded successfully' />
       )}
-      <h2 className='text-base font-semibold w-full'>
+      <h2 className='w-full text-base font-semibold'>
         Add Documents
         <HorizontalLine />
       </h2>
       <form
-        className="flex flex-col py-2 md:flex-row md:items-end text-xs"
+        className="flex flex-col py-2 text-xs md:flex-row md:items-end"
         onSubmit={onSubmit}
       >
         <label className="max-w-sm justify-start font-semibold uppercase text-secondary md:mr-3">
@@ -52,12 +52,12 @@ export function AddDocs() {
             name="file"
             onChange={(e) => setFile(e.target.files?.[0])}
             type="file"
-            className="file-input file-input-bordered file-input-accent w-full max-w-sm file-input-md"
+            className="file-input file-input-bordered file-input-accent file-input-md w-full max-w-sm"
             accept=".pdf, .doc, .docx, .png, .jpg, .jpeg, .webp" // Allowed file types
           />
         </label>
         <select
-          className="select select-warning my-3 w-full max-w-sm text-secondary md:m-0 md:mr-3 select-md"
+          className="select select-warning select-md my-3 w-full max-w-sm text-secondary md:m-0 md:mr-3"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
@@ -72,7 +72,7 @@ export function AddDocs() {
           <option>Payment Requests & Receipts</option>
         </select>
         <button
-          className="btn btn-accent mt-2 md:m-0 btn-md"
+          className="btn btn-accent btn-md mt-2 md:m-0"
           type="submit"
           disabled={!file || !category || isLoading} // Disable if no file or category is selected
         >
